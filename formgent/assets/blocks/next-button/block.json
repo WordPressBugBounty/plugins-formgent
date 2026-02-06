@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/next-button",
+  "ancestor": [
+    "formgent/welcome",
+    "formgent/step"
+  ],
+  "title": "Next Button",
+  "category": "formgent",
+  "description": "Seamlessly guide users to the next step.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "button"
+    },
+    "button_text": {
+      "type": "string",
+      "default": "Next"
+    },
+    "arrow_icon": {
+      "type": "boolean",
+      "default": true
+    },
+    "button_alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "button_style": {
+      "type": "string",
+      "default": "default"
+    },
+    "background_color": {
+      "type": "string",
+      "default": "#4cafaa"
+    },
+    "border_color": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "text_color": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "skip_button": {
+      "type": "boolean",
+      "default": false
+    },
+    "skip_button_text": {
+      "type": "string",
+      "default": "Skip"
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

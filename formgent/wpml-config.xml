@@ -1,0 +1,106 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">formgent_form</custom-type>
+    </custom-types>
+
+    <gutenberg-blocks>
+        <gutenberg-block type="formgent/name" translate="1" label="Name">
+            <key name="label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/text" translate="1" label="Text">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/textarea" translate="1" label="Textarea">
+            <key name="label" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/email" translate="1" label="Email">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/number" translate="1" label="Number">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/phone-number" translate="1" label="Phone Number">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/dropdown" translate="1" label="Dropdown">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+            <key name="options">
+                <key name="label" />
+            </key>
+        </gutenberg-block>
+        
+        <gutenberg-block type="formgent/multiple-choice" translate="1" label="Multiple Choice">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+            <key name="options">
+                <key name="label" />
+            </key>
+        </gutenberg-block>
+        
+        <gutenberg-block type="formgent/address" translate="1" label="Address">
+            <key name="label" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/input-masking" translate="1" label="Input Masking">
+            <key name="label" />
+            <key name="placeholder" />
+            <key name="sub_label" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/gdpr" translate="1" label="GDPR">
+            <key name="description" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/file-upload" translate="1" label="File Upload">
+            <key name="label" />
+            <key name="sub_label" />
+            <key name="upload_text" />
+            <key name="limit_text" />
+        </gutenberg-block>
+
+        <gutenberg-block type="formgent/submit-button" translate="1" label="Submit Button Text">
+            <key name="button_text" />
+        </gutenberg-block>
+    </gutenberg-blocks>
+
+    <admin-texts>
+        <key name="formgent_settings">
+            <key name="validation_messages">
+                <key name="required" />
+                <key name="email" />
+                <key name="number" />
+                <key name="min" />
+                <key name="max" />
+                <key name="confirm" />
+                <key name="url" />
+                <key name="input_mask" />
+                <key name="gdpr" />
+                <key name="character_limit" />
+            </key>
+        </key>
+    </admin-texts>
+
+    <custom-fields>
+        <custom-field action="copy">_formgent_type</custom-field>
+        <custom-field action="copy">_formgent_settings</custom-field>
+    </custom-fields>
+</wpml-config>

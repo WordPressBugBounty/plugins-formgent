@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/date-picker",
+  "title": "Date & Time Picker",
+  "category": "formgent",
+  "description": "A customizable date and time picker block for selecting single or range-based dates or time, with flexible formatting.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "date-picker"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "label": {
+      "type": "string",
+      "default": "Date Picker"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "option": {
+      "type": "string",
+      "default": "date"
+    },
+    "range": {
+      "type": "boolean",
+      "default": false
+    },
+    "date_placeholder": {
+      "type": "string",
+      "default": "Select date"
+    },
+    "time_placeholder": {
+      "type": "string",
+      "default": "Select time"
+    },
+    "date_time_placeholder": {
+      "type": "string",
+      "default": "Select date & time"
+    },
+    "start_placeholder": {
+      "type": "string",
+      "default": "Start Date"
+    },
+    "end_placeholder": {
+      "type": "string",
+      "default": "End Date"
+    },
+    "separator": {
+      "type": "string",
+      "default": "-"
+    },
+    "date_format": {
+      "type": "string",
+      "default": "MM-dd-yy"
+    },
+    "allowed_days": {
+      "type": "array",
+      "default": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

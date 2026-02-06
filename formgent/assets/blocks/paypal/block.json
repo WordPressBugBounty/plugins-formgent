@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/paypal",
+  "title": "Paypal",
+  "category": "formgent-payment",
+  "description": "Paypal payment gateway block for FormGent.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "paypal"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "title": {
+      "type": "string",
+      "default": "Paypal checkout"
+    },
+    "subtitle": {
+      "type": "string",
+      "default": "Pay securely with PayPal"
+    }
+  },
+  "supports": {
+    "interactivity": true,
+    "multiple": false
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/info",
+  "ancestor": [
+    "formgent/welcome"
+  ],
+  "title": "Form Info",
+  "category": "formgent",
+  "description": "Display essential form details at a glance.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "info"
+    },
+    "info": {
+      "type": "string",
+      "default": "both"
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

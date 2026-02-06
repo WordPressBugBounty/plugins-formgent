@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/textarea",
+  "title": "Multi-Line Text (Textarea)",
+  "category": "formgent",
+  "description": "Add a multi-line text field for more detailed responses.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "textarea"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "Textarea"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "character_limit": {
+      "type": "boolean",
+      "default": false
+    },
+    "limit": {
+      "type": "number",
+      "default": 300
+    },
+    "correct_answer": {
+      "type": "string",
+      "default": ""
+    },
+    "points": {
+      "type": "number",
+      "default": 1
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

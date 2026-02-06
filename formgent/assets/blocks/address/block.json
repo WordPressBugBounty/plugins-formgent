@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/address",
+  "title": "Address",
+  "category": "formgent",
+  "description": "Insert an address field for users to provide location details.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "name": {
+      "type": "string",
+      "default": "address"
+    },
+    "label": {
+      "type": "string",
+      "default": "Address"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

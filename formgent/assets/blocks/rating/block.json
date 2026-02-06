@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/rating",
+  "title": "Rating",
+  "category": "formgent",
+  "description": "Seamlessly integrate a rating system into your form.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "rating"
+    },
+    "label": {
+      "type": "string",
+      "default": "Rating"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "rating_icon": {
+      "type": "string",
+      "default": "star"
+    },
+    "rating_limit": {
+      "type": "number",
+      "default": 5
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "default_rating": {
+      "type": "number",
+      "default": 0
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

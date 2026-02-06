@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/quantity",
+  "title": "Quantity",
+  "category": "formgent-payment",
+  "description": "Formgent number field to add quantity for payment items.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "quantity"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "Quantity"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "limit": {
+      "type": "boolean",
+      "default": false
+    },
+    "min": {
+      "type": "number",
+      "default": 1
+    },
+    "max": {
+      "type": "number",
+      "default": 100
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "field_mapping": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

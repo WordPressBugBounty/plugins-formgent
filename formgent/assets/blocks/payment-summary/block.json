@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/payment-summary",
+  "title": "Payment Summary",
+  "category": "formgent-payment",
+  "description": "Add payment summary table to the form.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "payment-summary"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "info_text": {
+      "type": "string",
+      "default": "No payment items has been selected yet."
+    },
+    "summary": {
+      "type": "string",
+      "default": ""
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

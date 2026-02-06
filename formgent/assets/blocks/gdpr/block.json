@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/gdpr",
+  "title": "GDPR Compliance",
+  "category": "formgent",
+  "description": "Include a consent field to ensure data privacy compliance.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "gdpr"
+    },
+    "value": {
+      "type": "number",
+      "default": 0
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "description": {
+      "type": "string",
+      "default": "I agree to the GDPR terms and conditions."
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

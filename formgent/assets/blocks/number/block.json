@@ -1,0 +1,90 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/number",
+  "title": "Number",
+  "category": "formgent",
+  "description": "Include a number field to capture numeric values.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "number"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "Number"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "format": {
+      "type": "string",
+      "default": "none"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "limit": {
+      "type": "boolean",
+      "default": false
+    },
+    "min": {
+      "type": "number",
+      "default": 1
+    },
+    "max": {
+      "type": "number",
+      "default": 100
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_calculation_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "formula": {
+      "type": "string",
+      "default": ""
+    },
+    "rounding": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

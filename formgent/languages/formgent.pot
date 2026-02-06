@@ -1,0 +1,5609 @@
+# Copyright (C) 2026 wpWax - Contact Form Plugin & WP Form Builder
+# This file is distributed under the GPL v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: FormGent 1.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-01-29T08:17:37+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.13.0-alpha\n"
+"X-Domain: formgent\n"
+
+#. Plugin Name of the plugin
+#: formgent.php
+#: app/Providers/Admin/MenuServiceProvider.php:51
+#: app/Providers/PostTypeServiceProvider.php:121
+msgid "FormGent"
+msgstr ""
+
+#. Description of the plugin
+#: formgent.php
+msgid "Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More."
+msgstr ""
+
+#. Author of the plugin
+#: formgent.php
+msgid "wpWax - Contact Form Plugin & WP Form Builder"
+msgstr ""
+
+#. Author URI of the plugin
+#: formgent.php
+msgid "http://wpwax.com"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:26
+#: app/EnumeratedList/PaymentStatus.php:26
+msgid "Pending"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:27
+#: app/EnumeratedList/PaymentStatus.php:27
+msgid "Paid"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:28
+#: app/EnumeratedList/PaymentStatus.php:28
+msgid "Failed"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:29
+#: app/EnumeratedList/PaymentStatus.php:29
+msgid "Cancelled"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:30
+#: app/EnumeratedList/PaymentStatus.php:32
+msgid "Expired"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:31
+#: app/EnumeratedList/PaymentStatus.php:30
+msgid "Refunded"
+msgstr ""
+
+#: app/EnumeratedList/OrderStatus.php:32
+#: app/EnumeratedList/PaymentStatus.php:31
+msgid "Unpaid"
+msgstr ""
+
+#: app/Helpers/helper.php:144
+#: app/Repositories/SummaryRepository.php:32
+msgid "Field handler not found."
+msgstr ""
+
+#: app/Helpers/helper.php:150
+msgid "Please use a valid field handler."
+msgstr ""
+
+#: app/Helpers/payment.php:30
+msgid "Payment gateway not found."
+msgstr ""
+
+#: app/Helpers/payment.php:69
+msgid "United Arab Emirates dirham"
+msgstr ""
+
+#: app/Helpers/payment.php:70
+msgid "Afghan afghani"
+msgstr ""
+
+#: app/Helpers/payment.php:71
+msgid "Albanian lek"
+msgstr ""
+
+#: app/Helpers/payment.php:72
+msgid "Armenian dram"
+msgstr ""
+
+#: app/Helpers/payment.php:73
+msgid "Netherlands Antillean guilder"
+msgstr ""
+
+#: app/Helpers/payment.php:74
+msgid "Angolan kwanza"
+msgstr ""
+
+#: app/Helpers/payment.php:75
+msgid "Argentine peso"
+msgstr ""
+
+#: app/Helpers/payment.php:76
+msgid "Australian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:77
+msgid "Aruban florin"
+msgstr ""
+
+#: app/Helpers/payment.php:78
+msgid "Azerbaijani manat"
+msgstr ""
+
+#: app/Helpers/payment.php:79
+msgid "Bosnia and Herzegovina convertible mark"
+msgstr ""
+
+#: app/Helpers/payment.php:80
+msgid "Barbadian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:81
+msgid "Bangladeshi taka"
+msgstr ""
+
+#: app/Helpers/payment.php:82
+msgid "Bulgarian lev"
+msgstr ""
+
+#: app/Helpers/payment.php:83
+msgid "Bahraini dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:84
+msgid "Burundian franc"
+msgstr ""
+
+#: app/Helpers/payment.php:85
+msgid "Bermudian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:86
+msgid "Brunei dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:87
+msgid "Bolivian boliviano"
+msgstr ""
+
+#: app/Helpers/payment.php:88
+msgid "Brazilian real"
+msgstr ""
+
+#: app/Helpers/payment.php:89
+msgid "Bahamian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:90
+msgid "Bitcoin"
+msgstr ""
+
+#: app/Helpers/payment.php:91
+msgid "Bhutanese ngultrum"
+msgstr ""
+
+#: app/Helpers/payment.php:92
+msgid "Botswana pula"
+msgstr ""
+
+#: app/Helpers/payment.php:93
+msgid "Belarusian ruble (old)"
+msgstr ""
+
+#: app/Helpers/payment.php:94
+msgid "Belarusian ruble"
+msgstr ""
+
+#: app/Helpers/payment.php:95
+msgid "Belize dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:96
+msgid "Canadian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:97
+msgid "Congolese franc"
+msgstr ""
+
+#: app/Helpers/payment.php:98
+msgid "Swiss franc"
+msgstr ""
+
+#: app/Helpers/payment.php:99
+msgid "Chilean peso"
+msgstr ""
+
+#: app/Helpers/payment.php:100
+msgid "Chinese yuan"
+msgstr ""
+
+#: app/Helpers/payment.php:101
+msgid "Colombian peso"
+msgstr ""
+
+#: app/Helpers/payment.php:102
+msgid "Costa Rican col&oacute;n"
+msgstr ""
+
+#: app/Helpers/payment.php:103
+msgid "Cuban convertible peso"
+msgstr ""
+
+#: app/Helpers/payment.php:104
+msgid "Cuban peso"
+msgstr ""
+
+#: app/Helpers/payment.php:105
+msgid "Cape Verdean escudo"
+msgstr ""
+
+#: app/Helpers/payment.php:106
+msgid "Czech koruna"
+msgstr ""
+
+#: app/Helpers/payment.php:107
+msgid "Djiboutian franc"
+msgstr ""
+
+#: app/Helpers/payment.php:108
+msgid "Danish krone"
+msgstr ""
+
+#: app/Helpers/payment.php:109
+msgid "Dominican peso"
+msgstr ""
+
+#: app/Helpers/payment.php:110
+msgid "Algerian dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:111
+msgid "Egyptian pound"
+msgstr ""
+
+#: app/Helpers/payment.php:112
+msgid "Eritrean nakfa"
+msgstr ""
+
+#: app/Helpers/payment.php:113
+msgid "Ethiopian birr"
+msgstr ""
+
+#: app/Helpers/payment.php:114
+msgid "Euro"
+msgstr ""
+
+#: app/Helpers/payment.php:115
+msgid "Fijian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:116
+msgid "Falkland Islands pound"
+msgstr ""
+
+#: app/Helpers/payment.php:117
+msgid "Pound sterling"
+msgstr ""
+
+#: app/Helpers/payment.php:118
+msgid "Georgian lari"
+msgstr ""
+
+#: app/Helpers/payment.php:119
+msgid "Guernsey pound"
+msgstr ""
+
+#: app/Helpers/payment.php:120
+msgid "Ghana cedi"
+msgstr ""
+
+#: app/Helpers/payment.php:121
+msgid "Gibraltar pound"
+msgstr ""
+
+#: app/Helpers/payment.php:122
+msgid "Gambian dalasi"
+msgstr ""
+
+#: app/Helpers/payment.php:123
+msgid "Guinean franc"
+msgstr ""
+
+#: app/Helpers/payment.php:124
+msgid "Guatemalan quetzal"
+msgstr ""
+
+#: app/Helpers/payment.php:125
+msgid "Guyanese dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:126
+msgid "Hong Kong dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:127
+msgid "Honduran lempira"
+msgstr ""
+
+#: app/Helpers/payment.php:128
+msgid "Croatian kuna"
+msgstr ""
+
+#: app/Helpers/payment.php:129
+msgid "Haitian gourde"
+msgstr ""
+
+#: app/Helpers/payment.php:130
+msgid "Hungarian forint"
+msgstr ""
+
+#: app/Helpers/payment.php:131
+msgid "Indonesian rupiah"
+msgstr ""
+
+#: app/Helpers/payment.php:132
+msgid "Israeli new shekel"
+msgstr ""
+
+#: app/Helpers/payment.php:133
+msgid "Manx pound"
+msgstr ""
+
+#: app/Helpers/payment.php:134
+msgid "Indian rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:135
+msgid "Iraqi dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:136
+msgid "Iranian rial"
+msgstr ""
+
+#: app/Helpers/payment.php:137
+msgid "Iranian toman"
+msgstr ""
+
+#: app/Helpers/payment.php:138
+msgid "Icelandic kr&oacute;na"
+msgstr ""
+
+#: app/Helpers/payment.php:139
+msgid "Jersey pound"
+msgstr ""
+
+#: app/Helpers/payment.php:140
+msgid "Jamaican dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:141
+msgid "Jordanian dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:142
+msgid "Japanese yen"
+msgstr ""
+
+#: app/Helpers/payment.php:143
+msgid "Kenyan shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:144
+msgid "Kyrgyzstani som"
+msgstr ""
+
+#: app/Helpers/payment.php:145
+msgid "Cambodian riel"
+msgstr ""
+
+#: app/Helpers/payment.php:146
+msgid "Comorian franc"
+msgstr ""
+
+#: app/Helpers/payment.php:147
+msgid "North Korean won"
+msgstr ""
+
+#: app/Helpers/payment.php:148
+msgid "South Korean won"
+msgstr ""
+
+#: app/Helpers/payment.php:149
+msgid "Kuwaiti dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:150
+msgid "Cayman Islands dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:151
+msgid "Kazakhstani tenge"
+msgstr ""
+
+#: app/Helpers/payment.php:152
+msgid "Lao kip"
+msgstr ""
+
+#: app/Helpers/payment.php:153
+msgid "Lebanese pound"
+msgstr ""
+
+#: app/Helpers/payment.php:154
+msgid "Sri Lankan rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:155
+msgid "Liberian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:156
+msgid "Lesotho loti"
+msgstr ""
+
+#: app/Helpers/payment.php:157
+msgid "Libyan dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:158
+msgid "Moroccan dirham"
+msgstr ""
+
+#: app/Helpers/payment.php:159
+msgid "Moldovan leu"
+msgstr ""
+
+#: app/Helpers/payment.php:160
+msgid "Malagasy ariary"
+msgstr ""
+
+#: app/Helpers/payment.php:161
+msgid "Macedonian denar"
+msgstr ""
+
+#: app/Helpers/payment.php:162
+msgid "Burmese kyat"
+msgstr ""
+
+#: app/Helpers/payment.php:163
+msgid "Mongolian t&ouml;gr&ouml;g"
+msgstr ""
+
+#: app/Helpers/payment.php:164
+msgid "Macanese pataca"
+msgstr ""
+
+#: app/Helpers/payment.php:165
+msgid "Mauritanian ouguiya"
+msgstr ""
+
+#: app/Helpers/payment.php:166
+msgid "Mauritian rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:167
+msgid "Maldivian rufiyaa"
+msgstr ""
+
+#: app/Helpers/payment.php:168
+msgid "Malawian kwacha"
+msgstr ""
+
+#: app/Helpers/payment.php:169
+msgid "Mexican peso"
+msgstr ""
+
+#: app/Helpers/payment.php:170
+msgid "Malaysian ringgit"
+msgstr ""
+
+#: app/Helpers/payment.php:171
+msgid "Mozambican metical"
+msgstr ""
+
+#: app/Helpers/payment.php:172
+msgid "Namibian dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:173
+msgid "Nigerian naira"
+msgstr ""
+
+#: app/Helpers/payment.php:174
+msgid "Nicaraguan c&oacute;rdoba"
+msgstr ""
+
+#: app/Helpers/payment.php:175
+msgid "Norwegian krone"
+msgstr ""
+
+#: app/Helpers/payment.php:176
+msgid "Nepalese rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:177
+msgid "New Zealand dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:178
+msgid "Omani rial"
+msgstr ""
+
+#: app/Helpers/payment.php:179
+msgid "Panamanian balboa"
+msgstr ""
+
+#: app/Helpers/payment.php:180
+msgid "Sol"
+msgstr ""
+
+#: app/Helpers/payment.php:181
+msgid "Papua New Guinean kina"
+msgstr ""
+
+#: app/Helpers/payment.php:182
+msgid "Philippine peso"
+msgstr ""
+
+#: app/Helpers/payment.php:183
+msgid "Pakistani rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:184
+msgid "Polish z&#x142;oty"
+msgstr ""
+
+#: app/Helpers/payment.php:185
+msgid "Transnistrian ruble"
+msgstr ""
+
+#: app/Helpers/payment.php:186
+msgid "Paraguayan guaran&iacute;"
+msgstr ""
+
+#: app/Helpers/payment.php:187
+msgid "Qatari riyal"
+msgstr ""
+
+#: app/Helpers/payment.php:188
+msgid "Romanian leu"
+msgstr ""
+
+#: app/Helpers/payment.php:189
+msgid "Serbian dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:190
+msgid "Russian ruble"
+msgstr ""
+
+#: app/Helpers/payment.php:191
+msgid "Rwandan franc"
+msgstr ""
+
+#: app/Helpers/payment.php:192
+msgid "Saudi riyal"
+msgstr ""
+
+#: app/Helpers/payment.php:193
+msgid "Solomon Islands dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:194
+msgid "Seychellois rupee"
+msgstr ""
+
+#: app/Helpers/payment.php:195
+msgid "Sudanese pound"
+msgstr ""
+
+#: app/Helpers/payment.php:196
+msgid "Swedish krona"
+msgstr ""
+
+#: app/Helpers/payment.php:197
+msgid "Singapore dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:198
+msgid "Saint Helena pound"
+msgstr ""
+
+#: app/Helpers/payment.php:199
+msgid "Sierra Leonean leone"
+msgstr ""
+
+#: app/Helpers/payment.php:200
+msgid "Somali shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:201
+msgid "Surinamese dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:202
+msgid "South Sudanese pound"
+msgstr ""
+
+#: app/Helpers/payment.php:203
+msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra"
+msgstr ""
+
+#: app/Helpers/payment.php:204
+msgid "Syrian pound"
+msgstr ""
+
+#: app/Helpers/payment.php:205
+msgid "Swazi lilangeni"
+msgstr ""
+
+#: app/Helpers/payment.php:206
+msgid "Thai baht"
+msgstr ""
+
+#: app/Helpers/payment.php:207
+msgid "Tajikistani somoni"
+msgstr ""
+
+#: app/Helpers/payment.php:208
+msgid "Turkmenistan manat"
+msgstr ""
+
+#: app/Helpers/payment.php:209
+msgid "Tunisian dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:210
+msgid "Tongan pa&#x2bb;anga"
+msgstr ""
+
+#: app/Helpers/payment.php:211
+msgid "Turkish lira"
+msgstr ""
+
+#: app/Helpers/payment.php:212
+msgid "Trinidad and Tobago dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:213
+msgid "New Taiwan dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:214
+msgid "Tanzanian shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:215
+msgid "Ukrainian hryvnia"
+msgstr ""
+
+#: app/Helpers/payment.php:216
+msgid "Ugandan shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:217
+msgid "United States (US) dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:218
+msgid "Uruguayan peso"
+msgstr ""
+
+#: app/Helpers/payment.php:219
+msgid "Uzbekistani som"
+msgstr ""
+
+#: app/Helpers/payment.php:220
+msgid "Venezuelan bol&iacute;var (2008–2018)"
+msgstr ""
+
+#: app/Helpers/payment.php:221
+msgid "Venezuelan bol&iacute;var"
+msgstr ""
+
+#: app/Helpers/payment.php:222
+msgid "Vietnamese &#x111;&#x1ed3;ng"
+msgstr ""
+
+#: app/Helpers/payment.php:223
+msgid "Vanuatu vatu"
+msgstr ""
+
+#: app/Helpers/payment.php:224
+msgid "Samoan t&#x101;l&#x101;"
+msgstr ""
+
+#: app/Helpers/payment.php:225
+msgid "Central African CFA franc"
+msgstr ""
+
+#: app/Helpers/payment.php:226
+msgid "East Caribbean dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:227
+msgid "West African CFA franc"
+msgstr ""
+
+#: app/Helpers/payment.php:228
+msgid "CFP franc"
+msgstr ""
+
+#: app/Helpers/payment.php:229
+msgid "Yemeni rial"
+msgstr ""
+
+#: app/Helpers/payment.php:230
+msgid "South African rand"
+msgstr ""
+
+#: app/Helpers/payment.php:231
+msgid "Zambian kwacha"
+msgstr ""
+
+#: app/Http/Controllers/Admin/AnalyticsController.php:30
+#: app/Http/Controllers/Admin/EmailNotificationController.php:53
+#: app/Http/Controllers/Admin/EmailNotificationController.php:78
+#: app/Http/Controllers/Admin/FormController.php:211
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:72
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:150
+#: app/Http/Controllers/Admin/MailchimpController.php:103
+#: app/Http/Controllers/Admin/MailchimpController.php:183
+#: app/Http/Controllers/Admin/ResponseController.php:179
+#: app/Http/Controllers/Admin/ResponseController.php:260
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:72
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
+#: app/Http/Controllers/AnalyticsController.php:40
+#: app/Http/Controllers/FormController.php:32
+#: app/Http/Controllers/ResponseController.php:64
+#: app/Http/Controllers/ResponseController.php:315
+#: app/Repositories/FormPresetFieldRepository.php:151
+msgid "Form not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:62
+msgid "Email notification was created successfully!"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:87
+msgid "Email notification was updated successfully!"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:104
+#: app/Http/Controllers/Admin/EmailNotificationController.php:144
+msgid "Email notification not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:127
+msgid "Email notification was deleted successfully!"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:165
+msgid "Email notification was duplicated successfully!"
+msgstr ""
+
+#: app/Http/Controllers/Admin/EmailNotificationController.php:182
+#: app/Http/Controllers/Admin/MailchimpController.php:289
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:186
+msgid "The status has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:125
+msgid "The form has been created successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:146
+msgid "The form title has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:164
+msgid "Sorry, some thing was wrong"
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:173
+#: app/Http/Controllers/Admin/FormController.php:194
+msgid "The form status has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:236
+msgid "The form has been duplicated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:275
+msgid "The form has been deleted successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:292
+#: app/Http/Controllers/Admin/ResponseController.php:249
+#: app/Http/Controllers/Admin/ResponseController.php:347
+#: app/Http/Controllers/Admin/ResponseController.php:399
+msgid "Sorry, Something was wrong."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:305
+msgid "Forms have been successfully deleted."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:362
+#: app/Http/Controllers/Admin/SettingsController.php:63
+msgid "Settings have been saved successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:117
+#: app/Http/Controllers/Admin/MailchimpController.php:143
+msgid "Item was created successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:154
+msgid "Spreadsheet not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:182
+#: app/Http/Controllers/Admin/MailchimpController.php:272
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:146
+msgid "Item was updated successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:199
+msgid "The spreadsheet status has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:222
+msgid "Spreadsheet was deleted successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:62
+msgid "Item not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:109
+#: app/Http/Controllers/Admin/MailchimpController.php:196
+msgid "The email field must be mapped"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:116
+#: app/Http/Controllers/Admin/MailchimpController.php:203
+msgid "Group option is required when group is selected"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:138
+msgid "Could not create the item"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:190
+msgid "The item not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:265
+msgid "Nothing to update"
+msgstr ""
+
+#: app/Http/Controllers/Admin/MailchimpController.php:477
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:169
+msgid "Item was deleted successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/NoteController.php:54
+msgid "The note has been created successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/NoteController.php:75
+msgid "The note has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/NoteController.php:92
+msgid "The note has been deleted successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/OrderController.php:55
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Order status updated successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/ResponseController.php:288
+msgid "The response starred has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/ResponseController.php:309
+msgid "The response read has been updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/ResponseController.php:413
+msgid "Responses have been successfully deleted."
+msgstr ""
+
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:82
+msgid "Zoho CRM feed was created."
+msgstr ""
+
+#: app/Http/Controllers/Admin/ZohoCRMFeedController.php:107
+msgid "Feed data not found"
+msgstr ""
+
+#: app/Http/Controllers/AnalyticsController.php:57
+msgid "Could't update the view count"
+msgstr ""
+
+#: app/Http/Controllers/CaptchaController.php:30
+msgid "Failed to verify captcha"
+msgstr ""
+
+#: app/Http/Controllers/CaptchaController.php:38
+msgid "Captcha verification failed"
+msgstr ""
+
+#: app/Http/Controllers/CaptchaController.php:47
+msgid "Captcha verification successful"
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:62
+msgid "Payment successful."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:105
+msgid "Payment canceled."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:124
+msgid "Order not found."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:132
+msgid "Order is already paid."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:143
+msgid "Order items not found."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:157
+msgid "Payment method not found."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:72
+msgid "Response not found."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:80
+msgid "Skipping submission: Response is already completed."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:88
+msgid "Oops, something went wrong. Please try again."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:122
+msgid "The form was submitted successfully!"
+msgstr ""
+
+#: app/Integrations/Mailchimp/Mailchimp.php:70
+#: app/Integrations/Mailchimp/Mailchimp.php:78
+#: app/Integrations/Mailchimp/Mailchimp.php:88
+msgid "The email is required"
+msgstr ""
+
+#. translators: %s: field display label
+#: app/Integrations/ZohoCRM/ZohoCRM.php:104
+#, php-format
+msgid "Enter %s value or choose form input provided by shortcode."
+msgstr ""
+
+#. translators: %s: field display label
+#: app/Integrations/ZohoCRM/ZohoCRM.php:114
+#, php-format
+msgid "%s is a required field. Enter value or choose form input provided by shortcode."
+msgstr ""
+
+#. translators: %s: field display label
+#: app/Integrations/ZohoCRM/ZohoCRM.php:121
+#, php-format
+msgid "%s is a required field. Enter value or choose form input shortcode. <br> Make sure format is (01/01/2022 00:00 +0:00)"
+msgstr ""
+
+#. translators: %s: field display label
+#: app/Integrations/ZohoCRM/ZohoCRM.php:129
+#, php-format
+msgid "Choose %s type in select list."
+msgstr ""
+
+#: app/Providers/Admin/MenuServiceProvider.php:18
+#: app/Providers/Admin/MenuServiceProvider.php:52
+#: app/Providers/PostTypeServiceProvider.php:159
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:1722
+#: assets/build/js/modules.js:4050
+msgid "All Forms"
+msgstr ""
+
+#: app/Providers/Admin/MenuServiceProvider.php:19
+#: app/Providers/Admin/MenuServiceProvider.php:56
+msgid "Go Pro"
+msgstr ""
+
+#: app/Providers/Admin/MenuServiceProvider.php:53
+#: assets/build/chunk/121.js:300
+msgid "Settings"
+msgstr ""
+
+#: app/Providers/MailchimpProvider.php:93
+msgid "Merge fields is empty"
+msgstr ""
+
+#: app/Providers/MailchimpProvider.php:97
+msgid "Email field is empty"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:30
+msgid "FormGent Payment Success"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:32
+msgid "FormGent Payment Failed"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:127
+msgid "FormGent Payment Fields"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:150
+msgctxt "Post type general name"
+msgid "Forms"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:151
+msgctxt "Post type singular name"
+msgid "Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:152
+msgctxt "Admin Menu text"
+msgid "Formgent Forms"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:153
+msgctxt "Add New on Toolbar"
+msgid "Formgent Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:154
+msgid "Add New"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:155
+msgid "Add New Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:156
+msgid "New Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:157
+msgid "Edit Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:158
+msgid "View Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:160
+msgid "Search Forms"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:161
+msgid "Parent Forms:"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:162
+msgid "No Forms found."
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:163
+msgid "No Forms found in Trash."
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:164
+msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
+msgid "Form Cover Image"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:165
+msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
+msgid "Set cover image"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:166
+msgctxt "Overrides the “Remove featured image” phrase for this post type. Added in 4.3"
+msgid "Remove cover image"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:167
+msgctxt "Overrides the “Use as featured image” phrase for this post type. Added in 4.3"
+msgid "Use as cover image"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:168
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Form archives"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:169
+msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
+msgid "Insert into Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:170
+msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
+msgid "Uploaded to this Form"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:171
+msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
+msgid "Filter Forms list"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:172
+msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
+msgid "Forms list navigation"
+msgstr ""
+
+#: app/Providers/PostTypeServiceProvider.php:173
+msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
+msgid "Forms list"
+msgstr ""
+
+#. translators: %s: error message
+#: app/Providers/ZohoCRMServiceProvider.php:48
+#, php-format
+msgid "ZohoCRM connection failed (%s). Please try again."
+msgstr ""
+
+#: app/Providers/ZohoCRMServiceProvider.php:51
+msgid "ZohoCRM connection failed"
+msgstr ""
+
+#: app/Providers/ZohoCRMServiceProvider.php:54
+msgid "« Back To ZohoCRM Integration"
+msgstr ""
+
+#: app/Repositories/AnalyticRepository.php:129
+#: app/Repositories/AnalyticRepository.php:150
+msgid "Could not update the view count."
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:161
+msgid "Prints the response ID"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:166
+msgid "Prints the IP address"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:171
+msgid "Prints the device name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:176
+msgid "Prints the browser name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:181
+msgid "Prints the browser version name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:187
+msgid "Prints the website URL"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:192
+msgid "Prints the website name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:197
+msgid "Prints the admin email address"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:202
+msgid "Prints the admin name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:207
+msgid "Prints the user email address"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:212
+msgid "Prints user name"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:216
+msgid "Prints the fields value"
+msgstr ""
+
+#: app/Repositories/FormPresetFieldRepository.php:217
+msgid "Prints the fields label"
+msgstr ""
+
+#: app/Repositories/FormRepository.php:359
+msgid "Forms not found."
+msgstr ""
+
+#: app/Repositories/MailchimpRepository.php:37
+msgid "The item not found."
+msgstr ""
+
+#: app/Repositories/ResponseRepository.php:32
+#: app/Repositories/ResponseRepository.php:239
+#: app/Repositories/ResponseRepository.php:269
+#: app/Repositories/SummaryRepository.php:17
+#: app/Repositories/SummaryRepository.php:47
+msgid "Form not found."
+msgstr ""
+
+#: app/Repositories/SpreadsheetRepository.php:29
+msgid "Spreadsheet not found."
+msgstr ""
+
+#: app/Repositories/SummaryRepository.php:23
+msgid "Field not found"
+msgstr ""
+
+#: app/Widgets/Form.php:33
+#: assets/blocks/form/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "General"
+msgstr ""
+
+#: app/Widgets/Form.php:41
+msgid "Select Form"
+msgstr ""
+
+#: assets/blocks/captcha/render.php:80
+msgid "Captcha validation failed. Please complete the captcha."
+msgstr ""
+
+#: assets/blocks/file-upload/render.php:89
+msgid "Upload file"
+msgstr ""
+
+#: assets/blocks/file-upload/render.php:195
+msgid "Delete file"
+msgstr ""
+
+#: assets/blocks/payment-summary/render.php:22
+msgid "Item"
+msgstr ""
+
+#: assets/blocks/payment-summary/render.php:23
+msgid "Price"
+msgstr ""
+
+#: assets/blocks/payment-summary/render.php:27
+msgid "Quantity"
+msgstr ""
+
+#: assets/blocks/payment-summary/render.php:28
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Total"
+msgstr ""
+
+#: assets/blocks/payment-summary/render.php:61
+msgid "Total:"
+msgstr ""
+
+#. translators: %1$s is the current page number, %2$s is the total number of pages
+#: resources/views/multi-step-indicator.php:35
+#, php-format
+msgid "Page %1$s of %2$s"
+msgstr ""
+
+#. translators: %s is the step number
+#: resources/views/multi-step-indicator.php:67
+#, php-format
+msgid "Step %s"
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:43
+#: resources/views/shortcodes/payment-failed.php:69
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Try again"
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:44
+msgid "Trying"
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:53
+#: resources/views/shortcodes/payment-success.php:58
+msgid "You are viewing sample order data."
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:60
+msgid "Payment Failed"
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:61
+msgid "Please try again or contact support if the problem continues."
+msgstr ""
+
+#: resources/views/shortcodes/payment-failed.php:74
+msgid "Go Home"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:65
+msgid "Payment Success"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:66
+msgid "Your transaction has been completed successfully."
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:70
+msgid "Amount:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:81
+msgid "Payment Method:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:93
+msgid "Transaction ID:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:100
+msgid "Date:"
+msgstr ""
+
+#: resources/views/submit-button.php:25
+#: assets/build/js/blocks-editor.js:1469
+msgid "Submit"
+msgstr ""
+
+#: assets/blocks/address/index.js:1
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/gdpr/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/repeater/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Label Alignment"
+msgstr ""
+
+#: assets/blocks/address/index.js:1
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/gdpr/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/repeater/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Left"
+msgstr ""
+
+#: assets/blocks/address/index.js:1
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/gdpr/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/repeater/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Right"
+msgstr ""
+
+#: assets/blocks/address/index.js:1
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/gdpr/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/repeater/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Top"
+msgstr ""
+
+#: assets/blocks/address/index.js:1
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/repeater/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Justify"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Captcha Type"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Google Recaptcha"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Cloudflare Turnstile"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "hCaptcha"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Theme"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Light"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Dark"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "Please set the credentials for the captcha in "
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+msgid "settings"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Required"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/quantity/index.js:1
+msgid "Limit"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/quantity/index.js:1
+msgid "Minimum"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/quantity/index.js:1
+msgid "Maximum"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Field Placeholder"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+msgid "Default Value"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/date-picker/index.js:1
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/name/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/payment-summary/index.js:1
+#: assets/blocks/phone-number/index.js:1
+#: assets/blocks/quantity/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/rating/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+#: assets/build/js/formgent-gutenberg.js:1
+msgid "Field Name"
+msgstr ""
+
+#: assets/blocks/custom-payment-amount/index.js:1
+#: assets/blocks/email/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Type sub label here (optional)"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "MM-DD-YY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "DD-MM-YYYY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "YYYY-MM-DD"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "MM.DD.YY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "DD.MM.YYYY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "YYYY.MM.DD"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "MM/DD/YY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "DD/MM/YYYY"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "YYYY/MM/DD"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Picker Type"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Date"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Time"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Both"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Placeholder"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Range"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Start Placeholder"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "End Placeholder"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Date Format"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Separator"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "-"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "."
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "/"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Allowed Days"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Sunday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Monday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Tuesday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Wednesday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Thursday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Friday"
+msgstr ""
+
+#: assets/blocks/date-picker/index.js:1
+msgid "Saturday"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "is"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "is not"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "equal length"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "less then length"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "greater then length"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "contains"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "does not contain"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "is null"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "is not null"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+#: assets/build/js/modules.js:2991
+msgid "regex"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "Less then"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "Greater then"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "between"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "begins with"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "ends with"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "does not begin with"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/end/index.js:1
+#: assets/blocks/file-upload/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/stripe/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/admin.js:715
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:715
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "does not end with"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+msgid "Dropdown Items"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Quiz correct answer"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+msgid "Points"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Options value"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Value"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#, js-format
+msgid "%s options in list"
+msgstr ""
+
+#: assets/blocks/email/index.js:1
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/blocks/website/index.js:1
+#: assets/build/chunk/121.js:1063
+msgid "Character Limit"
+msgstr ""
+
+#: assets/blocks/email/index.js:1
+msgid "Enable Confirmation Field"
+msgstr ""
+
+#: assets/blocks/email/index.js:1
+msgid "Confirm Field Placeholder"
+msgstr ""
+
+#: assets/blocks/email/index.js:1
+msgid "Show Email Icon"
+msgstr ""
+
+#: assets/blocks/email/index.js:1
+msgid "Type your question"
+msgstr ""
+
+#: assets/blocks/end/index.js:1
+msgid "You can use the placeholders {{points}}, {{percentage}}, and {{grade}} to display the user's quiz results. These will be automatically replaced with the actual values when the form is submitted."
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Limit file size"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "KB"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "MB"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Limit number of files"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Allowed types"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Type upload text here"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Type upload instruction here"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Maximum file size allowed: {file_size}"
+msgstr ""
+
+#: assets/blocks/file-upload/index.js:1
+msgid "Maximum number of files allowed: {file_limit}"
+msgstr ""
+
+#: assets/blocks/form/index.js:1
+msgid "-- Select a Form --"
+msgstr ""
+
+#: assets/blocks/form/index.js:1
+msgid "SELECT A FORM"
+msgstr ""
+
+#: assets/blocks/google-map/index.js:1
+msgid "Location Preview"
+msgstr ""
+
+#: assets/blocks/google-map/index.js:1
+msgid "Google Maps Preview"
+msgstr ""
+
+#: assets/blocks/google-map/index.js:1
+msgid "Configure API key to see map"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Dynamic tags"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Site Title"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Site URL"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Form Title"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "User ID"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:2223
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "User Email"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "User Display Name"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "User First Name"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "User Last Name"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "User Username"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Admin Email"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Admin Name"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Login URL"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Registration URL"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Lost Password URL"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Logout URL"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Browser Name"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Browser Platform"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/directorist.js:2223
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "IP Address"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Current Date"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Embedded Post ID"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Embedded Post Title"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "GET Parameters"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Cookie Values"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "No HTML content added yet"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Edit HTML Content"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "HTML Code Block"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Done"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+msgid "Show Info Items"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+msgid "Show Both"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+msgid "Show Question Count"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+msgid "Time to Complete"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+#, js-format
+msgid "%s Questions"
+msgstr ""
+
+#: assets/blocks/info/index.js:1
+#, js-format
+msgid "Takes %s"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "Mask Type"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+#: assets/blocks/number/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "None"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "(###) ###-####"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "(##) ####-####"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "26/09/2024"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "23:59:59"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "23/09/2024 23:59:59"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "00/00"
+msgstr ""
+
+#: assets/blocks/input-masking/index.js:1
+msgid "00000"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Column layout"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Default"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Full width"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Two columns"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Style"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Frame"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Standard"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+msgid "Choice Limit"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+msgid "Multi Choice Options"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "+ Add Option"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+msgid "Quiz correct answers"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Type label here..."
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Type placeholder here..."
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Add Option"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Add Other"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+msgid "Arrow icon"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Button Alignment"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Middle"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Block"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Button Style"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Default Style"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Solid"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Bordered"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Background Color"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Border Color"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Text Color"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+msgid "Skip button"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/submit-button/index.js:2
+#: assets/build/js/blocks-editor.js:1469
+msgid "Button text"
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+#: assets/blocks/page-break/index.js:1
+#: assets/blocks/submit-button/index.js:2
+#: assets/build/js/blocks-editor.js:1469
+msgid "Add text..."
+msgstr ""
+
+#: assets/blocks/next-button/index.js:1
+msgid "Next button text"
+msgstr ""
+
+#: assets/blocks/number/index.js:1
+msgid "Number Format"
+msgstr ""
+
+#: assets/blocks/number/index.js:1
+msgid "Decimal (Ex: 364.54)"
+msgstr ""
+
+#: assets/blocks/number/index.js:1
+msgid "Non Decimal (Ex: 364)"
+msgstr ""
+
+#: assets/blocks/number/index.js:1
+msgid "Enable Calculation"
+msgstr ""
+
+#: assets/blocks/number/index.js:1
+msgid "Rounding"
+msgstr ""
+
+#: assets/blocks/page-break/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+msgid "Page Break Settings"
+msgstr ""
+
+#: assets/blocks/page-break/index.js:1
+msgid "Go to settings"
+msgstr ""
+
+#: assets/blocks/page-break/index.js:1
+#: assets/build/js/components.js:734
+#: assets/build/js/modules.js:2288
+#: assets/build/js/modules.js:2303
+msgid "Back"
+msgstr ""
+
+#: assets/blocks/page-break/index.js:1
+#: assets/blocks/submit-button/index.js:2
+#: assets/build/js/blocks-editor.js:1469
+msgid "Page Break"
+msgstr ""
+
+#: assets/blocks/page-break/index.js:1
+#: assets/blocks/submit-button/index.js:2
+msgid "Next"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Product Display Type"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Single"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Radio"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Checkbox"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/components.js:734
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Select"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Payment Item"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Payment Amount"
+msgstr ""
+
+#: assets/blocks/payment-item/index.js:1
+msgid "Amount Label"
+msgstr ""
+
+#: assets/blocks/payment-summary/index.js:1
+msgid "Empty payment selected text"
+msgstr ""
+
+#: assets/blocks/payment-summary/index.js:1
+msgid "Payment Summary will be shown here."
+msgstr ""
+
+#: assets/blocks/paypal/index.js:1
+msgid "Paypal credentials are missing. Please <link>go to Settings</link> to configure them."
+msgstr ""
+
+#: assets/blocks/phone-number/index.js:1
+msgid "Include Country Code"
+msgstr ""
+
+#: assets/blocks/phone-number/index.js:1
+msgid "Enable Auto Country Detection"
+msgstr ""
+
+#: assets/blocks/phone-number/index.js:1
+msgid "Flag"
+msgstr ""
+
+#: assets/blocks/quantity/index.js:1
+msgid "Product Field Mapping"
+msgstr ""
+
+#: assets/blocks/quantity/index.js:1
+msgid "This block only works with the \"Payment Item\", \"Custom Payment Amount\" and Payment methods blocks."
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Type"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+#: assets/build/chunk/121.js:1063
+msgid "Number"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Text"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Right Label"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Left Label"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Tooltip Prefix"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "e.g., $"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Tooltip Suffix"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "e.g., %"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Min Value"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Max Value"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Step Increment"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Slider Options"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "Options Value"
+msgstr ""
+
+#: assets/blocks/range-slider/index.js:1
+msgid "No options"
+msgstr ""
+
+#: assets/blocks/rating/index.js:1
+msgid "Rating Icon"
+msgstr ""
+
+#: assets/blocks/rating/index.js:1
+msgid "Rating Scale"
+msgstr ""
+
+#: assets/blocks/rating/index.js:1
+msgid "Default Rating"
+msgstr ""
+
+#: assets/blocks/rating/index.js:1
+#, js-format
+msgid "%s/%s"
+msgstr ""
+
+#: assets/blocks/single-choice/index.js:1
+msgid "Single Choice Options"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/blocks-editor.js:1574
+msgid "Media"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+msgid "Add media"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+msgid "Layout type"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/formgent-gutenberg.js:1365
+msgid "Select or Upload Media Of Your Chosen Persuasion"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/formgent-gutenberg.js:1365
+msgid "Use this media"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+msgid "Upload Media"
+msgstr ""
+
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+msgid "Select Media"
+msgstr ""
+
+#: assets/blocks/stripe/index.js:1
+msgid "Stripe credentials are missing. Please <link>go to Settings</link> to configure them."
+msgstr ""
+
+#. translators: 1: <strong>Submit Button</strong>, 2: <strong>Next</strong>, 3: <strong>Page Break</strong>, 4: <strong>submit the form on the final step</strong>
+#: assets/blocks/submit-button/index.js:2
+#, js-format
+msgid "The %1$s block is not compatible with multi-step forms. Instead, the %2$s button in the %3$s block will automatically %4$s."
+msgstr ""
+
+#: assets/blocks/submit-button/index.js:2
+#: assets/build/js/blocks-editor.js:1469
+msgid "Submit Button"
+msgstr ""
+
+#: assets/blocks/submit-button/index.js:2
+msgid "submit the form on the final step"
+msgstr ""
+
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Correct answer"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/121.js:1
+#: assets/build/chunk/246.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/components.js:734
+#: assets/build/js/directorist.js:149
+#: assets/build/js/directorist.js:2223
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Cancel"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/js/modules.js:2991
+msgid "Copied embed code."
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Get Embed Code"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Copying..."
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/js/modules.js:2991
+msgid "Copy Code"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Click to copy"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Copied!"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2221
+msgid "Internal server error"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2221
+#: assets/build/js/modules.js:2991
+msgid "You are about to delete"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "All responses these forms has collected, including associated messages, will be deleted forever."
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "All responses this form has collected, including associated messages, will be deleted forever."
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2221
+msgid "Are you sure you want to proceed with the deletion?"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Rename"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Duplicate"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/chunk/246.js:1513
+#: assets/build/js/directorist.js:2223
+msgid "Delete"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Rename, Duplicate & Delete"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Delete Form"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/chunk/246.js:1513
+#: assets/build/js/directorist.js:2223
+msgid "Deleting"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+#: assets/build/js/modules.js:2991
+msgid "Status"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Activate"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Deactivate"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Forms Selected"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Clear Selection"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "ID"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Created:"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Edit"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "All Responses"
+msgstr ""
+
+#: assets/build/chunk/116.js:1
+msgid "Preview"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Authorization URL copied"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Secret key copied"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Secret Key"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Learn how to connect"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Authorization URL"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zapier"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Integrate Zapier with FormGent"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zapier is enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zapier is disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Homepage URL copied"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Authorized Redirect URL"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zoho CRM successfully connected"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zoho CRM successfully disconnected"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Disconnect"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Step 1: Register your application at Zoho API Console"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "To create Client ID and Secrete use the information below. Visit "
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zoho API Console"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Client type"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Homepage URL"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Step 2: Enter the Zoho CRM credential below"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Paste the Zoho CRM Client ID and Client Secret you just received from the Zoho API Console."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Data Centre"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Select a data center"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Client ID"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Client Secrete"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Authorize"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Zoho CRM"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Send FormGent form submissions directly to Zoho CRM."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zoho is enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Zoho is disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Api Key"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google map api key saved"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Save Key"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google Map"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Integrate Google map with FormGent"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Disconnect integration"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Mailchimp Disconnected"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Mailchimp Enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Mailchimp Disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Mailchimp"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+#: assets/build/js/modules.js:2991
+msgid "Auto-sync FormGent forms with Mailchimp audience."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Connected"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+#: assets/build/js/modules.js:2991
+msgid "Yes. Disconnect"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Are you sure to disconnect this integration?"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Data sync will be stopped for this integration. You can reconnect it anytime."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Connecting..."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Connect"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+#: assets/build/chunk/121.js:1063
+msgid "Integrations"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google Sheets"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Send your data insights to Google Sheets. Automatically syncs as results come in."
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google Sheet Disconnected"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google Sheet Enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:124
+msgid "Google Sheet Disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid " Default currency"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Select default currency"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Currency Sign Position"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Save Currency"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Payment success page"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Use the following shortcode to display the payment success message"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Payment Failed page"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Use the following shortcode to display the payment failed message"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Save Page Configuration"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Enable PayPal"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Easily collect PayPal Checkout and credit card payments with PayPal ."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Enable Test Mode"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Prevent PayPal Commerce from processing live transactions. Please, see <a href='https://developer.paypal.com/tools/sandbox/'>PayPal Commerce documentation</a> for full details."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Connect your PayPal Account to your website to accept Payments"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Securely connect to PayPal with just a few clicks to begin accepting payments!"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Client Id is required!"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Client id"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Secret Key is required!"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+#: assets/build/chunk/121.js:375
+msgid "Secret key"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+#: assets/build/js/modules.js:2991
+msgid "Save changes"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Enable Stripe"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Easily collect Stripe Checkout and credit card payments with Stripe."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Prevent Stripe from processing live transactions."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Connect your Stripe Account to your website to accept Payments"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Securely connect to Stripe with just a few clicks to begin accepting payments!"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Publishable Key is required!"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Publishable key"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Payment Settings Updated Successfully"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+#: assets/build/chunk/121.js:1063
+msgid "Payment Settings"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "By toggling the switch, users can enable or disable payments."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Enable Payment"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "To process payments with FormGent, this needs to be enabled."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Payment Status Disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Payment Status Enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Page configuration"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Currency"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Available Payment Gateways (2)"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Paypal"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Stripe"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+#: assets/build/chunk/121.js:1063
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "General Settings"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "Disable IP Logging"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "When enabled, the user's IP address will not be saved with the form submission."
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "IP Logging Disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:300
+msgid "IP Logging Enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Google reCAPTCHA Settings"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+#, js-format
+msgid "Formgent integrates with Google reCAPTCHA, a free service that protects your website from fraud and abuse. %s"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Learn more about reCAPTCHA"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "hCaptcha Settings"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+#, js-format
+msgid "Formgent integrates with hCaptcha, a free service that protects your website from fraud and abuse. %s"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Learn more about hCaptcha"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Cloudflare Turnstile Settings"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+#, js-format
+msgid "Formgent integrates with Cloudflare Turnstile, a free service that protects your website from fraud and abuse. %s"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Learn more about Cloudflare Turnstile"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Site key"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Enter your site key"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Enter your secret key"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Save"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+#: assets/build/chunk/121.js:1063
+msgid "Security & Protection"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Enable Honeypot Protection"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Uses hidden fields to catch bots and reduce spam"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Honeypot Protection Enabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:375
+msgid "Honeypot Protection Disabled"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Required Field"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "This field is required"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Email"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "This field must contain a valid email"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "This field must contain numeric value"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Minimum Value"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "This value is below the minimum limit"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Maximum Value"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "This value exceeds the maximum limit"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Confirm Value"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Field values do not match"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "URL Format Validation"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Please enter a valid URL"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Input Mask Error"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Please fill out the field in required format"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "GDPR Compliance (Checkbox)"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "You must agree to proceed"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Limit is {limit} characters"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Validation Messages"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+#: assets/build/js/modules.js:2991
+msgid "The field is required"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+#: assets/build/js/modules.js:2991
+msgid "Save Changes"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+#: assets/build/js/modules.js:2991
+msgid "Settings have been updated successfully."
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Validation"
+msgstr ""
+
+#: assets/build/chunk/121.js:1063
+msgid "Activate License"
+msgstr ""
+
+#: assets/build/chunk/246.js:1
+#: assets/build/js/directorist.js:2223
+#: assets/build/js/modules.js:715
+#, js-format
+msgid " %s/%s "
+msgstr ""
+
+#: assets/build/chunk/246.js:1
+#: assets/build/js/directorist.js:715
+#: assets/build/js/modules.js:1482
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: assets/build/chunk/246.js:1
+#: assets/build/js/directorist.js:715
+#: assets/build/js/modules.js:1482
+msgid "Loading..."
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2221
+msgid "All responses has collected, including all submission data will be deleted forever."
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2221
+msgid "This response has collected, including all submission data will be deleted forever."
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Ascending"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Descending"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/chunk/246.js:1513
+msgid "Column"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "N/A"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Accepted"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Declined"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "No signature provided"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Error parsing repeater data"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#, js-format
+msgid "Document ID: %s"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#, js-format
+msgid "Form: \"%s\" Responses"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#, js-format
+msgid "Response ID: %s"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Generating PDF..."
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Download as PDF"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/modules.js:2288
+msgid "All"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Read"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/modules.js:2288
+msgid "Unread"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Starred"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+msgid "Unstarred"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Payment Method"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Payment Status"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Transaction ID"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Billing Name"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Billing Email"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Billing Country"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Order Details"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Change status"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Saving"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Order Items"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Quiz Result"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Total score"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+#, js-format
+msgid "(%1$d/%2$d)"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Percentage"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Grade"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Star"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Unstar"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Read/Unread"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+#, js-format
+msgid "%s of %s Responses"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Submission Note"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Add Note"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Write your note..."
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Save note"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "No notes available!"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/chunk/246.js:1513
+#: assets/build/js/directorist.js:2223
+msgid "Submission Date"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Username"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Completed"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "In Progress"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Browser"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Operating System"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Answers"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Submission Info"
+msgstr ""
+
+#: assets/build/chunk/246.js:1509
+#: assets/build/js/directorist.js:2223
+msgid "Delete Note?"
+msgstr ""
+
+#. translators: Placeholder %s will be replaced with the number of completed responses.
+#: assets/build/chunk/246.js:1511
+#, js-format
+msgid "Completed %s"
+msgstr ""
+
+#. translators: Placeholder %s will be replaced with the number of partial responses.
+#: assets/build/chunk/246.js:1513
+#, js-format
+msgid "Incomplete %s"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+#, js-format
+msgid "%s response selected"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Select All"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Show Hide Columns"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Download as CSV"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Download as Excel"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "View"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Submitted By"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Amount"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Payment status"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Payment method"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "No data Found"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Try FormGent Pro"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "View responses from users who abandoned or haven't completed the form."
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Upgrade to view Incomplete Responses"
+msgstr ""
+
+#: assets/build/chunk/246.js:1513
+msgid "Delete Response?"
+msgstr ""
+
+#: assets/build/js/admin.js:715
+#: assets/build/js/directorist.js:715
+#: assets/build/js/modules.js:1482
+msgid "Unknown size"
+msgstr ""
+
+#: assets/build/js/admin.js:715
+#, js-format
+msgid "Responses (%s)"
+msgstr ""
+
+#: assets/build/js/admin.js:715
+msgid "Summary"
+msgstr ""
+
+#: assets/build/js/admin.js:715
+msgid "Analytics"
+msgstr ""
+
+#: assets/build/js/admin.js:730
+#: assets/build/js/modules.js:2288
+msgid "Server Error"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Demo importing is in progress"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Just a moment! Your form is being created..."
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Demo importing failed"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "There was an issue importing the template. Please try again."
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Demo imported successfully!"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Demo imported. You’re ready to go!"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Not now"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Customize form"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Let's get started"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Please enter a name for your form. You can edit it later."
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Form name"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "The title field must be at least 5 characters."
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Only spaces are not allowed"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "The title field is required"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "%s form (#%s)"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Classic"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Conversational"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Creating"
+msgstr ""
+
+#: assets/build/js/admin.js:1296
+#: assets/build/js/modules.js:2288
+msgid "Create Form"
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "Choose a template to speed up the process of creating your form."
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "ID:"
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "Title:"
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "View Demo"
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "Template Library"
+msgstr ""
+
+#: assets/build/js/admin.js:2068
+#: assets/build/js/modules.js:4050
+msgid "To get started, look through our pre-made templates."
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/formgent-gutenberg.js:1365
+msgid "Change"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/formgent-gutenberg.js:1365
+msgid "Remove"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Solid color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:2288
+msgid "Custom"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Gradient color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Focal Point"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Overlay Opacity"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Formula"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Insert fields"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Formula is valid"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Formula is invalid"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Add Block"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Form Confirmation"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Email Notifications"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Webhooks"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Quiz"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Google Sheet Integration"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Export form responses to Google Sheets"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Mailchimp Integration"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Post/CPT Submission"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Embed"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/modules.js:2991
+msgid "Custom CSS/JS"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Show Labels"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Progress Indicator"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Progress Bar"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Steps"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Form"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Background"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1574
+msgid "Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Image"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Background Image"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Padding"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Margin"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Border"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Fields"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Vertical Spacing"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Horizontal Spacing"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Colors"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Label Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Description Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Placeholder Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Field Background"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Hover"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Error Message Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Input Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Options Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Rating Colors"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Range slider Colors"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Disable Button"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Add text"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Next Button Style"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Next Button Background Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Next Button Border Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Next Button Text Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Back Button Style"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Back Button Background Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Back Button Border Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Back Button Text Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1469
+msgid "Form Settings"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Welcome & End blocks cannot be reordered."
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Form Logo"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Type your title here"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Enable Share"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "This form is not published yet. You must publish the form before sharing the link."
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Show Cover"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Cover Image"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Use cover as page background"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Show Logo"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Show Title"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Form Width"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Desktop"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Mobile"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Publish"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Close"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+#: assets/build/js/blocks-editor.js:1576
+msgid "Design and Share"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Get the link"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Link copied!"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1574
+msgid "Copy link"
+msgstr ""
+
+#: assets/build/js/components.js:715
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: assets/build/js/components.js:730
+#: assets/build/js/components.js:734
+msgid "Preset Fields"
+msgstr ""
+
+#: assets/build/js/components.js:734
+msgid "Expand"
+msgstr ""
+
+#: assets/build/js/components.js:734
+msgid "Processing..."
+msgstr ""
+
+#: assets/build/js/components.js:734
+msgid "Payment is disabled. Please <link>go to Settings</link> to configure them. Otherwise, this field will not work."
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1
+msgid "This name is already used"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1
+msgid "Block Advanced"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "Welcome"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1469
+msgid "End"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "Checked"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "Signed"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1469
+#: assets/build/js/modules.js:1482
+msgid "Uploaded"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "If"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Select a step"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Then Go to"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Delete rule"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Add rule"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Edit logic"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Set Conditional Logic"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+#, js-format
+msgid "%s applied"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Set conditional logic"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Always go to"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "All other cases go to"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Deleted logic successfully!"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Delete logic"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Apply"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Select a field"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Rule"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Group"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Set Field Condition"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+#, js-format
+msgid "Show %s if"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Advanced"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "Logic"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "100%"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "75%"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "67%"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "50%"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "33%"
+msgstr ""
+
+#: assets/build/js/formgent-gutenberg.js:1636
+msgid "25%"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Views"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Started"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Finished"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Completion rate"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Time to complete"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Views, clicks & other stats"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Conversation analytics"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Track drop-off rates for each question of your form"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Upgrade to view analytics"
+msgstr ""
+
+#: assets/build/js/modules.js:1722
+msgid "Create New"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "AI Classic Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Show multiple questions on single page"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "AI Conversational Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Show one questions on single page"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Make a customer feedback form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Generate an appointment request form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Generate an event registration form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Make a checkout form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Make a job interview form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Build a reservation form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Describe what the form is about."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Build your directory instantly. Customize with FormGent AI"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "AI Form (#%s)"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Describe the goal of your form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Field is required"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "e.g., A Event registration form about the design meat-up event held the 13th of July in Dublin city."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Forms suggestions for you"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Generate Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "AI Form Limit 5/5 Reached!"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Preparing your form..."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Upgrade to Pro for unlimited features."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Build your form instantly. Customize with FormGent AI"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Redirecting to forms..."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Generating form fields..."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Creating the form..."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Something went wrong! Please try again."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "AI form limit 5/5 reached. Upgrade to Pro for unlimited possibilities."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "Step %s of 2"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Select the type of form you want to create"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Start from scratch or you can select a template to assist you."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Start from Scratch"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Start with a blank form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Use a Template"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Pick a premade template and customize it as you want"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Create with AI"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Thanks for trying free 5/5 AI form creation. Unlock pro for unlimited possibilities "
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Describe it and FormGent AI will build it for you"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Classic Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Conversational Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "5 AI Form left in free"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Choose Form Type"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Create a New Form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Start from scratch"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "You don't have any form"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "Create a new form from scratch or use a %s template to get started."
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Coming soon"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "General (%s)"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "Conversational (%s)"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+#, js-format
+msgid "All Forms (%s)"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Date Created"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Last Modified"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Alphabetical"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Active"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Inactive"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Today"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Yesterday"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Last Week"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Last Month"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Select a Timeframe"
+msgstr ""
+
+#: assets/build/js/modules.js:2288
+msgid "Filter"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Save partially submitted form data and more."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Save incomplete data"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable to save partially submitted form data, so you don’t miss valuable leads."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Customize the form as your need."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "The form's context data is accessible via the 'context' variable."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Are you sure to proceed with the deletions?"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "This action cannot be undone."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Deleting..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Yes. Delete"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Manage email notifications for your forms"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add notification"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Form Fields"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Only one email address is allowed."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Please enter valid emails separated by commas."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Notifications can use only one From Email address."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Warning:"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "The From Email domain does not match your site domain. This may increase the chance of emails going to spam. Consider using a domain-based email address or installing a mail (SMTP) plugin."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Edit Email Notification"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add Email Notification"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Template Name"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Email Subject"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Send to"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Hide Advanced Options"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Show Advanced Options"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "From Name"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "From Email"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Reply To"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Replies will go to this address."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "CC"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Comma separated emails (optional)."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "manager@site.com, sales@site.com"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "BCC"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "log@site.com, audit@site.com"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Email Content"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Conditional Email"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable conditional email"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable this option to send email notification conditionally"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Set conditions"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Send this notification when"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Update the combinator"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "of the following match: "
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Update Notification"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add Notification"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Copy the code below to embed this form on your website"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Embed Options"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Auto Height"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Automatically adjust iframe height based on content"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Responsive Width"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Make the form responsive to container width"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Success message"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Redirect to page"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Redirect to custom URL"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Decide what happens after a user submits the form."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Confirmation type"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Confirmation message"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select page"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Custom URL"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enter URL"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "After form submission"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Hide form"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Reset form"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet is updating..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Opps! Something went wrong."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet is connecting..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Please check settings for authorization and try again."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "This may take a few seconds, do not close this window."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go back to sheets"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet successfully updated"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet successfully connected"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Congrats! You have successfully sync/connected your form data with your Google sheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "See connected sheets"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet info"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Provide your Google spreadsheet information"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Where do you want to send your form responses?"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Create a new sheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Use existing sheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet name"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet name is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "e.g Lead collection sheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Worksheet name"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Worksheet name is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "e.g Tab 1"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Send responses to a custom tab within a single spreadsheet."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select spreadsheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheet is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select your spreadsheet from list"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select worksheet"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Worksheet is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select column"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Form field"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add option"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Auto map"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Automatically map form fields to spreadsheet columns"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Manual map"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Manually match form fields to spreadsheet columns "
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Field mapping"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Set up the mapping between form fields and Google sheet columns"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Field mapping type"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Set conditional sync"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Setup conditional sync for your form responses"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable conditional logic"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable this option to set conditional sync for your form responses"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Send this response if"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Edit Google Spreadsheet connection settings"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add new Google Spreadsheet connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Save settings"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+#, js-format
+msgid "Are you sure to disconnect \"%s\"?"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Data sync will be stopped for this spreadsheet. You can reconnect it anytime."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Spreadsheets"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Worksheet:"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Actions"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "No Google Sheets connected"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Connect to a spreadsheet to export & sync responses"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Export and auto-sync form responses to Google Sheets"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add new connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go to global settings to connect, disconnect or toggle your Google Sheet integration."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Global Settings"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Automate your integrations with webhooks."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Try FromGent Pro"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "100% Risk-Free Money Back Guarantee!"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Upgrade to access advanced webhook features and explore our all Exceptional features."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Upgrade Now"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Are you sure to delete this feed ?"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Yes, Delete"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "module"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Action"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "No Zoho modules found"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Send FormGent form submissions directly to Zoho CRM"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add New Feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go to global settings to connect, disconnect, or toggle your Zoho CRM integration."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Automate your submissions to your custom post type."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Upgrade to access advanced post/CPT submission features and explore our all exceptional features."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Mailchimp is updating..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Mailchimp is connecting..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go back to mailchimp feeds"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Mailchimp fields"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Map Form Fields to Mailchimp Fields"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Provide your Mailchimp information"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "General Feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Provide your Mailchimp feed information"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Name"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Feed name is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Newsletter Opt-in"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Audience"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Audience is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select Audience"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Group Category"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select Group Category"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Group Option"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Group Option is required."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select Group Option"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Permission Feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Allow to show info in preview form"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Tags"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Double Opt-in"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Resubscribe Existing Contact"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Update Existing Contact"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Mark as VIP"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Edit Mailchimp Connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add Mailchimp Connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Title"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "No Mailchimp Connection"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add new feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go to global settings to connect, disconnect, or toggle your Mailchimp integration."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Grade label"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Grade range"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Example: A | B"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Min"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Max"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Grade system"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Configure options for turning your form into a interactive quiz"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable Quiz"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Enable quiz functionality, including scoring and result display."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "CRM is updating..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "CRM is connecting..."
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Go back to CRM"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Zoho fields"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Set up the mapping between form fields and Zoho CRM fields"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Select a Module"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Edit Zoho CRM Module"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add New Zoho CRM Feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "Add feed"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+msgid "No response yet!"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+#, js-format
+msgid "%s out of %s people answered this question"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+#, js-format
+msgid "%s response"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+#, js-format
+msgid "%s responses"
+msgstr ""
+
+#: assets/build/js/modules.js:2991
+#, js-format
+msgid "(%s%%)"
+msgstr ""
+
+#: assets/build/js/modules.js:3278
+msgid "No summary data available"
+msgstr ""
+
+#: assets/build/js/modules.js:3278
+msgid "Share your form to your audiences to get responses."
+msgstr ""

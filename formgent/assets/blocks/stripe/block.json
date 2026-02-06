@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/stripe",
+  "title": "Stripe",
+  "category": "formgent-payment",
+  "description": "Stripe payment gateway block for FormGent.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "stripe"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "title": {
+      "type": "string",
+      "default": "Credit Card (Stripe)"
+    },
+    "subtitle": {
+      "type": "string",
+      "default": "Pay securely with Stripe"
+    }
+  },
+  "supports": {
+    "interactivity": true,
+    "multiple": false
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

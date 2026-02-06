@@ -1,0 +1,100 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/single-choice",
+  "title": "Single Choice",
+  "category": "formgent",
+  "description": "Provide a single-choice block for selecting one option from a list.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "single-choice"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "options": {
+      "type": "array",
+      "default": [
+        {
+          "id": "default_option",
+          "label": "New Option",
+          "value": "default_value"
+        }
+      ]
+    },
+    "other_option": {
+      "type": "array",
+      "default": []
+    },
+    "label": {
+      "type": "string",
+      "default": "Single Choice"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "style": {
+      "type": "string",
+      "default": "frame"
+    },
+    "layout": {
+      "type": "string",
+      "default": "default"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "allow_user_add_other_option": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "other_label": {
+      "type": "string",
+      "default": "Other"
+    },
+    "other_placeholder": {
+      "type": "string",
+      "default": "Please specify"
+    },
+    "correct_answer": {
+      "type": "string",
+      "default": ""
+    },
+    "points": {
+      "type": "number",
+      "default": 1
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/email",
+  "title": "Email",
+  "category": "formgent",
+  "description": "Insert an email field for users to enter their email address.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "email"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "confirm_placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "Email"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "confirm_sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "show_field_icon": {
+      "type": "boolean",
+      "default": false
+    },
+    "enable_confirmation_field": {
+      "type": "boolean",
+      "default": false
+    },
+    "confirm_label": {
+      "type": "string",
+      "default": "Confirm Email"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "character_limit": {
+      "type": "boolean",
+      "default": false
+    },
+    "limit": {
+      "type": "number",
+      "default": 100
+    },
+    "is_invalid_name": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

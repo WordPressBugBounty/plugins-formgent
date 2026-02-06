@@ -1,0 +1,114 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/range-slider",
+  "title": "Range Slider",
+  "category": "formgent",
+  "description": "Add a range slider for price, rating, budget or custom scoring.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "range-slider"
+    },
+    "label": {
+      "type": "string",
+      "default": "Range Slider"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "slider_type": {
+      "type": "string",
+      "default": "number"
+    },
+    "left_label": {
+      "type": "string",
+      "default": "Min"
+    },
+    "right_label": {
+      "type": "string",
+      "default": "Max"
+    },
+    "value_prefix": {
+      "type": "string",
+      "default": ""
+    },
+    "value_suffix": {
+      "type": "string",
+      "default": ""
+    },
+    "min_value": {
+      "type": "number",
+      "default": 0
+    },
+    "max_value": {
+      "type": "number",
+      "default": 100
+    },
+    "default_value": {
+      "type": "number",
+      "default": 50
+    },
+    "step_increment": {
+      "type": "number",
+      "default": 1
+    },
+    "text_options": {
+      "type": "array",
+      "default": [
+        {
+          "id": "option_1",
+          "label": "Option 1",
+          "value": "option_1"
+        },
+        {
+          "id": "option_2",
+          "label": "Option 2",
+          "value": "option_2"
+        },
+        {
+          "id": "option_3",
+          "label": "Option 3",
+          "value": "option_3"
+        }
+      ]
+    },
+    "text_default_index": {
+      "type": "number",
+      "default": 0
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/submit-button",
+  "title": "Custom Button",
+  "category": "formgent",
+  "description": "Add a custom submit button to allow users to submit their form data.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "button"
+    },
+    "button_text": {
+      "type": "string",
+      "default": "Submit"
+    },
+    "button_alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "button_style": {
+      "type": "string",
+      "default": "default"
+    },
+    "background_color": {
+      "type": "string",
+      "default": "#4cafaa"
+    },
+    "border_color": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "text_color": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true,
+    "multiple": false
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

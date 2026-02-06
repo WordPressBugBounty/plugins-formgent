@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/captcha",
+  "title": "Captcha",
+  "category": "formgent",
+  "description": "Protect your forms from spam and ensure genuine submissions with seamless user verification.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "captcha"
+    },
+    "label": {
+      "type": "string",
+      "default": "Captcha"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "captcha": {
+      "type": "string",
+      "default": "google_recaptcha"
+    },
+    "theme": {
+      "type": "string",
+      "default": "light"
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true,
+    "multiple": false
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

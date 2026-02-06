@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/dropdown",
+  "title": "Dropdown",
+  "category": "formgent",
+  "description": "Add a dropdown field to allow users to select one option from a list.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "dropdown"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "options": {
+      "type": "array",
+      "default": []
+    },
+    "label": {
+      "type": "string",
+      "default": "Dropdown"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Select an option..."
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "correct_answer": {
+      "type": "string",
+      "default": ""
+    },
+    "points": {
+      "type": "number",
+      "default": 1
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

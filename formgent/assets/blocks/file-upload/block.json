@@ -1,0 +1,99 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/file-upload",
+  "title": "File Upload",
+  "category": "formgent",
+  "description": "Enable users to upload files in the form.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "file-upload"
+    },
+    "label": {
+      "type": "string",
+      "default": "File Upload"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "upload_button_text": {
+      "type": "string",
+      "default": "Upload"
+    },
+    "upload_text": {
+      "type": "string",
+      "default": "Drop file here or click to upload"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "limit_text": {
+      "type": "string",
+      "default": "Maximum file size allowed: {file_size}"
+    },
+    "limit_size": {
+      "type": "string",
+      "default": "250KB"
+    },
+    "is_limit_size": {
+      "type": "boolean",
+      "default": true
+    },
+    "size_type": {
+      "type": "string",
+      "default": "KB"
+    },
+    "limit_files": {
+      "type": "number",
+      "default": 5
+    },
+    "limit_files_text": {
+      "type": "string",
+      "default": "Maximum number of files allowed: {file_limit}"
+    },
+    "is_limit_files": {
+      "type": "boolean",
+      "default": 0
+    },
+    "allowed_types": {
+      "type": "array",
+      "default": [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "application/pdf"
+      ]
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

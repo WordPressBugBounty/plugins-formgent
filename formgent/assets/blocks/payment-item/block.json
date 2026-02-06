@@ -1,0 +1,86 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/payment-item",
+  "title": "Payment Item",
+  "category": "formgent-payment",
+  "description": "Add payment item to the form.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "payment-item"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "options": {
+      "type": "array",
+      "default": []
+    },
+    "label": {
+      "type": "string",
+      "default": "Payment Item"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "style": {
+      "type": "string",
+      "default": "frame"
+    },
+    "layout": {
+      "type": "string",
+      "default": "default"
+    },
+    "product_display_type": {
+      "type": "string",
+      "default": "radio"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Select an option..."
+    },
+    "single_amount": {
+      "type": "number",
+      "default": ""
+    },
+    "single_amount_label": {
+      "type": "string",
+      "default": "Price:"
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

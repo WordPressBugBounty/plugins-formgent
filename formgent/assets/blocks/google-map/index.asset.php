@@ -1,0 +1,1 @@
+<?php return array('dependencies' => array('formgent/gutenberg', 'lodash', 'react', 'react-jsx-runtime', 'wp-api-fetch', 'wp-block-editor', 'wp-data', 'wp-element', 'wp-hooks', 'wp-i18n'), 'version' => 'd6d54563ee51e4fed7e1');
