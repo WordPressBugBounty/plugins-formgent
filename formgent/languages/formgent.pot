@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.3.0\n"
+"Project-Id-Version: FormGent 1.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-29T08:17:37+00:00\n"
+"POT-Creation-Date: 2026-02-16T08:39:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -1244,7 +1244,7 @@ msgstr ""
 
 #: app/Widgets/Form.php:33
 #: assets/blocks/form/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1636
 msgid "General"
 msgstr ""
@@ -1352,7 +1352,8 @@ msgid "Date:"
 msgstr ""
 
 #: resources/views/submit-button.php:25
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
+#: assets/build/js/blocks-editor.js:1578
 msgid "Submit"
 msgstr ""
 
@@ -1409,7 +1410,7 @@ msgstr ""
 #: assets/blocks/text/index.js:1
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/website/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Left"
 msgstr ""
 
@@ -1439,7 +1440,7 @@ msgstr ""
 #: assets/blocks/text/index.js:1
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/website/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Right"
 msgstr ""
 
@@ -1758,7 +1759,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1779,7 +1780,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1800,7 +1801,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1821,7 +1822,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1842,7 +1843,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1863,7 +1864,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1883,7 +1884,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1903,7 +1904,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1923,7 +1924,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1943,7 +1944,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1964,7 +1965,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -1984,7 +1985,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2004,7 +2005,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2024,7 +2025,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2044,7 +2045,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2064,7 +2065,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2084,7 +2085,7 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/welcome/index.js:1
 #: assets/build/js/admin.js:715
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 #: assets/build/js/directorist.js:715
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:1482
@@ -2093,6 +2094,12 @@ msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
 msgid "Dropdown Items"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Set default option"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
@@ -2218,13 +2225,13 @@ msgid "Dynamic tags"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Site Title"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Site URL"
 msgstr ""
@@ -2234,14 +2241,14 @@ msgid "Form Title"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "User ID"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
 #: assets/build/chunk/246.js:1509
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/directorist.js:2223
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "User Email"
@@ -2252,19 +2259,19 @@ msgid "User Display Name"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "User First Name"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "User Last Name"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "User Username"
 msgstr ""
@@ -2303,7 +2310,7 @@ msgstr ""
 
 #: assets/blocks/html/index.js:1
 #: assets/build/chunk/246.js:1509
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/directorist.js:2223
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "IP Address"
@@ -2377,7 +2384,7 @@ msgstr ""
 
 #: assets/blocks/input-masking/index.js:1
 #: assets/blocks/number/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "None"
 msgstr ""
 
@@ -2418,7 +2425,7 @@ msgstr ""
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/single-choice/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Default"
 msgstr ""
 
@@ -2437,7 +2444,7 @@ msgstr ""
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/single-choice/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Style"
 msgstr ""
 
@@ -2501,61 +2508,61 @@ msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Button Alignment"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Middle"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Block"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Button Style"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Default Style"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Solid"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Bordered"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Background Color"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Border Color"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Text Color"
 msgstr ""
 
@@ -2565,14 +2572,14 @@ msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/submit-button/index.js:2
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 msgid "Button text"
 msgstr ""
 
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/page-break/index.js:1
 #: assets/blocks/submit-button/index.js:2
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1
 msgid "Add text..."
 msgstr ""
 
@@ -2601,7 +2608,7 @@ msgid "Rounding"
 msgstr ""
 
 #: assets/blocks/page-break/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Page Break Settings"
 msgstr ""
 
@@ -2618,7 +2625,7 @@ msgstr ""
 
 #: assets/blocks/page-break/index.js:1
 #: assets/blocks/submit-button/index.js:2
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Page Break"
 msgstr ""
 
@@ -2644,7 +2651,7 @@ msgid "Checkbox"
 msgstr ""
 
 #: assets/blocks/payment-item/index.js:1
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/components.js:734
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/formgent-gutenberg.js:1636
@@ -2779,7 +2786,7 @@ msgstr ""
 
 #: assets/blocks/step/index.js:1
 #: assets/blocks/welcome/index.js:1
-#: assets/build/js/blocks-editor.js:1574
+#: assets/build/js/blocks-editor.js:106
 msgid "Media"
 msgstr ""
 
@@ -2795,14 +2802,14 @@ msgstr ""
 
 #: assets/blocks/step/index.js:1
 #: assets/blocks/welcome/index.js:1
-#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/blocks-editor.js:1474
 #: assets/build/js/formgent-gutenberg.js:1365
 msgid "Select or Upload Media Of Your Chosen Persuasion"
 msgstr ""
 
 #: assets/blocks/step/index.js:1
 #: assets/blocks/welcome/index.js:1
-#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/blocks-editor.js:1474
 #: assets/build/js/formgent-gutenberg.js:1365
 msgid "Use this media"
 msgstr ""
@@ -2828,7 +2835,7 @@ msgid "The %1$s block is not compatible with multi-step forms. Instead, the %2$s
 msgstr ""
 
 #: assets/blocks/submit-button/index.js:2
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Submit Button"
 msgstr ""
 
@@ -3087,7 +3094,7 @@ msgid "Authorize"
 msgstr ""
 
 #: assets/build/chunk/121.js:124
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Zoho CRM"
 msgstr ""
@@ -3360,7 +3367,7 @@ msgstr ""
 
 #: assets/build/chunk/121.js:300
 #: assets/build/chunk/121.js:1063
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "General Settings"
 msgstr ""
@@ -4056,339 +4063,339 @@ msgstr ""
 msgid "To get started, look through our pre-made templates."
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/blocks-editor.js:1
+msgid "Form Settings"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Welcome & End blocks cannot be reordered."
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Form Logo"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Type your title here"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Enable Share"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "This form is not published yet. You must publish the form before sharing the link."
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Show Cover"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+#: assets/build/js/blocks-editor.js:1578
+msgid "Color"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Cover Image"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Use cover as page background"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Show Logo"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Show Title"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Form Width"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Desktop"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Mobile"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Publish"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Close"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+#: assets/build/js/blocks-editor.js:108
+msgid "Design and Share"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Get the link"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Link copied!"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:106
+msgid "Copy link"
+msgstr ""
+
+#: assets/build/js/blocks-editor.js:1474
 #: assets/build/js/formgent-gutenberg.js:1365
 msgid "Change"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1365
+#: assets/build/js/blocks-editor.js:1474
 #: assets/build/js/formgent-gutenberg.js:1365
 msgid "Remove"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Solid color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 #: assets/build/js/modules.js:2288
 msgid "Custom"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Gradient color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Focal Point"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Overlay Opacity"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Formula"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Insert fields"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Formula is valid"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/formgent-gutenberg.js:1469
 msgid "Formula is invalid"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Add Block"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Form Confirmation"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Email Notifications"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Webhooks"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Quiz"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Google Sheet Integration"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Export form responses to Google Sheets"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Mailchimp Integration"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Post/CPT Submission"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Embed"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 #: assets/build/js/modules.js:2991
 msgid "Custom CSS/JS"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Show Labels"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Progress Indicator"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Progress Bar"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Steps"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Form"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Background"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
-#: assets/build/js/blocks-editor.js:1574
-msgid "Color"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Image"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Background Image"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Padding"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Margin"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Border"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Fields"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Vertical Spacing"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Horizontal Spacing"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Colors"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Label Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Description Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Placeholder Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Field Background"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Hover"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Error Message Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Input Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Options Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Rating Colors"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Range slider Colors"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Disable Button"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Add text"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Next Button Style"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Next Button Background Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Next Button Border Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Next Button Text Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Back Button Style"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Back Button Background Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Back Button Border Color"
 msgstr ""
 
-#: assets/build/js/blocks-editor.js:1469
+#: assets/build/js/blocks-editor.js:1578
 msgid "Back Button Text Color"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1469
-msgid "Form Settings"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Welcome & End blocks cannot be reordered."
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Form Logo"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Type your title here"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Enable Share"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "This form is not published yet. You must publish the form before sharing the link."
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Show Cover"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Cover Image"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Use cover as page background"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Show Logo"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Show Title"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Form Width"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Desktop"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Mobile"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Publish"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Close"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-#: assets/build/js/blocks-editor.js:1576
-msgid "Design and Share"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Get the link"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Link copied!"
-msgstr ""
-
-#: assets/build/js/blocks-editor.js:1574
-msgid "Copy link"
 msgstr ""
 
 #: assets/build/js/components.js:715

@@ -82,6 +82,11 @@ function formgent_form_default_values_functions() {
                 return get_bloginfo( 'name' );
             },
             'user'       => function( $property ) {
+                // For non-logged-in users, keep user-based defaults blank.
+                if ( ! is_user_logged_in() ) {
+                    return '';
+                }
+
                 $user = wp_get_current_user();
                 return isset( $user->$property ) ? $user->$property : '';
             }
@@ -123,32 +128,54 @@ function formgent_form_default_values( array $data ) {
             continue;
         }
 
-        $value = $item['value'];
-        preg_match_all( '/\{(.*?)\}/', $value, $matches );
+        $value            = $item['value'];
+        $raw_placeholders = [];
+        $tokens           = [];
 
-        foreach ( $matches[1] as $key => $variable ) {
-            // Split the variable by dot notation
-            $parts = explode( '.', $variable );
-            $base  = array_shift( $parts );
+        // Default value UI inserts tokens like {{site_url}} and {{user.user_email}}.
+        // Support both {{token}} (preferred) and legacy {token}.
+        if ( false !== strpos( $value, '{{' ) ) {
+            preg_match_all( '/{{\s*(.*?)\s*}}/', $value, $matches );
+            $raw_placeholders = $matches[0] ?? [];
+            $tokens           = $matches[1] ?? [];
+        } else {
+            preg_match_all( '/{\s*(.*?)\s*}/', $value, $matches );
+            $raw_placeholders = $matches[0] ?? [];
+            $tokens           = $matches[1] ?? [];
+        }
 
-            // Check if the value is already cached
-            if ( ! isset( $dynamic_values[$variable] ) ) {
-                $dynamic_value = '';
-
-                if ( isset( $values_functions[$base] ) && is_callable( $values_functions[$base] ) ) {
-                    // Resolve the user property if applicable
-                    if ( $base === 'user' && ! empty( $parts ) ) {
-                        $property      = implode( '.', $parts );
-                        $dynamic_value = $values_functions[$base]( $property );
-                    } else {
-                        $dynamic_value = $values_functions[$base]();
-                    }
-                }
-                $dynamic_values[$variable] = $dynamic_value;
+        foreach ( $tokens as $match_index => $token ) {
+            $token = trim( (string) $token );
+            if ( '' === $token ) {
+                continue;
             }
 
-            // Replace the placeholder with the resolved value
-            $value = str_replace( $matches[0][$key], $dynamic_values[$variable], $value );
+            // Split the token by dot notation (e.g., user.user_email).
+            $parts = explode( '.', $token );
+            $base  = array_shift( $parts );
+
+            // Cache resolved values per token so repeated placeholders are cheap.
+            if ( ! isset( $dynamic_values[ $token ] ) ) {
+                $dynamic_value = '';
+
+                if ( isset( $values_functions[ $base ] ) && is_callable( $values_functions[ $base ] ) ) {
+                    // Resolve the user property if applicable.
+                    if ( 'user' === $base && ! empty( $parts ) ) {
+                        $property      = implode( '.', $parts );
+                        $dynamic_value = $values_functions[ $base ]( $property );
+                    } else {
+                        $dynamic_value = $values_functions[ $base ]();
+                    }
+                }
+
+                $dynamic_values[ $token ] = $dynamic_value;
+            }
+
+            // Replace the placeholder with the resolved value.
+            $placeholder = $raw_placeholders[ $match_index ] ?? '';
+            if ( '' !== $placeholder ) {
+                $value = str_replace( $placeholder, $dynamic_values[ $token ], $value );
+            }
         }
 
         $values[$key] = $value;
