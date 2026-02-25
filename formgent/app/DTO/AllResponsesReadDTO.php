@@ -6,28 +6,26 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\WpMVC\DTO\DTO;
 
-class ResponseReadDTO extends DTO {
+class AllResponsesReadDTO extends DTO {
     private int $page;
 
     private int $per_page;
 
-    private ?int $form_id = null;
-
     private ?int $is_read = null;
 
-    private int $is_completed = 0;
+    private ?int $is_completed = null;
 
     private ?string $search = null;
 
     private ?string $order_by = null;
-
-    private ?string $order_field_type = null;
 
     private ?string $order = null;
 
     private ?string $date_type = null;
 
     private array $date_frame = [];
+
+    private ?string $sort_by = null;
 
     /**
      * Get the value of page
@@ -74,28 +72,6 @@ class ResponseReadDTO extends DTO {
     }
 
     /**
-     * Get the value of form_id
-     *
-     * @return ?int
-     */
-    public function get_form_id(): ?int {
-        return $this->form_id;
-    }
-
-    /**
-     * Set the value of form_id
-     *
-     * @param ?int $form_id 
-     *
-     * @return self
-     */
-    public function set_form_id( ?int $form_id ): self {
-        $this->form_id = $form_id;
-
-        return $this;
-    }
-
-    /**
      * Get the value of is_read
      *
      * @return ?int
@@ -120,20 +96,20 @@ class ResponseReadDTO extends DTO {
     /**
      * Get the value of is_completed
      *
-     * @return int
+     * @return ?int
      */
-    public function get_is_completed(): int {
+    public function get_is_completed(): ?int {
         return $this->is_completed;
     }
 
     /**
      * Set the value of is_completed
      *
-     * @param int $is_completed 
+     * @param ?int $is_completed 
      *
      * @return self
      */
-    public function set_is_completed( int $is_completed ): self {
+    public function set_is_completed( ?int $is_completed ): self {
         $this->is_completed = $is_completed;
 
         return $this;
@@ -179,28 +155,6 @@ class ResponseReadDTO extends DTO {
      */
     public function set_order_by( ?string $order_by ): self {
         $this->order_by = $order_by;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of order_field_type
-     *
-     * @return ?string
-     */
-    public function get_order_field_type(): ?string {
-        return $this->order_field_type;
-    }
-
-    /**
-     * Set the value of order_field_type
-     *
-     * @param ?string $order_field_type 
-     *
-     * @return self
-     */
-    public function set_order_field_type( ?string $order_field_type ): self {
-        $this->order_field_type = $order_field_type;
 
         return $this;
     }
@@ -267,6 +221,28 @@ class ResponseReadDTO extends DTO {
      */
     public function set_date_frame( array $date_frame ): self {
         $this->date_frame = $date_frame;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sort_by
+     *
+     * @return ?string
+     */
+    public function get_sort_by(): ?string {
+        return $this->sort_by;
+    }
+
+    /**
+     * Set the value of sort_by
+     *
+     * @param ?string $sort_by 
+     *
+     * @return self
+     */
+    public function set_sort_by( ?string $sort_by ): self {
+        $this->sort_by = $sort_by;
 
         return $this;
     }

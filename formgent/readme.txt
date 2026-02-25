@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,6 +208,14 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides built-in analytics to track form submissions, user interactions, and more in the All Responses section.
 
 == Changelog ==
+= 1.4.0 - 25 February 2026 =
+* New: Introduced a single-page entry detail view
+* New: Added the ability to edit individual entries
+* New: Refreshed the Forms table interface
+* New: Implemented a new All Entries table view
+* New: Added a dedicated Entries menu for easier navigation
+* New: Display new submission badges within the Forms table
+
 = 1.3.1 - 16 February 2026 =
 * Fixed: An issue where field default values were not applied correctly
 * Fixed: An issue where logic rules became invalid after changing options label

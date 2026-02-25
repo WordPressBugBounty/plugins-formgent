@@ -8,6 +8,7 @@ use FormGent\App\DTO\AnswerDTO;
 use FormGent\App\Models\Answer;
 use FormGent\WpMVC\Database\Query\Builder;
 use FormGent\WpMVC\Repositories\Repository;
+use FormGent\WpMVC\DTO\DTO;
 
 class AnswerRepository extends Repository {
     public function get_query_builder() : Builder {
@@ -54,5 +55,56 @@ class AnswerRepository extends Repository {
         }
 
         return $field->first();
+    }
+
+    /**
+     * Create a single answer.
+     *
+     * @param AnswerDTO $dto
+     * @return bool|int
+     */
+    public function create( DTO $dto ) {
+        // Type check to ensure we have AnswerDTO
+        if ( ! $dto instanceof AnswerDTO ) {
+            return false;
+        }
+        
+        return Answer::query()->insert_get_id( $this->process_values( $dto->to_array() ) );
+    }
+
+    public function update( DTO $dto ) {
+        // Type check to ensure we have AnswerDTO
+        if ( ! $dto instanceof AnswerDTO ) {
+            return false;
+        }
+        
+        $data = $this->process_values( $dto->to_array( true ) );
+        
+        // Remove 'id' from update data as it's used in WHERE clause
+        unset( $data['id'] );
+        
+        // Ensure 'value' field is always included in update (even if null)
+        // This is critical for updates to work correctly
+        if ( ! isset( $data['value'] ) ) {
+            $data['value'] = $dto->get_value();
+            // Process the value if it's an array or object
+            if ( is_array( $data['value'] ) || ( is_object( $data['value'] ) && get_class( $data['value'] ) === 'stdClass' ) ) {
+                $data['value'] = wp_json_encode( $data['value'] );
+            }
+        }
+        
+        // Ensure we have data to update
+        if ( empty( $data ) ) {
+            return false;
+        }
+        
+        // Ensure required fields are present
+        if ( ! isset( $data['response_id'] ) || ! isset( $data['form_id'] ) || ! isset( $data['field_name'] ) || ! isset( $data['field_type'] ) ) {
+            return false;
+        }
+        
+        return Answer::query()
+            ->where( 'id', $dto->get_id() )
+            ->update( $data );
     }
 }

@@ -86,7 +86,7 @@ Route::group(
                     '{response_id}/order', function() {
                         Route::get( '/', [OrderController::class, 'order'] );
                         Route::patch( '/{id}/status', [OrderController::class, 'update_status'] );
-                    } 
+                    }
                 );
                 Route::get( 'table', [ResponseController::class, 'get_fields'] );
                 Route::group(
@@ -96,7 +96,9 @@ Route::group(
                 );
                 Route::get( 'export', [ResponseController::class, 'export'] );
                 Route::get( 'single', [ResponseController::class, 'show'] );
+                Route::patch( 'read/bulk', [ResponseController::class, 'update_read_bulk'] );
                 Route::delete( '/', [ResponseController::class, 'delete_bulk_response'] );
+                Route::patch( '{response_id}', [ResponseController::class, 'update'] );
                 Route::resource( '/', ResponseController::class );
             }
         );
@@ -109,6 +111,9 @@ Route::group(
 
         Route::get( 'settings', [SettingsController::class, 'index'] );
         Route::post( 'settings', [SettingsController::class, 'update'] );
+        Route::get( 'total-unread-count', [ResponseController::class, 'total_unread_count'] );
+        Route::get( 'all-responses', [ResponseController::class, 'all_responses'] );
+        Route::delete( 'all-responses', [ResponseController::class, 'delete_all_responses'] );
         Route::group(
             'google', function() {
                 Route::get( 'spreadsheets', [GoogleSheetController::class, 'index'] );

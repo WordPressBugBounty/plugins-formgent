@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 use FormGent\App\DTO\ResponseDTO;
 use FormGent\App\DTO\ResponseReadDTO;
 use FormGent\App\DTO\ResponseSingleDTO;
+use FormGent\App\DTO\AllResponsesReadDTO;
 use FormGent\App\EnumeratedList\ResponseStatus;
 use FormGent\App\Models\Response;
 use FormGent\App\Models\ResponseMeta;
@@ -92,31 +93,407 @@ class ResponseRepository {
         ];
     }
 
+    public function get_all( AllResponsesReadDTO $dto ) {
+        $responses_query = $this->all_responses_query( $dto );
+
+        $count_query = clone $responses_query;
+
+        do_action( 'formgent_responses_count_query', $count_query, $dto );
+
+        // Apply sorting (sort_by takes precedence over order_by/order)
+        $this->all_responses_sort_query( $responses_query, $dto );
+
+        $page     = max( 1, $dto->get_page() );
+        $per_page = max( 1, $dto->get_per_page() );
+        $offset   = ( $page - 1 ) * $per_page;
+
+        // Get distinct response IDs first with proper pagination
+        $ids_query = clone $responses_query;
+
+        // Apply sorting to IDs query
+        $this->all_responses_sort_query( $ids_query, $dto );
+
+        $ids_results = $ids_query->select( 'response.id' )
+            ->group_by( ['response.id'] )
+            ->limit( $per_page )
+            ->offset( $offset )
+            ->get();
+
+        // Extract IDs from results
+        $response_ids = array_map(
+            function( $row ) {
+                return (int) $row->id;
+            }, $ids_results
+        );
+
+        if ( empty( $response_ids ) ) {
+            return [
+                'total'     => $count_query->count( 'DISTINCT response.id' ),
+                'responses' => [],
+            ];
+        }
+
+        // Fetch full response data for the paginated IDs
+        $select_columns = [
+            'response.id',
+            'response.form_id',
+            'post.post_title as form_title',
+            'response.is_completed',
+            'response.is_read',
+            'response.is_starred',
+            'response.created_at',
+        ];
+
+        $group_columns = [
+            'response.id',
+            'response.form_id',
+            'post.post_title',
+            'response.is_completed',
+            'response.is_read',
+            'response.is_starred',
+            'response.created_at',
+        ];
+
+        $responses_query = $this->all_responses_query( $dto );
+        $responses_query->select( $select_columns )
+            ->group_by( $group_columns )
+            ->where_in( 'response.id', $response_ids );
+
+        // Apply sorting to maintain order
+        $this->all_responses_sort_query( $responses_query, $dto );
+
+        do_action( 'formgent_responses_query', $responses_query, $dto );
+
+        $responses = array_map(
+            function( $response ) {
+                return [
+                    'id'           => (int) $response->id,
+                    'form_id'      => (int) $response->form_id,
+                    'form_title'   => $response->form_title ?? '',
+                    'submitted_on' => $response->created_at,
+                    'is_completed' => (int) $response->is_completed === 1 ? 1 : 0,
+                    'is_read'      => (int) $response->is_read,
+                    'is_starred'   => (int) $response->is_starred,
+                ];
+            },
+            $responses_query->get()
+        );
+
+        // Maintain original sort order from IDs query
+        $sorted_responses = [];
+        foreach ( $response_ids as $id ) {
+            foreach ( $responses as $response ) {
+                if ( $response['id'] === $id ) {
+                    $sorted_responses[] = $response;
+                    break;
+                }
+            }
+        }
+
+        return [
+            'total'     => $count_query->count( 'DISTINCT response.id' ),
+            'responses' => $sorted_responses,
+        ];
+    }
+
+    private function all_responses_query( AllResponsesReadDTO $dto ) {
+        $responses_query = Response::query( 'response' )
+            ->join( Post::get_table_name() . ' as post', 'post.ID', 'response.form_id' )
+            ->where( 'response.status', ResponseStatus::PUBLISH );
+
+        // Apply date filtering
+        $this->all_responses_date_query( $responses_query, $dto );
+
+        if ( $dto->get_is_completed() !== null ) {
+            $responses_query->where( 'response.is_completed', '=', $dto->get_is_completed() );
+        }
+
+        if ( $dto->get_is_read() !== null ) {
+            $responses_query->where( 'response.is_read', $dto->get_is_read() );
+        }
+
+        $search = $dto->get_search();
+
+        if ( empty( $search ) ) {
+            return $responses_query;
+        }
+
+        $responses_query->left_join(
+            Answer::get_table_name() . " as answer", function( JoinClause $join ) {
+                $join->on_column( "response.id", "answer.response_id" );
+            }
+        );
+
+        global $wpdb;
+
+        $search = "%{$search}%";
+
+        $search_query = $wpdb->prepare( "(post.post_title like %s or answer.value like %s)", $search, $search );
+
+        return $responses_query->where_raw( $search_query );
+    }
+
+    private function all_responses_date_query( Builder $query, AllResponsesReadDTO $dto ) {
+        if ( empty( $dto->get_date_type() ) || 'all' === $dto->get_date_type() ) {
+            return $query;
+        }
+
+        $now              = formgent_now();
+        $from_date_format = "Y-m-d 00:00:01";
+        $to_date_format   = "Y-m-d 23:59:59";
+
+        $date_type  = $dto->get_date_type();
+        $date_frame = $dto->get_date_frame();
+
+        if ( 'today' === $date_type ) {
+            $today = $now->format( $from_date_format );
+            return $query->where_raw( "response.created_at >= '{$today}'" );
+        }
+
+        if ( 'date_frame' === $date_type ) {
+            /**
+             * Checking if the date is valid and the date format is correct.
+             */
+            $date_format = "Y-m-d"; // Validate against date only
+
+            if ( empty( $date_frame['from'] ) ||
+                ! is_string( $date_frame['from'] ) ||
+                empty( $date_frame['to'] ) ||
+                ! is_string( $date_frame['to'] ) ||
+                ! formgent_is_valid_date( $date_frame['from'], $date_format ) ||
+                ! formgent_is_valid_date( $date_frame['to'], $date_format )
+            ) {
+                return $query;
+            }
+
+            // Append time portion for SQL query
+            $from = sanitize_text_field( $date_frame['from'] ) . ' 00:00:01';
+            $to   = sanitize_text_field( $date_frame['to'] ) . ' 23:59:59';
+        } else {
+            switch ( $date_type ) {
+                case 'yesterday':
+                    $date = $now->sub_days( 1 );
+                    break;
+                case 'last_week':
+                    $date = $now->sub_days( 6 );
+                    break;
+                case 'last_month':
+                    $date = $now->sub_days( 30 );
+                    break;
+                default:
+                    return $query;
+            }
+            $from = $date->format( $from_date_format );
+            $to   = formgent_now()->format( $to_date_format );
+        }
+
+        return $query->where_raw( "response.created_at >= '{$from}' AND response.created_at <= '{$to}'" );
+    }
+
+    private function responses_date_query( Builder $query, ResponseReadDTO $dto ) {
+        if ( empty( $dto->get_date_type() ) || 'all' === $dto->get_date_type() ) {
+            return $query;
+        }
+
+        $now              = formgent_now();
+        $from_date_format = "Y-m-d 00:00:01";
+        $to_date_format   = "Y-m-d 23:59:59";
+
+        $date_type  = $dto->get_date_type();
+        $date_frame = $dto->get_date_frame();
+
+        if ( 'today' === $date_type ) {
+            $today = $now->format( $from_date_format );
+            return $query->where_raw( "response.created_at >= '{$today}'" );
+        }
+
+        if ( 'date_frame' === $date_type ) {
+            /**
+             * Checking if the date is valid and the date format is correct.
+             */
+            $date_format = "Y-m-d"; // Validate against date only
+
+            if ( empty( $date_frame['from'] ) ||
+                ! is_string( $date_frame['from'] ) ||
+                empty( $date_frame['to'] ) ||
+                ! is_string( $date_frame['to'] ) ||
+                ! formgent_is_valid_date( $date_frame['from'], $date_format ) ||
+                ! formgent_is_valid_date( $date_frame['to'], $date_format )
+            ) {
+                return $query;
+            }
+
+            // Append time portion for SQL query
+            $from = sanitize_text_field( $date_frame['from'] ) . ' 00:00:01';
+            $to   = sanitize_text_field( $date_frame['to'] ) . ' 23:59:59';
+        } else {
+            switch ( $date_type ) {
+                case 'yesterday':
+                    $date = $now->sub_days( 1 );
+                    break;
+                case 'last_week':
+                    $date = $now->sub_days( 6 );
+                    break;
+                case 'last_month':
+                    $date = $now->sub_days( 30 );
+                    break;
+                default:
+                    return $query;
+            }
+            $from = $date->format( $from_date_format );
+            $to   = formgent_now()->format( $to_date_format );
+        }
+
+        return $query->where_raw( "response.created_at >= '{$from}' AND response.created_at <= '{$to}'" );
+    }
+
+    private function all_responses_sort_query( Builder $query, AllResponsesReadDTO $dto ) {
+        $sort_by = $dto->get_sort_by();
+
+        if ( empty( $sort_by ) ) {
+            // Use order_by and order if sort_by is not provided
+            $allowed_columns = ['id', 'form_id', 'is_completed', 'is_read', 'created_at'];
+            $order_by        = $dto->get_order_by() ?? 'id';
+            $order_by        = in_array( $order_by, $allowed_columns, true ) ? $order_by : 'id';
+            $order           = $dto->get_order() ?? 'desc';
+            $order           = in_array( $order, ['asc', 'desc'], true ) ? strtolower( $order ) : 'desc';
+            return $query->order_by( 'response.' . $order_by, $order );
+        }
+
+        switch ( $sort_by ) {
+            case 'alphabetical':
+                return $query->order_by_raw( 'post.post_title asc, response.id desc' );
+
+            case 'date_created':
+                return $query->order_by_desc( 'response.created_at' );
+
+            case 'read':
+                return $query->order_by_raw(
+                    "CASE
+                    WHEN response.is_read = 1 THEN 1
+                    WHEN response.is_read = 0 THEN 2
+                    ELSE 3
+                END, response.id desc"
+                );
+
+            case 'unread':
+                return $query->order_by_raw(
+                    "CASE
+                    WHEN response.is_read = 0 THEN 1
+                    WHEN response.is_read = 1 THEN 2
+                    ELSE 3
+                END, response.id desc"
+                );
+
+            case 'complete':
+                return $query->order_by_raw(
+                    "CASE
+                    WHEN response.is_completed = 1 THEN 1
+                    WHEN response.is_completed = 0 THEN 2
+                    ELSE 3
+                END, response.id desc"
+                );
+
+            case 'incomplete':
+                return $query->order_by_raw(
+                    "CASE
+                    WHEN response.is_completed = 0 THEN 1
+                    WHEN response.is_completed = 1 THEN 2
+                    ELSE 3
+                END, response.id desc"
+                );
+            case 'starred':
+                return $query->order_by_raw(
+                    "CASE
+                    WHEN response.is_starred = 1 THEN 1
+                    WHEN response.is_starred = 0 THEN 2
+                    ELSE 3
+                END, response.id desc"
+                );
+
+            default:
+                return $query->order_by_desc( 'response.id' );
+        }
+    }
+
     /**
      * Prepare a single field's value based on its type.
      */
     protected function prepare_field_value( \stdClass $answer, array $field_data ): \stdClass {
-        if ( in_array( $answer->field_type, [SingleChoice::get_key(), Dropdown::get_key()], true ) ) {
+        if ( Dropdown::get_key() === $answer->field_type ) {
             $answer->option_label = $this->get_option_label( $field_data, $answer->value );
+        } elseif ( SingleChoice::get_key() === $answer->field_type ) {
+            $label = $this->get_option_label( $field_data, $answer->value );
+
+            $allow_other = ! empty( $field_data['allow_user_add_other_option'] );
+            $other_label = isset( $field_data['other_label'] ) && $field_data['other_label'] !== ''
+                ? $field_data['other_label']
+                : esc_html__( 'Other', 'formgent' );
+
+            if ( '' !== $label ) {
+                $answer->option_label = $label;
+                $answer->is_other     = false;
+            } elseif ( $allow_other ) {
+                // Keep the real free-text in $answer->value, but flag the selection as "Other".
+                $answer->option_label = $other_label;
+                $answer->is_other     = true;
+            } else {
+                $answer->option_label = '';
+                $answer->is_other     = false;
+            }
         } elseif ( MultipleChoice::get_key() === $answer->field_type ) {
+            $values = is_array( $answer->value ) ? $answer->value : json_decode( $answer->value, true ) ?? [];
+
+            $allow_other = ! empty( $field_data['allow_user_add_other_option'] );
+            $other_label = isset( $field_data['other_label'] ) && $field_data['other_label'] !== ''
+                ? $field_data['other_label']
+                : esc_html__( 'Other', 'formgent' );
+
             $answer->options = array_map(
-                fn( $value ) => [
-                    'label' => $this->get_option_label( $field_data, $value ),
-                    'value' => $value
-                ],
-                is_array( $answer->value ) ? $answer->value : json_decode( $answer->value, true ) ?? []
+                function( $value ) use ( $field_data, $allow_other, $other_label ) {
+                    $label = $this->get_option_label( $field_data, $value );
+                    if ( '' !== $label ) {
+                        return [
+                            'label'    => $label,
+                            'value'    => $value,
+                            'is_other' => false,
+                        ];
+                    }
+
+                    if ( $allow_other ) {
+                        return [
+                            'label'    => $other_label,
+                            'value'    => $value,
+                            'is_other' => true,
+                        ];
+                    }
+
+                    return [
+                        'label'    => '',
+                        'value'    => $value,
+                        'is_other' => false,
+                    ];
+                },
+                is_array( $values ) ? $values : []
             );
-        } elseif ( RangeSlider::get_key() === $answer->field_type 
-                && isset( $field_data['slider_type'] ) && $field_data['slider_type'] === 'text' 
+        } elseif ( RangeSlider::get_key() === $answer->field_type
+                && isset( $field_data['slider_type'] ) && $field_data['slider_type'] === 'text'
                 && isset( $field_data['text_options'] ) && is_array( $field_data['text_options'] ) ) {
             // For Range Slider text type, get label from text_options
             $answer->option_label = $this->get_text_option_label( $field_data, $answer->value );
         } elseif ( FileUpload::get_key() === $answer->field_type ) {
             // Use content_url() which respects HTTPS from site settings
-            $content_url   = content_url();
+            $content_url = content_url();
+            $files       = json_decode( $answer->value, true ) ?? [];
+
             $answer->value = array_map(
-                fn( $file ) => $content_url . '/uploads/' . $file,
-                json_decode( $answer->value, true ) ?? []
+                function( $file ) use ( $content_url ) {
+                    return [
+                        'token' => base64_encode( $file ),
+                        'url'   => $content_url . '/uploads/' . $file,
+                    ];
+                },
+                $files
             );
         } elseif ( Rating::get_key() === $answer->field_type ) {
             $answer->rating_limit = $field_data['rating_limit'] ?? 5;
@@ -232,6 +609,15 @@ class ResponseRepository {
         return Response::query( 'response' )->where( 'response.form_id', $form_id )->where( 'response.status', ResponseStatus::PUBLISH )->where( 'response.is_completed', 0 )->count();
     }
 
+    /**
+     * Get total count of unread responses across all forms (published responses only).
+     *
+     * @return int
+     */
+    public function get_total_unread_count(): int {
+        return (int) Response::query( 'response' )->where( 'response.status', ResponseStatus::PUBLISH )->where( 'response.is_read', 0 )->count();
+    }
+
     public function get_single_with_pagination( ResponseSingleDTO $dto ) {
         $form = formgent_get_form_by_id( $dto->get_form_id() );
 
@@ -244,13 +630,36 @@ class ResponseRepository {
         $count_query = clone $responses_query;
 
         do_action( 'formgent_responses_count_query', $count_query, $dto );
-       
-        $this->single_response_query( $responses_query, $dto );
-        $this->responses_order_query( $responses_query, $dto );
 
-        do_action( 'formgent_responses_query', $responses_query, $dto );
+        $responses_query->with(
+            'answers', function( Builder $query ){
+                $query->select( 'id', 'response_id', 'field_name', 'field_type', 'value', 'created_at', 'updated_at' )->where_null( 'parent_id' )->where( 'field_type', '!=', 'gdpr' );
+            }
+        )->with(
+            'answers.children', function( Builder $query ){
+                $query->select( 'id', 'parent_id', 'field_name', 'field_type', 'value', 'created_at', 'updated_at' );
+            }
+        );
 
-        $responses = $responses_query->pagination( $dto->get_page(), 1, 1, 1 );
+        $group_columns = ['response.id', 'response.form_id', 'response.is_read', 'response.is_starred', 'response.is_completed', 'response.device', 'response.browser', 'response.created_at'];
+
+        $responses_query->select( $dto->get_columns() )->group_by( $group_columns );
+
+        // If id is provided, filter by id directly (simpler and more reliable)
+        if ( $dto->get_id() !== null ) {
+            $responses_query->where( 'response.id', $dto->get_id() );
+        } else {
+            // Fall back to page-based approach (backward compatibility)
+            $this->responses_order_query( $responses_query, $dto );
+            do_action( 'formgent_responses_query', $responses_query, $dto );
+            $responses = $responses_query->pagination( $dto->get_page(), 1, 1, 1 );
+        }
+
+        // If using id, get the response directly
+        if ( $dto->get_id() !== null ) {
+            do_action( 'formgent_responses_query', $responses_query, $dto );
+            $responses = $responses_query->limit( 1 )->get();
+        }
 
         if ( ! empty( $responses[0] ) ) {
             $responses[0] = $this->prepare_response_data( $responses[0], $form );
@@ -288,7 +697,7 @@ class ResponseRepository {
 
     public function single_response_query( Builder $responses_query, ResponseSingleDTO $dto ) {
         $group_columns = ['response.id', 'response.form_id', 'response.is_read', 'response.is_starred', 'response.is_completed', 'response.device', 'response.browser', 'response.created_at'];
-        
+
         $responses_query->select( $dto->get_columns() )->with(
             'answers', function( Builder $query ){
                 $query->select( 'id', 'response_id', 'field_name', 'field_type', 'value', 'created_at', 'updated_at' )->where_null( 'parent_id' )->where( 'field_type', '!=', 'gdpr' );
@@ -337,7 +746,10 @@ class ResponseRepository {
     protected function get_option_label( $field_data, $value ) {
         $option_keys = array_column( $field_data['options'] ?? [], 'value' );
         $option_key  = array_search( $value, $option_keys );
-        return is_int( $option_key ) ? $field_data['options'][$option_key]['label'] : '';
+        if ( is_int( $option_key ) ) {
+            return $field_data['options'][$option_key]['label'];
+        }
+        return '';
     }
 
     /**
@@ -347,7 +759,7 @@ class ResponseRepository {
         if ( ! isset( $field_data['text_options'] ) || ! is_array( $field_data['text_options'] ) ) {
             return '';
         }
-        
+
         foreach ( $field_data['text_options'] as $option ) {
             // Match by value first
             if ( isset( $option['value'] ) && $option['value'] === $value ) {
@@ -358,12 +770,16 @@ class ResponseRepository {
                 return $option['label'];
             }
         }
-        
+
         return '';
     }
 
     private function response_query( ResponseReadDTO $dto ) {
         $responses_query = Response::query( 'response' )->join( Post::get_table_name() . ' as post', 'post.ID', 'response.form_id' )->where( 'response.status', ResponseStatus::PUBLISH )->where( 'response.is_completed', '=', 1, 'is_completed' )->left_join( User::get_table_name() . ' as user', 'response.created_by', 'user.ID' );
+
+        // Apply date filtering
+        $this->responses_date_query( $responses_query, $dto );
+
         if ( $dto->get_form_id() ) {
             $responses_query->where( 'post.ID', $dto->get_form_id() );
         }
@@ -399,6 +815,26 @@ class ResponseRepository {
 
     public function update_read( int $response_id, int $is_read ) {
         return Response::query()->where( 'id', $response_id )->update( [ 'is_read' => $is_read ] );
+    }
+
+    /**
+     * Update response timestamp.
+     *
+     * @param int $response_id
+     * @return bool|int
+     */
+    public function update_response_timestamp( int $response_id ) {
+        return Response::query()->where( 'id', $response_id )->update(
+            [
+                'updated_at' => formgent_now(),
+            ]
+        );
+    }
+
+    public function update_read_bulk( array $ids, int $is_read ) {
+        return Response::query()
+            ->where_in( 'id', $ids )
+            ->update( [ 'is_read' => $is_read ] );
     }
 
     public function update_completed( int $response_id, int $is_completed ) {
@@ -464,6 +900,26 @@ class ResponseRepository {
 
     public function deletes( int $form_id, array $ids ) {
         return Response::query( 'response' )->where( 'form_id', $form_id )->where_in( 'id', $ids )->delete();
+    }
+
+    public function delete_by_ids( array $ids ) {
+        if ( empty( $ids ) ) {
+            return 0;
+        }
+
+        // Sanitize IDs to ensure they're integers
+        $ids = array_map( 'intval', $ids );
+        $ids = array_filter(
+            $ids, function( $id ) {
+                return $id > 0;
+            }
+        );
+
+        if ( empty( $ids ) ) {
+            return 0;
+        }
+
+        return Response::query()->where_in( 'id', $ids )->delete();
     }
 
     public function mark_as_completed( int $id ) {

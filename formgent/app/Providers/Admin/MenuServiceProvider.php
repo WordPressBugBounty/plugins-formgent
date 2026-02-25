@@ -50,6 +50,17 @@ class MenuServiceProvider implements Provider
 
         add_menu_page( esc_html__( 'FormGent', 'formgent' ), esc_html__( 'FormGent', 'formgent' ), 'manage_options', 'formgent-menu', function () { }, $icon, 5 );
         add_submenu_page( 'formgent-menu', esc_html__( 'All Forms', 'formgent' ), esc_html__( 'All Forms', 'formgent' ), 'manage_options', 'formgent', [$this, 'content'] );
+
+        $entries_title = esc_html__( 'Entries', 'formgent' );
+        $unread_count  = formgent_response_repository()->get_total_unread_count();
+
+        if ( $unread_count > 0 ) {
+            $entries_title .= '<span class="formgent-menu-unread-badge update-plugins count-' . esc_attr( $unread_count ) . '">
+                <span class="plugin-count">' . esc_html( number_format_i18n( $unread_count ) ) . '</span>
+            </span>';
+        }
+        add_submenu_page( 'formgent-menu', esc_html__( 'Entries', 'formgent' ), $entries_title, 'manage_options', $page_url . '#/responses' );
+
         add_submenu_page( 'formgent-menu', esc_html__( 'Settings', 'formgent' ), esc_html__( 'Settings', 'formgent' ), 'manage_options', $page_url . '#/settings' );
 
         if ( ! function_exists( 'formgent_pro' ) ) {

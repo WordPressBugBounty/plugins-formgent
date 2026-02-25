@@ -97,7 +97,7 @@ return apply_filters(
         FileUpload::get_key()     => [
             'class'                     => FileUpload::class,
             'allowed_in_response'       => true,
-            'allowed_in_response_table' => false,
+            'allowed_in_response_table' => true,
         ],
         GoogleMap::get_key()      => [
             'class'                     => GoogleMap::class,
@@ -107,12 +107,12 @@ return apply_filters(
         Repeater::get_key()       => [
             'class'                     => Repeater::class,
             'allowed_in_response'       => true,
-            'allowed_in_response_table' => false,
+            'allowed_in_response_table' => true,
         ],
         Rating::get_key()         => [
             'class'                     => Rating::class,
             'allowed_in_response'       => true,
-            'allowed_in_response_table' => false,
+            'allowed_in_response_table' => true,
         ],
         DatePicker::get_key()     => [
             'class'                     => DatePicker::class,

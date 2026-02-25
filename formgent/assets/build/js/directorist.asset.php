@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('formgent/components', 'lodash', 'react', 'react-jsx-runtime', 'wp-api-fetch', 'wp-components', 'wp-data', 'wp-element', 'wp-hooks', 'wp-i18n'), 'version' => '807047d8d42d398b05a1');
+<?php return array('dependencies' => array('formgent/components', 'lodash', 'moment', 'react', 'react-dom', 'react-jsx-runtime', 'wp-api-fetch', 'wp-components', 'wp-data', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-url'), 'version' => 'abc93b504ee818d8cdc2');

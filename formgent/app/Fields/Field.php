@@ -35,7 +35,11 @@ abstract class Field {
     public function validate( array $field, WP_REST_Request $wp_rest_request, Validator $validator, stdClass $form ) {
         $rules = $this->get_validation_rules( $field );
 
-        if ( isset( $field["required"] ) && $field["required"] ) {
+        $is_admin_edit        = (bool) $wp_rest_request->get_param( '_formgent_admin_edit' );
+        $bypass_required      = (bool) $wp_rest_request->get_param( '_formgent_bypass_required' );
+        $should_skip_required = $is_admin_edit && $bypass_required;
+
+        if ( ! $should_skip_required && isset( $field["required"] ) && $field["required"] ) {
             $rules[] = 'required';
         }
 

@@ -61,7 +61,7 @@
     },
     "default_value": {
       "type": "number",
-      "default": 50
+      "default": 10
     },
     "step_increment": {
       "type": "number",
