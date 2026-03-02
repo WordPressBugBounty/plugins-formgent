@@ -109,6 +109,8 @@ $post            = get_post();
 $GLOBALS['post'] = $form;
 
 include __DIR__ . '/form-styles.php';
+
+$form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $form->ID ) : '';
 ?>
 <style>
     <?php
@@ -116,7 +118,7 @@ include __DIR__ . '/form-styles.php';
     echo $custom_script['css'];
     ?>
 </style>
-<div class="formgent-form formgent-form-<?php echo esc_attr( $form->ID ) ?> formgent-form-<?php echo esc_attr( $form_type ) ?> <?php echo isset( $css_class ) ? esc_attr( $css_class ) : ''; ?>">
+<div class="formgent-form <?php echo esc_attr( $form_id_class ); ?> formgent-form-<?php echo esc_attr( $form_type ); ?> <?php echo isset( $css_class ) ? esc_attr( $css_class ) : ''; ?>">
     <?php if ( 'general' === $form_type ) {?>
         <div class="formgent-confirmation-wrap formgent-confirmation-wrap--hidden">
             <div class="formgent-notices formgent-notices--classic-form" data-message="<?php echo $message; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped              ?>"></div>

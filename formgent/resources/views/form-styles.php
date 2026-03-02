@@ -40,7 +40,7 @@ $process_border_radius = function ( $border_radius, $default_radius = '16px' ) {
 ?>
 
 <style>
-    :root {
+    .formgent-form-<?php echo esc_attr( $form->ID ); ?> {
         /* Form variables */
         --formgent-form-background-color: <?php echo esc_attr( $form_settings['form_background_color'] ?? '#ffffff' ); ?>;
         --formgent-form-background-image: <?php echo esc_attr( ( isset( $form_settings['form_background'] ) && $form_settings['form_background'] === 'image' ) ? 'url(' . $form_settings['form_background_image']['url'] . ')' : '' ); ?>;
@@ -72,7 +72,7 @@ $process_border_radius = function ( $border_radius, $default_radius = '16px' ) {
         --formgent-field-vertical-spacing-tablet: <?php echo esc_attr( $form_settings['field_vertical_spacing']['tablet'] ?? '35px' ); ?>;
         --formgent-field-vertical-spacing-mobile: <?php echo esc_attr( $form_settings['field_vertical_spacing']['mobile'] ?? '35px' ); ?>;
         --formgent-field-horizontal-spacing-desktop: <?php echo esc_attr( $form_settings['field_horizontal_spacing']['desktop'] ?? '15px' ); ?>;
-        --formgent-field-horizontal-spacing-tablet: <?php echo esc_attr( $form_setting['field_horizontal_spacing']['tablet'] ?? '15px' ) ?>;
+        --formgent-field-horizontal-spacing-tablet: <?php echo esc_attr( $form_settings['field_horizontal_spacing']['tablet'] ?? '15px' ); ?>;
         --formgent-field-horizontal-spacing-mobile: <?php echo esc_attr( $form_settings['field_horizontal_spacing']['mobile'] ?? '15px' ); ?>;
         --formgent-field-background-color: <?php echo esc_attr( $form_settings['field_colors']['background']['default'] ?? 'transparent' ); ?>;
         --formgent-field-background-color-hover: <?php echo esc_attr( $form_settings['field_colors']['background']['hover'] ?? 'transparent' ); ?>;
