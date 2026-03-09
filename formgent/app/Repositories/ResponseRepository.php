@@ -212,6 +212,10 @@ class ResponseRepository {
             $responses_query->where( 'response.is_read', $dto->get_is_read() );
         }
 
+        if ( $dto->get_is_starred() !== null ) {
+            $responses_query->where( 'response.is_starred', $dto->get_is_starred() );
+        }
+
         $search = $dto->get_search();
 
         if ( empty( $search ) ) {
@@ -365,6 +369,13 @@ class ResponseRepository {
                 return $query->order_by_raw( 'post.post_title asc, response.id desc' );
 
             case 'date_created':
+                $order = $dto->get_order() ?? 'desc';
+                $order = in_array( $order, ['asc', 'desc'], true ) ? strtolower( $order ) : 'desc';
+
+                if ( 'asc' === $order ) {
+                    return $query->order_by( 'response.created_at', 'asc' );
+                }
+
                 return $query->order_by_desc( 'response.created_at' );
 
             case 'read':
@@ -775,7 +786,11 @@ class ResponseRepository {
     }
 
     private function response_query( ResponseReadDTO $dto ) {
-        $responses_query = Response::query( 'response' )->join( Post::get_table_name() . ' as post', 'post.ID', 'response.form_id' )->where( 'response.status', ResponseStatus::PUBLISH )->where( 'response.is_completed', '=', 1, 'is_completed' )->left_join( User::get_table_name() . ' as user', 'response.created_by', 'user.ID' );
+        $responses_query = Response::query( 'response' )->join( Post::get_table_name() . ' as post', 'post.ID', 'response.form_id' )->where( 'response.status', ResponseStatus::PUBLISH )->left_join( User::get_table_name() . ' as user', 'response.created_by', 'user.ID' );
+
+        if ( $dto->get_is_completed() !== null ) {
+            $responses_query->where( 'response.is_completed', '=', $dto->get_is_completed() );
+        }
 
         // Apply date filtering
         $this->responses_date_query( $responses_query, $dto );
@@ -784,8 +799,12 @@ class ResponseRepository {
             $responses_query->where( 'post.ID', $dto->get_form_id() );
         }
 
-        if ( $dto->get_is_read() ) {
+        if ( $dto->get_is_read() !== null ) {
             $responses_query->where( 'response.is_read', $dto->get_is_read() );
+        }
+
+        if ( $dto->get_is_starred() !== null ) {
+            $responses_query->where( 'response.is_starred', $dto->get_is_starred() );
         }
 
         $search = $dto->get_search();

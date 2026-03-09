@@ -1,0 +1,133 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/payment",
+  "title": "Payment",
+  "category": "formgent-payment",
+  "description": "Unified payment block for FormGent. Supports one-time and subscription payments with Stripe and PayPal.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "payment"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "payment_type": {
+      "type": "string",
+      "default": "one_time"
+    },
+    "payment_methods": {
+      "type": "array",
+      "default": [
+        "stripe"
+      ]
+    },
+    "amount_type": {
+      "type": "string",
+      "default": "fixed"
+    },
+    "fixed_label": {
+      "type": "string",
+      "default": ""
+    },
+    "fixed_price": {
+      "type": "number",
+      "default": 0
+    },
+    "amount_fields": {
+      "type": "array",
+      "default": []
+    },
+    "quantity_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "quantity_apply_to": {
+      "type": "array",
+      "default": []
+    },
+    "quantity_min": {
+      "type": "number",
+      "default": 1
+    },
+    "quantity_max": {
+      "type": "number",
+      "default": 10
+    },
+    "quantity_label": {
+      "type": "string",
+      "default": ""
+    },
+    "subscription_plan_name": {
+      "type": "string",
+      "default": ""
+    },
+    "subscription_amount_type": {
+      "type": "string",
+      "default": "fixed"
+    },
+    "subscription_fixed_label": {
+      "type": "string",
+      "default": ""
+    },
+    "subscription_fixed_price": {
+      "type": "number",
+      "default": 0
+    },
+    "subscription_amount_fields": {
+      "type": "array",
+      "default": []
+    },
+    "billing_interval": {
+      "type": "string",
+      "default": "monthly"
+    },
+    "total_billing_times": {
+      "type": "number",
+      "default": 0
+    },
+    "free_trial_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "trial_days": {
+      "type": "number",
+      "default": 0
+    },
+    "customer_name_field": {
+      "type": "string",
+      "default": ""
+    },
+    "customer_email_field": {
+      "type": "string",
+      "default": ""
+    },
+    "info_text": {
+      "type": "string",
+      "default": "No payment items has been selected yet."
+    }
+  },
+  "supports": {
+    "interactivity": true,
+    "multiple": false
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

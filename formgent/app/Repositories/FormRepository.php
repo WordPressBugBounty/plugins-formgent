@@ -33,6 +33,7 @@ class FormRepository extends FormSettingsRepository {
 
         $this->forms_date_query( $posts_query, $dto );
         $this->forms_search_query( $posts_query, $dto );
+        $this->forms_status_query( $posts_query, $dto );
 
         $count_query = clone $posts_query;
 
@@ -83,6 +84,16 @@ class FormRepository extends FormSettingsRepository {
         $search       = "%{$search}%";
         $search_query = $wpdb->prepare( "(post.post_title like %s or user.display_name like %s)", $search, $search );
         return $query->where_raw( $search_query );
+    }
+
+    private function forms_status_query( Builder $query, FormReadDTO $dto ) {
+        $status = $dto->get_status();
+
+        if ( empty( $status ) || 'all' === $status ) {
+            return $query;
+        }
+
+        return $query->where( 'post.post_status', $status );
     }
 
     private function forms_date_query( Builder $query, FormReadDTO $dto ) {

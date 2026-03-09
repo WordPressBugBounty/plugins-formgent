@@ -269,5 +269,19 @@ class Setup {
                 $table->foreign( 'response_id' )->on( "{$prefix}responses" )->on_delete( 'cascade' );
             }
         );
+
+        // -- Table: response_logs
+        Schema::create(
+            "{$prefix}response_logs", function ( Blueprint $table ) use ( $prefix ) {
+                $table->big_increments( 'id' );
+                $table->unsigned_big_integer( 'response_id' );
+                $table->string( 'action', 50 )->default( 'entry_edited' );
+                $table->unsigned_big_integer( 'created_by' )->nullable();
+                $table->long_text( 'meta' )->nullable();
+                $table->timestamp( 'created_at' )->use_current();
+
+                $table->foreign( 'response_id' )->on( "{$prefix}responses" )->on_delete( 'cascade' );
+            }
+        );
     }
 }

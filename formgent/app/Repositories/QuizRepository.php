@@ -54,7 +54,7 @@ class QuizRepository {
                 'dropdown',
                 'single-choice',
                 'multiple-choice',
-            ] 
+            ]
         );
 
         $choice_fields = apply_filters(
@@ -62,7 +62,7 @@ class QuizRepository {
                 'dropdown',
                 'single-choice',
                 'multiple-choice',
-            ] 
+            ]
         );
 
         foreach ( $form_fields as $field_key => $field ) {
@@ -76,15 +76,78 @@ class QuizRepository {
                 $is_multiple_choice = 'multiple-choice' === $field['field_type'];
 
                 if ( $is_multiple_choice ) {
-                    $correct_answer   = isset( $field['correct_answer'] ) && is_array( $field['correct_answer'] ) ? $field['correct_answer'] : [];
+                    // Multiple-choice: new quiz config uses options[].is_default for correct answers
+                    // and sums their numeric_value for total points.
+                    // Back-compat: fall back to legacy correct_answer/points when is_default/numeric_value are not present.
+                    $derived_correct = [];
+                    $derived_points  = null;
+
+                    if ( ! empty( $field['options'] ) && is_array( $field['options'] ) ) {
+                        $sum_points      = 0;
+                        $has_any_numeric = false;
+
+                        foreach ( $field['options'] as $opt ) {
+                            if ( empty( $opt ) || ! is_array( $opt ) ) {
+                                continue;
+                            }
+
+                            if ( ! empty( $opt['is_default'] ) ) {
+                                if ( isset( $opt['value'] ) ) {
+                                    $derived_correct[] = (string) $opt['value'];
+                                }
+
+                                if ( isset( $opt['numeric_value'] ) && is_numeric( $opt['numeric_value'] ) ) {
+                                    $sum_points     += floatval( $opt['numeric_value'] );
+                                    $has_any_numeric = true;
+                                }
+                            }
+                        }
+
+                        if ( $has_any_numeric ) {
+                            $derived_points = $sum_points;
+                        }
+                    }
+
+                    $correct_answer   = ! empty( $derived_correct )
+                        ? $derived_correct
+                        : ( ( isset( $field['correct_answer'] ) && is_array( $field['correct_answer'] ) ) ? $field['correct_answer'] : [] );
                     $submitted_answer = isset( $field['value'] ) ? json_decode( $field['value'] ) : [];
+                    $field_points     = null !== $derived_points
+                        ? $derived_points
+                        : ( ( isset( $field['points'] ) && is_numeric( $field['points'] ) ) ? floatval( $field['points'] ) : 0 );
                 } else {
-                    $correct_answer   = isset( $field['correct_answer'] ) ? $field['correct_answer'] : '';
+                    // Dropdown: new quiz config uses options[].is_default as correct answer and options[].numeric_value as points.
+                    // Back-compat: fall back to legacy correct_answer/points when is_default/numeric_value are not present.
+                    if ( in_array( $field['field_type'], [ 'dropdown', 'single-choice' ], true ) && ! empty( $field['options'] ) && is_array( $field['options'] ) ) {
+                        $derived_correct = '';
+                        $derived_points  = null;
+
+                        foreach ( $field['options'] as $opt ) {
+                            if ( empty( $opt ) || ! is_array( $opt ) ) {
+                                continue;
+                            }
+
+                            if ( ! empty( $opt['is_default'] ) ) {
+                                $derived_correct = $opt['value'] ?? '';
+
+                                if ( isset( $opt['numeric_value'] ) && is_numeric( $opt['numeric_value'] ) ) {
+                                    $derived_points = floatval( $opt['numeric_value'] );
+                                }
+                                break;
+                            }
+                        }
+
+                        $correct_answer = $derived_correct ? $derived_correct : ( isset( $field['correct_answer'] ) ? $field['correct_answer'] : '' );
+                        $field_points   = null !== $derived_points ? $derived_points : ( ( isset( $field['points'] ) && is_numeric( $field['points'] ) ) ? floatval( $field['points'] ) : 0 );
+                    } else {
+                        $correct_answer = isset( $field['correct_answer'] ) ? $field['correct_answer'] : '';
+                        $field_points   = isset( $field['points'] ) && is_numeric( $field['points'] ) ? floatval( $field['points'] ) : 0;
+                    }
+
                     $submitted_answer = isset( $field['value'] ) ? $field['value'] : '';
                 }
 
-                $field_points = isset( $field['points'] ) && is_numeric( $field['points'] ) ? floatval( $field['points'] ) : 0;
-                $field_score  = 0;
+                $field_score = 0;
 
                 $total_correct_answer          = 0;
                 $total_selected_correct_answer = 0;
@@ -92,7 +155,7 @@ class QuizRepository {
 
                 foreach ( $field['options'] as $option ) {
                     $is_selected = false;
-                    
+
                     if ( $is_multiple_choice ) {
                         $is_correct_current_option = in_array( $option['value'], $correct_answer );
 
@@ -132,7 +195,7 @@ class QuizRepository {
 
                 $total_points += $field_points;
                 $total_score  += $field_score;
-                
+
                 $quiz_fields[ $field_key ] = [
                     'label'          => $field['label'],
                     'field_type'     => $field['field_type'],
@@ -167,12 +230,13 @@ class QuizRepository {
         $form_settings            = $form_settings_repository->get_settings( $form->ID );
         $quiz_settings            = isset( $form_settings['quiz'] ) ? $form_settings['quiz'] : [];
         $score_percentage         = $total_points > 0 ? round( ( $total_score / $total_points ) * 100 ) : 0;
+        $grading_enabled          = isset( $quiz_settings['is_grading_enabled'] ) ? (bool) $quiz_settings['is_grading_enabled'] : true;
 
         return [
             'total_points' => $total_points,
             'total_score'  => $total_score,
             'percentage'   => $score_percentage,
-            'grade'        => ( string ) $this->get_score_grade( $score_percentage, $quiz_settings['grades'] ?? [] ),
+            'grade'        => $grading_enabled ? (string) $this->get_score_grade( $score_percentage, $quiz_settings['grades'] ?? [] ) : null,
             'fields'       => $quiz_fields,
         ];
     }

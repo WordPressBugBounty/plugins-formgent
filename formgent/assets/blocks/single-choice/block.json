@@ -92,6 +92,10 @@
     "points": {
       "type": "number",
       "default": 1
+    },
+    "enable_numeric_value": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

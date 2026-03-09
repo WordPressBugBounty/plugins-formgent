@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.4.2\n"
+"Project-Id-Version: FormGent 1.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-03T08:52:32+00:00\n"
+"POT-Creation-Date: 2026-03-09T12:54:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -739,20 +739,20 @@ msgstr ""
 #: app/Http/Controllers/Admin/AnalyticsController.php:30
 #: app/Http/Controllers/Admin/EmailNotificationController.php:53
 #: app/Http/Controllers/Admin/EmailNotificationController.php:78
-#: app/Http/Controllers/Admin/FormController.php:211
+#: app/Http/Controllers/Admin/FormController.php:213
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:72
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:150
 #: app/Http/Controllers/Admin/MailchimpController.php:103
 #: app/Http/Controllers/Admin/MailchimpController.php:183
-#: app/Http/Controllers/Admin/ResponseController.php:343
-#: app/Http/Controllers/Admin/ResponseController.php:681
-#: app/Http/Controllers/Admin/ResponseController.php:877
+#: app/Http/Controllers/Admin/ResponseController.php:364
+#: app/Http/Controllers/Admin/ResponseController.php:702
+#: app/Http/Controllers/Admin/ResponseController.php:898
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:72
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
 #: app/Http/Controllers/AnalyticsController.php:40
 #: app/Http/Controllers/FormController.php:32
 #: app/Http/Controllers/ResponseController.php:64
-#: app/Http/Controllers/ResponseController.php:315
+#: app/Http/Controllers/ResponseController.php:324
 #: app/Repositories/FormPresetFieldRepository.php:151
 msgid "Form not found"
 msgstr ""
@@ -784,44 +784,44 @@ msgstr ""
 msgid "The status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:125
+#: app/Http/Controllers/Admin/FormController.php:127
 msgid "The form has been created successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:146
+#: app/Http/Controllers/Admin/FormController.php:148
 msgid "The form title has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:164
+#: app/Http/Controllers/Admin/FormController.php:166
 msgid "Sorry, some thing was wrong"
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:173
-#: app/Http/Controllers/Admin/FormController.php:194
+#: app/Http/Controllers/Admin/FormController.php:175
+#: app/Http/Controllers/Admin/FormController.php:196
 msgid "The form status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:236
+#: app/Http/Controllers/Admin/FormController.php:238
 msgid "The form has been duplicated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:275
+#: app/Http/Controllers/Admin/FormController.php:277
 msgid "The form has been deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:292
-#: app/Http/Controllers/Admin/ResponseController.php:178
-#: app/Http/Controllers/Admin/ResponseController.php:865
-#: app/Http/Controllers/Admin/ResponseController.php:993
-#: app/Http/Controllers/Admin/ResponseController.php:1046
+#: app/Http/Controllers/Admin/FormController.php:294
+#: app/Http/Controllers/Admin/ResponseController.php:194
+#: app/Http/Controllers/Admin/ResponseController.php:886
+#: app/Http/Controllers/Admin/ResponseController.php:1014
+#: app/Http/Controllers/Admin/ResponseController.php:1067
 msgid "Sorry, Something was wrong."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:305
+#: app/Http/Controllers/Admin/FormController.php:307
 msgid "Forms have been successfully deleted."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:362
+#: app/Http/Controllers/Admin/FormController.php:364
 #: app/Http/Controllers/Admin/SettingsController.php:63
 msgid "Settings have been saved successfully."
 msgstr ""
@@ -896,84 +896,111 @@ msgstr ""
 msgid "Order status updated successfully"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:194
+#: app/Http/Controllers/Admin/ResponseController.php:210
 #, php-format
 msgid "%d response has been successfully deleted."
 msgid_plural "%d responses have been successfully deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:203
+#: app/Http/Controllers/Admin/ResponseController.php:219
 msgid "Failed to delete responses."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:236
+#: app/Http/Controllers/Admin/ResponseController.php:252
 msgid "Either \"id\" or \"page\" parameter is required."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:256
+#: app/Http/Controllers/Admin/ResponseController.php:275
 #: app/Http/Controllers/ResponseController.php:72
 msgid "Response not found."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:281
+#: app/Http/Controllers/Admin/ResponseController.php:302
 msgid "Parameter \"form_id\" is required when using \"page\"."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:331
+#: app/Http/Controllers/Admin/ResponseController.php:352
 msgid "Response not found"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:373
+#: app/Http/Controllers/Admin/ResponseController.php:394
 msgid "No fields were processed. Please check field names."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:389
+#: app/Http/Controllers/Admin/ResponseController.php:410
 msgid "Response has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:439
+#: app/Http/Controllers/Admin/ResponseController.php:460
 msgid "Field not found in form settings"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:447
+#: app/Http/Controllers/Admin/ResponseController.php:468
 msgid "Field type not allowed in response"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:457
+#: app/Http/Controllers/Admin/ResponseController.php:478
 msgid "Form type not supported by field handler"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:494
+#: app/Http/Controllers/Admin/ResponseController.php:515
 msgid "Failed to update answer in database"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:507
+#: app/Http/Controllers/Admin/ResponseController.php:528
 msgid "Failed to create answer in database"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:526
+#: app/Http/Controllers/Admin/ResponseController.php:547
 msgid "No fields were processed. Please check field names and ensure they exist in the form."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:906
+#: app/Http/Controllers/Admin/ResponseController.php:927
 msgid "The response starred has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:927
+#: app/Http/Controllers/Admin/ResponseController.php:948
 msgid "The response read has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:944
+#: app/Http/Controllers/Admin/ResponseController.php:965
 msgid "Invalid IDs."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:956
+#: app/Http/Controllers/Admin/ResponseController.php:977
 msgid "Responses read state updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:1060
+#: app/Http/Controllers/Admin/ResponseController.php:1081
 msgid "Responses have been successfully deleted."
+msgstr ""
+
+#: app/Http/Controllers/Admin/ResponseLogController.php:60
+msgid "Log deleted successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/SubscriptionController.php:36
+#: app/Http/Controllers/Admin/SubscriptionController.php:136
+#: app/Http/Controllers/PaymentController.php:125
+msgid "Order not found."
+msgstr ""
+
+#: app/Http/Controllers/Admin/SubscriptionController.php:47
+#: app/Http/Controllers/Admin/SubscriptionController.php:147
+msgid "Payment not found."
+msgstr ""
+
+#: app/Http/Controllers/Admin/SubscriptionController.php:161
+msgid "No subscription found for this order."
+msgstr ""
+
+#: app/Http/Controllers/Admin/SubscriptionController.php:173
+msgid "Invalid subscription metadata."
+msgstr ""
+
+#: app/Http/Controllers/Admin/SubscriptionController.php:195
+msgid "Subscription cancellation is not supported for this gateway."
 msgstr ""
 
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:82
@@ -1000,27 +1027,23 @@ msgstr ""
 msgid "Captcha verification successful"
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:62
+#: app/Http/Controllers/PaymentController.php:63
 msgid "Payment successful."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:105
+#: app/Http/Controllers/PaymentController.php:106
 msgid "Payment canceled."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:124
-msgid "Order not found."
-msgstr ""
-
-#: app/Http/Controllers/PaymentController.php:132
+#: app/Http/Controllers/PaymentController.php:134
 msgid "Order is already paid."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:143
+#: app/Http/Controllers/PaymentController.php:146
 msgid "Order items not found."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:157
+#: app/Http/Controllers/PaymentController.php:161
 msgid "Payment method not found."
 msgstr ""
 
@@ -1032,7 +1055,7 @@ msgstr ""
 msgid "Oops, something went wrong. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:122
+#: app/Http/Controllers/ResponseController.php:131
 msgid "The form was submitted successfully!"
 msgstr ""
 
@@ -1092,6 +1115,14 @@ msgstr ""
 
 #: app/Providers/MailchimpProvider.php:97
 msgid "Email field is empty"
+msgstr ""
+
+#: app/Providers/PaymentServiceProvider.php:66
+msgid "The selected payment method does not support subscriptions."
+msgstr ""
+
+#: app/Providers/PaymentServiceProvider.php:318
+msgid "Payment"
 msgstr ""
 
 #: app/Providers/PostTypeServiceProvider.php:30
@@ -1212,6 +1243,12 @@ msgctxt "Screen reader text for the items list heading on the post type listing 
 msgid "Forms list"
 msgstr ""
 
+#. translators: %d: row number
+#: app/Providers/ResponseLogServiceProvider.php:221
+#, php-format
+msgid "Row %d"
+msgstr ""
+
 #. translators: %s: error message
 #: app/Providers/ZohoCRMServiceProvider.php:48
 #, php-format
@@ -1283,7 +1320,7 @@ msgstr ""
 msgid "Prints the fields label"
 msgstr ""
 
-#: app/Repositories/FormRepository.php:359
+#: app/Repositories/FormRepository.php:370
 msgid "Forms not found."
 msgstr ""
 
@@ -1292,15 +1329,15 @@ msgid "The item not found."
 msgstr ""
 
 #: app/Repositories/ResponseRepository.php:33
-#: app/Repositories/ResponseRepository.php:625
-#: app/Repositories/ResponseRepository.php:678
+#: app/Repositories/ResponseRepository.php:636
+#: app/Repositories/ResponseRepository.php:689
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
 msgid "Form not found."
 msgstr ""
 
-#: app/Repositories/ResponseRepository.php:431
-#: app/Repositories/ResponseRepository.php:450
+#: app/Repositories/ResponseRepository.php:442
+#: app/Repositories/ResponseRepository.php:461
 msgid "Other"
 msgstr ""
 
@@ -1334,10 +1371,13 @@ msgid "Delete file"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:22
+#: assets/blocks/payment/render.php:95
 msgid "Item"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:23
+#: assets/blocks/payment/render.php:98
+#: assets/blocks/payment/index.js:1
 msgid "Price"
 msgstr ""
 
@@ -1346,11 +1386,33 @@ msgid "Quantity"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:28
+#: assets/blocks/payment/render.php:107
 msgid "Total"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:61
+#: assets/blocks/payment/render.php:157
 msgid "Total:"
+msgstr ""
+
+#: assets/blocks/payment/render.php:85
+msgid "No payment items has been selected yet."
+msgstr ""
+
+#: assets/blocks/payment/render.php:207
+msgid "Credit Card (Stripe)"
+msgstr ""
+
+#: assets/blocks/payment/render.php:210
+msgid "Pay securely with Stripe"
+msgstr ""
+
+#: assets/blocks/payment/render.php:214
+msgid "Paypal checkout"
+msgstr ""
+
+#: assets/blocks/payment/render.php:217
+msgid "Pay securely with PayPal"
 msgstr ""
 
 #. translators: %1$s is the current page number, %2$s is the total number of pages
@@ -1375,7 +1437,7 @@ msgid "Trying"
 msgstr ""
 
 #: resources/views/shortcodes/payment-failed.php:53
-#: resources/views/shortcodes/payment-success.php:58
+#: resources/views/shortcodes/payment-success.php:141
 msgid "You are viewing sample order data."
 msgstr ""
 
@@ -1391,27 +1453,101 @@ msgstr ""
 msgid "Go Home"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:65
+#: resources/views/shortcodes/payment-success.php:119
+msgid "day"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:120
+msgid "week"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:121
+msgid "month"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:122
+msgid "year"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:126
+#: assets/blocks/payment/index.js:1
+msgid "Daily"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:127
+#: assets/blocks/payment/index.js:1
+msgid "Weekly"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:128
+#: assets/blocks/payment/index.js:1
+msgid "Monthly"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:129
+#: assets/blocks/payment/index.js:1
+msgid "Yearly"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:148
 msgid "Payment Success"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:66
+#: resources/views/shortcodes/payment-success.php:152
+msgid "Your subscription has been activated successfully."
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:154
 msgid "Your transaction has been completed successfully."
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:70
+#: resources/views/shortcodes/payment-success.php:162
 msgid "Amount:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:81
+#. translators: %d: number of trial days
+#: resources/views/shortcodes/payment-success.php:176
+#, php-format
+msgid "after %d days"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:197
 msgid "Payment Method:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:93
+#: resources/views/shortcodes/payment-success.php:214
+msgid "Subscription ID:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:226
 msgid "Transaction ID:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:100
+#: resources/views/shortcodes/payment-success.php:238
+msgid "Status:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:240
+msgid "Active"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:246
+msgid "Start Date:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:257
+msgid "Next Billing Date:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:282
+msgid "Billing Cycle:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:291
+msgid "Plan:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:301
 msgid "Date:"
 msgstr ""
 
@@ -1644,6 +1780,7 @@ msgstr ""
 
 #: assets/blocks/custom-payment-amount/index.js:1
 #: assets/blocks/email/index.js:1
+#: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
 #: assets/blocks/number/index.js:1
 #: assets/blocks/quantity/index.js:1
@@ -1664,6 +1801,7 @@ msgstr ""
 #: assets/blocks/number/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/payment-summary/index.js:1
+#: assets/blocks/payment/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
@@ -2065,20 +2203,18 @@ msgstr ""
 #: assets/blocks/dropdown/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/single-choice/index.js:1
-msgid "Set default option"
+msgid "Quiz Answer & Scoring Information"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
 #: assets/blocks/single-choice/index.js:1
-msgid "Quiz correct answer"
+msgid "The selected default option will be treated as the correct answer for this question. The numeric value assigned to that option will determine the points awarded."
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/single-choice/index.js:1
-#: assets/blocks/text/index.js:1
-#: assets/blocks/textarea/index.js:1
-msgid "Points"
+msgid "Enable Numeric Values for Options"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
@@ -2361,6 +2497,16 @@ msgid "00000"
 msgstr ""
 
 #: assets/blocks/multiple-choice/index.js:1
+msgid "Multi Choice Options"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/range-slider/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "+ Add Option"
+msgstr ""
+
+#: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/single-choice/index.js:1
 msgid "Column layout"
@@ -2407,17 +2553,7 @@ msgid "Choice Limit"
 msgstr ""
 
 #: assets/blocks/multiple-choice/index.js:1
-msgid "Multi Choice Options"
-msgstr ""
-
-#: assets/blocks/multiple-choice/index.js:1
-#: assets/blocks/range-slider/index.js:1
-#: assets/blocks/single-choice/index.js:1
-msgid "+ Add Option"
-msgstr ""
-
-#: assets/blocks/multiple-choice/index.js:1
-msgid "Quiz correct answers"
+msgid "Mark one or more options as default to define the correct answers. The numeric values of those correct options will be summed to determine the total points for this question."
 msgstr ""
 
 #: assets/blocks/multiple-choice/index.js:1
@@ -2599,6 +2735,114 @@ msgstr ""
 msgid "Payment Summary will be shown here."
 msgstr ""
 
+#: assets/blocks/payment/index.js:1
+msgid "Payment Type"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "One Time"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Subscription"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Pro Feature"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Subscription payments require the FormGent Pro plugin. Please install and activate FormGent Pro to use this feature."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Payment Methods"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Amount Type"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Fixed Amount"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Amount from Fields"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Label"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Amount fields"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Select one or more fields. Their amounts will be added together."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Subscription Plan Name"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Billing Interval"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Total Billing Times"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "0 means the subscription never ends."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Free Trial"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Let customers try before first charge."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Trial Days"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Customer Fields Required"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Subscription payments require both Customer Email and Customer Name fields to be mapped. Stripe uses these to create the customer and send billing receipts."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Customer Name Field"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Select the field that contains the customer name."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Customer Email Field"
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Select the field that contains the customer email."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "This is a placeholder for the payment block. The fully configured payment block, including all selected settings and payment methods, will appear when you preview or publish the form."
+msgstr ""
+
+#: assets/blocks/payment/index.js:1
+msgid "Subscription payments require the following customer fields to be mapped in the block settings:"
+msgstr ""
+
 #: assets/blocks/paypal/index.js:1
 msgid "Paypal credentials are missing. Please <link>go to Settings</link> to configure them."
 msgstr ""
@@ -2760,4 +3004,9 @@ msgstr ""
 #: assets/blocks/text/index.js:1
 #: assets/blocks/textarea/index.js:1
 msgid "Correct answer"
+msgstr ""
+
+#: assets/blocks/text/index.js:1
+#: assets/blocks/textarea/index.js:1
+msgid "Points"
 msgstr ""

@@ -34,7 +34,8 @@ class FormController extends Controller {
                 'sort_by'    => 'string|accepted:last_modified,date_created,alphabetical,last_submission,unread,draft,publish',
                 'date_type'  => 'string|accepted:all,today,yesterday,last_week,last_month,date_frame',
                 'date_frame' => 'array',
-                'type'       => 'string|accepted:all,general,conversational'
+                'type'       => 'string|accepted:all,general,conversational',
+                'status'     => 'string|accepted:all,publish,draft'
             ]
         );
 
@@ -48,6 +49,7 @@ class FormController extends Controller {
         $dto->set_date_type( $wp_rest_request->get_param( 'date_type' ) );
         $dto->set_date_frame( (array) $wp_rest_request->get_param( 'date_frame' ) );
         $dto->set_type( $wp_rest_request->get_param( 'type' ) );
+        $dto->set_status( $wp_rest_request->get_param( 'status' ) );
 
         $data                      = $this->form_repository->get( $dto );
         $response                  = $this->pagination( $wp_rest_request, $data['total'], $dto->get_per_page() );

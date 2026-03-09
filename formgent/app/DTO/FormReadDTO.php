@@ -21,6 +21,8 @@ class FormReadDTO extends DTO {
 
     private ?string $type = null;
 
+    private ?string $status = null;
+
     /**
      * Get the value of page
      *
@@ -171,6 +173,28 @@ class FormReadDTO extends DTO {
      */
     public function set_type( ?string $type ): self {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     *
+     * @return ?string
+     */
+    public function get_status(): ?string {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @param ?string $status 
+     *
+     * @return self
+     */
+    public function set_status( ?string $status ): self {
+        $this->status = $status;
 
         return $this;
     }

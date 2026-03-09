@@ -25,7 +25,8 @@ use FormGent\App\Fields\RangeSlider\RangeSlider;
 $blocks_dir = formgent_dir( "assets/blocks" );
 
 return apply_filters(
-    'formgent_gutenberg_blocks', [
+    'formgent_gutenberg_blocks',
+    [
         'formgent/form'                  => [
             'dir' => $blocks_dir,
         ],
@@ -150,6 +151,11 @@ return apply_filters(
         'formgent/date-picker'           => [
             'types'      => ['general', 'conversational'],
             'field_type' => DatePicker::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/payment'               => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => 'payment',
             'dir'        => $blocks_dir,
         ],
         'formgent/paypal'                => [

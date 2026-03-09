@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.4.2
+Stable tag: 1.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,6 +208,20 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides built-in analytics to track form submissions, user interactions, and more in the All Responses section.
 
 == Changelog ==
+= 1.5.0 - 09 March 2026 =
+* Replaced: six separate payment blocks with a single unified payment block
+* New: Stripe subscription support
+* New: PayPal subscription support
+* New: Auto-save partial entries for guest & logged-in users
+* New: Save & resume link feature
+* New: Ability to switch between Classic and Conversational form types
+* New: Entry log feature to track edit history on responses
+* New: "Use label as placeholder" option for fields
+* New: Independent "Enable Grading System" option in form settings
+* Improved: Moved logic to Advanced tab
+* Removed: global "Enable Payment Settings" toggle
+* Removed: global Post/CPT settings option
+
 = 1.4.2 - 03 March 2026 =
 * Fixed: Resolved an issue affecting the End screen
 

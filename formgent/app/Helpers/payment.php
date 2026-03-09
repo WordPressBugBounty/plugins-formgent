@@ -26,11 +26,11 @@ function formgent_payment_repository(): PaymentRepository {
 function formgent_payment_processor( $payment_gateway ): PaymentInterface {
     $payment_gateways = formgent_get_payment_gateways();
 
-    if ( ! isset( $payment_gateways[ $payment_gateway ] ) ) {
+    if ( ! isset( $payment_gateways[$payment_gateway] ) ) {
         throw new Exception( esc_html__( "Payment gateway not found.", 'formgent' ) );
     }
 
-    return formgent_singleton( $payment_gateways[ $payment_gateway ]['processor'] );
+    return formgent_singleton( $payment_gateways[$payment_gateway]['processor'] );
 }
 
 function formgent_is_payment_form( array $fields_data ) {
@@ -38,7 +38,7 @@ function formgent_is_payment_form( array $fields_data ) {
     $payment_field_types = array_keys( $payment_gateways );
 
     // Add other payment-related field types
-    $payment_field_types = array_merge( $payment_field_types, ['custom-payment-amount', 'payment-item', 'quantity'] );
+    $payment_field_types = array_merge( $payment_field_types, ['custom-payment-amount', 'payment-item', 'quantity', 'payment'] );
 
     foreach ( $fields_data as $field_data ) {
         if ( in_array( $field_data['field_type'], $payment_field_types ) ) {
@@ -453,7 +453,8 @@ function formgent_get_price_format() {
 
 function formgent_price( $price, array $args = [] ) {
     $args = wp_parse_args(
-        $args, [
+        $args,
+        [
             'currency' => 'USD'
         ]
     );
@@ -463,4 +464,5 @@ function formgent_price( $price, array $args = [] ) {
     $price_format     = formgent_get_price_format();
 
     return sprintf( $price_format, $currency_symbol, $price );
-};
+}
+;

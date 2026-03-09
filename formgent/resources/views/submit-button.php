@@ -56,10 +56,12 @@ if ( $button_disabled ) {
 }
 ?>
 <div
-    class="formgent-fixed-submit-button formgent-field-single formgent-field-single--button formgent-field-align-<?php echo esc_attr( $button_alignment ); ?>"
+    class="formgent-fixed-submit-button formgent-field-single formgent-field-single--button formgent-show-button formgent-field-align-<?php echo esc_attr( $button_alignment ); ?>"
     style="--formgent-btn-bg-color: <?php echo esc_attr( $background_color ); ?>;
         --formgent-btn-text-color: <?php echo esc_attr( $text_color ); ?>;
         --formgent-btn-border-color: <?php echo esc_attr( $border_color ); ?>;"
+    data-wp-class--formgent-show-button="!state.showPaypalButton"
+    data-wp-class--formgent-hide-button="state.showPaypalButton"
 >
     <button
         type="submit"
@@ -71,3 +73,9 @@ if ( $button_disabled ) {
         <?php echo wp_kses_post( $button_text ); ?>
     </button>
 </div>
+<?php
+$attributes = [
+    'button_alignment' => $button_alignment,
+];
+\FormGent\WpMVC\View\View::render( 'paypal-button', compact( 'attributes' ) );
+?>

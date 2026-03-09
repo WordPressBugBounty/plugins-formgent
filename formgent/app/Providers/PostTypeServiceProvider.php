@@ -306,6 +306,45 @@ class PostTypeServiceProvider implements Provider {
                 },
             ]
         );
+
+        /**
+         * Form type meta (classic/general vs conversational)
+         */
+        register_post_meta(
+            'formgent_form', '_formgent_type', [
+                'type'          => 'string',
+                'single'        => true,
+                'default'       => 'general',
+                'show_in_rest'  => [
+                    'schema' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'auth_callback' => function() {
+                    return current_user_can( 'edit_posts' );
+                },
+            ]
+        );
+
+        /**
+         * One-time builder migration flag used when switching form type in editor.
+         * Stored as JSON string payload.
+         */
+        register_post_meta(
+            'formgent_form', '_formgent_pending_type_migration', [
+                'type'          => 'string',
+                'single'        => true,
+                'default'       => '',
+                'show_in_rest'  => [
+                    'schema' => [
+                        'type' => 'string',
+                    ],
+                ],
+                'auth_callback' => function() {
+                    return current_user_can( 'edit_posts' );
+                },
+            ]
+        );
     }
 
     /**

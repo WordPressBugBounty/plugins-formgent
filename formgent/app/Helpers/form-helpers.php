@@ -75,13 +75,14 @@ function formgent_is_conversational_form( stdClass $form ) {
 
 function formgent_form_default_values_functions() {
     return apply_filters(
-        'formgent_default_values_functions', [
+        'formgent_default_values_functions',
+        [
             'ip'         => 'formgent_get_user_ip_address',
             'site_url'   => 'site_url',
-            'site_title' => function() {
+            'site_title' => function () {
                 return get_bloginfo( 'name' );
             },
-            'user'       => function( $property ) {
+            'user'       => function ( $property ) {
                 // For non-logged-in users, keep user-based defaults blank.
                 if ( ! is_user_logged_in() ) {
                     return '';
@@ -155,26 +156,26 @@ function formgent_form_default_values( array $data ) {
             $base  = array_shift( $parts );
 
             // Cache resolved values per token so repeated placeholders are cheap.
-            if ( ! isset( $dynamic_values[ $token ] ) ) {
+            if ( ! isset( $dynamic_values[$token] ) ) {
                 $dynamic_value = '';
 
-                if ( isset( $values_functions[ $base ] ) && is_callable( $values_functions[ $base ] ) ) {
+                if ( isset( $values_functions[$base] ) && is_callable( $values_functions[$base] ) ) {
                     // Resolve the user property if applicable.
                     if ( 'user' === $base && ! empty( $parts ) ) {
                         $property      = implode( '.', $parts );
-                        $dynamic_value = $values_functions[ $base ]( $property );
+                        $dynamic_value = $values_functions[$base]( $property );
                     } else {
-                        $dynamic_value = $values_functions[ $base ]();
+                        $dynamic_value = $values_functions[$base]();
                     }
                 }
 
-                $dynamic_values[ $token ] = $dynamic_value;
+                $dynamic_values[$token] = $dynamic_value;
             }
 
             // Replace the placeholder with the resolved value.
-            $placeholder = $raw_placeholders[ $match_index ] ?? '';
+            $placeholder = $raw_placeholders[$match_index] ?? '';
             if ( '' !== $placeholder ) {
-                $value = str_replace( $placeholder, $dynamic_values[ $token ], $value );
+                $value = str_replace( $placeholder, $dynamic_values[$token], $value );
             }
         }
 
@@ -269,15 +270,15 @@ function formgent_form_answer_field_dtos( array $answers, array $fields, bool $f
     $flattened_answers = [];
 
     foreach ( $answers as $answer ) {
-        if ( ! isset( $fields[ $answer->field_name ] ) ) {
+        if ( ! isset( $fields[$answer->field_name] ) ) {
             continue;
         }
 
-        $form_field = $fields[ $answer->field_name ];
+        $form_field = $fields[$answer->field_name];
 
         $field_dto = formgent_make_answer_field_dto( $answer, $form_field );
 
-        $flattened_answers[ $field_dto->get_field_id() ] = $field_dto;
+        $flattened_answers[$field_dto->get_field_id()] = $field_dto;
 
         if ( empty( $answer->children ) ) {
             continue;
@@ -328,8 +329,8 @@ function formgent_get_preset_values( int $form_id ): array {
     $embed_post   = get_post();
 
     $user_agent = isset( $_SERVER['HTTP_USER_AGENT'] )
-    ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )
-    : '';
+        ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )
+        : '';
     $browser    = '';
     $platform   = '';
 
@@ -366,6 +367,7 @@ function formgent_get_preset_values( int $form_id ): array {
 
     $preset = [
         'site_title'          => get_option( 'blogname', '' ),
+        'site_name'           => get_option( 'blogname', '' ),
         'site_url'            => esc_url_raw( site_url() ),
         'form_title'          => $form_post ? $form_post->post_title : '',
         'browser_name'        => $browser,
@@ -380,6 +382,7 @@ function formgent_get_preset_values( int $form_id ): array {
         $preset += [
             'user_id'           => (string) $current_user->ID,
             'user_display_name' => $current_user->display_name,
+            'user_name'         => $current_user->display_name,
             'user_first_name'   => $current_user->first_name,
             'user_last_name'    => $current_user->last_name,
             'user_email'        => $current_user->user_email,
@@ -393,7 +396,7 @@ function formgent_get_preset_values( int $form_id ): array {
         $cookies    = [];
 
         foreach ( $_COOKIE as $key => $value ) {
-            $cookies[ $key ] = is_string( $value ) ? sanitize_text_field( wp_unslash( $value ) ) : $value;
+            $cookies[$key] = is_string( $value ) ? sanitize_text_field( wp_unslash( $value ) ) : $value;
         }
 
         $preset += [
@@ -439,13 +442,13 @@ function formgent_replace_html_dynamic_tags( string $html_content, int $form_id,
     $replacements  = [];
 
     foreach ( $matches[1] as $index => $raw_token ) {
-        $placeholder = $matches[0][ $index ];
+        $placeholder = $matches[0][$index];
         $token       = trim( $raw_token );
         $token_key   = strtolower( $token );
 
         // 1. Preset tags (user/site/admin)
-        if ( isset( $preset_values[ $token_key ] ) ) {
-            $replacements[ $placeholder ] = esc_html( $preset_values[ $token_key ] );
+        if ( isset( $preset_values[$token_key] ) ) {
+            $replacements[$placeholder] = esc_html( $preset_values[$token_key] );
             continue;
         }
 
@@ -462,7 +465,7 @@ function formgent_replace_html_dynamic_tags( string $html_content, int $form_id,
                 $resolved = $resolver->resolve_from_form_data( $form_data, $form_fields, $field_reference );
 
                 if ( null !== $resolved ) {
-                    $replacements[ $placeholder ] = esc_html( $resolved );
+                    $replacements[$placeholder] = esc_html( $resolved );
                     continue;
                 }
             }
@@ -475,7 +478,7 @@ function formgent_replace_html_dynamic_tags( string $html_content, int $form_id,
                 $resolved = $resolver->resolve_from_answers( $answers, $form_fields, $field_reference );
 
                 if ( null !== $resolved ) {
-                    $replacements[ $placeholder ] = esc_html( $resolved );
+                    $replacements[$placeholder] = esc_html( $resolved );
                     continue;
                 }
             }
@@ -489,15 +492,49 @@ function formgent_replace_html_dynamic_tags( string $html_content, int $form_id,
             $answers       = $answers ?? formgent_get_form_answers( $form_id, $response_id, true );
 
             if ( $response_dto ) {
-                $resolved                     = $preset_repo->transform_value( '{{' . $raw_token . '}}', $answers, $response_dto, '' );
-                $replacements[ $placeholder ] = esc_html( (string) $resolved );
+                $resolved                   = $preset_repo->transform_value( '{{' . $raw_token . '}}', $answers, $response_dto, '' );
+                $replacements[$placeholder] = esc_html( (string) $resolved );
                 continue;
             }
         }
 
         // 4. Fallback: leave untouched so frontend can handle it later
-        $replacements[ $placeholder ] = $placeholder;
+        $replacements[$placeholder] = $placeholder;
     }
 
     return wp_kses_post( strtr( $html_content, $replacements ) );
+}
+
+/**
+ * Replace save-resume-specific placeholders in a string.
+ *
+ * Supported tokens (double-curly-brace style):
+ *   {{resume_url}}  – the unique resume URL with the token.
+ *   {{form_title}}  – the form's post_title.
+ *   {{site_name}}   – get_bloginfo('name').
+ *   {{save_email}}  – the email address the user entered.
+ *
+ * This helper is intentionally standalone: it does NOT depend on ResponseDTO
+ * or any response data, making it safe to call for transactional save-resume
+ * emails where no submission has been created yet.
+ *
+ * @param string $content      Raw content (HTML or plain text) with {{token}} placeholders.
+ * @param array  $replacements Associative array of token_key => replacement_value.
+ *
+ * @return string
+ */
+function formgent_replace_save_resume_placeholders( string $content, array $replacements ): string {
+    if ( '' === $content || false === strpos( $content, '{{' ) ) {
+        return $content;
+    }
+
+    $search  = [];
+    $replace = [];
+
+    foreach ( $replacements as $key => $value ) {
+        $search[]  = '{{' . $key . '}}';
+        $replace[] = (string) $value;
+    }
+
+    return str_replace( $search, $replace, $content );
 }

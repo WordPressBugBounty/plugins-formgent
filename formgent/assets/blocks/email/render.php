@@ -1,8 +1,12 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php defined( 'ABSPATH' ) || exit;
+
+$settings                 = get_post_meta( get_post()->ID, '_formgent_form_settings', true );
+$use_label_as_placeholder = ! empty( $settings['use_label_as_placeholder'] ?? null );
+?>
 
 <div data-wp-interactive="formgent/form" data-wp-context='{ "name": "<?php echo esc_attr( $attributes['name'] ); ?>" }' data-wp-bind--hidden="state.hideField" class="display-none formgent-field formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?> formgent-field-email">
     <div class="formgent-field-single formgent-field-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?> formgent-field-single-email-primary">
-        <?php if ( ! empty( $attributes['label'] ) ) : ?>
+        <?php if ( ! empty( $attributes['label'] ) && ! $use_label_as_placeholder ) : ?>
             <label
                 for="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>"
                 class= "formgent-field-label formgent-label-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?>"
@@ -27,7 +31,7 @@
                     class="formgent-field-single__input"
                     type="email"
                     id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>"
-                    placeholder="<?php echo esc_attr( $attributes['placeholder'] ); ?>"
+                    placeholder="<?php echo esc_attr( $use_label_as_placeholder ? $attributes['label'] : $attributes['placeholder'] ); ?>"
                     data-wp-on--input="actions.updateInput"
                     data-wp-bind--value="state.getValue"
                 />
@@ -44,7 +48,7 @@
     <?php if ( $attributes['enable_confirmation_field'] ) :
         $name = $attributes['name'] . '_confirm'; ?>
         <div class="formgent-field-single formgent-field-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?>">
-            <?php if ( ! empty( $attributes['confirm_label'] ) ) : ?>
+            <?php if ( ! empty( $attributes['confirm_label'] ) && ! $use_label_as_placeholder ) : ?>
             <label
                 for="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>_confirmation"
                 class= "formgent-field-label formgent-label-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?>"
@@ -64,7 +68,7 @@
                     type="email"
                     id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>_confirmation"
                     data-wp-context='{ "name": "<?php echo esc_attr( $name ); ?>" }'
-                    placeholder="<?php echo esc_attr( $attributes['confirm_placeholder'] ); ?>"
+                    placeholder="<?php echo esc_attr( $use_label_as_placeholder ? $attributes['confirm_label'] : $attributes['confirm_placeholder'] ); ?>"
                     data-wp-on--input="actions.updateInput"
                     data-wp-bind--value="state.getValue"
                 />

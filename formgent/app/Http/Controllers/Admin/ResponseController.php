@@ -46,10 +46,11 @@ class ResponseController extends Controller
                 's'                => 'string|max:255',
                 'form_id'          => 'numeric',
                 'is_read'          => 'numeric|accepted:0,1',
+                'is_starred'       => 'numeric|accepted:0,1',
                 'order_by'         => 'string|max:50',
                 'order'            => 'string|accepted:asc,desc',
                 'order_field_type' => 'string|accepted:response,answer',
-                'is_completed'     => 'required|numeric|accepted:0,1',
+                'is_completed'     => 'numeric|accepted:0,1',
                 'date_type'        => 'string|accepted:all,today,yesterday,last_week,last_month,date_frame',
                 'date_frame'       => 'array',
             ]
@@ -68,10 +69,20 @@ class ResponseController extends Controller
             $dto->set_is_read( $wp_rest_request->get_param( 'is_read' ) );
         }
 
+        if ( $wp_rest_request->has_param( 'is_starred' ) ) {
+            $dto->set_is_starred( $wp_rest_request->get_param( 'is_starred' ) );
+        }
+
         $dto->set_order( $wp_rest_request->get_param( 'order' ) ?? 'desc' )
             ->set_order_by( $wp_rest_request->get_param( 'order_by' ) ?? 'id' )
-            ->set_order_field_type( $wp_rest_request->get_param( 'order_field_type' ) ?? 'response' )
-            ->set_is_completed( $wp_rest_request->get_param( 'is_completed' ) );
+            ->set_order_field_type( $wp_rest_request->get_param( 'order_field_type' ) ?? 'response' );
+
+        if ( $wp_rest_request->has_param( 'is_completed' ) ) {
+            $value = $wp_rest_request->get_param( 'is_completed' );
+            if ( $value !== null && $value !== '' ) {
+                $dto->set_is_completed( (int) $value );
+            }
+        }
 
         // Set date filtering
         $dto->set_date_type( $wp_rest_request->get_param( 'date_type' ) );
@@ -113,6 +124,7 @@ class ResponseController extends Controller
                 'page'         => 'numeric',
                 's'            => 'string|max:255',
                 'is_read'      => 'numeric|accepted:0,1',
+                'is_starred'   => 'numeric|accepted:0,1',
                 'order_by'     => 'string|max:50',
                 'order'        => 'string|accepted:asc,desc',
                 'is_completed' => 'numeric|accepted:0,1',
@@ -138,6 +150,10 @@ class ResponseController extends Controller
         // Set optional filters
         if ( $wp_rest_request->has_param( 'is_read' ) ) {
             $dto->set_is_read( $wp_rest_request->get_param( 'is_read' ) );
+        }
+
+        if ( $wp_rest_request->has_param( 'is_starred' ) ) {
+            $dto->set_is_starred( $wp_rest_request->get_param( 'is_starred' ) );
         }
 
         if ( $wp_rest_request->has_param( 'is_completed' ) ) {
@@ -246,9 +262,12 @@ class ResponseController extends Controller
             $dto->set_form_id( intval( $form_id_param ) );
         }
 
-        // When fetching by id without form_id (e.g. deep link or very old response not in list),
-        // look up the response to get form_id and is_completed
-        if ( $dto->get_id() !== null && ( ! $dto->get_form_id() || $dto->get_form_id() === 0 ) ) {
+        // When fetching by id, always look up the response to get canonical form_id and is_completed.
+        // This prevents stale client-side filters (e.g. is_completed=0) from hiding the response
+        // after it transitions to completed.
+        $response_by_id = null;
+
+        if ( $dto->get_id() !== null ) {
             $response_by_id = $this->repository->get_by_id( $dto->get_id() );
             if ( ! $response_by_id ) {
                 return Response::send(
@@ -260,13 +279,15 @@ class ResponseController extends Controller
             }
             $dto->set_form_id( (int) $response_by_id->form_id );
             $dto->set_is_completed( (int) $response_by_id->is_completed );
+            $dto->set_is_read( (int) $response_by_id->is_read );
         } elseif ( $wp_rest_request->has_param( 'is_completed' ) ) {
-            $dto->set_is_completed( (int) $wp_rest_request->get_param( 'is_completed' ) );
-        } else {
-            $dto->set_is_completed( 1 );
+            $value = $wp_rest_request->get_param( 'is_completed' );
+            if ( $value !== null && $value !== '' ) {
+                $dto->set_is_completed( (int) $value );
+            }
         }
 
-        if ( $wp_rest_request->has_param( 'is_read' ) ) {
+        if ( $dto->get_id() === null && $wp_rest_request->has_param( 'is_read' ) ) {
             $dto->set_is_read( $wp_rest_request->get_param( 'is_read' ) );
         }
 

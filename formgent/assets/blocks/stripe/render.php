@@ -2,10 +2,6 @@
 
 $settings = formgent_get_setting( "payment" );
 
-if ( ! $settings['status'] ) {
-    return;
-}
-
 if ( ! $settings['stripe']['status'] ) {
     return;
 }
@@ -26,7 +22,7 @@ if ( ! $settings['stripe']['status'] ) {
             <div
                 class="formgent-field-single__box formgent-single-choice-payment-method formgent-field-single__box--full_width"
                 id="<?php echo esc_attr( formgent_field_id_prefix( 'payment-gateways' ) ); ?>"
-                
+
             >
                 <div class="formgent-field-single__box__choice formgent-field-single__box__choice--frame">
                     <input

@@ -15,8 +15,9 @@ class FormSettingsRepository {
             "after_submission" => "reset" // hide | reset
         ],
         "quiz"                   => [
-            "is_enabled" => false,
-            "grades"     => [],
+            "is_enabled"         => false,
+            "is_grading_enabled" => true,
+            "grades"             => [],
         ],
         "design"                 => [
             "status"     => false,

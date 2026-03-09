@@ -52,7 +52,8 @@ if ( 'page' === $confirmation['type'] ) {
 unset( $confirmation['message'] );
 
 $context = apply_filters(
-    'formgent_form_context', [
+    'formgent_form_context',
+    [
         'form_id'               => $form->ID,
         'blocks_settings'       => $data,
         'form_type'             => $form_type,
@@ -75,7 +76,8 @@ $context = apply_filters(
         'confirmation'          => $confirmation,
         'plugin_url'            => WP_PLUGIN_URL,
         'external_data'         => [],
-    ], $form
+    ],
+    $form
 );
 
 if ( isset( $external_data ) ) {
@@ -108,37 +110,43 @@ if ( $is_multi_step ) {
 $post            = get_post();
 $GLOBALS['post'] = $form;
 
+// Auto save disclaimer message
+$save_resume              = $context['save_resume'] ?? [];
+$show_disclaimer          = ! empty( $save_resume['show_disclaimer_message'] )
+    && ( ! empty( $save_resume['auto_save_partial_entries'] ) || ! empty( $context['is_save_incomplete_data'] ) );
+$disclaimer_message       = isset( $save_resume['disclaimer_message'] ) ? $save_resume['disclaimer_message'] : '';
+$save_resume_link_enabled = ! empty( $save_resume['enable_save_resume_link'] );
+$save_resume_link_text    = isset( $save_resume['save_resume_link_text'] ) ? $save_resume['save_resume_link_text'] : 'Save & Resume';
+
 include __DIR__ . '/form-styles.php';
 
 $form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $form->ID ) : '';
 ?>
 <style>
     <?php
-//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     echo $custom_script['css'];
     ?>
 </style>
 <div class="formgent-form <?php echo esc_attr( $form_id_class ); ?> formgent-form-<?php echo esc_attr( $form_type ); ?> <?php echo isset( $css_class ) ? esc_attr( $css_class ) : ''; ?>">
     <?php if ( 'general' === $form_type ) {?>
         <div class="formgent-confirmation-wrap formgent-confirmation-wrap--hidden">
-            <div class="formgent-notices formgent-notices--classic-form" data-message="<?php echo $message; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped              ?>"></div>
+            <div class="formgent-notices formgent-notices--classic-form"
+                data-message="<?php echo $message; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped              ?>">
+            </div>
             <div class="formgent-quiz-result"></div>
         </div>
-    <?php }?>
-    <form
-        id="formgent-<?php echo esc_attr( $unique_id ) ?>"
-        <?php
-        if ( isset( $is_block ) ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo get_block_wrapper_attributes();
-        }
-        ?>
+    <?php } ?>
+    <form id="formgent-<?php echo esc_attr( $unique_id ) ?>" <?php
+    if ( isset( $is_block ) ) {
+        //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo get_block_wrapper_attributes();
+    }
+    ?>
         data-wp-interactive="formgent/form"
         data-wp-context='<?php echo esc_attr( wp_json_encode( $context, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_APOS | JSON_HEX_AMP ) ); ?>'
-        data-wp-init="callbacks.<?php echo( 'conversational' !== $form_type ? 'initClassicForm' : 'initConversationalForm' ) ?>"
-        data-wp-bind--disabled="context.global.is_response_submitting"
-        data-wp-watch="callbacks.watchForm"
-    >
+        data-wp-init="callbacks.<?php echo ( 'conversational' !== $form_type ? 'initClassicForm' : 'initConversationalForm' ) ?>"
+        data-wp-bind--disabled="context.global.is_response_submitting" data-wp-watch="callbacks.watchForm">
         <?php
         do_action( 'formgent_form_top', $form, $context );
 
@@ -146,16 +154,18 @@ $form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $
             View::render( 'multi-step-indicator', compact( 'form', 'context' ) );
         }
         ?>
-        <?php if ( 'conversational' === $form_type ) {?>
+        <?php if ( 'conversational' === $form_type ) { ?>
             <div data-wp-bind--hidden="context.is_form_loaded">
                 <div class="formgent-form-preloader">
-                    <span><?php formgent_render_icon( 'spinner' )?></span>
+                    <span><?php formgent_render_icon( 'spinner' ) ?></span>
                 </div>
             </div>
-        <?php }?>
-        <div class="formgent-field-list formgent-field-list--frontend" data-wp-class--formgent-field-list-loading="!context.is_form_loaded" data-wp-class--formgent-partial-submitting="!context.is_partial_submitting">
+        <?php } ?>
+        <div class="formgent-field-list formgent-field-list--frontend"
+            data-wp-class--formgent-field-list-loading="!context.is_form_loaded"
+            data-wp-class--formgent-partial-submitting="!context.is_partial_submitting">
             <?php
-//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo do_blocks( $form->post_content );
             ?>
 
@@ -166,34 +176,44 @@ $form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $
         </div>
         <?php do_action( 'formgent_form_bottom', $form ); ?>
         <!-- Honeypot field -->
-        <?php if ( $is_enabled_honeypot_protection ) {?>
-            <input
-                type="hidden"
-                name="formgent-honeypot-<?php echo esc_attr( $form->ID ) ?>"
-                id="formgent-honeypot-<?php echo esc_attr( $form->ID ) ?>"
-            >
-        <?php }?>
+        <?php if ( $is_enabled_honeypot_protection ) { ?>
+            <input type="hidden" name="formgent-honeypot-<?php echo esc_attr( $form->ID ) ?>"
+                id="formgent-honeypot-<?php echo esc_attr( $form->ID ) ?>">
+        <?php } ?>
+
+        <?php if ( 'conversational' !== $form_type && $save_resume_link_enabled ) : ?>
+            <a class="formgent-save-resume-link" tabindex="0">
+                <?php echo wp_kses_post( $save_resume_link_text ); ?>
+            </a>
+        <?php endif; ?>
+
+        <?php if ( 'conversational' !== $form_type && $show_disclaimer && $disclaimer_message !== '' ) : ?>
+            <div class="formgent-save-resume-disclaimer">
+                <?php echo wp_kses_post( $disclaimer_message ); ?>
+            </div>
+        <?php endif; ?>
     </form>
+
 </div>
 
 <?php if ( ! empty( $custom_script['js'] ) ) : ?>
-<script>
-    document.addEventListener( 'DOMContentLoaded', function () {
-        const currentFormId = parseInt( '<?php
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentFormId = parseInt('<?php
             //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo esc_js( $form->ID ); ?>' );
 
-        window.wp.hooks.addAction( 'formgent_form_before_init', 'formgent_custom_script', function ( id, context, element ) {
-            if ( currentFormId !== id ) {
+        window.wp.hooks.addAction('formgent_form_before_init', 'formgent_custom_script', function (id, context, element) {
+            if (currentFormId !== id) {
                 return;
             }
 
             <?php //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $custom_script['js'];
+                echo $custom_script['js'];
             ?>
-        } );
-    } );
-</script>
+        });
+            } );
+    </script>
 <?php endif; ?>
 
 <?php $GLOBALS['post'] = $post; ?>

@@ -6,7 +6,8 @@ defined( "ABSPATH" ) || exit;
 
 use FormGent\WpMVC\DTO\DTO;
 
-class PayDTO extends DTO {
+class PayDTO extends DTO
+{
     public OrderDTO $order;
 
     public PaymentDTO $payment;
@@ -15,6 +16,18 @@ class PayDTO extends DTO {
      * @var OrderItemDTO[]
      */
     public array $order_items;
+
+    /** Runtime payment metadata (not persisted). */
+    public array $meta = [];
+
+    public function get_meta(): array {
+        return $this->meta;
+    }
+
+    public function set_meta( array $meta ): self {
+        $this->meta = $meta;
+        return $this;
+    }
 
     /**
      * Get the value of order
@@ -28,7 +41,7 @@ class PayDTO extends DTO {
     /**
      * Set the value of order
      *
-     * @param OrderDTO $order 
+     * @param OrderDTO $order
      *
      * @return self
      */
@@ -50,7 +63,7 @@ class PayDTO extends DTO {
     /**
      * Set the value of payment
      *
-     * @param PaymentDTO $payment 
+     * @param PaymentDTO $payment
      *
      * @return self
      */
@@ -72,7 +85,7 @@ class PayDTO extends DTO {
     /**
      * Set the value of order_items
      *
-     * @param OrderItemDTO[] $order_items 
+     * @param OrderItemDTO[] $order_items
      *
      * @return self
      */

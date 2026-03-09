@@ -34,7 +34,8 @@
   },
   "supports": {
     "interactivity": true,
-    "multiple": false
+    "multiple": false,
+    "inserter": false
   },
   "editorScript": "file:index.js",
   "style": "file:style-index.css",

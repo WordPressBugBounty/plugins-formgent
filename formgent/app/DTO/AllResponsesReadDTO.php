@@ -13,6 +13,8 @@ class AllResponsesReadDTO extends DTO {
 
     private ?int $is_read = null;
 
+    private ?int $is_starred = null;
+
     private ?int $is_completed = null;
 
     private ?string $search = null;
@@ -89,6 +91,28 @@ class AllResponsesReadDTO extends DTO {
      */
     public function set_is_read( ?int $is_read ): self {
         $this->is_read = $is_read;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_starred
+     *
+     * @return ?int
+     */
+    public function get_is_starred(): ?int {
+        return $this->is_starred;
+    }
+
+    /**
+     * Set the value of is_starred
+     *
+     * @param ?int $is_starred 
+     *
+     * @return self
+     */
+    public function set_is_starred( ?int $is_starred ): self {
+        $this->is_starred = $is_starred;
 
         return $this;
     }

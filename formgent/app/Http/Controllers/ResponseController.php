@@ -100,8 +100,17 @@ class ResponseController extends Controller {
         }
 
         if ( ! empty( $validate_data['field_dtos'] ) ) {
+            // Save & Resume / partial-entry flows may have already stored draft answers
+            // against this response token. On final submit, replace existing answers
+            // to avoid duplicated rows in the completed entry.
+            try {
+                Answer::query()->where( 'response_id', $response->id )->delete();
+            } catch ( \Throwable $e ) {
+                // If deletion fails for any reason, continue with insert to avoid blocking submit.
+            }
+
             $this->answer_repository->creates( $response->id, $validate_data['field_dtos'] );
-            
+
             // Handle child fields if present.
             if ( ! empty( $validate_data['parent_field_names'] ) ) {
                 $this->handle_child_fields( $response->id, $validate_data );
@@ -111,18 +120,18 @@ class ResponseController extends Controller {
         $this->repository->mark_as_completed( $response->id );
 
         $response->is_completed = 1;
-        
+
         // Trigger the after response creation hook.
         do_action( "formgent_after_create_form_response", $response->id, $form, $request );
 
         // Return a success response.
         return Response::send(
             apply_filters(
-                'formgent_form_submission_response', 
+                'formgent_form_submission_response',
                 [ 'message' => esc_html__( 'The form was submitted successfully!', 'formgent' ) ],
                 $request, $form, $response
-            ), 
-            201 
+            ),
+            201
         );
     }
 
@@ -218,9 +227,9 @@ class ResponseController extends Controller {
             foreach ( $dtos as $dto ) {
                 /**
                  * @var AnswerDTO $dto
-                 * 
+                 *
                  * Prepare the AnswerDTO for storing in the database.
-                 * 
+                 *
                  * - Set the parent ID of the answer (from the previously retrieved parent field IDs).
                  * - Set the response ID to associate this answer with the current form response.
                  * - Convert the DTO to an array for insertion into the database.
@@ -250,11 +259,11 @@ class ResponseController extends Controller {
 
         $field_dtos = [];
         $errors     = [];
-        
+
         if ( ! is_array( $form_data ) ) {
             return compact( 'field_dtos', 'errors' );
         }
-        
+
         $children_request->set_body_params( $form_data );
         $validator->wp_rest_request = $children_request;
         $registered_fields          = formgent_config( "fields" );
@@ -316,7 +325,7 @@ class ResponseController extends Controller {
                 ], 404
             );
         }
-        
+
         $dto = new ResponseDTO;
         $dto->set_status( ResponseStatus::DRAFT )->set_is_completed( 0 )->set_form_id( $form_id );
 

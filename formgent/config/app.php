@@ -22,6 +22,8 @@ use FormGent\App\Providers\ZohoCRMServiceProvider;
 use FormGent\App\Providers\DirectoristScriptProvider;
 use FormGent\WpMVC\Helpers\Helpers;
 use FormGent\Database\Migration\V122 as V122Migration;
+use FormGent\Database\Migration\V123 as V123Migration;
+use FormGent\App\Providers\ResponseLogServiceProvider;
 
 return [
     'version'                 => Helpers::get_plugin_version( 'formgent' ),
@@ -52,6 +54,7 @@ return [
         ZohoCRMServiceProvider::class,
         QueueServiceProvider::class,
         DirectoristScriptProvider::class,
+        ResponseLogServiceProvider::class,
     ],
 
     'admin_providers'         => [
@@ -68,6 +71,7 @@ return [
     'migration_db_option_key' => 'formgent_migrations',
 
     'migrations'              => [
-        '1.2.2' => V122Migration::class
+        '1.2.2' => V122Migration::class,
+        '1.2.3' => V123Migration::class,
     ]
 ];

@@ -15,7 +15,9 @@ class ResponseReadDTO extends DTO {
 
     private ?int $is_read = null;
 
-    private int $is_completed = 0;
+    private ?int $is_starred = null;
+
+    private ?int $is_completed = null;
 
     private ?string $search = null;
 
@@ -118,22 +120,44 @@ class ResponseReadDTO extends DTO {
     }
 
     /**
+     * Get the value of is_starred
+     *
+     * @return ?int
+     */
+    public function get_is_starred(): ?int {
+        return $this->is_starred;
+    }
+
+    /**
+     * Set the value of is_starred
+     *
+     * @param ?int $is_starred 
+     *
+     * @return self
+     */
+    public function set_is_starred( ?int $is_starred ): self {
+        $this->is_starred = $is_starred;
+
+        return $this;
+    }
+
+    /**
      * Get the value of is_completed
      *
-     * @return int
+     * @return ?int
      */
-    public function get_is_completed(): int {
+    public function get_is_completed(): ?int {
         return $this->is_completed;
     }
 
     /**
      * Set the value of is_completed
      *
-     * @param int $is_completed 
+     * @param ?int $is_completed 
      *
      * @return self
      */
-    public function set_is_completed( int $is_completed ): self {
+    public function set_is_completed( ?int $is_completed ): self {
         $this->is_completed = $is_completed;
 
         return $this;

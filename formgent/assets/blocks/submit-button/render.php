@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
-<div 
-    data-wp-interactive="formgent/form" 
+<div
+    data-wp-interactive="formgent/form"
     data-wp-context='{ "name": "<?php echo esc_attr( $attributes['name'] ); ?>" }'
     data-wp-class--formgent-display-none="context.is_multi_step"
     data-wp-bind--hidden="state.hideField" class="display-none formgent-field  formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>">
@@ -11,7 +11,7 @@
         data-wp-class--formgent-show-button="!state.showPaypalButton"
         data-wp-class--formgent-hide-button="state.showPaypalButton"
     >
-        <button type="submit" 
+        <button type="submit"
             class="formgent-btn formgent-btn-md formgent-btn-<?php echo esc_attr( $attributes['button_style'] ); ?>"
             data-wp-on--keydown="actions.handleSubmitButtonKeydown"
         >

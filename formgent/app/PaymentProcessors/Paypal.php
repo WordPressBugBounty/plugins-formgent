@@ -18,7 +18,8 @@ use FormGent\App\DTO\OrderItemDTO;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\App\Contracts\PaymentInterface;
 
-class Paypal implements PaymentInterface {
+class Paypal implements PaymentInterface
+{
     protected PaymentProcessor $payment_processor;
 
     public function __construct() {
@@ -33,6 +34,12 @@ class Paypal implements PaymentInterface {
     }
 
     public function pay( PayDTO $pay_dto ) {
+        // Allow formgent-pro to handle subscription approval.
+        $result = apply_filters( 'formgent_paypal_pay', null, $pay_dto );
+        if ( $result !== null ) {
+            return $result;
+        }
+
         $return_url_args = [
             'order_id'   => $pay_dto->order->get_id(),
             'payment_id' => $pay_dto->payment->get_id(),
@@ -99,6 +106,12 @@ class Paypal implements PaymentInterface {
     }
 
     public function success( Validator $validator, WP_REST_Request $request ): PaymentReturnDTO {
+        // Allow formgent-pro to handle subscription callbacks (before legacy validation).
+        $result = apply_filters( 'formgent_paypal_success', null, $validator, $request );
+        if ( $result !== null ) {
+            return $result;
+        }
+
         $validator->validate(
             [
                 'token'      => 'required|string',

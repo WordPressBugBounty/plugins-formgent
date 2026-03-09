@@ -10,7 +10,7 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     }
 
-    .formgent-success-icon{
+    .formgent-success-icon {
         margin-bottom: 16px;
     }
 
@@ -61,6 +61,16 @@
         font-size: 14px;
         font-weight: 600;
         color: #141921;
+    }
+
+    .formgent-amount-after-trial {
+        font-size: 12px;
+        color: #747C89;
+        font-weight: 400;
+    }
+
+    .formgent-status-active {
+        color: #26a56c;
     }
 
     .formgent-payment-method {

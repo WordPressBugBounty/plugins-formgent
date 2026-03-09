@@ -65,7 +65,8 @@
     }
   },
   "supports": {
-    "interactivity": true
+    "interactivity": true,
+    "inserter": false
   },
   "editorScript": "file:index.js",
   "style": "file:style-index.css",

@@ -13,7 +13,8 @@ use FormGent\Stripe\Checkout\Session;
 use FormGent\Stripe\Stripe as StripeSDK;
 use WP_REST_Request;
 
-class Stripe implements PaymentInterface {
+class Stripe implements PaymentInterface
+{
     public string $secret_key = '';
 
     public function __construct() {
@@ -22,16 +23,22 @@ class Stripe implements PaymentInterface {
 
         $this->secret_key = $payment_settings['stripe']['secret_key'];
     }
-    
+
     public static function get_key(): string {
         return 'stripe';
     }
 
     public function pay( PayDTO $pay_dto ) {
+        // Allow formgent-pro to handle subscription sessions.
+        $result = apply_filters( 'formgent_stripe_pay', null, $pay_dto );
+        if ( $result !== null ) {
+            return $result;
+        }
+
         StripeSDK::setApiKey( $this->secret_key );
 
-        $success_url = add_query_arg( [ 'session_id' => "{CHECKOUT_SESSION_ID}" ], get_rest_url( null, '/formgent/payment/success/stripe' ) );
-        $cancel_url  = add_query_arg( [ 'order_id' => $pay_dto->order->get_id(), 'payment_id' => $pay_dto->payment->get_id(), ], get_rest_url( null, '/formgent/payment/cancel/stripe' ) );
+        $success_url = add_query_arg( ['session_id' => "{CHECKOUT_SESSION_ID}"], get_rest_url( null, '/formgent/payment/success/stripe' ) );
+        $cancel_url  = add_query_arg( ['order_id' => $pay_dto->order->get_id(), 'payment_id' => $pay_dto->payment->get_id(),], get_rest_url( null, '/formgent/payment/cancel/stripe' ) );
 
         $line_items = [];
 
@@ -90,18 +97,26 @@ class Stripe implements PaymentInterface {
 
         $session_id = $request->get_param( 'session_id' );
 
-        $session        = Session::retrieve( $session_id );
+        $session = Session::retrieve( $session_id, ['expand' => ['subscription', 'customer_details']] );
+
+        // Allow formgent-pro to handle subscription sessions.
+        $result = apply_filters( 'formgent_stripe_success', null, $session, $request );
+        if ( $result !== null ) {
+            return $result;
+        }
+
+        // One-time payment path (unchanged).
         $payment_intent = PaymentIntent::retrieve( $session->payment_intent );
         $transaction_id = $payment_intent->id;
         $meta_data      = $payment_intent->metadata;
 
         $dto = ( new PaymentReturnDTO )
-        ->set_order_id( $meta_data->order_id )
-        ->set_payment_id( $meta_data->payment_id )
-        ->set_transaction_id( $transaction_id )
-        ->set_billing_email( $session->customer_details->email )
-        ->set_billing_name( $session->customer_details->name )
-        ->set_billing_country( $session->customer_details->address->country );
+            ->set_order_id( $meta_data->order_id )
+            ->set_payment_id( $meta_data->payment_id )
+            ->set_transaction_id( $transaction_id )
+            ->set_billing_email( $session->customer_details->email )
+            ->set_billing_name( $session->customer_details->name )
+            ->set_billing_country( $session->customer_details->address->country );
 
         return $dto;
     }

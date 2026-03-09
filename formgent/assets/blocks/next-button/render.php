@@ -1,4 +1,16 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php defined( 'ABSPATH' ) || exit;
+// Block render receives $attributes, $content, $block (no form $context). Get form ID from block context.
+$form_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : (int) get_the_ID();
+
+$save_resume = function_exists( 'formgent_form_get_setting' ) ? formgent_form_get_setting( $form_id, 'save_resume', [] ) : [];
+
+$show_disclaimer          = ! empty( $save_resume['show_disclaimer_message'] )
+    && ( ! empty( $save_resume['auto_save_partial_entries'] ) || ! empty( $context['is_save_incomplete_data'] ) );
+$disclaimer_message       = isset( $save_resume['disclaimer_message'] ) ? $save_resume['disclaimer_message'] : '';
+$save_resume_link_enabled = ! empty( $save_resume['enable_save_resume_link'] );
+$save_resume_link_text    = isset( $save_resume['save_resume_link_text'] ) ? $save_resume['save_resume_link_text'] : 'Save & Resume';
+
+?>
 
 <div
     class="
@@ -39,3 +51,17 @@
         </button>
     <?php endif; ?>
 </div>
+
+<?php if ( $save_resume_link_enabled && function_exists( 'formgent_pro' ) ) : ?>
+    <div class="formgent-save-resume-link-container">
+        <a class="formgent-save-resume-link" tabindex="0">
+            <?php echo wp_kses_post( $save_resume_link_text ); ?>
+        </a>
+    </div>
+<?php endif; ?>
+
+<?php if ( $show_disclaimer && $disclaimer_message !== '' && function_exists( 'formgent_pro' ) ) : ?>
+    <div class="formgent-save-resume-disclaimer">
+        <span><?php echo wp_kses_post( $disclaimer_message ); ?></span>
+    </div>
+<?php endif; ?>

@@ -4,9 +4,11 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\Http\Controllers\Admin\TemplateController;
 use FormGent\App\Http\Controllers\Admin\OrderController;
+use FormGent\App\Http\Controllers\Admin\SubscriptionController;
 use FormGent\App\Http\Controllers\Admin\PageController;
 use FormGent\App\Http\Controllers\Admin\SummaryController;
 use FormGent\App\Http\Controllers\Admin\NoteController;
+use FormGent\App\Http\Controllers\Admin\ResponseLogController;
 use FormGent\App\Http\Controllers\Admin\EmailNotificationController;
 use FormGent\App\Http\Controllers\Admin\GoogleSheetController;
 use FormGent\App\Http\Controllers\Admin\GoogleSpreadsheetController;
@@ -79,6 +81,8 @@ Route::group(
         Route::group(
             'responses', function() {
                 Route::resource( 'notes', NoteController::class );
+                Route::get( 'logs',      [ ResponseLogController::class, 'index'  ] );
+                Route::delete( 'logs/{id}', [ ResponseLogController::class, 'delete' ] );
                 Route::patch( '{id}/starred', [ResponseController::class, 'update_starred'] );
                 Route::patch( '{id}/read', [ResponseController::class, 'update_read'] );
                 Route::get( '{id}/quiz-result', [ResponseController::class, 'quiz_result'] );
@@ -86,6 +90,8 @@ Route::group(
                     '{response_id}/order', function() {
                         Route::get( '/', [OrderController::class, 'order'] );
                         Route::patch( '/{id}/status', [OrderController::class, 'update_status'] );
+                        Route::get( '/{order_id}/subscription', [SubscriptionController::class, 'details'] );
+                        Route::post( '/{order_id}/subscription/cancel', [SubscriptionController::class, 'cancel'] );
                     }
                 );
                 Route::get( 'table', [ResponseController::class, 'get_fields'] );
