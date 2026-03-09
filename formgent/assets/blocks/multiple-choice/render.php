@@ -77,17 +77,18 @@ $context = [
             <?php endif; ?>
         </div>
     </div>
-    <div data-wp-bind--hidden="!state.showFieldQuantityInput" class="formgent-field-single formgent-field-quantity" data-wp-class--formgent-field-quantity-hidden="!state.showFieldQuantityInput">
-        <label for="<?php echo esc_attr( formgent_field_id_prefix( $attributes['name'] . '_quantity' ) ); ?>"
+
+    <!-- <div data-wp-bind--hidden="!state.showFieldQuantityInput" class="formgent-field-single formgent-field-quantity" data-wp-class--formgent-field-quantity-hidden="!state.showFieldQuantityInput">
+        <label for="<?php //echo esc_attr( formgent_field_id_prefix( $attributes['name'] . '_quantity' ) ); ?>"
             class="formgent-field-label" data-wp-text="state.getQuantityLabel">
         </label>
         <input class="formgent-field-single__input" type="number"
-            id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['name'] . '_quantity' ) ); ?>"
-            name="<?php echo esc_attr( $attributes['name'] ); ?>_quantity"
+            id="<?php //echo esc_attr( formgent_field_id_prefix( $attributes['name'] . '_quantity' ) ); ?>"
+            name="<?php //echo esc_attr( $attributes['name'] ); ?>_quantity"
             data-wp-on--input="actions.updatePaymentQuantity"
             data-wp-bind--value="state.getFieldQuantity"
             data-wp-bind--min="state.getFieldQuantityMin"
             data-wp-bind--max="state.getFieldQuantityMax"
             value="1" />
-    </div>
+    </div> -->
 </div>
