@@ -70,6 +70,10 @@
     "enable_numeric_value": {
       "type": "boolean",
       "default": false
+    },
+    "disable_search": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

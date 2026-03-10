@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.5.1\n"
+"Project-Id-Version: FormGent 1.5.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-09T17:16:50+00:00\n"
+"POT-Creation-Date: 2026-03-10T12:50:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -2215,6 +2215,10 @@ msgstr ""
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/single-choice/index.js:1
 msgid "Enable Numeric Values for Options"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+msgid "Disable Option Search"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
