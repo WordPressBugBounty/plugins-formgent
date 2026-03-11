@@ -14,8 +14,14 @@ class SpreadsheetRepository extends Repository {
         return Spreadsheet::query();
     }
 
-    public function get( $form_id ) {
-        return $this->get_query_builder()->where( 'form_id', $form_id )->order_by_desc( 'id' )->get();
+    public function get( $form_id, int $page = 1, int $per_page = 10 ) {
+        $query       = $this->get_query_builder()->where( 'form_id', $form_id )->order_by_desc( 'id' );
+        $count_query = clone $query;
+
+        return [
+            'total'        => $count_query->count(),
+            'spreadsheets' => $query->pagination( $page, $per_page ),
+        ];
     }
 
     public function get_by_form_id( int $form_id, string $status = 'publish' ) {

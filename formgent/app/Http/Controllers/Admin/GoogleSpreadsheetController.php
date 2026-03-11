@@ -34,11 +34,23 @@ class GoogleSpreadsheetController extends Controller {
      * @return array
      */
     public function index( Validator $validator, WP_REST_Request $request ): array {
-        $form_id = absint( $request->get_param( "id" ) );
+        $validator->validate(
+            [
+                'per_page' => 'numeric',
+                'page'     => 'numeric',
+            ]
+        );
+
+        $form_id  = absint( $request->get_param( 'id' ) );
+        $page     = intval( $request->get_param( 'page' ) ) ?: 1;
+        $per_page = intval( $request->get_param( 'per_page' ) ) ?: 10;
+
+        $result = $this->repository->get( $form_id, $page, $per_page );
 
         return Response::send(
             [
-                "spreadsheets" => $this->repository->get( $form_id )
+                'spreadsheets' => $result['spreadsheets'],
+                'total'        => $result['total'],
             ]
         );
     }
