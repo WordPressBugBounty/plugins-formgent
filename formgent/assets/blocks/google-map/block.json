@@ -35,6 +35,14 @@
       "type": "string",
       "default": ""
     },
+    "default_location": {
+      "type": "object",
+      "default": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "address": ""
+      }
+    },
     "block_width": {
       "type": "string",
       "default": "100"

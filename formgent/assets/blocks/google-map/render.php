@@ -6,7 +6,10 @@ $settings                 = get_post_meta( get_post()->ID, '_formgent_form_setti
 $use_label_as_placeholder = ! empty( $settings['use_label_as_placeholder'] ?? null );
 ?>
 
-<div data-wp-interactive="formgent/form" data-wp-context='{ "name": "<?php echo esc_attr( $attributes['name'] ); ?>", "map": {} }' data-wp-bind--hidden="state.hideField" class="display-none formgent-field   formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>">
+<?php
+$default_location = ! empty( $attributes['default_location'] ) ? $attributes['default_location'] : [ 'lat' => 40.7128, 'lng' => -74.006, 'address' => '' ];
+?>
+<div data-wp-interactive="formgent/form" data-wp-context='{ "name": "<?php echo esc_attr( $attributes['name'] ); ?>", "map": {}, "default_location": <?php echo wp_json_encode( $default_location ); ?> }' data-wp-bind--hidden="state.hideField" class="display-none formgent-field   formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>">
     <div class="formgent-field-single formgent-field-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?>">
         <?php if ( ! empty( $attributes['label'] ) && ! $use_label_as_placeholder ) : ?>
             <label
@@ -37,13 +40,22 @@ $use_label_as_placeholder = ! empty( $settings['use_label_as_placeholder'] ?? nu
                     ></div>
                 </template>
             </div>
-            <div
-                class="formgent-field-single-map"
-                id="formgent-map-<?php echo esc_attr( $attributes['id'] ); ?>"
-                data-wp-init="callbacks.initGoogleMap"
-                data-apikey="<?php echo esc_attr( $google_map_api_key ) ?>"
-                style="min-height: 300px; width: 100%; border: 1px solid #ddd; border-radius: var(--formgent-field-border-radius);"
-            ></div>
+            <?php if ( ! empty( $google_map_api_key ) ) : ?>
+                <div
+                    class="formgent-field-single-map"
+                    id="formgent-map-<?php echo esc_attr( $attributes['id'] ); ?>"
+                    data-wp-init="callbacks.initGoogleMap"
+                    data-apikey="<?php echo esc_attr( $google_map_api_key ); ?>"
+                    style="min-height:300px;width:100%;border:1px solid #ddd;border-radius:var(--formgent-field-border-radius);"
+                ></div>
+            <?php else : ?>
+                <div class="just-validate-error-label">
+                    <?php esc_html_e(
+                        'Google Maps API key is not configured. Please configure it in the Global Settings.',
+                        'formgent'
+                    ); ?>
+                </div>
+            <?php endif; ?>
             <?php if ( ! empty( $attributes['sub_label'] ) ) : ?>
                 <span class="formgent-field-sub-label">
                     <?php echo wp_kses_post( $attributes['sub_label'] ); ?>
