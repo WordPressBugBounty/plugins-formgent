@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,6 +208,10 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides built-in analytics to track form submissions, user interactions, and more in the All Responses section.
 
 == Changelog ==
+= 1.5.6 - 29 March 2026 =
+* Fixed: Form slug customization issue in the Gutenberg editor
+* Fixed: Duplicate ID issue for Name and Address inner blocks when duplicated
+
 = 1.5.5 - 12 March 2026 =
 * Added: Default location support for the Google Map block
 * Fixed: Issue with the quiz end-screen notice
