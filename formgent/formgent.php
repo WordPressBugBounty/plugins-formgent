@@ -8,7 +8,7 @@ use FormGent\WpMVC\App;
 /**
  * Plugin Name:       FormGent
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.5.6
+ * Version:           1.5.7
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Tested up to:      6.9

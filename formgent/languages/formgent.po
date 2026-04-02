@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.5.6\n"
+"Project-Id-Version: FormGent 1.5.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-29T12:21:06+00:00\n"
+"POT-Creation-Date: 2026-04-02T09:27:14+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -812,8 +812,8 @@ msgstr ""
 #: app/Http/Controllers/Admin/FormController.php:294
 #: app/Http/Controllers/Admin/ResponseController.php:194
 #: app/Http/Controllers/Admin/ResponseController.php:886
-#: app/Http/Controllers/Admin/ResponseController.php:1014
-#: app/Http/Controllers/Admin/ResponseController.php:1067
+#: app/Http/Controllers/Admin/ResponseController.php:1015
+#: app/Http/Controllers/Admin/ResponseController.php:1075
 msgid "Sorry, Something was wrong."
 msgstr ""
 
@@ -972,7 +972,7 @@ msgstr ""
 msgid "Responses read state updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:1081
+#: app/Http/Controllers/Admin/ResponseController.php:1089
 msgid "Responses have been successfully deleted."
 msgstr ""
 
@@ -1417,6 +1417,15 @@ msgstr ""
 
 #: assets/blocks/payment/render.php:217
 msgid "Pay securely with PayPal"
+msgstr ""
+
+#: assets/blocks/repeater/render.php:31
+#: assets/blocks/repeater/render.php:45
+msgid "Remove Item"
+msgstr ""
+
+#: assets/blocks/repeater/render.php:53
+msgid "Add another"
 msgstr ""
 
 #. translators: %1$s is the current page number, %2$s is the total number of pages

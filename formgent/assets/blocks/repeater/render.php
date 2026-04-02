@@ -28,7 +28,7 @@ $is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
                 <?php if ( ! $is_editor ) : ?>
                 <span class="formgent-repeater-remove" data-wp-on--click="actions.onRemoveRepeaterItem" data-wp-on--keydown="actions.handleRepeaterRemoveKeydown" data-wp-class--formgent-repeater-remove-hide="!state.hasMultipleRepeaterItem" tabindex="0">
                     <?php formgent_render_icon( 'trash' ); ?>
-                    Remove Item
+                    <?php esc_html_e( 'Remove Item', 'formgent' ); ?>
                 </span>
                 <?php endif; ?>
             </div>
@@ -42,7 +42,7 @@ $is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
                     <?php if ( ! $is_editor ) : ?>
                     <span class="formgent-repeater-remove" data-wp-on--click="actions.onRemoveRepeaterItem" data-wp-on--keydown="actions.handleRepeaterRemoveKeydown" data-wp-class--formgent-repeater-remove-hide="!state.hasMultipleRepeaterItem" tabindex="0">
                         <?php formgent_render_icon( 'trash' ); ?>
-                        Remove Item
+                        <?php esc_html_e( 'Remove Item', 'formgent' ); ?>
                     </span>
                     <?php endif; ?>
                 </div>
@@ -50,7 +50,7 @@ $is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
         </div>
         <span class="formgent-repeater-add" data-wp-on--click="actions.onAddRepeaterItem" data-wp-on--keydown="actions.handleRepeaterAddKeydown" tabindex="0">
             <?php formgent_render_icon( 'plus-circle' ); ?>
-            Add another
+            <?php esc_html_e( 'Add another', 'formgent' ); ?>
         </span>
     </div>
 </div>

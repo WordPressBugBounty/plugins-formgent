@@ -1001,14 +1001,15 @@ class ResponseController extends Controller
     public function export( Validator $validator, WP_REST_Request $wp_rest_request ) {
         $validator->validate(
             [
-                'form_id'      => 'required|numeric',
-                'response_ids' => 'required|array'
+                'form_id'  => 'required|numeric',
+                'page'     => 'numeric',
+                'per_page' => 'numeric',
             ]
         );
 
-        $response_ids = $wp_rest_request->get_param( 'response_ids' );
+        $response_ids = $wp_rest_request->get_param( 'response_ids' ) ?? [];
 
-        if ( ! formgent_is_one_level_array( $response_ids ) ) {
+        if ( ! empty( $response_ids ) && ! formgent_is_one_level_array( $response_ids ) ) {
             return Response::send(
                 [
                     'message' => esc_html__( 'Sorry, Something was wrong.', 'formgent' )
@@ -1017,10 +1018,13 @@ class ResponseController extends Controller
             );
         }
 
-        $form_id = intval( $wp_rest_request->get_param( 'form_id' ) );
-        $form    = formgent_get_form_by_id( $form_id );
+        $form_id  = intval( $wp_rest_request->get_param( 'form_id' ) );
+        $page     = max( 1, intval( $wp_rest_request->get_param( 'page' ) ?? 1 ) );
+        $per_page = min( 500, max( 1, intval( $wp_rest_request->get_param( 'per_page' ) ?? 500 ) ) );
+        $form     = formgent_get_form_by_id( $form_id );
 
-        $responses = $this->repository->get_export_data( $form_id, $response_ids );
+        $total     = $this->repository->get_export_count( $form_id, $response_ids );
+        $responses = $this->repository->get_export_data( $form_id, $response_ids, $page, $per_page );
 
         if ( ! empty( $responses ) ) {
             foreach ( $responses as &$response_item ) {
@@ -1042,11 +1046,15 @@ class ResponseController extends Controller
 
         return Response::send(
             [
-                'form'      => [
+                'form'        => [
                     'title' => $form->post_title,
                 ],
-                'fields'    => $this->summary_repository->get_fields( $form_id ),
-                'responses' => $responses,
+                'fields'      => $this->summary_repository->get_fields( $form_id ),
+                'responses'   => $responses,
+                'total'       => $total,
+                'page'        => $page,
+                'per_page'    => $per_page,
+                'total_pages' => $total > 0 ? (int) ceil( $total / $per_page ) : 1,
             ]
         );
     }

@@ -865,7 +865,17 @@ class ResponseRepository {
         return Response::query()->where( 'id', $response_id )->update( $data );
     }
 
-    public function get_export_data( int $form_id, array $response_ids ) {
+    public function get_export_count( int $form_id, array $response_ids = [] ): int {
+        $query = Response::query()->where( 'form_id', $form_id )->where( 'status', 'publish' );
+
+        if ( ! empty( $response_ids ) ) {
+            $query->where_in( 'id', $response_ids );
+        }
+
+        return (int) $query->count();
+    }
+
+    public function get_export_data( int $form_id, array $response_ids = [], int $page = 1, int $per_page = 0 ) {
         $form = formgent_get_form_by_id( $form_id );
         if ( ! $form ) {
             return [];
@@ -881,10 +891,16 @@ class ResponseRepository {
             'answers.children', function( Builder $query ) {
                 $query->select( 'id', 'response_id', 'parent_id', 'field_name', 'field_type', 'value' );
             }
-        )->where( 'form_id', $form_id );
+        )->where( 'form_id', $form_id )
+        ->where( 'status', 'publish' );
 
         if ( ! empty( $response_ids ) ) {
             $response_query->where_in( 'id', $response_ids );
+        }
+
+        if ( $per_page > 0 ) {
+            $offset = ( max( 1, $page ) - 1 ) * $per_page;
+            $response_query->limit( $per_page )->offset( $offset );
         }
 
         $responses = $response_query->get();
