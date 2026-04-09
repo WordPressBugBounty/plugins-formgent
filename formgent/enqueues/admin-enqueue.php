@@ -19,13 +19,13 @@ if ( formgent_post_type() === get_post_type() ) {
     Enqueue::script( 'formgent/blocks-editor', 'build/js/blocks-editor', ['lodash', 'formgent/notification'] );
     Enqueue::style( 'formgent/blocks-editor', 'build/css/blocks-editor' );
 
-    $payment_settings         = formgent_get_setting( 'payment' );
-    $payment_gateways         = array_keys( formgent_get_payment_gateways() );
-    $enabled_payment_gateways = array_values(
+    $formgent_payment_settings = formgent_get_setting( 'payment' );
+    $payment_gateways          = array_keys( formgent_get_payment_gateways() );
+    $enabled_payment_gateways  = array_values(
         array_filter(
             $payment_gateways,
-            static function ( $gateway ) use ( $payment_settings ) {
-                return ! empty( $payment_settings[$gateway]['status'] );
+            static function ( $gateway ) use ( $formgent_payment_settings ) {
+                return ! empty( $formgent_payment_settings[$gateway]['status'] );
             }
         )
     );

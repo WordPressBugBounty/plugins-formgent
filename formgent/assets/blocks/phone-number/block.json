@@ -41,11 +41,19 @@
     },
     "country_code": {
       "type": "boolean",
-      "default": false
+      "default": true
     },
     "country_auto_detection": {
       "type": "boolean",
       "default": false
+    },
+    "default_country": {
+      "type": "string",
+      "default": "US"
+    },
+    "include_plus_sign": {
+      "type": "boolean",
+      "default": true
     },
     "block_width": {
       "type": "string",

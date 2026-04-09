@@ -99,6 +99,24 @@ class ResponseController extends Controller {
             return Response::send( ['messages' => $validate_data['errors']], 422 );
         }
 
+        // Allow pro features (e.g. OTP verification) to gate submission before data is stored.
+        // Returning a WP_Error from this filter aborts the submission with a proper REST response.
+        $gate_result = apply_filters( 'formgent_before_store_form_response', true, $response, $form, $request );
+
+        if ( is_wp_error( $gate_result ) ) {
+            return Response::send(
+                [ 'message' => $gate_result->get_error_message() ],
+                $gate_result->get_error_code() && is_numeric( $gate_result->get_error_code() ) ? (int) $gate_result->get_error_code() : 403
+            );
+        }
+
+        if ( false === $gate_result ) {
+            return Response::send(
+                [ 'message' => esc_html__( 'Verification required.', 'formgent' ) ],
+                403
+            );
+        }
+
         if ( ! empty( $validate_data['field_dtos'] ) ) {
             // Save & Resume / partial-entry flows may have already stored draft answers
             // against this response token. On final submit, replace existing answers

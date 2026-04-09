@@ -43,7 +43,9 @@ class FormSettingsRepository {
 
     public function get_settings( int $form_id ) {
         $settings = get_post_meta( $form_id, '_formgent_settings', true );
-        return is_array( $settings ) ? array_merge( $this->default_settings, $settings ) : $this->default_settings;
+        $settings = is_array( $settings ) ? array_merge( $this->default_settings, $settings ) : $this->default_settings;
+
+        return apply_filters( 'formgent_form_settings', $settings, $form_id );
     }
 
     public function save_settings( int $form_id, array $settings ) {
