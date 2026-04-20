@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.6.0\n"
+"Project-Id-Version: FormGent 1.7.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-09T02:38:38+00:00\n"
+"POT-Creation-Date: 2026-04-20T04:16:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -69,6 +69,56 @@ msgstr ""
 #: app/EnumeratedList/OrderStatus.php:32
 #: app/EnumeratedList/PaymentStatus.php:31
 msgid "Unpaid"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:494
+#: assets/blocks/payment-summary/render.php:22
+#: assets/blocks/payment/render.php:95
+msgid "Item"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:495
+msgid "Qty"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:496
+msgid "Unit Price"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:497
+#: assets/blocks/payment-summary/render.php:28
+#: assets/blocks/payment/render.php:107
+msgid "Total"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:569
+#: resources/views/shortcodes/payment-success.php:126
+#: assets/blocks/payment/index.js:1
+msgid "Daily"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:570
+#: resources/views/shortcodes/payment-success.php:127
+#: assets/blocks/payment/index.js:1
+msgid "Weekly"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:571
+#: resources/views/shortcodes/payment-success.php:128
+#: assets/blocks/payment/index.js:1
+msgid "Monthly"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:572
+#: resources/views/shortcodes/payment-success.php:129
+#: assets/blocks/payment/index.js:1
+msgid "Yearly"
+msgstr ""
+
+#: app/Helpers/form-helpers.php:1070
+#: app/Helpers/form-helpers.php:1171
+#: app/Helpers/form-helpers.php:1200
+msgid "Generated PDF"
 msgstr ""
 
 #: app/Helpers/helper.php:144
@@ -739,11 +789,12 @@ msgstr ""
 #: app/Http/Controllers/Admin/AnalyticsController.php:30
 #: app/Http/Controllers/Admin/EmailNotificationController.php:53
 #: app/Http/Controllers/Admin/EmailNotificationController.php:78
-#: app/Http/Controllers/Admin/FormController.php:213
+#: app/Http/Controllers/Admin/FormController.php:217
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:84
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:162
 #: app/Http/Controllers/Admin/MailchimpController.php:103
 #: app/Http/Controllers/Admin/MailchimpController.php:183
+#: app/Http/Controllers/Admin/PdfController.php:71
 #: app/Http/Controllers/Admin/ResponseController.php:364
 #: app/Http/Controllers/Admin/ResponseController.php:702
 #: app/Http/Controllers/Admin/ResponseController.php:898
@@ -751,9 +802,9 @@ msgstr ""
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
 #: app/Http/Controllers/AnalyticsController.php:40
 #: app/Http/Controllers/FormController.php:32
-#: app/Http/Controllers/ResponseController.php:64
-#: app/Http/Controllers/ResponseController.php:342
-#: app/Repositories/FormPresetFieldRepository.php:151
+#: app/Http/Controllers/ResponseController.php:66
+#: app/Http/Controllers/ResponseController.php:354
+#: app/Repositories/FormPresetFieldRepository.php:162
 msgid "Form not found"
 msgstr ""
 
@@ -784,32 +835,32 @@ msgstr ""
 msgid "The status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:127
+#: app/Http/Controllers/Admin/FormController.php:131
 msgid "The form has been created successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:148
+#: app/Http/Controllers/Admin/FormController.php:152
 msgid "The form title has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:166
+#: app/Http/Controllers/Admin/FormController.php:170
 msgid "Sorry, some thing was wrong"
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:175
-#: app/Http/Controllers/Admin/FormController.php:196
+#: app/Http/Controllers/Admin/FormController.php:179
+#: app/Http/Controllers/Admin/FormController.php:200
 msgid "The form status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:238
+#: app/Http/Controllers/Admin/FormController.php:242
 msgid "The form has been duplicated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:277
+#: app/Http/Controllers/Admin/FormController.php:281
 msgid "The form has been deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:294
+#: app/Http/Controllers/Admin/FormController.php:298
 #: app/Http/Controllers/Admin/ResponseController.php:194
 #: app/Http/Controllers/Admin/ResponseController.php:886
 #: app/Http/Controllers/Admin/ResponseController.php:1015
@@ -817,12 +868,12 @@ msgstr ""
 msgid "Sorry, Something was wrong."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:307
+#: app/Http/Controllers/Admin/FormController.php:311
 msgid "Forms have been successfully deleted."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:364
-#: app/Http/Controllers/Admin/SettingsController.php:63
+#: app/Http/Controllers/Admin/FormController.php:386
+#: app/Http/Controllers/Admin/SettingsController.php:60
 msgid "Settings have been saved successfully."
 msgstr ""
 
@@ -896,6 +947,61 @@ msgstr ""
 msgid "Order status updated successfully"
 msgstr ""
 
+#: app/Http/Controllers/Admin/PdfController.php:38
+#: app/Http/Controllers/Admin/PdfController.php:100
+#: app/Http/Controllers/Admin/PdfResourcesController.php:164
+#: app/Http/Controllers/ResponseController.php:411
+#: app/Repositories/ResponseRepository.php:33
+#: app/Repositories/ResponseRepository.php:636
+#: app/Repositories/ResponseRepository.php:689
+#: app/Repositories/SummaryRepository.php:17
+#: app/Repositories/SummaryRepository.php:47
+msgid "Form not found."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfController.php:81
+msgid "PDF template was created successfully!"
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfController.php:109
+#: app/Http/Controllers/Admin/PdfController.php:141
+#: app/Http/Controllers/Admin/PdfController.php:168
+#: app/Http/Controllers/ResponseController.php:435
+msgid "PDF template not found."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfController.php:120
+msgid "PDF template updated successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfController.php:177
+msgid "PDF template deleted successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:54
+msgid "PDF resources zip not found or could not be downloaded. Enter a valid local path above, or ensure the remote URL is reachable."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:66
+msgid "Could not create formgent-libraries/pdf directory."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:81
+msgid "Failed to extract PDF resources archive."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:91
+msgid "Verification failed: vendor/autoload.php not found after extraction."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:102
+msgid "PDF resources installed successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:139
+msgid "PDF library removed successfully."
+msgstr ""
+
 #: app/Http/Controllers/Admin/ResponseController.php:210
 #, php-format
 msgid "%d response has been successfully deleted."
@@ -912,7 +1018,8 @@ msgid "Either \"id\" or \"page\" parameter is required."
 msgstr ""
 
 #: app/Http/Controllers/Admin/ResponseController.php:275
-#: app/Http/Controllers/ResponseController.php:72
+#: app/Http/Controllers/ResponseController.php:74
+#: app/Http/Controllers/ResponseController.php:421
 msgid "Response not found."
 msgstr ""
 
@@ -982,7 +1089,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/SubscriptionController.php:36
 #: app/Http/Controllers/Admin/SubscriptionController.php:136
-#: app/Http/Controllers/PaymentController.php:125
+#: app/Http/Controllers/PaymentController.php:138
 msgid "Order not found."
 msgstr ""
 
@@ -1027,40 +1134,65 @@ msgstr ""
 msgid "Captcha verification successful"
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:63
+#: app/Http/Controllers/PaymentController.php:76
 msgid "Payment successful."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:106
+#: app/Http/Controllers/PaymentController.php:119
 msgid "Payment canceled."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:134
+#: app/Http/Controllers/PaymentController.php:147
 msgid "Order is already paid."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:146
+#: app/Http/Controllers/PaymentController.php:159
 msgid "Order items not found."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:161
+#: app/Http/Controllers/PaymentController.php:174
 msgid "Payment method not found."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:80
+#: app/Http/Controllers/ResponseController.php:82
 msgid "Skipping submission: Response is already completed."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:88
+#: app/Http/Controllers/ResponseController.php:90
 msgid "Oops, something went wrong. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:115
+#: app/Http/Controllers/ResponseController.php:117
 msgid "Verification required."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:149
+#: app/Http/Controllers/ResponseController.php:159
 msgid "The form was submitted successfully!"
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:447
+msgid "PDF library is not installed for this form."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:460
+msgid "PDF engine could not be loaded."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:481
+msgid "Failed to generate PDF."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:552
+msgid "Invalid file name."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:562
+msgid "Upload directory is not available."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:577
+#: app/Http/Controllers/ResponseController.php:586
+msgid "PDF file not found."
 msgstr ""
 
 #: app/Integrations/Mailchimp/Mailchimp.php:70
@@ -1272,55 +1404,55 @@ msgstr ""
 msgid "Could not update the view count."
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:161
+#: app/Repositories/FormPresetFieldRepository.php:172
 msgid "Prints the response ID"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:166
+#: app/Repositories/FormPresetFieldRepository.php:177
 msgid "Prints the IP address"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:171
+#: app/Repositories/FormPresetFieldRepository.php:182
 msgid "Prints the device name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:176
+#: app/Repositories/FormPresetFieldRepository.php:187
 msgid "Prints the browser name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:181
+#: app/Repositories/FormPresetFieldRepository.php:192
 msgid "Prints the browser version name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:187
+#: app/Repositories/FormPresetFieldRepository.php:198
 msgid "Prints the website URL"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:192
+#: app/Repositories/FormPresetFieldRepository.php:203
 msgid "Prints the website name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:197
+#: app/Repositories/FormPresetFieldRepository.php:208
 msgid "Prints the admin email address"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:202
+#: app/Repositories/FormPresetFieldRepository.php:213
 msgid "Prints the admin name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:207
+#: app/Repositories/FormPresetFieldRepository.php:218
 msgid "Prints the user email address"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:212
+#: app/Repositories/FormPresetFieldRepository.php:223
 msgid "Prints user name"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:216
+#: app/Repositories/FormPresetFieldRepository.php:227
 msgid "Prints the fields value"
 msgstr ""
 
-#: app/Repositories/FormPresetFieldRepository.php:217
+#: app/Repositories/FormPresetFieldRepository.php:228
 msgid "Prints the fields label"
 msgstr ""
 
@@ -1330,14 +1462,6 @@ msgstr ""
 
 #: app/Repositories/MailchimpRepository.php:37
 msgid "The item not found."
-msgstr ""
-
-#: app/Repositories/ResponseRepository.php:33
-#: app/Repositories/ResponseRepository.php:636
-#: app/Repositories/ResponseRepository.php:689
-#: app/Repositories/SummaryRepository.php:17
-#: app/Repositories/SummaryRepository.php:47
-msgid "Form not found."
 msgstr ""
 
 #: app/Repositories/ResponseRepository.php:442
@@ -1378,11 +1502,6 @@ msgstr ""
 msgid "Google Maps API key is not configured. Please configure it in the Global Settings."
 msgstr ""
 
-#: assets/blocks/payment-summary/render.php:22
-#: assets/blocks/payment/render.php:95
-msgid "Item"
-msgstr ""
-
 #: assets/blocks/payment-summary/render.php:23
 #: assets/blocks/payment/render.php:98
 #: assets/blocks/payment/index.js:1
@@ -1391,11 +1510,6 @@ msgstr ""
 
 #: assets/blocks/payment-summary/render.php:27
 msgid "Quantity"
-msgstr ""
-
-#: assets/blocks/payment-summary/render.php:28
-#: assets/blocks/payment/render.php:107
-msgid "Total"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:61
@@ -1486,26 +1600,6 @@ msgstr ""
 msgid "year"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:126
-#: assets/blocks/payment/index.js:1
-msgid "Daily"
-msgstr ""
-
-#: resources/views/shortcodes/payment-success.php:127
-#: assets/blocks/payment/index.js:1
-msgid "Weekly"
-msgstr ""
-
-#: resources/views/shortcodes/payment-success.php:128
-#: assets/blocks/payment/index.js:1
-msgid "Monthly"
-msgstr ""
-
-#: resources/views/shortcodes/payment-success.php:129
-#: assets/blocks/payment/index.js:1
-msgid "Yearly"
-msgstr ""
-
 #: resources/views/shortcodes/payment-success.php:148
 msgid "Payment Success"
 msgstr ""
@@ -1566,6 +1660,14 @@ msgstr ""
 
 #: resources/views/shortcodes/payment-success.php:301
 msgid "Date:"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:319
+msgid "Your Documents"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:324
+msgid "Download PDF"
 msgstr ""
 
 #: resources/views/submit-button.php:25
@@ -1705,6 +1807,390 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/website/index.js:1
 msgid "Justify"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "New Template"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Portrait"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Landscape"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Left to right (LTR)"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Right to left (RTL)"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Site Title"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Site URL"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Form Title"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Submission Date"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User ID"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User Email"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User Display Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User First Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User Last Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "User Username"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Admin Email"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Admin Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Login URL"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Registration URL"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Lost Password URL"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Logout URL"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Browser Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Browser Platform"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "IP Address"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Current Date"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Embedded Post ID"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Embedded Post Title"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "GET Parameters"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/html/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Cookie Values"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Payment Amount"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Payment Currency"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Payment Method"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Transaction ID"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Payment Status"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Billing Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Billing Email"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Billing Country"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Payment Date"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Order Items Table"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/payment/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Plan Name"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Billing Interval"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Billing Times"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Trial Days"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Start Date"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Subscription Next Billing Date"
 msgstr ""
 
 #: assets/blocks/captcha/index.js:1
@@ -2355,99 +2841,19 @@ msgid "Google Maps API key is not configured. Please <link>go to Settings</link>
 msgstr ""
 
 #: assets/blocks/html/index.js:1
+msgid "Generic Tags"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Form fields"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
+msgid "Generated PDFs"
+msgstr ""
+
+#: assets/blocks/html/index.js:1
 msgid "Dynamic tags"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Site Title"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Site URL"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Form Title"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User ID"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User Email"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User Display Name"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User First Name"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User Last Name"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "User Username"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Admin Email"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Admin Name"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Login URL"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Registration URL"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Lost Password URL"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Logout URL"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Browser Name"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Browser Platform"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "IP Address"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Current Date"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Embedded Post ID"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Embedded Post Title"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "GET Parameters"
-msgstr ""
-
-#: assets/blocks/html/index.js:1
-msgid "Cookie Values"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
@@ -2753,10 +3159,6 @@ msgid "Payment Item"
 msgstr ""
 
 #: assets/blocks/payment-item/index.js:1
-msgid "Payment Amount"
-msgstr ""
-
-#: assets/blocks/payment-item/index.js:1
 msgid "Amount Label"
 msgstr ""
 
@@ -2814,10 +3216,6 @@ msgstr ""
 
 #: assets/blocks/payment/index.js:1
 msgid "Select one or more fields. Their amounts will be added together."
-msgstr ""
-
-#: assets/blocks/payment/index.js:1
-msgid "Subscription Plan Name"
 msgstr ""
 
 #: assets/blocks/payment/index.js:1

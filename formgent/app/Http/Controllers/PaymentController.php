@@ -46,6 +46,19 @@ class PaymentController extends Controller
 
         $order = $order_repository->get_by_id( $payment_return_dto->get_order_id() );
 
+        // Generate PDFs with payment data now that payment is complete.
+        if ( ! empty( $order->response_id ) ) {
+            $response_obj = formgent_response_repository()->get_by_id( $order->response_id );
+
+            if ( $response_obj && ! empty( $response_obj->form_id ) ) {
+                $pdf_links = formgent_generate_payment_pdf_links( (int) $response_obj->form_id, (int) $order->response_id );
+
+                if ( ! empty( $pdf_links ) && ! empty( $order->hash ) ) {
+                    set_transient( 'formgent_payment_pdf_links_' . $order->hash, $pdf_links, DAY_IN_SECONDS );
+                }
+            }
+        }
+
         $settings = formgent_get_setting( 'payment' );
 
         if ( ! empty( $settings['success_page'] ) ) {

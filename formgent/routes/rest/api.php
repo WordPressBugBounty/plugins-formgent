@@ -23,6 +23,8 @@ Route::get( 'payment/retry/{order_hash}', [PaymentController::class, 'retry'] );
 Route::group(
     'responses', function() {
         Route::post( '/', [ResponseController::class, 'store'] );
+        Route::get( 'download-pdf', [ResponseController::class, 'download_pdf'] );
+        Route::get( 'serve-pdf', [ResponseController::class, 'serve_pdf'] );
         Route::post( 'attachments', [AttachmentController::class, 'store'] );
         Route::delete( 'attachments', [AttachmentController::class, 'delete'] );
     }

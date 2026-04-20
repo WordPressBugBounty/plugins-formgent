@@ -19,6 +19,8 @@ use FormGent\App\Http\Controllers\Admin\FormController;
 use FormGent\App\Http\Controllers\Admin\AnalyticsController;
 use FormGent\App\Http\Controllers\Admin\ZohoCRMController;
 use FormGent\App\Http\Controllers\Admin\ZohoCRMFeedController;
+use FormGent\App\Http\Controllers\Admin\PdfResourcesController;
+use FormGent\App\Http\Controllers\Admin\PdfController;
 use FormGent\WpMVC\Routing\Route;
 Route::group(
     'admin', function() {
@@ -66,6 +68,16 @@ Route::group(
                                 Route::delete( '/{feed_id}', [ MailchimpController::class, 'delete' ] );
                                 Route::patch( '/{feed_id}', [ MailchimpController::class, 'update' ] );
                                 Route::patch( '/{feed_id}/status', [ MailchimpController::class, 'update_status' ] );
+                            }
+                        );
+
+                        Route::group(
+                            'pdfs', function() {
+                                Route::get( '/', [PdfController::class, 'index'] );
+                                Route::post( '/', [PdfController::class, 'store'] );
+                                Route::get( '/{pdf_id}', [PdfController::class, 'show'] );
+                                Route::patch( '/{pdf_id}', [PdfController::class, 'update'] );
+                                Route::delete( '/{pdf_id}', [PdfController::class, 'delete'] );
                             }
                         );
                     }
@@ -117,6 +129,8 @@ Route::group(
 
         Route::get( 'settings', [SettingsController::class, 'index'] );
         Route::post( 'settings', [SettingsController::class, 'update'] );
+        Route::post( 'pdf-resources', [PdfResourcesController::class, 'install'] );
+        Route::delete( 'pdf-resources', [PdfResourcesController::class, 'delete'] );
         Route::get( 'total-unread-count', [ResponseController::class, 'total_unread_count'] );
         Route::get( 'all-responses', [ResponseController::class, 'all_responses'] );
         Route::delete( 'all-responses', [ResponseController::class, 'delete_all_responses'] );

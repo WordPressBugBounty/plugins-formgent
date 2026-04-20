@@ -28,7 +28,7 @@ class AnswerFieldDTO extends DTO {
 
     private array $options = [];
 
-    private ?array $children;
+    private ?array $children = null;
 
     /**
      * Get the value of id

@@ -10,6 +10,7 @@ use FormGent\App\Http\Controllers\Controller;
 use FormGent\App\Models\Post;
 use FormGent\App\Repositories\FormRepository;
 use FormGent\App\Repositories\FormPresetFieldRepository;
+use FormGent\App\Repositories\PdfRepository;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
 use WP_REST_Request;
@@ -20,9 +21,12 @@ class FormController extends Controller {
 
     public FormPresetFieldRepository $form_preset_field_repository;
 
-    public function __construct( FormRepository $form_repository, FormPresetFieldRepository $form_preset_field_repository ) {
+    public PdfRepository $pdf_repository;
+
+    public function __construct( FormRepository $form_repository, FormPresetFieldRepository $form_preset_field_repository, PdfRepository $pdf_repository ) {
         $this->form_preset_field_repository = $form_preset_field_repository;
         $this->form_repository              = $form_repository;
+        $this->pdf_repository               = $pdf_repository;
     }
 
     public function index( Validator $validator, WP_REST_Request $wp_rest_request ) {
@@ -334,9 +338,25 @@ class FormController extends Controller {
             ]
         );
 
+        $form_id = intval( $wp_rest_request->get_param( 'id' ) );
+
+        $settings         = $this->form_repository->get_settings( $form_id );
+        $settings['pdfs'] = $this->pdf_repository->get_by_form_id( $form_id );
+
+        $pdf_path                   = formgent_get_pdf_library_path();
+        $autoload                   = $pdf_path ? trailingslashit( $pdf_path ) . 'vendor/autoload.php' : '';
+        $is_library_exist           = ! empty( $pdf_path ) && is_readable( $autoload );
+        $settings['pdf_generation'] = [
+            'is_library_exist' => $is_library_exist,
+        ];
+
+        $form                   = formgent_get_form_by_id( $form_id );
+        $fields                 = $form ? formgent_get_form_fields( $form ) : [];
+        $settings['is_payment'] = formgent_is_payment_form( $fields );
+
         return Response::send(
             [
-                'settings' => $this->form_repository->get_settings( intval( $wp_rest_request->get_param( 'id' ) ) ),
+                'settings' => $settings,
             ]
         );
     }
@@ -351,13 +371,15 @@ class FormController extends Controller {
 
         $form_id = intval( $wp_rest_request->get_param( 'id' ) );
 
-        $this->form_repository->save_settings(
-            $form_id,
-            array_merge(
-                $this->form_repository->get_settings( $form_id ),
-                $wp_rest_request->get_param( 'settings' )
-            )
+        $settings = array_merge(
+            $this->form_repository->get_settings( $form_id ),
+            $wp_rest_request->get_param( 'settings' )
         );
+        unset( $settings['pdfs'] );
+        unset( $settings['pdf_generation'] );
+        unset( $settings['pdf_library_path'] ); // Stored globally; do not persist per-form.
+
+        $this->form_repository->save_settings( $form_id, $settings );
 
         return Response::send(
             [

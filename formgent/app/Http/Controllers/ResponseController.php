@@ -13,9 +13,11 @@ use FormGent\App\Http\Controllers\Controller;
 use FormGent\App\Repositories\ResponseRepository;
 use FormGent\App\Repositories\AnswerRepository;
 use FormGent\App\Repositories\FormRepository;
+use FormGent\App\Repositories\PdfRepository;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
 use stdClass;
+use Throwable;
 use WP_REST_Request;
 
 class ResponseController extends Controller {
@@ -29,8 +31,8 @@ class ResponseController extends Controller {
      * Constructor for initializing repositories.
      *
      * @param ResponseRepository $repository
-     * @param AnswerRepository $answer_repository
-     * @param FormRepository $form_repository
+     * @param AnswerRepository   $answer_repository
+     * @param FormRepository     $form_repository
      */
     public function __construct( ResponseRepository $repository, AnswerRepository $answer_repository, FormRepository $form_repository ) {
         $this->repository        = $repository;
@@ -142,11 +144,21 @@ class ResponseController extends Controller {
         // Trigger the after response creation hook.
         do_action( "formgent_after_create_form_response", $response->id, $form, $request );
 
+        // Skip PDF generation for payment forms — PDFs are generated after
+        // payment completes in PaymentController::success() when payment data exists.
+        $pdf_links = [];
+        if ( ! $request->get_param( 'payment_gateway' ) ) {
+            $pdf_links = $this->generate_confirmation_pdf_links( (int) $form->ID, (int) $response->id );
+        }
+
         // Return a success response.
         return Response::send(
             apply_filters(
                 'formgent_form_submission_response',
-                [ 'message' => esc_html__( 'The form was submitted successfully!', 'formgent' ) ],
+                [
+                    'message'   => esc_html__( 'The form was submitted successfully!', 'formgent' ),
+                    'pdf_links' => $pdf_links,
+                ],
                 $request, $form, $response
             ),
             201
@@ -370,6 +382,222 @@ class ResponseController extends Controller {
                 'response_token' => $response_token
             ]
         );
+    }
+
+    /**
+     * Generate and stream a response PDF from a template token in confirmation message.
+     *
+     * @param Validator       $validator
+     * @param WP_REST_Request $request
+     * @return array|WP_REST_Response
+     */
+    public function download_pdf( Validator $validator, WP_REST_Request $request ) {
+        $validator->validate(
+            [
+                'id'             => 'required|numeric',
+                'pdf_id'         => 'required|numeric',
+                'response_token' => 'required|string',
+            ]
+        );
+
+        $form_id        = absint( $request->get_param( 'id' ) );
+        $pdf_id         = absint( $request->get_param( 'pdf_id' ) );
+        $response_token = sanitize_text_field( (string) $request->get_param( 'response_token' ) );
+
+        $form = $this->form_repository->get_by_id_publish( $form_id );
+        if ( ! $form ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'Form not found.', 'formgent' ),
+                ],
+                404
+            );
+        }
+
+        $response = formgent_get_response_by_token( $response_token, $form_id );
+        if ( ! $response || '1' !== (string) $response->is_completed ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'Response not found.', 'formgent' ),
+                ],
+                404
+            );
+        }
+
+        /** @var PdfRepository $pdf_repository */
+        $pdf_repository = formgent_singleton( PdfRepository::class );
+
+        [ $pdf, $decrypted_password ] = $pdf_repository->get_by_id_and_form_with_decrypted_password( $pdf_id, $form_id );
+
+        if ( ! $pdf ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'PDF template not found.', 'formgent' ),
+                ],
+                404
+            );
+        }
+
+        $pdf_path = formgent_get_pdf_library_path();
+        $autoload = $pdf_path ? trailingslashit( $pdf_path ) . 'vendor/autoload.php' : '';
+
+        if ( empty( $autoload ) || ! is_readable( $autoload ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'PDF library is not installed for this form.', 'formgent' ),
+                ],
+                400
+            );
+        }
+
+        if ( ! class_exists( '\Dompdf\Dompdf', false ) ) {
+            require_once $autoload;
+        }
+
+        if ( ! class_exists( '\Dompdf\Dompdf' ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'PDF engine could not be loaded.', 'formgent' ),
+                ],
+                500
+            );
+        }
+
+        $template_content = isset( $pdf->content ) ? (string) $pdf->content : '';
+        $payment_values   = formgent_get_payment_preset_values( (int) $response->id, $form_id );
+        $html             = formgent_replace_html_dynamic_tags( $template_content, $form_id, (int) $response->id, null, $payment_values ?: null );
+        $paper_size       = ! empty( $pdf->paper_size ) ? sanitize_text_field( (string) $pdf->paper_size ) : 'A4';
+        $orientation      = strtolower( (string) ( $pdf->orientation ?? '' ) );
+        $orientation      = 'landscape' === $orientation || 'l' === $orientation ? 'L' : 'P';
+        $direction        = strtolower( (string) ( $pdf->direction ?? '' ) );
+        $password         = sanitize_text_field( $decrypted_password );
+        $html             = formgent_apply_pdf_direction( $html, $direction );
+
+        try {
+            $pdf_binary = formgent_render_pdf_with_dompdf( $html, $paper_size, $orientation, $password, $form_id, $pdf_id );
+        } catch ( Throwable $exception ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'Failed to generate PDF.', 'formgent' ),
+                ],
+                500
+            );
+        }
+
+        $template_name = isset( $pdf->template_name ) ? (string) $pdf->template_name : '';
+        $base_name     = sanitize_file_name( $template_name ?: 'formgent-generated-pdf' );
+        $filename      = $base_name . '.pdf';
+
+        // Stream the PDF directly through PHP — never expose raw file URLs.
+        // This avoids the Nginx .htaccess bypass and ensures auth is always checked.
+        header( 'Content-Type: application/pdf' );
+        header( 'Content-Disposition: inline; filename="' . $filename . '"' );
+        header( 'Content-Length: ' . strlen( $pdf_binary ) );
+        header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+        header( 'Pragma: no-cache' );
+
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- binary PDF data
+        echo $pdf_binary;
+        exit;
+    }
+
+    /**
+     * Generate PDF files for {{pdf:id}} tags used in confirmation message and End block content.
+     *
+     * @param int $form_id
+     * @param int $response_id
+     * @return array<string, array{url:string,name:string}> [pdf_id => {url,name}]
+     */
+    private function generate_confirmation_pdf_links( int $form_id, int $response_id ): array {
+        // Skip all DB/parsing work when no PDF templates exist for this form.
+        $pdf_repository = formgent_singleton( PdfRepository::class );
+        if ( $pdf_repository->count_by_form_id( $form_id ) === 0 ) {
+            return [];
+        }
+
+        $settings             = $this->form_repository->get_settings( $form_id );
+        $confirmation_message = isset( $settings['confirmation']['message'] ) ? (string) $settings['confirmation']['message'] : '';
+
+        $form              = $this->form_repository->get_by_id_publish( $form_id );
+        $post_content      = $form && isset( $form->post_content ) ? (string) $form->post_content : '';
+        $end_block_content = formgent_get_end_block_content( $post_content );
+
+        $content_with_pdf_refs = trim( $confirmation_message . "\n" . $end_block_content );
+        return formgent_generate_pdf_links_from_content( $content_with_pdf_refs, $form_id, $response_id );
+    }
+
+    /**
+     * Serve a generated PDF file through PHP.
+     *
+     * Files are stored on disk but never exposed via direct URL — this endpoint
+     * streams the file content after validating the filename exists in the
+     * protected PDF directory. The filename contains 32 hex chars of randomness
+     * making it effectively an unguessable bearer token.
+     *
+     * @param Validator       $validator
+     * @param WP_REST_Request $request
+     */
+    public function serve_pdf( Validator $validator, WP_REST_Request $request ) {
+        $validator->validate(
+            [
+                'file' => 'required|string',
+            ]
+        );
+
+        $filename = sanitize_file_name( (string) $request->get_param( 'file' ) );
+
+        if ( empty( $filename ) || ! preg_match( '/\.pdf$/i', $filename ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'Invalid file name.', 'formgent' ),
+                ],
+                400
+            );
+        }
+
+        $uploads = wp_upload_dir();
+        if ( ! empty( $uploads['error'] ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'Upload directory is not available.', 'formgent' ),
+                ],
+                500
+            );
+        }
+
+        $file_path = trailingslashit( $uploads['basedir'] ) . 'formgent/pdfs/' . $filename;
+
+        // Verify the resolved path stays within the PDF directory (prevent path traversal).
+        $real_path = realpath( $file_path );
+        $pdf_dir   = realpath( trailingslashit( $uploads['basedir'] ) . 'formgent/pdfs' );
+
+        if ( false === $real_path || false === $pdf_dir || 0 !== strpos( $real_path, $pdf_dir ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'PDF file not found.', 'formgent' ),
+                ],
+                404
+            );
+        }
+
+        if ( ! is_readable( $real_path ) ) {
+            return Response::send(
+                [
+                    'message' => esc_html__( 'PDF file not found.', 'formgent' ),
+                ],
+                404
+            );
+        }
+
+        header( 'Content-Type: application/pdf' );
+        header( 'Content-Disposition: inline; filename="' . $filename . '"' );
+        header( 'Content-Length: ' . filesize( $real_path ) );
+        header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+        header( 'Pragma: no-cache' );
+
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- streaming binary PDF data
+        readfile( $real_path );
+        exit;
     }
 
     /**

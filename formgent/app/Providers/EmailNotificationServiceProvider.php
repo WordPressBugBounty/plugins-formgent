@@ -53,6 +53,10 @@ class EmailNotificationServiceProvider implements Provider {
         $form_answers_data       = formgent_get_form_answers( $queue->form_id, $queue->response_id, false );
         $response                = formgent_response_repository()->get_response_dto( $queue->response_id );
 
+        // Replace PDF preset tags first; generic placeholder replacement strips unknown tags.
+        $pdf_links   = formgent_generate_pdf_links_from_content( (string) $email->body, (int) $queue->form_id, (int) $queue->response_id );
+        $email->body = formgent_replace_pdf_placeholders_with_links( (string) $email->body, $pdf_links );
+
         $email->subject = formgent_replace_placeholders( $email->subject, $preset_field_repository, $form_answers_data, $response );
         $email->send_to = formgent_replace_placeholders( $email->send_to, $preset_field_repository, $form_answers_data, $response );
         $email->body    = formgent_replace_placeholders( $email->body, $preset_field_repository, $form_answers_data, $response );

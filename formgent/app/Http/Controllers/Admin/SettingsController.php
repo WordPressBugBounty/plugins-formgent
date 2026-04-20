@@ -23,11 +23,8 @@ class SettingsController extends Controller
     }
 
     public function index() {
-        return Response::send(
-            [
-                'settings' => $this->repository->get(),
-            ] 
-        );
+        $settings = $this->repository->get();
+        return Response::send( [ 'settings' => $settings ] );
     }
 
     public function update( Validator $validator, WP_REST_Request $request ) {

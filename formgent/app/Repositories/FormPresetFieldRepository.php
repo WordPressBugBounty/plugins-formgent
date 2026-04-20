@@ -87,6 +87,17 @@ class FormPresetFieldRepository {
             }
         }
 
+        // Submission date alias used in PDF templates and notifications.
+        if ( '{{submission_date}}' === $key ) {
+            if ( $response->get_created_at() ) {
+                $timestamp = strtotime( (string) $response->get_created_at() );
+                if ( false !== $timestamp ) {
+                    return wp_date( get_option( 'date_format', 'Y-m-d' ), $timestamp );
+                }
+            }
+            return $default_value;
+        }
+
         // Transform response value
         $matches = [];
 

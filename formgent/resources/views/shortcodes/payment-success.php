@@ -310,5 +310,33 @@ include_once __DIR__ . '/payment-success-style.php';
 
     </div>
 
+    <?php
+    // PDF download links (generated after payment success).
+    $pdf_links = $order_hash ? get_transient( 'formgent_payment_pdf_links_' . $order_hash ) : false;
+    if ( ! empty( $pdf_links ) && is_array( $pdf_links ) ) :
+        ?>
+        <div class="formgent-pdf-downloads">
+            <h3 class="formgent-pdf-downloads__title"><?php esc_html_e( 'Your Documents', 'formgent' ); ?></h3>
+            <div class="formgent-pdf-downloads__list">
+                <?php
+                foreach ( $pdf_links as $link_data ) :
+                    $url  = is_array( $link_data ) ? ( $link_data['url'] ?? '' ) : '';
+                    $name = is_array( $link_data ) ? ( $link_data['name'] ?? __( 'Download PDF', 'formgent' ) ) : __( 'Download PDF', 'formgent' );
+                    if ( '' === $url ) {
+                        continue;
+                    }
+                    ?>
+                    <a href="<?php echo esc_url( $url ); ?>"
+                       class="formgent-pdf-download-link"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><polyline points="9 15 12 18 15 15"></polyline></svg>
+                        <span><?php echo esc_html( $name ); ?></span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- <button class="formgent-done-button">Done</button> -->
 </div>

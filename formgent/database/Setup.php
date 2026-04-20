@@ -270,6 +270,24 @@ class Setup {
             }
         );
 
+        // -- Table: pdfs (PDF template configurations)
+        Schema::create(
+            "{$prefix}pdfs", function ( Blueprint $table ) {
+                $table->big_increments( 'id' );
+                $table->unsigned_big_integer( 'form_id' );
+                $table->string( 'template_name' );
+                $table->string( 'template_type' )->nullable();
+                $table->long_text( 'content' );
+                $table->string( 'paper_size' )->nullable();
+                $table->string( 'orientation' )->nullable();
+                $table->string( 'direction' )->nullable();
+                $table->text( 'password' )->nullable();
+                $table->timestamps();
+
+                $table->foreign( 'form_id' )->references( 'ID' )->on( 'posts' )->on_delete( 'cascade' );
+            }
+        );
+
         // -- Table: response_logs
         Schema::create(
             "{$prefix}response_logs", function ( Blueprint $table ) use ( $prefix ) {

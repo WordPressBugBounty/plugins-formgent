@@ -107,4 +107,49 @@
         border-left: 2px solid #f5bb43;
         margin-bottom: 20px;
     }
+
+    .formgent-pdf-downloads {
+        margin-top: 24px;
+        padding: 16px;
+        background: #f8fafc;
+        border-radius: 8px;
+        text-align: left;
+    }
+
+    .formgent-pdf-downloads__title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #141921;
+        margin: 0 0 12px;
+    }
+
+    .formgent-pdf-downloads__list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .formgent-pdf-download-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        color: #2563eb;
+        font-size: 14px;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+
+    .formgent-pdf-download-link:hover {
+        background: #eff6ff;
+    }
+
+    .formgent-pdf-download-link svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
 </style>
