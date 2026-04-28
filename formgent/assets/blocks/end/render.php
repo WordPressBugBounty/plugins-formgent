@@ -45,7 +45,7 @@ if ( $form instanceof WP_Post ) {
                     </div>
                 </div>
 
-                <div data-wp-bind--hidden="context.global.is_response_submitting">
+                <div data-formgent-end-content data-wp-bind--hidden="context.global.is_response_submitting">
                     <?php
                         //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo $content;

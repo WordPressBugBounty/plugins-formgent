@@ -32,6 +32,17 @@ class QuizProvider implements Provider {
         $quiz_result     = $quiz_repository->get_result( $response->id );
 
         if ( $quiz_result ) {
+            /** @var FormSettingsRepository $settings_repo */
+            $settings_repo = formgent_singleton( FormSettingsRepository::class );
+            $quiz_settings = $settings_repo->get_setting_by_key( $form->ID, 'quiz' );
+            $show_results  = $quiz_settings['show_results'] ?? true;
+
+            if ( ! $show_results ) {
+                // Keep summary scores (needed for CC conditions and placeholders)
+                // but strip per-field answer details to prevent answer exposure.
+                unset( $quiz_result['fields'] );
+            }
+
             $data['quiz_result'] = $quiz_result;
         }
 

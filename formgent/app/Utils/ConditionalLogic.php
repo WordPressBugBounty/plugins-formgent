@@ -99,11 +99,28 @@ class ConditionalLogic {
                 return ! in_array( $condition_value, $array_value, true );
             
             case 'regex':
-                return preg_match( '/' . strval( $condition_value ) . '/', strval( $field_value ) ) === 1;
+                $pattern = '/' . str_replace( '/', '\/', strval( $condition_value ) ) . '/';
+                try {
+                    return @preg_match( $pattern, strval( $field_value ) ) === 1;
+                } catch ( \Exception $e ) {
+                    return false;
+                }
             
+            case 'less_than':
+            case 'less_then':
+                return floatval( $field_value ) < floatval( $condition_value );
+
+            case 'greater_than':
+            case 'greater_then':
+                return floatval( $field_value ) > floatval( $condition_value );
+
+            case 'between':
+                $range = array_map( 'floatval', array_map( 'trim', explode( ',', $condition_value ) ) );
+                return count( $range ) === 2 && floatval( $field_value ) >= $range[0] && floatval( $field_value ) <= $range[1];
+
             case 'null':
                 return empty( $field_value );
-            
+
             default:
                 return false;
         }

@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,12 +208,18 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides built-in analytics to track form submissions, user interactions, and more in the All Responses section.
 
 == Changelog ==
+= 1.8.0 - 28 April 2026 =
+* New: Introduced Conditional Confirmation feature (PRO)
+* Added: Option to display quiz results
+* Fixed: Resolved issue where quiz correct answers could be exposed
+* Improved: Strengthened conditional logic sanitization
+
 = 1.7.0 - 20 April 2026 =
 * Added: PDF Generator with Invoice template support
 * Fixed: Minor style issues
 
 = 1.6.0 - 09 April 2026 =
-* Added: SMS OTP Verification with Email, Twilio, Firebase and Custom Gateways
+* Added: SMS OTP Verification with Email, Twilio, Firebase and Custom Gateways (PRO)
 * Added: Default country selection in Phone number field
 * Fixed: Minor style issues
 

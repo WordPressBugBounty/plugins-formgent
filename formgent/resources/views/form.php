@@ -44,24 +44,26 @@ $custom_script = formgent_form_get_setting( $form->ID, 'customScript', ['css' =>
 $message = "";
 
 if ( 'page' === $confirmation['type'] ) {
-    $confirmation['page'] = get_page_uri( $confirmation['page'] );
+    $confirmation['page'] = get_permalink( intval( $confirmation['page'] ) );
 } elseif ( 'message' === $confirmation['type'] ) {
     $message = htmlspecialchars( $confirmation['message'] ?? '', ENT_QUOTES, 'UTF-8' );
 }
 
-unset( $confirmation['message'] );
+if ( 'conversational' !== $form_type ) {
+    unset( $confirmation['message'] );
+}
 
 $context = apply_filters(
     'formgent_form_context',
     [
-        'form_id'               => $form->ID,
-        'blocks_settings'       => $data,
-        'form_type'             => $form_type,
-        'data'                  => formgent_form_default_values( $data ),
-        'preset_values'         => formgent_get_preset_values( $form->ID ),
-        'is_form_loaded'        => false,
-        'is_partial_submitting' => false,
-        'global'                => [
+        'form_id'                => $form->ID,
+        'blocks_settings'        => $data,
+        'form_type'              => $form_type,
+        'data'                   => formgent_form_default_values( $data ),
+        'preset_values'          => formgent_get_preset_values( $form->ID ),
+        'is_form_loaded'         => false,
+        'is_partial_submitting'  => false,
+        'global'                 => [
             'is_response_submitting'         => false,
             'is_response_token_generating'   => false,
             'is_enabled_honeypot_protection' => $is_enabled_honeypot_protection,
@@ -72,10 +74,15 @@ $context = apply_filters(
                 'total_amount'    => '',
             ],
         ],
-        'quiz_result'           => false,
-        'confirmation'          => $confirmation,
-        'plugin_url'            => WP_PLUGIN_URL,
-        'external_data'         => [],
+        'quiz_result'            => false,
+        'show_quiz_results'      => formgent_form_get_setting( $form->ID, 'quiz' )['show_results'] ?? true,
+        'confirmation'           => $confirmation,
+        '_ccOverride'            => false,
+        '_confirmationDisplayed' => false,
+        'submit_label'           => __( 'Submit', 'formgent' ),
+        'redirecting_label'      => __( 'You will be redirected in', 'formgent' ),
+        'plugin_url'             => WP_PLUGIN_URL,
+        'external_data'          => [],
     ],
     $form
 );

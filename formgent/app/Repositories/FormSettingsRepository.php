@@ -6,20 +6,22 @@ defined( "ABSPATH" ) || exit;
 
 class FormSettingsRepository {
     protected array $default_settings = [
-        "save_incompleted_data"  => "no",
-        "hide_formgent_branding" => "no",
-        "confirmation"           => [
+        "save_incompleted_data"     => "no",
+        "hide_formgent_branding"    => "no",
+        "confirmation"              => [
             "type"             => "message", // message | page | url
             "page"             => 0,
             "url"              => "https://google.com",
             "after_submission" => "reset" // hide | reset
         ],
-        "quiz"                   => [
+        "quiz"                      => [
             "is_enabled"         => false,
+            "show_results"       => true,
             "is_grading_enabled" => true,
             "grades"             => [],
         ],
-        "design"                 => [
+        "conditional_confirmations" => [],
+        "design"                    => [
             "status"     => false,
             "show_cover" => true,
             "cover"      => [],

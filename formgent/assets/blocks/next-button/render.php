@@ -33,7 +33,7 @@ $save_resume_link_text    = isset( $save_resume['save_resume_link_text'] ) ? $sa
         class="formgent-btn formgent-btn-md formgent-btn-<?php echo esc_attr( $attributes['button_style'] ); ?>"
         data-wp-on--click="actions.nextStep"
     >
-        <?php echo wp_kses_post( $attributes['button_text'] ); ?>
+        <span data-wp-text="state.conversationalButtonText" data-default-text="<?php echo esc_attr( $attributes['button_text'] ); ?>"><?php echo wp_kses_post( $attributes['button_text'] ); ?></span>
         <?php if ( ! empty( $attributes['arrow_icon'] ) ) : ?>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

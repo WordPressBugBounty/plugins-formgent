@@ -97,6 +97,9 @@ class Form {
             'upload_text',
             'limit_text',
             'limit_files_text',
+            // Strip quiz answer data to prevent cheating via DOM inspection
+            'correct_answer',
+            'points',
         ] as $key ) {
             unset( $attributes[$key] );
         }
