@@ -190,7 +190,7 @@ class EmailNotificationController extends Controller {
             'name'       => 'required|string|max:255',
             'send_to'    => 'required|string|max:255',
             'subject'    => 'required|string|max:255',
-            'body'       => 'required|string|max:2000',
+            'body'       => 'required|string',
             'cc'         => 'string|max:255',
             'bcc'        => 'string|max:255',
             'reply_to'   => 'string|max:255',
