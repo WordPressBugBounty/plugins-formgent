@@ -5,6 +5,7 @@ namespace FormGent\App\Integrations\Mailchimp;
 defined( "ABSPATH" ) || exit;
 
 use Exception;
+use Throwable;
 use FormGent\MailchimpMarketing\ApiClient as MailchimpAPIClient;
 use FormGent\MailchimpMarketing\Api\ListsApi;
 
@@ -101,7 +102,7 @@ class Mailchimp {
         try {
             $this->list()->getListMember( $list_id, md5( strtolower( $email ) ) );
             return true;
-        } catch ( Exception $e ) {
+        } catch ( Throwable $e ) {
             return false;
         }
     }

@@ -107,31 +107,33 @@ class PaymentServiceProvider implements Provider
             ->set_order_items( $order_item_dtos )
             ->set_meta( $subscription_meta );
 
-        // Persist subscription meta for admin display and scheduled cancellations.
-        if ( $is_subscription && ! empty( $subscription_meta ) ) {
-            $meta_value = wp_json_encode(
-                array_merge(
-                    $subscription_meta,
-                    [
-                        'payment_id'  => $payment_dto->get_id(),
-                        'order_id'    => $order_dto->get_id(),
-                        'response_id' => $response->id,
-                        'gateway'     => $payment_gateway,
-                        'currency'    => $currency,
-                    ]
-                ) 
-            );
-            formgent_response_repository()->update_meta(
-                $response->id,
-                'formgent_subscription_meta_' . $payment_dto->get_id(),
-                $meta_value
-            );
-        }
-
         try {
+            $redirect_url = $processor->pay( $dto );
+
+            // Persist subscription meta only after successful payment initiation.
+            if ( $is_subscription && ! empty( $subscription_meta ) ) {
+                $meta_value = wp_json_encode(
+                    array_merge(
+                        $subscription_meta,
+                        [
+                            'payment_id'  => $payment_dto->get_id(),
+                            'order_id'    => $order_dto->get_id(),
+                            'response_id' => $response->id,
+                            'gateway'     => $payment_gateway,
+                            'currency'    => $currency,
+                        ]
+                    )
+                );
+                formgent_response_repository()->update_meta(
+                    $response->id,
+                    'formgent_subscription_meta_' . $payment_dto->get_id(),
+                    $meta_value
+                );
+            }
+
             $response_data['payment_data'] = [
                 'success'      => true,
-                'redirect_url' => $processor->pay( $dto ),
+                'redirect_url' => $redirect_url,
             ];
         } catch ( Exception $e ) {
             $response_data['payment_data'] = [

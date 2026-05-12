@@ -36,5 +36,7 @@ class QueueServiceProvider implements Provider {
 
         $repository = formgent_singleton( QueueRepository::class );
         $repository->create_many( $dtos );
+
+        $this->background_process->dispatch_queue();
     }
 }

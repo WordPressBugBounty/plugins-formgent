@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/password",
+  "title": "Password",
+  "category": "formgent",
+  "description": "Insert a password field with optional strength and confirmation.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "password"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "confirm_placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": "Password"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "confirm_sub_label": {
+      "type": "string",
+      "default": ""
+    },
+    "enable_confirmation_field": {
+      "type": "boolean",
+      "default": false
+    },
+    "confirm_label": {
+      "type": "string",
+      "default": "Confirm Password"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "enable_password_strength": {
+      "type": "boolean",
+      "default": false
+    },
+    "minimum_strength": {
+      "type": "string",
+      "default": "medium"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

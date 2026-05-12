@@ -141,7 +141,7 @@ class ResponseController extends Controller
         $dto->set_page( $page > 0 ? $page : 1 );
 
         $per_page = intval( $wp_rest_request->get_param( 'per_page' ) );
-        $dto->set_per_page( $per_page > 0 ? $per_page : 10 );
+        $dto->set_per_page( $per_page > 0 ? min( 200, $per_page ) : 10 );
 
         // Set search with proper sanitization and null handling
         $search = $wp_rest_request->get_param( 's' );
@@ -391,9 +391,8 @@ class ResponseController extends Controller
         if ( empty( $validate_data['processed_fields'] ) && ! empty( $wp_rest_request->get_param( 'form_data' ) ) ) {
             return Response::send(
                 [
-                    'message'          => esc_html__( 'No fields were processed. Please check field names.', 'formgent' ),
-                    'skipped_fields'   => $validate_data['skipped_fields'] ?? [],
-                    'available_fields' => array_keys( formgent_get_form_fields( $form ) )
+                    'message'        => esc_html__( 'No fields were processed. Please check field names.', 'formgent' ),
+                    'skipped_fields' => $validate_data['skipped_fields'] ?? []
                 ],
                 422
             );
@@ -503,6 +502,11 @@ class ResponseController extends Controller
                     }
 
                     $parent_field_names[] = $field['name'];
+                }
+
+                if ( 'password' === $field['field_type'] ) {
+                    // Do not store password fields in the answers table.
+                    continue;
                 }
 
                 // Update or create parent answer
@@ -675,6 +679,11 @@ class ResponseController extends Controller
                 $field_handler->validate( $field, $children_request, $validator, $form );
                 $dto = $field_handler->get_field_dto( $field, $children_request, $form );
 
+                if ( 'password' === $field['field_type'] ) {
+                    // Do not store password fields in the answers table.
+                    continue;
+                }
+
                 $field_dtos[$field['name']] = $dto;
 
             } catch ( \FormGent\WpMVC\Exceptions\Exception $exception ) {
@@ -738,7 +747,7 @@ class ResponseController extends Controller
      * @param string $parent_type     Parent field type for nested fields.
      * @return array Prepared fields array with configuration data.
      */
-    function prepare_fields( array $fields_settings, string $parent_name = '', string $parent_type = '' ) {
+    protected function prepare_fields( array $fields_settings, string $parent_name = '', string $parent_type = '' ) {
         $registered_fields = formgent_config( 'fields' );
 
         $fields = [];

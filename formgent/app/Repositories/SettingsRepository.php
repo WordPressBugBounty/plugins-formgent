@@ -54,6 +54,16 @@ class SettingsRepository {
                 "secret_key"      => "",
             ],
         ],
+        "login_registration"         => [
+            "login"        => [
+                "status" => "0",
+                "page"   => "",
+            ],
+            "registration" => [
+                "status" => "0",
+                "page"   => "",
+            ],
+        ],
     ];
 
     public function save( array $settings ) {

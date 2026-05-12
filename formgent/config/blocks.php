@@ -21,6 +21,9 @@ use FormGent\App\Fields\Number\Number;
 use FormGent\App\Fields\TextArea\TextArea;
 use FormGent\App\Fields\Text\Text;
 use FormGent\App\Fields\RangeSlider\RangeSlider;
+use FormGent\App\Fields\Login\Login;
+use FormGent\App\Fields\Password\Password;
+use FormGent\App\Fields\Register\Register;
 
 $blocks_dir = formgent_dir( "assets/blocks" );
 
@@ -151,6 +154,51 @@ return apply_filters(
         'formgent/date-picker'           => [
             'types'      => ['general', 'conversational'],
             'field_type' => DatePicker::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/password'              => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => Password::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/register'              => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => Register::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login'                 => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => Login::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login-username'        => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => '',
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login-password'        => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => '',
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login-remember-me'     => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => '',
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login-forgot-password' => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => '',
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/login-signup-link'     => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => '',
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/register-signin-link'  => [
+            'types'      => ['general'],
+            'field_type' => '',
             'dir'        => $blocks_dir,
         ],
         'formgent/payment'               => [

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.8.1\n"
+"Project-Id-Version: FormGent 1.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-29T08:34:44+00:00\n"
+"POT-Creation-Date: 2026-05-12T09:34:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -71,62 +71,73 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:494
+#: app/Fields/Password/MethodResolver.php:58
+#: app/Http/Controllers/RegisterController.php:91
+#: app/Providers/UserRegistrationServiceProvider.php:398
+#: assets/blocks/password/render.php:205
+msgid "Password strength is too weak."
+msgstr ""
+
+#: app/Fields/Password/MethodResolver.php:62
+msgid "Validation failed."
+msgstr ""
+
+#: app/Helpers/form-helpers.php:498
 #: assets/blocks/payment-summary/render.php:22
 #: assets/blocks/payment/render.php:95
 msgid "Item"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:495
+#: app/Helpers/form-helpers.php:499
 msgid "Qty"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:496
+#: app/Helpers/form-helpers.php:500
 msgid "Unit Price"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:497
+#: app/Helpers/form-helpers.php:501
 #: assets/blocks/payment-summary/render.php:28
 #: assets/blocks/payment/render.php:107
 msgid "Total"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:569
+#: app/Helpers/form-helpers.php:573
 #: resources/views/shortcodes/payment-success.php:126
 #: assets/blocks/payment/index.js:1
 msgid "Daily"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:570
+#: app/Helpers/form-helpers.php:574
 #: resources/views/shortcodes/payment-success.php:127
 #: assets/blocks/payment/index.js:1
 msgid "Weekly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:571
+#: app/Helpers/form-helpers.php:575
 #: resources/views/shortcodes/payment-success.php:128
 #: assets/blocks/payment/index.js:1
 msgid "Monthly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:572
+#: app/Helpers/form-helpers.php:576
 #: resources/views/shortcodes/payment-success.php:129
 #: assets/blocks/payment/index.js:1
 msgid "Yearly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:1070
-#: app/Helpers/form-helpers.php:1171
-#: app/Helpers/form-helpers.php:1200
+#: app/Helpers/form-helpers.php:1074
+#: app/Helpers/form-helpers.php:1175
+#: app/Helpers/form-helpers.php:1204
 msgid "Generated PDF"
 msgstr ""
 
-#: app/Helpers/helper.php:144
+#: app/Helpers/helper.php:148
 #: app/Repositories/SummaryRepository.php:32
 msgid "Field handler not found."
 msgstr ""
 
-#: app/Helpers/helper.php:150
+#: app/Helpers/helper.php:154
 msgid "Please use a valid field handler."
 msgstr ""
 
@@ -796,14 +807,18 @@ msgstr ""
 #: app/Http/Controllers/Admin/MailchimpController.php:183
 #: app/Http/Controllers/Admin/PdfController.php:71
 #: app/Http/Controllers/Admin/ResponseController.php:364
-#: app/Http/Controllers/Admin/ResponseController.php:702
-#: app/Http/Controllers/Admin/ResponseController.php:898
+#: app/Http/Controllers/Admin/ResponseController.php:711
+#: app/Http/Controllers/Admin/ResponseController.php:907
+#: app/Http/Controllers/Admin/UserRegistrationController.php:44
+#: app/Http/Controllers/Admin/UserRegistrationController.php:73
+#: app/Http/Controllers/Admin/UserRegistrationController.php:124
+#: app/Http/Controllers/Admin/UserRegistrationController.php:182
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:72
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
 #: app/Http/Controllers/AnalyticsController.php:40
 #: app/Http/Controllers/FormController.php:32
 #: app/Http/Controllers/ResponseController.php:66
-#: app/Http/Controllers/ResponseController.php:354
+#: app/Http/Controllers/ResponseController.php:371
 #: app/Repositories/FormPresetFieldRepository.php:162
 msgid "Form not found"
 msgstr ""
@@ -862,9 +877,9 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/FormController.php:298
 #: app/Http/Controllers/Admin/ResponseController.php:194
-#: app/Http/Controllers/Admin/ResponseController.php:886
-#: app/Http/Controllers/Admin/ResponseController.php:1015
-#: app/Http/Controllers/Admin/ResponseController.php:1075
+#: app/Http/Controllers/Admin/ResponseController.php:895
+#: app/Http/Controllers/Admin/ResponseController.php:1024
+#: app/Http/Controllers/Admin/ResponseController.php:1084
 msgid "Sorry, Something was wrong."
 msgstr ""
 
@@ -879,6 +894,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:129
 #: app/Http/Controllers/Admin/MailchimpController.php:143
+#: app/Http/Controllers/Admin/UserRegistrationController.php:100
 msgid "Item was created successfully"
 msgstr ""
 
@@ -888,6 +904,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:194
 #: app/Http/Controllers/Admin/MailchimpController.php:272
+#: app/Http/Controllers/Admin/UserRegistrationController.php:158
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:146
 msgid "Item was updated successfully"
 msgstr ""
@@ -950,10 +967,10 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:38
 #: app/Http/Controllers/Admin/PdfController.php:100
 #: app/Http/Controllers/Admin/PdfResourcesController.php:164
-#: app/Http/Controllers/ResponseController.php:411
+#: app/Http/Controllers/ResponseController.php:428
 #: app/Repositories/ResponseRepository.php:33
-#: app/Repositories/ResponseRepository.php:636
-#: app/Repositories/ResponseRepository.php:689
+#: app/Repositories/ResponseRepository.php:580
+#: app/Repositories/ResponseRepository.php:633
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
 msgid "Form not found."
@@ -966,7 +983,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:109
 #: app/Http/Controllers/Admin/PdfController.php:141
 #: app/Http/Controllers/Admin/PdfController.php:168
-#: app/Http/Controllers/ResponseController.php:435
+#: app/Http/Controllers/ResponseController.php:452
 msgid "PDF template not found."
 msgstr ""
 
@@ -1019,7 +1036,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/ResponseController.php:275
 #: app/Http/Controllers/ResponseController.php:74
-#: app/Http/Controllers/ResponseController.php:421
+#: app/Http/Controllers/ResponseController.php:438
 msgid "Response not found."
 msgstr ""
 
@@ -1035,51 +1052,51 @@ msgstr ""
 msgid "No fields were processed. Please check field names."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:410
+#: app/Http/Controllers/Admin/ResponseController.php:409
 msgid "Response has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:460
+#: app/Http/Controllers/Admin/ResponseController.php:459
 msgid "Field not found in form settings"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:468
+#: app/Http/Controllers/Admin/ResponseController.php:467
 msgid "Field type not allowed in response"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:478
+#: app/Http/Controllers/Admin/ResponseController.php:477
 msgid "Form type not supported by field handler"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:515
+#: app/Http/Controllers/Admin/ResponseController.php:519
 msgid "Failed to update answer in database"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:528
+#: app/Http/Controllers/Admin/ResponseController.php:532
 msgid "Failed to create answer in database"
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:547
+#: app/Http/Controllers/Admin/ResponseController.php:551
 msgid "No fields were processed. Please check field names and ensure they exist in the form."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:927
+#: app/Http/Controllers/Admin/ResponseController.php:936
 msgid "The response starred has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:948
+#: app/Http/Controllers/Admin/ResponseController.php:957
 msgid "The response read has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:965
+#: app/Http/Controllers/Admin/ResponseController.php:974
 msgid "Invalid IDs."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:977
+#: app/Http/Controllers/Admin/ResponseController.php:986
 msgid "Responses read state updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:1089
+#: app/Http/Controllers/Admin/ResponseController.php:1098
 msgid "Responses have been successfully deleted."
 msgstr ""
 
@@ -1110,6 +1127,23 @@ msgstr ""
 msgid "Subscription cancellation is not supported for this gateway."
 msgstr ""
 
+#: app/Http/Controllers/Admin/UserRegistrationController.php:134
+#: app/Http/Controllers/Admin/UserRegistrationController.php:192
+msgid "User registration not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/UserRegistrationController.php:200
+msgid "User registration was deleted successfully"
+msgstr ""
+
+#: app/Http/Controllers/Admin/UserRegistrationController.php:324
+msgid "User verification confirmation page is required."
+msgstr ""
+
+#: app/Http/Controllers/Admin/UserRegistrationController.php:331
+msgid "Verification email template is required."
+msgstr ""
+
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:82
 msgid "Zoho CRM feed was created."
 msgstr ""
@@ -1134,6 +1168,14 @@ msgstr ""
 msgid "Captcha verification successful"
 msgstr ""
 
+#: app/Http/Controllers/LoginController.php:21
+msgid "Username/email and password are required."
+msgstr ""
+
+#: app/Http/Controllers/LoginController.php:49
+msgid "Login successful. Redirecting..."
+msgstr ""
+
 #: app/Http/Controllers/PaymentController.php:76
 msgid "Payment successful."
 msgstr ""
@@ -1154,6 +1196,70 @@ msgstr ""
 msgid "Payment method not found."
 msgstr ""
 
+#: app/Http/Controllers/RegisterController.php:14
+#: app/Providers/UserRegistrationServiceProvider.php:337
+msgid "User registration is currently disabled."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:62
+#: app/Providers/UserRegistrationServiceProvider.php:369
+msgid "Email is required."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:64
+#: app/Providers/UserRegistrationServiceProvider.php:371
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:66
+#: app/Providers/UserRegistrationServiceProvider.php:373
+msgid "This email is already registered."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:74
+#: app/Providers/UserRegistrationServiceProvider.php:381
+msgid "Emails do not match."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:78
+#: app/Providers/UserRegistrationServiceProvider.php:385
+msgid "Password is required."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:80
+#: app/Providers/UserRegistrationServiceProvider.php:387
+msgid "Passwords do not match."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:95
+#: app/Providers/UserRegistrationServiceProvider.php:402
+msgid "This username is already taken."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:101
+#: app/Providers/UserRegistrationServiceProvider.php:42
+#: app/Providers/UserRegistrationServiceProvider.php:231
+msgid "Registration failed. Please fix the errors."
+msgstr ""
+
+#: app/Http/Controllers/RegisterController.php:121
+msgid "Registration details validated."
+msgstr ""
+
+#. translators: %s: field label.
+#: app/Http/Controllers/RegisterController.php:190
+#: app/Providers/UserRegistrationServiceProvider.php:664
+#, php-format
+msgid "%s is required."
+msgstr ""
+
+#. translators: 1: field label, 2: character limit.
+#: app/Http/Controllers/RegisterController.php:204
+#: app/Providers/UserRegistrationServiceProvider.php:678
+#, php-format
+msgid "%1$s must not exceed %2$d characters."
+msgstr ""
+
 #: app/Http/Controllers/ResponseController.php:82
 msgid "Skipping submission: Response is already completed."
 msgstr ""
@@ -1162,42 +1268,42 @@ msgstr ""
 msgid "Oops, something went wrong. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:117
+#: app/Http/Controllers/ResponseController.php:124
 msgid "Verification required."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:159
+#: app/Http/Controllers/ResponseController.php:166
 msgid "The form was submitted successfully!"
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:447
+#: app/Http/Controllers/ResponseController.php:464
 msgid "PDF library is not installed for this form."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:460
+#: app/Http/Controllers/ResponseController.php:477
 msgid "PDF engine could not be loaded."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:481
+#: app/Http/Controllers/ResponseController.php:498
 msgid "Failed to generate PDF."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:552
+#: app/Http/Controllers/ResponseController.php:569
 msgid "Invalid file name."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:562
+#: app/Http/Controllers/ResponseController.php:579
 msgid "Upload directory is not available."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:577
-#: app/Http/Controllers/ResponseController.php:586
+#: app/Http/Controllers/ResponseController.php:594
+#: app/Http/Controllers/ResponseController.php:603
 msgid "PDF file not found."
 msgstr ""
 
-#: app/Integrations/Mailchimp/Mailchimp.php:70
-#: app/Integrations/Mailchimp/Mailchimp.php:78
-#: app/Integrations/Mailchimp/Mailchimp.php:88
+#: app/Integrations/Mailchimp/Mailchimp.php:71
+#: app/Integrations/Mailchimp/Mailchimp.php:79
+#: app/Integrations/Mailchimp/Mailchimp.php:89
 msgid "The email is required"
 msgstr ""
 
@@ -1245,11 +1351,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: app/Providers/MailchimpProvider.php:93
+#: app/Providers/MailchimpProvider.php:94
 msgid "Merge fields is empty"
 msgstr ""
 
-#: app/Providers/MailchimpProvider.php:97
+#: app/Providers/MailchimpProvider.php:98
 msgid "Email field is empty"
 msgstr ""
 
@@ -1257,7 +1363,7 @@ msgstr ""
 msgid "The selected payment method does not support subscriptions."
 msgstr ""
 
-#: app/Providers/PaymentServiceProvider.php:318
+#: app/Providers/PaymentServiceProvider.php:320
 msgid "Payment"
 msgstr ""
 
@@ -1380,9 +1486,22 @@ msgid "Forms list"
 msgstr ""
 
 #. translators: %d: row number
-#: app/Providers/ResponseLogServiceProvider.php:221
+#: app/Providers/ResponseLogServiceProvider.php:213
 #, php-format
 msgid "Row %d"
+msgstr ""
+
+#: app/Providers/UserRegistrationServiceProvider.php:207
+#: app/Providers/UserRegistrationServiceProvider.php:315
+msgid "Registration successful."
+msgstr ""
+
+#: app/Providers/UserRegistrationServiceProvider.php:251
+msgid "Registration failed. Please try again."
+msgstr ""
+
+#: app/Providers/UserRegistrationServiceProvider.php:747
+msgid "You are now logged in."
 msgstr ""
 
 #. translators: %s: error message
@@ -1464,8 +1583,8 @@ msgstr ""
 msgid "The item not found."
 msgstr ""
 
-#: app/Repositories/ResponseRepository.php:442
-#: app/Repositories/ResponseRepository.php:461
+#: app/Repositories/ResponseRepository.php:386
+#: app/Repositories/ResponseRepository.php:405
 msgid "Other"
 msgstr ""
 
@@ -1475,6 +1594,76 @@ msgstr ""
 
 #: app/Repositories/SummaryRepository.php:23
 msgid "Field not found"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:41
+msgid "Registration successful. Your account is awaiting manual approval."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:51
+msgid "Registration successful. Please check your email to verify your account."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:72
+#: app/Services/UserVerificationService.php:81
+#: app/Services/UserVerificationService.php:91
+msgid "Invalid verification link."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:86
+msgid "Verification link has expired."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:108
+msgid "Please verify your account from the email we sent before signing in."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:115
+msgid "Your account is awaiting manual approval."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:129
+msgid "Invalid username/email or password."
+msgstr ""
+
+#: app/Services/UserVerificationService.php:160
+msgid "Verified"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:161
+msgid "Pending email verification"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:162
+msgid "Pending manual approval"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:166
+msgid "FormGent account verification"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:169
+msgid "Verification status"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:175
+msgid "Mark this user as verified"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:228
+msgid "Verify your account"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:268
+msgid "Hi {{user_name}},"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:268
+msgid "Please verify your account by clicking the link below:"
+msgstr ""
+
+#: app/Services/UserVerificationService.php:268
+msgid "Verify account"
 msgstr ""
 
 #: app/Widgets/Form.php:33
@@ -1500,6 +1689,41 @@ msgstr ""
 
 #: assets/blocks/google-map/render.php:53
 msgid "Google Maps API key is not configured. Please configure it in the Global Settings."
+msgstr ""
+
+#: assets/blocks/login-password/render.php:42
+#: assets/blocks/login-password/index.js:1
+msgid "Toggle password visibility"
+msgstr ""
+
+#. translators: %s: user display name
+#: assets/blocks/login/render.php:33
+#, php-format
+msgid "You are already logged in as %s."
+msgstr ""
+
+#: assets/blocks/login/render.php:38
+msgid "Log out"
+msgstr ""
+
+#: assets/blocks/password/render.php:38
+msgid "Use at least 6 characters."
+msgstr ""
+
+#: assets/blocks/password/render.php:41
+msgid "Use at least 10 characters with uppercase, lowercase, a number, and a symbol."
+msgstr ""
+
+#: assets/blocks/password/render.php:45
+msgid "Use at least 8 characters with letters and a number."
+msgstr ""
+
+#: assets/blocks/password/render.php:83
+msgid "Show or hide password"
+msgstr ""
+
+#: assets/blocks/password/render.php:136
+msgid "Show or hide confirm password"
 msgstr ""
 
 #: assets/blocks/payment-summary/render.php:23
@@ -1546,12 +1770,12 @@ msgstr ""
 msgid "Add another"
 msgstr ""
 
-#: resources/views/form.php:82
+#: resources/views/form.php:96
 #: resources/views/submit-button.php:25
 msgid "Submit"
 msgstr ""
 
-#: resources/views/form.php:83
+#: resources/views/form.php:97
 msgid "You will be redirected in"
 msgstr ""
 
@@ -1690,14 +1914,19 @@ msgstr ""
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/repeater/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/text/index.js:1
@@ -1717,15 +1946,23 @@ msgstr ""
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/repeater/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/submit-button/index.js:1
@@ -1746,15 +1983,23 @@ msgstr ""
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/next-button/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/repeater/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/submit-button/index.js:1
@@ -1775,14 +2020,19 @@ msgstr ""
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/repeater/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/text/index.js:1
@@ -1799,13 +2049,18 @@ msgstr ""
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/repeater/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/text/index.js:1
@@ -2240,8 +2495,12 @@ msgstr ""
 #: assets/blocks/email/index.js:1
 #: assets/blocks/file-upload/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-remember-me/index.js:1
+#: assets/blocks/login-username/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
@@ -2277,7 +2536,10 @@ msgstr ""
 #: assets/blocks/email/index.js:1
 #: assets/blocks/google-map/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-username/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/phone-number/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/text/index.js:1
@@ -2291,6 +2553,7 @@ msgstr ""
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
 #: assets/blocks/number/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/text/index.js:1
@@ -2304,6 +2567,12 @@ msgstr ""
 #: assets/blocks/dropdown/index.js:1
 #: assets/blocks/file-upload/index.js:1
 #: assets/blocks/input-masking/index.js:1
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-password/index.js:1
+#: assets/blocks/login-remember-me/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/login-username/index.js:1
+#: assets/blocks/login/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/name/index.js:1
 #: assets/blocks/number/index.js:1
@@ -2314,6 +2583,8 @@ msgstr ""
 #: assets/blocks/quantity/index.js:1
 #: assets/blocks/range-slider/index.js:1
 #: assets/blocks/rating/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+#: assets/blocks/register/index.js:1
 #: assets/blocks/single-choice/index.js:1
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/website/index.js:1
@@ -2324,6 +2595,7 @@ msgstr ""
 #: assets/blocks/email/index.js:1
 #: assets/blocks/file-upload/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/password/index.js:1
 #: assets/blocks/payment-item/index.js:1
 #: assets/blocks/single-choice/index.js:1
 msgid "Type sub label here (optional)"
@@ -2762,6 +3034,7 @@ msgid "Enable Confirmation Field"
 msgstr ""
 
 #: assets/blocks/email/index.js:1
+#: assets/blocks/password/index.js:1
 msgid "Confirm Field Placeholder"
 msgstr ""
 
@@ -2770,6 +3043,7 @@ msgid "Show Email Icon"
 msgstr ""
 
 #: assets/blocks/email/index.js:1
+#: assets/blocks/password/index.js:1
 msgid "Type your question"
 msgstr ""
 
@@ -2938,6 +3212,64 @@ msgstr ""
 
 #: assets/blocks/input-masking/index.js:1
 msgid "00000"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Prefix Text"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "URL"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Suffix Text"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Text Alignment"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Center"
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+msgid "Prefix text..."
+msgstr ""
+
+#: assets/blocks/login-forgot-password/index.js:1
+msgid "Forgot Password?"
+msgstr ""
+
+#: assets/blocks/login-password/index.js:1
+msgid "Enable Password Visibility Toggle"
+msgstr ""
+
+#: assets/blocks/login-remember-me/index.js:1
+msgid "Remember Me"
+msgstr ""
+
+#: assets/blocks/login-signup-link/index.js:1
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Link Text"
+msgstr ""
+
+#: assets/blocks/login-signup-link/index.js:1
+msgid "Don't have an account?"
+msgstr ""
+
+#: assets/blocks/login-signup-link/index.js:1
+msgid "Sign Up"
 msgstr ""
 
 #: assets/blocks/multiple-choice/index.js:1
@@ -3137,6 +3469,30 @@ msgstr ""
 #: assets/blocks/page-break/index.js:1
 #: assets/blocks/submit-button/index.js:2
 msgid "Next"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Enable Password Strength"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Minimum Strength"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Weak"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Medium"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Strong"
+msgstr ""
+
+#: assets/blocks/password/index.js:1
+msgid "Enable Password Confirmation"
 msgstr ""
 
 #: assets/blocks/payment-item/index.js:1
@@ -3382,6 +3738,14 @@ msgstr ""
 #: assets/blocks/rating/index.js:1
 #, js-format
 msgid "%s/%s"
+msgstr ""
+
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Already have an account?"
+msgstr ""
+
+#: assets/blocks/register-signin-link/index.js:1
+msgid "Sign In"
 msgstr ""
 
 #: assets/blocks/single-choice/index.js:1

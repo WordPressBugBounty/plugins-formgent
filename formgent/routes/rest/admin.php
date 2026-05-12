@@ -19,6 +19,7 @@ use FormGent\App\Http\Controllers\Admin\FormController;
 use FormGent\App\Http\Controllers\Admin\AnalyticsController;
 use FormGent\App\Http\Controllers\Admin\ZohoCRMController;
 use FormGent\App\Http\Controllers\Admin\ZohoCRMFeedController;
+use FormGent\App\Http\Controllers\Admin\UserRegistrationController;
 use FormGent\App\Http\Controllers\Admin\PdfResourcesController;
 use FormGent\App\Http\Controllers\Admin\PdfController;
 use FormGent\WpMVC\Routing\Route;
@@ -68,6 +69,15 @@ Route::group(
                                 Route::delete( '/{feed_id}', [ MailchimpController::class, 'delete' ] );
                                 Route::patch( '/{feed_id}', [ MailchimpController::class, 'update' ] );
                                 Route::patch( '/{feed_id}/status', [ MailchimpController::class, 'update_status' ] );
+                            }
+                        );
+
+                        Route::group(
+                            'user-registrations', function() {
+                                Route::get( '/', [ UserRegistrationController::class, 'index' ] );
+                                Route::post( '/', [ UserRegistrationController::class, 'store' ] );
+                                Route::patch( '/{registration_id}', [ UserRegistrationController::class, 'update' ] );
+                                Route::delete( '/{registration_id}', [ UserRegistrationController::class, 'delete' ] );
                             }
                         );
 

@@ -130,9 +130,10 @@ class Form {
             }
 
             $block_name = $parsed_block['blockName'];
+            $attrs      = $parsed_block['attrs'] ?? [];
 
             if ( $allowed_core_blocks && in_array( $block_name, ['core/heading'], true ) ) { // core/paragraph
-                $attributes               = $parsed_block['attrs'];
+                $attributes               = $attrs;
                 $attributes['field_type'] = explode( '/', $block_name )[1];
 
                 if ( isset( $attributes[$array_key] ) ) {
@@ -150,7 +151,7 @@ class Form {
             // Merge default attributes with actual block attributes
             $attributes = array_merge(
                 $this->get_default_attributes( $block_name, $registered_blocks ),
-                $parsed_block['attrs']
+                $attrs
             );
 
             // Remove UI-only fields if required
@@ -161,7 +162,10 @@ class Form {
             }
 
             $field_type  = $blocks[$block_name]['field_type'];
-            $setting_key = $attributes[$array_key];
+            $setting_key = $attributes[$array_key] ?? null;
+            if ( null === $setting_key ) {
+                continue;
+            }
 
             $attributes['field_type'] = $field_type;
             $settings[$setting_key]   = $attributes;
@@ -197,6 +201,7 @@ class Form {
 
         foreach ( $parsed_blocks as $parsed_block ) {
             $block_name = $parsed_block['blockName'] ?? null;
+            $attrs      = $parsed_block['attrs'] ?? [];
 
             if ( ! $block_name || in_array( $block_name, ['formgent/submit-button', 'formgent/next-button', 'formgent/info'], true ) ) {
                 continue;
@@ -205,14 +210,14 @@ class Form {
             // Capture core/heading as fallback label for next field
             if ( ! isset( $blocks[$block_name] ) ) {
                 if ( ! $remove_label && 'core/heading' === $block_name ) {
-                    $last_label = wp_strip_all_tags( $parsed_block['innerHTML'] );
+                    $last_label = wp_strip_all_tags( $parsed_block['innerHTML'] ?? '' );
                 }
                 continue;
             }
 
             $attributes = array_merge(
                 $this->get_default_attributes( $block_name, $registered_blocks ),
-                $parsed_block['attrs']
+                $attrs
             );
 
             if ( $remove_label ) {
@@ -230,7 +235,10 @@ class Form {
 
             // Ensure only first step is visible by default
             if ( in_array( $field_type, ['step', 'welcome', 'end'], true ) ) {
-                $setting_key = $attributes['id'];
+                $setting_key = $attributes['id'] ?? null;
+                if ( null === $setting_key ) {
+                    continue;
+                }
 
                 if ( 0 === $i ) {
                     $attributes['show'] = true;
@@ -239,7 +247,10 @@ class Form {
                 }
                 $i++;
             } else {
-                $setting_key = $attributes[$array_key];
+                $setting_key = $attributes[$array_key] ?? null;
+                if ( null === $setting_key ) {
+                    continue;
+                }
             }
 
             $attributes['field_type'] = $field_type;
@@ -255,17 +266,25 @@ class Form {
     }
 
     /**
-     * Check if form has inline submit button or page-break blocks
+     * Check if form has inline submit, login, or page-break blocks.
      *
      * @param array $blocks Parsed blocks from post content
-     * @return bool True if inline submit button or page-break blocks exist
+     * @return bool True if those blocks exist (floating default submit not needed).
      */
     public function has_inline_submit_button_or_page_break( $blocks ) {
+        if ( ! is_array( $blocks ) ) {
+            return false;
+        }
+
         foreach ( $blocks as $parsed_block ) {
+            if ( empty( $parsed_block['blockName'] ) ) {
+                continue;
+            }
+
             $block_name = $parsed_block['blockName'];
 
-            // Check for submit button or page-break blocks
-            if ( in_array( $block_name, ['formgent/submit-button', 'formgent/page-break'], true ) ) {
+            // Submit / login / paging: no floating default submit needed.
+            if ( in_array( $block_name, ['formgent/submit-button', 'formgent/page-break', 'formgent/login'], true ) ) {
                 return true;
             }
 
@@ -278,5 +297,103 @@ class Form {
         }
 
         return false;
+    }
+
+    /**
+     * Check if parsed blocks contain a specific block type.
+     *
+     * @param array $blocks Parsed blocks from post content
+     * @param string $block_name Block name to search for
+     * @return bool True if block exists
+     */
+    public function parsed_blocks_contain( $blocks, $block_name ) {
+        if ( ! is_array( $blocks ) ) {
+            return false;
+        }
+
+        foreach ( $blocks as $parsed_block ) {
+            if ( empty( $parsed_block['blockName'] ) ) {
+                continue;
+            }
+
+            if ( $parsed_block['blockName'] === $block_name ) {
+                return true;
+            }
+
+            // Check inner blocks recursively
+            if ( ! empty( $parsed_block['innerBlocks'] ) ) {
+                if ( $this->parsed_blocks_contain( $parsed_block['innerBlocks'], $block_name ) ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Strip inline submit buttons when login form is present.
+     *
+     * @param string $post_content The post content
+     * @return string Modified post content
+     */
+    public function strip_inline_submit_when_login_form( $post_content ) {
+        // Parse blocks
+        $blocks = parse_blocks( $post_content );
+
+        // Filter blocks to remove submit buttons outside login blocks
+        $filtered_blocks = $this->filter_blocks_remove_submit_outside_login( $blocks );
+
+        // Serialize back to content
+        return serialize_blocks( $filtered_blocks );
+    }
+
+    /**
+     * Recursively filter blocks to remove submit buttons outside login blocks.
+     *
+     * @param array $blocks Parsed blocks
+     * @param bool $inside_login Whether we're currently inside a login block
+     * @return array Filtered blocks
+     */
+    protected function filter_blocks_remove_submit_outside_login( $blocks, $inside_login = false ) {
+        $filtered = [];
+
+        foreach ( $blocks as $block ) {
+            // Handle HTML content blocks (null blockName)
+            if ( empty( $block['blockName'] ) ) {
+                $filtered[] = $block;
+                continue;
+            }
+
+            $block_name = $block['blockName'];
+
+            // Check if we're entering a login block
+            $is_login_block = ( $block_name === 'formgent/login' );
+            if ( $is_login_block ) {
+                $inside_login = true;
+            }
+
+            // Remove submit button if we're not inside login block
+            if ( $block_name === 'formgent/submit-button' && ! $inside_login ) {
+                continue; // Skip this block (don't add to filtered)
+            }
+
+            // Process inner blocks recursively
+            if ( ! empty( $block['innerBlocks'] ) ) {
+                $block['innerBlocks'] = $this->filter_blocks_remove_submit_outside_login(
+                    $block['innerBlocks'],
+                    $inside_login
+                );
+            }
+
+            $filtered[] = $block;
+
+            // Reset inside_login after processing login block
+            if ( $is_login_block ) {
+                $inside_login = false;
+            }
+        }
+
+        return $filtered;
     }
 }

@@ -106,8 +106,15 @@ class ResponseController extends Controller {
         $gate_result = apply_filters( 'formgent_before_store_form_response', true, $response, $form, $request );
 
         if ( is_wp_error( $gate_result ) ) {
+            $error_data = $gate_result->get_error_data();
+            $payload    = [ 'message' => $gate_result->get_error_message() ];
+
+            if ( is_array( $error_data ) && ! empty( $error_data['errors'] ) ) {
+                $payload['errors'] = $error_data['errors'];
+            }
+
             return Response::send(
-                [ 'message' => $gate_result->get_error_message() ],
+                $payload,
                 $gate_result->get_error_code() && is_numeric( $gate_result->get_error_code() ) ? (int) $gate_result->get_error_code() : 403
             );
         }
@@ -224,6 +231,11 @@ class ResponseController extends Controller {
                     $parent_field_names[] = $dto->get_field_name();
                 }
 
+                if ( 'password' === $field['field_type'] ) {
+                    // Do not store password fields in the answers table.
+                    continue;
+                }
+
                 $field_dtos[$field['name']] = $dto;
 
             } catch ( Exception $exception ) {
@@ -325,6 +337,11 @@ class ResponseController extends Controller {
                 // Validate the field and create its DTO.
                 $field_handler->validate( $field, $children_request, $validator, $form );
                 $dto = $field_handler->get_field_dto( $field, $children_request, $form );
+
+                if ( 'password' === $field['field_type'] ) {
+                    // Do not store password fields in the answers table.
+                    continue;
+                }
 
                 $field_dtos[$field['name']] = $dto;
 

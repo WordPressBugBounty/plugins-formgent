@@ -11,7 +11,7 @@
             />
             <label for="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>" class="formgent-field-label">
                 <span class="formgent-field-gdpr-checkbox">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <?php formgent_render_icon( 'check-thin', 'general' ); ?>
                 </span>
                 <span class="formgent-field-sub-label">
                     <?php echo wp_kses_post( $attributes['description'] ); ?>

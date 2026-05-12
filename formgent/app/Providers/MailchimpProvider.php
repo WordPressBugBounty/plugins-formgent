@@ -6,6 +6,7 @@ defined( "ABSPATH" ) || exit;
 
 use Exception;
 use stdClass;
+use Throwable;
 use FormGent\App\DTO\QueueDTO;
 use FormGent\App\DTO\AnswerFieldDTO;
 use FormGent\WpMVC\Contracts\Provider;
@@ -79,7 +80,7 @@ class MailchimpProvider implements Provider {
         try {
             $this->process_feed( $feed, $queue->response_id );
             $callback( QueueStatus::COMPLETED );
-        } catch ( Exception $e ) {
+        } catch ( Throwable $e ) {
             $callback( QueueStatus::FAILED );
         }
     }
@@ -103,9 +104,12 @@ class MailchimpProvider implements Provider {
 
         $data = [
             'email_address' => $email,
-            'merge_fields'  => $merge_fields,
             'vip'           => '1' === strval( $feed->mark_as_vip ),
         ];
+
+        if ( ! empty( $merge_fields ) ) {
+            $data['merge_fields'] = $merge_fields;
+        }
 
         $this->add_list_member( $feed, $email, $data );
     }
@@ -202,6 +206,12 @@ class MailchimpProvider implements Provider {
             $data['tags'] = $tags;
         }
 
+        if ( ! empty( $feed->group_option_id ) ) {
+            $data['interests'] = [
+                $feed->group_option_id => true,
+            ];
+        }
+
         $member_exists = $this->mailchimp->is_exists_list_member( $feed->list_id, $email );
 
         if ( $member_exists ) {
@@ -217,7 +227,14 @@ class MailchimpProvider implements Provider {
             }
 
             if ( $resubscribe_existing_contact ) {
-                $this->mailchimp->update_list_member( $feed->list_id, [ 'status' => 'subscribed' ], true );
+                $this->mailchimp->update_list_member(
+                    $feed->list_id,
+                    [
+                        'email_address' => $email,
+                        'status'        => 'subscribed',
+                    ],
+                    true
+                );
             }
         } else {
             $data['status'] = '1' === strval( $feed->double_opt_in ) ? 'pending' : 'subscribed';

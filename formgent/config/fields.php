@@ -21,6 +21,9 @@ use FormGent\App\Fields\SingleChoice\SingleChoice;
 use FormGent\App\Fields\TextArea\TextArea;
 use FormGent\App\Fields\Text\Text;
 use FormGent\App\Fields\Website\Website;
+use FormGent\App\Fields\Login\Login;
+use FormGent\App\Fields\Password\Password;
+use FormGent\App\Fields\Register\Register;
 
 return apply_filters(
     'formgent_fields', [
@@ -116,6 +119,21 @@ return apply_filters(
         ],
         DatePicker::get_key()     => [
             'class'                     => DatePicker::class,
+            'allowed_in_response'       => true,
+            'allowed_in_response_table' => true,
+        ],
+        Login::get_key()          => [
+            'class'                     => Login::class,
+            'allowed_in_response'       => false,
+            'allowed_in_response_table' => false,
+        ],
+        Password::get_key()       => [
+            'class'                     => Password::class,
+            'allowed_in_response'       => true,
+            'allowed_in_response_table' => false,
+        ],
+        Register::get_key()       => [
+            'class'                     => Register::class,
             'allowed_in_response'       => true,
             'allowed_in_response_table' => true,
         ],

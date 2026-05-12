@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/register",
+  "title": "Register",
+  "category": "formgent",
+  "description": "Add a pre-built registration field group (name, username, email, password).",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "name": {
+      "type": "string",
+      "default": "register"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "label": {
+      "type": "string",
+      "default": "Register"
+    },
+    "logics": {
+      "type": "object",
+      "default": {}
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "multiple": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

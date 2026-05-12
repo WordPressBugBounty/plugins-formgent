@@ -34,6 +34,18 @@ wp_localize_script(
             'status'   => ! empty( $payment_settings['status'] ),
             'gateways' => $payment_gateway_statuses,
         ],
+        'ajax_url'            => admin_url( 'admin-ajax.php' ),
+        'login_nonce'         => wp_create_nonce( 'formgent_login_nonce' ),
+        'register_nonce'      => wp_create_nonce( 'formgent_register_nonce' ),
+        'i18n'                => [
+            'login_username_required' => esc_html__( 'Please enter your email or username.', 'formgent' ),
+            'login_password_required' => esc_html__( 'Please enter your password.', 'formgent' ),
+            'login_success'           => esc_html__( 'Login successful.', 'formgent' ),
+            'login_failed'            => esc_html__( 'Login failed. Please try again.', 'formgent' ),
+            'register_success'        => esc_html__( 'Registration successful.', 'formgent' ),
+            'register_failed'         => esc_html__( 'Registration failed. Please try again.', 'formgent' ),
+            'generic_error'           => esc_html__( 'An error occurred. Please try again.', 'formgent' ),
+        ],
     ]
 );
 

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/login-signup-link",
+  "title": "Login Signup Link",
+  "category": "formgent",
+  "description": "Sign Up link for the login block.",
+  "textdomain": "formgent",
+  "parent": [
+    "formgent/login"
+  ],
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "login_signup_link"
+    },
+    "prefix_text": {
+      "type": "string",
+      "default": "Don't have an account?"
+    },
+    "link_text": {
+      "type": "string",
+      "default": "Sign Up"
+    },
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "suffix_text": {
+      "type": "string",
+      "default": ""
+    },
+    "text_alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

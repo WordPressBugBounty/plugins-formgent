@@ -15,10 +15,18 @@ wp_enqueue_script( 'formgent/jquery-input-mask' );
 wp_enqueue_script_module( 'formgent/blocks-frontend' );
 
 $form_type       = formgent_get_form_type( $form->ID );
-$blocks          = parse_blocks( $form->post_content );
+$post_content    = (string) $form->post_content;
+$blocks          = parse_blocks( $post_content );
 $form->form_type = $form_type;
 
-$form_helper = new Form;
+$form_helper    = new Form;
+$has_login_form = $form_helper->parsed_blocks_contain( $blocks, 'formgent/login' );
+
+// If a Login block exists, never render/append any submit buttons.
+if ( $has_login_form ) {
+    $post_content = $form_helper->strip_inline_submit_when_login_form( $post_content );
+    $blocks       = parse_blocks( $post_content );
+}
 
 if ( 'conversational' === $form_type ) {
     $data = $form_helper->get_conversational_form_field_settings( $blocks, true );
@@ -52,6 +60,12 @@ if ( 'page' === $confirmation['type'] ) {
 if ( 'conversational' !== $form_type ) {
     unset( $confirmation['message'] );
 }
+
+// Conversational login forms reuse the classic frontend initializer because the
+// login AJAX submit flow is implemented there rather than in step navigation.
+$frontend_init_callback = ( 'conversational' === $form_type && ! $has_login_form )
+    ? 'initConversationalForm'
+    : 'initClassicForm';
 
 $context = apply_filters(
     'formgent_form_context',
@@ -152,7 +166,7 @@ $form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $
     ?>
         data-wp-interactive="formgent/form"
         data-wp-context='<?php echo esc_attr( wp_json_encode( $context, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_APOS | JSON_HEX_AMP ) ); ?>'
-        data-wp-init="callbacks.<?php echo ( 'conversational' !== $form_type ? 'initClassicForm' : 'initConversationalForm' ) ?>"
+        data-wp-init="callbacks.<?php echo esc_attr( $frontend_init_callback ); ?>"
         data-wp-bind--disabled="context.global.is_response_submitting" data-wp-watch="callbacks.watchForm">
         <?php
         do_action( 'formgent_form_top', $form, $context );
@@ -173,7 +187,7 @@ $form_id_class = empty( $suppress_form_id_class ) ? 'formgent-form-' . absint( $
             data-wp-class--formgent-partial-submitting="!context.is_partial_submitting">
             <?php
             //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo do_blocks( $form->post_content );
+            echo do_blocks( $post_content );
             ?>
 
             <?php if ( $show_custom_submit_button ) { ?>

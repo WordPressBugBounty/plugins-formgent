@@ -8,6 +8,7 @@ use FormGent\App\Http\Controllers\ZapierController;
 use FormGent\App\Http\Controllers\AnalyticsController;
 use FormGent\App\Http\Controllers\ResponseController;
 use FormGent\App\Http\Controllers\UserController;
+use FormGent\App\Http\Controllers\UserVerificationController;
 use FormGent\App\Http\Controllers\AttachmentController;
 // use FormGent\App\Http\Controllers\FormController;
 use FormGent\WpMVC\Routing\Route;
@@ -32,6 +33,7 @@ Route::group(
 
 Route::post( 'responses/generate-token', [ResponseController::class, 'generate_token'] );
 Route::get( 'countries', [UserController::class, 'get_countries'] );
+Route::get( 'user-verification/confirm', [UserVerificationController::class, 'confirm'] );
 // Route::get( 'forms/{id}', [FormController::class, 'show'] );
 
 Route::group(

@@ -25,14 +25,6 @@ class ResponseLogServiceProvider implements Provider {
 
     public function snapshot_before( int $response_id, \stdClass $form, WP_REST_Request $request ): void {
         self::$before_snapshots[ $response_id ] = $this->build_answer_map( $response_id );
-
-        // Guard: if write_log is never called (e.g. validation fails), clean up
-        // the snapshot on shutdown to prevent memory leaks and stale diffs.
-        register_shutdown_function(
-            function() use ( $response_id ) {
-                unset( self::$before_snapshots[ $response_id ] );
-            }
-        );
     }
 
     public function write_log( int $response_id, \stdClass $form, WP_REST_Request $request ): void {

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/login-forgot-password",
+  "title": "Login Forgot Password",
+  "category": "formgent",
+  "description": "Forgot Password link for the login block.",
+  "textdomain": "formgent",
+  "parent": [
+    "formgent/login"
+  ],
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "login_forgot_password"
+    },
+    "prefix_text": {
+      "type": "string",
+      "default": ""
+    },
+    "link_text": {
+      "type": "string",
+      "default": "Forgot Password?"
+    },
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "suffix_text": {
+      "type": "string",
+      "default": ""
+    },
+    "text_alignment": {
+      "type": "string",
+      "default": "right"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "50"
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

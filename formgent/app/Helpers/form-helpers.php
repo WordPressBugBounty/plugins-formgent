@@ -377,6 +377,10 @@ function formgent_get_preset_values( int $form_id ): array {
         'embedded_post_title' => $embed_post instanceof WP_Post ? $embed_post->post_title : '',
         'current_date'        => $now->format( 'm/d/Y' ),
         'admin_name'          => $admin_user ? sanitize_text_field( $admin_user->display_name ) : '',
+        'login_url'           => esc_url_raw( wp_login_url() ),
+        'register_url'        => esc_url_raw( wp_registration_url() ),
+        'forgot_password_url' => esc_url_raw( wp_lostpassword_url() ),
+        'logout_url'          => esc_url_raw( wp_logout_url() ),
     ];
 
     if ( $current_user ) {

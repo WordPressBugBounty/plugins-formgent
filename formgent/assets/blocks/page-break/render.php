@@ -20,9 +20,7 @@ if ( empty( $settings ) ) {
                 class="formgent-btn formgent-btn-md formgent-btn-<?php echo esc_attr( $settings['back_button_style'] ); ?>"
                 data-wp-on--click="actions.multiStepPrev"
             >
-                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <?php formgent_render_icon( 'arrow-left', 'general' ) ?>
                 <?php echo wp_kses_post( $attributes['back_button_text'] ); ?>
             </button>
         </div>
@@ -38,9 +36,7 @@ if ( empty( $settings ) ) {
                 data-wp-on--click="actions.multiStepNext"
             >
                 <span data-wp-text="state.nextButtonText"><?php echo wp_kses_post( $attributes['next_button_text'] ); ?></span>
-                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <?php formgent_render_icon( 'arrow-right', 'general' ) ?>
             </button>
         </div>
         <div

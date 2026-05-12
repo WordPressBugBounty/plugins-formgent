@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/login-password",
+  "title": "Login Password",
+  "category": "formgent",
+  "description": "Password field for the login block.",
+  "textdomain": "formgent",
+  "parent": [
+    "formgent/login"
+  ],
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "login_password"
+    },
+    "label": {
+      "type": "string",
+      "default": "Password"
+    },
+    "label_alignment": {
+      "type": "string",
+      "default": "top"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": ""
+    },
+    "required": {
+      "type": "boolean",
+      "default": true
+    },
+    "enable_password_visibility_toggle": {
+      "type": "boolean",
+      "default": true
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

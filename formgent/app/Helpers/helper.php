@@ -56,8 +56,12 @@ function formgent_dir( string $dir = '' ) {
     return formgent()->get_dir( $dir );
 }
 
-function formgent_render_icon( string $icon ) {
-    $svg = formgent_dir( "resources/blocks-icon/{$icon}.svg" );
+function formgent_render_icon( string $icon, string $path_type = 'blocks-icon' ) {
+    $dir = $path_type === 'blocks-icon'
+        ? 'blocks-icon'
+        : 'svg/icons';
+
+    $svg = formgent_dir( "resources/{$dir}/{$icon}.svg" );
 
     if ( ! is_file( $svg ) ) {
         return;
@@ -239,7 +243,7 @@ function formgent_is_form_visible( Wp_Post $form ) {
 
     // Get the current user object
     $current_user = wp_get_current_user();
-    
+
     // Check if the user has either 'administrator' or 'editor' role
     if ( in_array( 'administrator', $current_user->roles ) || in_array( 'editor', $current_user->roles ) ) {
         return true;
@@ -281,7 +285,7 @@ function formgent_is_mailchimp_enabled() {
 }
 
 function formgent_is_passed_conditional_logic( ResponseDTO $response, int $condition_status, string $logical_type, string $conditions ): bool {
-    /** 
+    /**
      * @var FormPresetFieldRepository $form_preset_field_repository
      */
     $form_preset_field_repository = formgent_singleton( FormPresetFieldRepository::class );

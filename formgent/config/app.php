@@ -20,11 +20,16 @@ use FormGent\App\Providers\WPMLCompatibilityProvider;
 use FormGent\App\Providers\MailchimpProvider;
 use FormGent\App\Providers\ZohoCRMServiceProvider;
 use FormGent\App\Providers\DirectoristScriptProvider;
+use FormGent\App\Providers\LoginRegistrationRedirectServiceProvider;
+use FormGent\App\Providers\UserRegistrationServiceProvider;
+use FormGent\App\Providers\UserVerificationServiceProvider;
 use FormGent\WpMVC\Helpers\Helpers;
 use FormGent\Database\Migration\V122 as V122Migration;
 use FormGent\Database\Migration\V123 as V123Migration;
 use FormGent\Database\Migration\V124 as V124Migration;
 use FormGent\App\Providers\ResponseLogServiceProvider;
+use FormGent\App\Providers\LoginServiceProvider;
+use FormGent\App\Providers\RegisterServiceProvider;
 use FormGent\App\Providers\PdfCleanupServiceProvider;
 
 return [
@@ -46,6 +51,7 @@ return [
         BlockServiceProvider::class,
         PostTypeServiceProvider::class,
         EmailNotificationServiceProvider::class,
+        LoginRegistrationRedirectServiceProvider::class,
         FileUploadServiceProvider::class,
         SpreadsheetServiceProvider::class,
         PaymentServiceProvider::class,
@@ -57,6 +63,10 @@ return [
         QueueServiceProvider::class,
         DirectoristScriptProvider::class,
         ResponseLogServiceProvider::class,
+        UserRegistrationServiceProvider::class,
+        UserVerificationServiceProvider::class,
+        LoginServiceProvider::class,
+        RegisterServiceProvider::class,
         PdfCleanupServiceProvider::class,
     ],
 

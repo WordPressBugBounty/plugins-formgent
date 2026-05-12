@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/register-signin-link",
+  "title": "Register Signin Link",
+  "category": "formgent",
+  "description": "Sign In link for the register block.",
+  "textdomain": "formgent",
+  "parent": [
+    "formgent/register"
+  ],
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "register_signin_link"
+    },
+    "prefix_text": {
+      "type": "string",
+      "default": "Already have an account?"
+    },
+    "link_text": {
+      "type": "string",
+      "default": "Sign In"
+    },
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "suffix_text": {
+      "type": "string",
+      "default": ""
+    },
+    "text_alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "inserter": false,
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

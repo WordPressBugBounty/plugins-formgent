@@ -100,9 +100,6 @@ class ResponseRepository {
 
         do_action( 'formgent_responses_count_query', $count_query, $dto );
 
-        // Apply sorting (sort_by takes precedence over order_by/order)
-        $this->all_responses_sort_query( $responses_query, $dto );
-
         $page     = max( 1, $dto->get_page() );
         $per_page = max( 1, $dto->get_per_page() );
         $offset   = ( $page - 1 ) * $per_page;
@@ -110,7 +107,7 @@ class ResponseRepository {
         // Get distinct response IDs first with proper pagination
         $ids_query = clone $responses_query;
 
-        // Apply sorting to IDs query
+        // Apply sorting only to the IDs query (not to responses_query before cloning)
         $this->all_responses_sort_query( $ids_query, $dto );
 
         $ids_results = $ids_query->select( 'response.id' )
@@ -238,84 +235,32 @@ class ResponseRepository {
     }
 
     private function all_responses_date_query( Builder $query, AllResponsesReadDTO $dto ) {
-        if ( empty( $dto->get_date_type() ) || 'all' === $dto->get_date_type() ) {
-            return $query;
-        }
-
-        $now              = formgent_now();
-        $from_date_format = "Y-m-d 00:00:01";
-        $to_date_format   = "Y-m-d 23:59:59";
-
-        $date_type  = $dto->get_date_type();
-        $date_frame = $dto->get_date_frame();
-
-        if ( 'today' === $date_type ) {
-            $today = $now->format( $from_date_format );
-            return $query->where_raw( "response.created_at >= '{$today}'" );
-        }
-
-        if ( 'date_frame' === $date_type ) {
-            /**
-             * Checking if the date is valid and the date format is correct.
-             */
-            $date_format = "Y-m-d"; // Validate against date only
-
-            if ( empty( $date_frame['from'] ) ||
-                ! is_string( $date_frame['from'] ) ||
-                empty( $date_frame['to'] ) ||
-                ! is_string( $date_frame['to'] ) ||
-                ! formgent_is_valid_date( $date_frame['from'], $date_format ) ||
-                ! formgent_is_valid_date( $date_frame['to'], $date_format )
-            ) {
-                return $query;
-            }
-
-            // Append time portion for SQL query
-            $from = sanitize_text_field( $date_frame['from'] ) . ' 00:00:01';
-            $to   = sanitize_text_field( $date_frame['to'] ) . ' 23:59:59';
-        } else {
-            switch ( $date_type ) {
-                case 'yesterday':
-                    $date = $now->sub_days( 1 );
-                    break;
-                case 'last_week':
-                    $date = $now->sub_days( 6 );
-                    break;
-                case 'last_month':
-                    $date = $now->sub_days( 30 );
-                    break;
-                default:
-                    return $query;
-            }
-            $from = $date->format( $from_date_format );
-            $to   = formgent_now()->format( $to_date_format );
-        }
-
-        return $query->where_raw( "response.created_at >= '{$from}' AND response.created_at <= '{$to}'" );
+        return $this->apply_date_filter( $query, $dto->get_date_type(), $dto->get_date_frame() );
     }
 
     private function responses_date_query( Builder $query, ResponseReadDTO $dto ) {
-        if ( empty( $dto->get_date_type() ) || 'all' === $dto->get_date_type() ) {
+        return $this->apply_date_filter( $query, $dto->get_date_type(), $dto->get_date_frame() );
+    }
+
+    private function apply_date_filter( Builder $query, ?string $date_type, ?array $date_frame ): Builder {
+        if ( empty( $date_type ) || 'all' === $date_type ) {
             return $query;
         }
+
+        global $wpdb;
 
         $now              = formgent_now();
         $from_date_format = "Y-m-d 00:00:01";
         $to_date_format   = "Y-m-d 23:59:59";
 
-        $date_type  = $dto->get_date_type();
-        $date_frame = $dto->get_date_frame();
-
         if ( 'today' === $date_type ) {
             $today = $now->format( $from_date_format );
-            return $query->where_raw( "response.created_at >= '{$today}'" );
+            return $query->where_raw( $wpdb->prepare( "response.created_at >= %s", $today ) );
         }
 
         if ( 'date_frame' === $date_type ) {
-            /**
-             * Checking if the date is valid and the date format is correct.
-             */
-            $date_format = "Y-m-d"; // Validate against date only
+            $date_format = "Y-m-d";
+            $date_frame  = is_array( $date_frame ) ? $date_frame : [];
 
             if ( empty( $date_frame['from'] ) ||
                 ! is_string( $date_frame['from'] ) ||
@@ -327,7 +272,6 @@ class ResponseRepository {
                 return $query;
             }
 
-            // Append time portion for SQL query
             $from = sanitize_text_field( $date_frame['from'] ) . ' 00:00:01';
             $to   = sanitize_text_field( $date_frame['to'] ) . ' 23:59:59';
         } else {
@@ -348,7 +292,7 @@ class ResponseRepository {
             $to   = formgent_now()->format( $to_date_format );
         }
 
-        return $query->where_raw( "response.created_at >= '{$from}' AND response.created_at <= '{$to}'" );
+        return $query->where_raw( $wpdb->prepare( "response.created_at >= %s AND response.created_at <= %s", $from, $to ) );
     }
 
     private function all_responses_sort_query( Builder $query, AllResponsesReadDTO $dto ) {
