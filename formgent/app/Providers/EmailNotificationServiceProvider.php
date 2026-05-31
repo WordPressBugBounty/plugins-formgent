@@ -110,7 +110,18 @@ class EmailNotificationServiceProvider implements Provider {
 
         $headers = apply_filters( 'formgent_email_headers', $headers, $email, $response, $form_answers_data, $queue );
 
-        wp_mail( $email->send_to, $email->subject, $email->body, $headers );
+        /**
+         * Filters the resolved email notification recipients before sending.
+         *
+         * @param string|string[] $send_to          Resolved email recipients.
+         * @param stdClass         $email            Email notification settings.
+         * @param mixed            $response         Response DTO for the current submission.
+         * @param array            $form_answers_data Submission answers keyed by field.
+         * @param stdClass         $queue            Queue item being processed.
+         */
+        $send_to = apply_filters( 'formgent_email_send_to', $email->send_to, $email, $response, $form_answers_data, $queue );
+
+        wp_mail( $send_to, $email->subject, $email->body, $headers );
 
         $callback( QueueStatus::COMPLETED );
     }

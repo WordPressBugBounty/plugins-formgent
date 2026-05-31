@@ -47,15 +47,38 @@ class Base {
             return $client;
         }
 
+        $refresh_token = $client->getRefreshToken();
+
+        if ( empty( $refresh_token ) ) {
+            throw new Exception( "Authorization failed", 400 );
+        }
+
         $responses = wp_remote_get(
             add_query_arg(
                 [
-                    'refresh_token' => $client->getRefreshToken()
+                    'refresh_token' => $refresh_token
                 ], 'https://app.formgent.com/wp-json/formgent-google-sheet/refresh-token'
             )
         );
-        
-        $data             = json_decode( wp_remote_retrieve_body( $responses ), true )['data'];
+
+        if ( is_wp_error( $responses ) ) {
+            throw new Exception( "Authorization failed", 400 );
+        }
+
+        $data = json_decode( wp_remote_retrieve_body( $responses ), true )['data'] ?? [];
+
+        if ( ! is_array( $data ) || empty( $data['access_token'] ) ) {
+            throw new Exception( "Authorization failed", 400 );
+        }
+
+        if ( empty( $data['refresh_token'] ) ) {
+            $data['refresh_token'] = $refresh_token;
+        }
+
+        if ( empty( $data['created'] ) ) {
+            $data['created'] = time();
+        }
+
         $settings         = $this->settings_repository->get_by_key( 'google_sheet', [] );
         $settings['data'] = $data;
 

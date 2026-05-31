@@ -8,10 +8,10 @@ use FormGent\WpMVC\App;
 /**
  * Plugin Name:       FormGent
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.9.0
+ * Version:           1.9.1
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Tested up to:      6.9
+ * Tested up to:      7.0
  * Author:            wpWax - Contact Form Plugin & WP Form Builder
  * Author URI:        http://wpwax.com
  * License:           GPL v3 or later
