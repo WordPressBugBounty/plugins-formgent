@@ -190,7 +190,13 @@ class FieldValueResolver {
 
         switch ( $definition['field_type'] ) {
             case 'single-choice':
+                return esc_html( $this->resolve_choice_label( $definition, $value ) );
+
             case 'dropdown':
+                if ( ! empty( $definition['allow_multi_select'] ) ) {
+                    return $this->format_multiple_choice( $value, $definition );
+                }
+
                 return esc_html( $this->resolve_choice_label( $definition, $value ) );
 
             case 'multiple-choice':

@@ -71,6 +71,284 @@ function formgent_render_icon( string $icon, string $path_type = 'blocks-icon' )
     echo file_get_contents( $svg );
 }
 
+/**
+ * Allowed SVG tags and attributes for sanitizing inline icons.
+ *
+ * @return array<string, array<string, bool>>
+ */
+function formgent_allowed_svg_tags(): array {
+    return [
+        'svg'      => [
+            'xmlns'       => true,
+            'viewbox'     => true,
+            'width'       => true,
+            'height'      => true,
+            'fill'        => true,
+            'class'       => true,
+            'aria-hidden' => true,
+            'focusable'   => true,
+            'role'        => true,
+        ],
+        'path'     => [
+            'd'            => true,
+            'fill'         => true,
+            'fill-rule'    => true,
+            'clip-rule'    => true,
+            'stroke'       => true,
+            'stroke-width' => true,
+        ],
+        'circle'   => [
+            'cx'     => true,
+            'cy'     => true,
+            'r'      => true,
+            'fill'   => true,
+            'stroke' => true,
+        ],
+        'rect'     => [
+            'x'      => true,
+            'y'      => true,
+            'width'  => true,
+            'height' => true,
+            'rx'     => true,
+            'ry'     => true,
+            'fill'   => true,
+        ],
+        'g'        => [
+            'fill'      => true,
+            'transform' => true,
+        ],
+        'polyline' => [
+            'points' => true,
+            'fill'   => true,
+            'stroke' => true,
+        ],
+        'polygon'  => [
+            'points' => true,
+            'fill'   => true,
+        ],
+        'line'     => [
+            'x1'     => true,
+            'y1'     => true,
+            'x2'     => true,
+            'y2'     => true,
+            'stroke' => true,
+        ],
+        'defs'     => [],
+        'clippath' => [
+            'id' => true,
+        ],
+        'span'     => [
+            'class' => true,
+        ],
+    ];
+}
+
+function formgent_choice_option_image_size(): string {
+    return (string) apply_filters( 'formgent_choice_option_image_size', 'formgent-option-thumb' );
+}
+
+/**
+ * Image size used when rendering tiny choice/dropdown option thumbnails.
+ *
+ * @return array{width:int,height:int,crop:bool}
+ */
+function formgent_choice_option_image_size_args(): array {
+    $args = apply_filters(
+        'formgent_choice_option_image_size_args',
+        [
+            'width'  => 64,
+            'height' => 64,
+            'crop'   => true,
+        ]
+    );
+
+    return [
+        'width'  => max( 1, absint( $args['width'] ?? 64 ) ),
+        'height' => max( 1, absint( $args['height'] ?? 64 ) ),
+        'crop'   => (bool) ( $args['crop'] ?? true ),
+    ];
+}
+
+function formgent_get_choice_option_image_id( array $image ): int {
+    $image_id = absint( $image['id'] ?? 0 );
+
+    if ( $image_id ) {
+        return $image_id;
+    }
+
+    foreach ( [ $image['thumbnail'] ?? '', $image['url'] ?? '' ] as $image_url ) {
+        if ( empty( $image_url ) ) {
+            continue;
+        }
+
+        $image_id = attachment_url_to_postid( $image_url );
+
+        if ( $image_id ) {
+            return absint( $image_id );
+        }
+    }
+
+    return 0;
+}
+
+function formgent_get_attachment_intermediate_image_url( int $image_id, string $size ): string {
+    if ( ! $image_id || 'full' === $size || ! image_get_intermediate_size( $image_id, $size ) ) {
+        return '';
+    }
+
+    $image_url = wp_get_attachment_image_url( $image_id, $size );
+    return $image_url ? esc_url( $image_url ) : '';
+}
+
+function formgent_generate_choice_option_image_size( int $image_id, string $size ): string {
+    if ( ! $image_id || formgent_choice_option_image_size() !== $size ) {
+        return '';
+    }
+
+    $metadata = wp_get_attachment_metadata( $image_id );
+
+    if ( ! is_array( $metadata ) ) {
+        return '';
+    }
+
+    if ( ! empty( $metadata['sizes'][ $size ]['file'] ) ) {
+        return formgent_get_attachment_intermediate_image_url( $image_id, $size );
+    }
+
+    $file = get_attached_file( $image_id );
+
+    if ( ! $file || ! is_file( $file ) ) {
+        return '';
+    }
+
+    if ( ! function_exists( 'image_make_intermediate_size' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+    }
+
+    $size_args = formgent_choice_option_image_size_args();
+    $resized   = image_make_intermediate_size( $file, $size_args['width'], $size_args['height'], $size_args['crop'] );
+
+    if ( ! is_array( $resized ) || empty( $resized['file'] ) ) {
+        return '';
+    }
+
+    $metadata['sizes'][ $size ] = $resized;
+    wp_update_attachment_metadata( $image_id, $metadata );
+
+    return formgent_get_attachment_intermediate_image_url( $image_id, $size );
+}
+
+function formgent_get_choice_option_image_url( array $image, string $size = '' ): string {
+    $image_size = $size ?: formgent_choice_option_image_size();
+    $image_id   = formgent_get_choice_option_image_id( $image );
+
+    if ( $image_id ) {
+        $image_url = formgent_get_attachment_intermediate_image_url( $image_id, $image_size );
+
+        if ( ! $image_url ) {
+            $image_url = formgent_generate_choice_option_image_size( $image_id, $image_size );
+        }
+
+        if ( ! $image_url && 'thumbnail' !== $image_size ) {
+            $image_url = formgent_get_attachment_intermediate_image_url( $image_id, 'thumbnail' );
+        }
+
+        if ( $image_url ) {
+            return esc_url( $image_url );
+        }
+    }
+
+    return esc_url( $image['thumbnail'] ?? $image['url'] ?? '' );
+}
+
+function formgent_get_choice_option_media( array $option ): array {
+    $allowed_svg_tags = formgent_allowed_svg_tags();
+    $media            = [];
+
+    if ( ! empty( $option['icon'] ) && is_array( $option['icon'] ) && ! empty( $option['icon']['svg'] ) ) {
+        $media['icon'] = [
+            'name' => esc_attr( $option['icon']['name'] ?? '' ),
+            'svg'  => wp_kses( $option['icon']['svg'], $allowed_svg_tags ),
+        ];
+    }
+
+    if ( ! empty( $option['image'] ) && is_array( $option['image'] ) ) {
+        $image_url = formgent_get_choice_option_image_url( $option['image'] );
+
+        if ( $image_url ) {
+            $media['image'] = [
+                'id'        => absint( $option['image']['id'] ?? 0 ),
+                'url'       => esc_url( $option['image']['url'] ?? '' ),
+                'alt'       => esc_attr( $option['image']['alt'] ?? '' ),
+                'thumbnail' => $image_url,
+            ];
+        }
+    }
+
+    return $media;
+}
+
+function formgent_render_choice_option_media( array $option ): void {
+    $media = formgent_get_choice_option_media( $option );
+
+    if ( ! empty( $media['icon']['svg'] ) ) {
+        echo '<span class="formgent-option-icon">' . wp_kses( $media['icon']['svg'], formgent_allowed_svg_tags() ) . '</span>';
+        return;
+    }
+
+    if ( ! empty( $media['image']['thumbnail'] ) ) {
+        printf(
+            '<img class="formgent-option-image" src="%s" alt="%s" width="24" height="24" loading="lazy" decoding="async" />',
+            esc_url( $media['image']['thumbnail'] ),
+            esc_attr( $media['image']['alt'] ?? '' )
+        );
+    }
+}
+
+/**
+ * Sanitize choice options including icon SVG and image data.
+ *
+ * @param mixed $options
+ * @return array<int, array<string, mixed>>
+ */
+function formgent_sanitize_choice_options( $options ): array {
+    if ( empty( $options ) || ! is_array( $options ) ) {
+        return [];
+    }
+
+    return array_map(
+        static function( $option ) {
+            if ( ! is_array( $option ) ) {
+                return [];
+            }
+
+            $sanitized = map_deep(
+                array_diff_key( $option, array_flip( [ 'icon', 'image' ] ) ),
+                'esc_attr'
+            );
+
+            if ( ! empty( $option['icon'] ) && is_array( $option['icon'] ) ) {
+                $media = formgent_get_choice_option_media( $option );
+
+                if ( ! empty( $media['icon'] ) ) {
+                    $sanitized['icon'] = $media['icon'];
+                }
+            }
+
+            if ( ! empty( $option['image'] ) && is_array( $option['image'] ) ) {
+                $media = $media ?? formgent_get_choice_option_media( $option );
+
+                if ( ! empty( $media['image'] ) ) {
+                    $sanitized['image'] = $media['image'];
+                }
+            }
+
+            return $sanitized;
+        },
+        $options
+    );
+}
+
 function formgent_date_time_format() {
     return apply_filters( 'formgent_date_time_format', 'Y-m-d H:i:s' );
 }

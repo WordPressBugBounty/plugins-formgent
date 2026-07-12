@@ -4,6 +4,7 @@ namespace FormGent\App\Summary;
 
 defined( 'ABSPATH' ) || exit;
 
+use FormGent\App\Utils\AnswerValueSanitizer;
 use stdClass;
 use FormGent\App\EnumeratedList\SummaryType;
 
@@ -16,7 +17,15 @@ trait Chart {
     }
 
     protected function get_answers( stdClass $form, array $field ) {
-        return $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'value', "COUNT(value) AS total" )->group_by( 'value' )->get();
+        $answers = $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'value', "COUNT(value) AS total" )->group_by( 'value' )->get();
+
+        return array_map(
+            static function( $answer ) {
+                $answer->value = AnswerValueSanitizer::sanitize( $answer->value );
+                return $answer;
+            },
+            $answers
+        );
     }
 
     protected function get_field_summary( stdClass $form, array $field ) {

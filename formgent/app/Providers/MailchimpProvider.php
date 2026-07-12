@@ -185,8 +185,38 @@ class MailchimpProvider implements Provider {
 
     protected function get_field_value( AnswerFieldDTO $answer, string $option_value_type = 'label' ) {
         if ( 'label' === $option_value_type && ( 'single-choice' === $answer->get_field_type() || 'dropdown' === $answer->get_field_type() ) ) {
+            $value = $answer->get_value();
+
+            if ( is_string( $value ) ) {
+                $decoded = json_decode( $value, true );
+
+                if ( is_array( $decoded ) ) {
+                    $value = $decoded;
+                }
+            }
+
+            if ( is_array( $value ) ) {
+                return implode(
+                    ', ',
+                    array_filter(
+                        array_map(
+                            function( $item ) use ( $answer ) {
+                                foreach ( $answer->get_options() as $option ) {
+                                    if ( $option['value'] === $item ) {
+                                        return $option['label'];
+                                    }
+                                }
+
+                                return $item;
+                            },
+                            $value
+                        )
+                    )
+                );
+            }
+
             foreach ( $answer->get_options() as $option ) {
-                if ( $option['value'] === $answer->get_value() ) {
+                if ( $option['value'] === $value ) {
                     return $option['label'];
                 }
             }

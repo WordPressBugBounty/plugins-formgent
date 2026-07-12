@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.9.2
+Stable tag: 1.10.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,15 +18,15 @@ Website forms aren’t just for collecting emails anymore. They’re essential t
 
 **Meet FormGent – a modern, AI-powered form builder that’s built for performance, simplicity, and feels like a part of WordPress, not a separate platform.**
 
-FormGent lets you create high-converting forms of any kind—conversational form, multi-step form, payment, surveys, and more, in just a few clicks. Simply drag and drop, or describe it with AI to generate your form in seconds. You can also connect tools like Google Sheets, Mailchimp, Zapier, or Zoho to automate your entire workflow—no code, no complexity.
+FormGent lets you create high-converting forms of any kind of conversational form, multi-step form, payment, surveys, and more, in just a few clicks. Simply drag and drop, or describe it with AI to generate your form in seconds. You can also connect tools like Google Sheets, Mailchimp, Zapier, or Zoho to automate your entire workflow, no code, no complexity.
 
 **And best of all? The most premium features aren’t locked behind a paywall.**
 
-* Premium Features — FREE
-* AI Form Builder — create forms in seconds
-* Drag, Drop & Done — as easy as it sounds
-* Ready-Made Templates — build smarter, not longer
-* Feels like WordPress — no learning curve, no clutter
+* Premium Features: FREE
+* AI Form Builder: create forms in seconds
+* Drag, Drop & Done: as easy as it sounds
+* Ready-Made Templates: build smarter, not longer
+* Feels like WordPress: no learning curve, no clutter
 
 So if you're ready to build forms that are faster, smarter, and easier, you're in the right place.
 
@@ -61,75 +61,105 @@ With FormGent, you can create any type of form your website needs. Here are a fe
 1. Scholarship Application Form
 1. Employee Leave Request Form
 
-== Key Features at a Glance==
-1. Conversational form
- FormGent allows building conversational forms that not only boosts engagement but also increases completion rate.
-**Bonus:** It saves your incomplete submission data in the back for you to find what you might be missing.
+== Key Features at a Glance ==
 
-1. Multistep form
- Don’t bore your customers with boring and lengthy forms. Break underwhelmingly long forms into multi-step forms using the page breaks and improve user experience.
- Classic or Conversational, make your visitors' interaction enjoyable.
+1. AI Form Creation
+Effortlessly create fully functional forms from a simple prompt. Save time and eliminate guesswork with support for both conversational and classic form formats.
+
+1. Classic, Conversational, and Multi-Step Forms
+Build traditional forms, one-question-at-a-time conversational forms, and multi-step forms with page breaks, welcome screens, end screens, and custom buttons.
 
 1. Conditional Logic
 Deliver personalized form experiences by showing or hiding fields based on user input. Create dynamic forms that adapt in real time, improving engagement and data quality.
 
-1. AI Form Creation
-Effortlessly create intelligent, fully functional forms from a simple prompt. Save time and eliminate guesswork with support for both conversational and classic form formats.
+1. Payments and Orders
+Collect one-time payments with Stripe and PayPal. Build product order forms with payment items, custom amounts, quantity controls, payment summaries, and order details.
 
-1. Integration
-FormGent seamlessly connects with your favorite tools like Google Sheets, Zapier, Mailchimp, Zoho CRM, PayPal, Stripe, Google Maps, and more. So every form submission can instantly trigger the next action, automate workflows, and keep your business moving.
+1. Quizzes, Surveys, and Polls
+Turn any form into an interactive quiz, survey, or poll with scoring, answer summaries, and result display support.
 
-1. Payment
-Receive your e-commerce product orders and collect online payments with a highly customized product order and payment collection form. Seamlessly integrate FormGent with popular payment options.
+1. Email Notifications and PDFs
+Create email notifications with dynamic form tags, From Name, From Email, Reply-To, CC, BCC, and PDF links. Generate PDFs from form submissions with document and invoice template support.
 
-1. Quiz
-Formgent allows you to turn any form into an interactive quiz with scoring and result display. This is perfect for educational tools, assessments, knowledge checks, or fun interactive content.
+1. Confirmations and Customization
+Show a success message, redirect to a WordPress page, redirect to a custom URL, control post-submit behavior, and add custom CSS/JS per form.
 
-1. Save incomplete data  ( Conversational form )
-FormGent saves incomplete data with no-code forms and AI-supported form-building features. Save partial form data right away. Prevent loss of progress, save your information. Capture unfinished form submissions.
+1. Responses, Analytics, and Logs
+Manage entries from a dedicated response area with single-entry views, field editing, notes, starred/read status, exports, unread badges, response logs, and form analytics summaries.
 
-1. Analytics
-Track how your forms perform with built-in analytics. Monitor submission rates, field drop-offs, and user behavior to optimize your forms for better conversions and user engagement, without relying on external tools.
+1. Integrations and Automation
+Connect submissions with Google Sheets, Mailchimp, Zoho CRM, Zapier, Directorist, WPML, Google Maps, Stripe, and PayPal.
 
-== What You Get for FREE==
-After reviewing the free features, you'll say – “Are you out of mind?” It seems like madness, but you know, “Great things come from madness”.
+1. User Login and Registration
+Build login and registration forms with dedicated blocks, account field mapping, redirect settings, and user verification workflows.
 
-1. Multi-step Forms / Page Break
-1. Conversational Form
-1. Conditional Logic
-1. iFrame Embedding
-1. FormGent AI
-1. Payment System
-1. Google Sheets Integration
-1. Zapier Integration
-1. Directorist Integration
-1. WPML Integration
-1. MailChimp Integration
-1. PayPal Integration
-1. Stripe Integration
-1. Google Maps Integration
+1. Role and Capability Support
+FormGent registers WordPress capabilities so site owners can manage FormGent access with third-party role editor plugins. Administrators keep access by default.
 
-==Pro Isn’t Required. But It’s Worth It==
+== What You Get for FREE ==
+
+FormGent includes a broad set of production features in the free plugin:
+
+1. AI form generation and ready-made templates
+1. Classic forms, conversational forms, and multi-step forms
+1. Conditional field logic
+1. Quiz, survey, and poll support
+1. Stripe and PayPal one-time payment forms
+1. Product order fields, payment items, custom payment amounts, quantity fields, and payment summaries
+1. Email notifications with dynamic tags, CC, BCC, Reply-To, From Name, and From Email
+1. Form confirmations with success messages, page redirects, and custom URL redirects
+1. PDF Generator with invoice and document template support
+1. Response management, CSV/Excel/PDF exports, response editing, notes, read/starred states, unread counts, and response logs
+1. Form analytics summaries
+1. User login and registration forms
+1. Google Sheets integration with field mapping and conditional sync rules
+1. Mailchimp integration with field mapping, groups, tags, and conditional sync rules
+1. Zoho CRM integration with module mapping and conditional sync rules
+1. Zapier integration
+1. Directorist integration
+1. WPML compatibility
+1. Google Maps integration
+1. Google reCAPTCHA, hCaptcha, and Cloudflare Turnstile support
+1. Publishing with Gutenberg blocks, shortcode, Elementor widget, share URL, and iFrame embedding
+1. Per-form custom CSS/JS
+1. WordPress role/capability support for access control
+
+== Form Fields and Blocks Included ==
+
+FormGent includes the following blocks and field types:
+
+1. Form structure blocks: Dynamic Form, Welcome, Step, Page Break, End, Form Info, HTML, Next Button, and Custom Button.
+1. Standard fields: Name, Email, Single-Line Text, Multi-Line Text, Number, Phone Number, Website URL, and Address.
+1. Choice and scoring fields: Dropdown, Single Choice, Multiple Choice, Rating, and Range Slider.
+1. Advanced inputs: Date & Time Picker, File Upload, Google Map, GDPR Compliance, Captcha, Input Masking, Password, and Repeater.
+1. Payment blocks: Payment, Payment Item, Custom Payment Amount, Quantity, Payment Summary, Stripe, and PayPal.
+1. Login and registration blocks: Login, Login Username, Login Password, Remember Me, Forgot Password, Signup Link, Register, and Register Signin Link.
+
+== Pro Isn’t Required. But It’s Worth It ==
 We care about your single penny, that's why we packaged FormGent in a solid way. Our free plan will cover almost every need about the term “Form”. But if you really want a no compromise solution, here is the Pro solution for you.
 
-1. Digital Signature
-1. Webhooks
-1. Conditional Email
-1. Analytics
-1. Save Incomplete Data
-1. More Coming
+1. Digital Signature block
+1. Webhooks with custom request settings
+1. Conditional email notifications
+1. Conditional confirmations with message, page, URL, and quiz result actions
+1. Advanced analytics, including completed submission counts and field drop-off summaries
+1. Save incomplete data, form drafts, and save-and-resume links
+1. OTP verification with email, SMS, Twilio, Firebase, and custom gateway workflows
+1. Post/CPT submission feeds with field, taxonomy, featured image, author, and post meta mapping
+1. Stripe and PayPal subscription payment workflows
+1. Additional Directorist dashboard support
 
 ==Grow with FormGent==
 The features list has just begun. We’re continuously developing our product with exciting features. And surely this will not be possible without your support. Feel free to submit your feedback. Let’s grow together and build an awesome form builder with FormGent.
 
 For a clear vision, you can check out our [roadmap](https://formgent.com/roadmap/) section.
 
-==From Idea to Form — In Just a Few Seconds==
+==From Idea to Form, In Just a Few Seconds==
 Building forms shouldn't feel like work. With FormGent, it’s as easy as having a conversation.
 
-1. **Tell us what you need** — Say something like: “I need a contact form with name, email, and message.”
-1. **Let our AI do the heavy lifting** — It instantly creates the form for you, with the right fields and settings.
-1. **Make it yours** — Tweak the design with drag & drop, then publish it anywhere using a shortcode or block, or URL.
+1. **Tell us what you need:** Say something like: “I need a contact form with name, email, and message.”
+1. **Let our AI do the heavy lifting:** It instantly creates the form for you, with the right fields and settings.
+1. **Make it yours:** Tweak the design with drag & drop, then publish it anywhere using a shortcode or block, or URL.
 
 That’s it. No tech headaches, no starting from scratch. Your form is done in seconds.
 
@@ -189,7 +219,15 @@ Absolutely! FormGent is designed with a mobile-first approach.
 
 = Does FormGent support payment forms? =
 
-Yes, FormGent supports Stripe and PayPal payments.
+Yes, FormGent supports Stripe and PayPal one-time payments. Stripe and PayPal subscription payment workflows are available in FormGent Pro.
+
+= Can I create login and registration forms? =
+
+Yes, FormGent includes login and registration blocks, account field mapping, redirect settings, and user verification workflows.
+
+= Can I control FormGent access with a role editor plugin? =
+
+Yes, FormGent registers `formgent_access`, `formgent_manage_forms`, `formgent_read_forms`, `formgent_create_forms`, `formgent_edit_forms`, `formgent_delete_forms`, and `formgent_publish_forms`. Administrators receive these capabilities by default, and you can grant them to other roles with a third-party role editor plugin.
 
 = How does FormGent handle user data? =
 
@@ -205,9 +243,24 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 
 = Can I track form submissions and user engagement? =
 
-Absolutely! FormGent provides built-in analytics to track form submissions, user interactions, and more in the All Responses section.
+Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.10.0 - 07 July 2026 =
+* New: Hidden field block for storing background values without showing the field to visitors.
+* Added: Icon and image support for Single Choice, Multiple Choice, and Dropdown options, including editor controls and frontend rendering.
+* Added: Dropdown multi-select support with response editing, summaries, quiz handling, conditional logic, and payment item calculations.
+* Added: Video media support for conversational step and welcome layouts.
+* Added: WordPress role capabilities for FormGent access and form actions, including read, create, edit, delete, and publish permissions.
+* Security: Hardened file upload deletion with signed upload tokens and stricter FormGent upload path validation.
+* Security: Sanitized stored answer values and response output to reduce stored XSS risk.
+* Improved: Conditional logic handling for choice fields, dropdown multi-select values, hidden fields, and externally updated field values.
+* Improved: Payment summaries and order item generation for selected choice options and multi-select dropdowns.
+* Improved: Single response display, PDF export, and repeater answer rendering for option labels, media, and multi-select values.
+* Fixed: File upload removal requests when signed file tokens are used.
+* Fixed: Dropdown multi-select frontend submission and styling issues.
+* Fixed: Quiz issues related to dropdown and choice-field values.
+
 = 1.9.2 - 09 June 2026 =
 * Fixed: Blocks controls UI issue
 

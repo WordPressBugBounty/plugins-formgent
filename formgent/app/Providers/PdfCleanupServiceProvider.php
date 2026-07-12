@@ -15,7 +15,10 @@ class PdfCleanupServiceProvider implements Provider {
         // Clean up generated PDF files when responses are deleted.
         add_action( 'formgent_before_delete_responses', [ $this, 'on_responses_deleted' ], 10, 1 );
         add_action( 'formgent_before_delete_all_responses', [ $this, 'on_responses_deleted' ], 10, 1 );
+        add_action( 'init', [ $this, 'schedule_cleanup' ] );
+    }
 
+    public function schedule_cleanup(): void {
         // Schedule cron only on admin requests to avoid per-request DB queries on frontend.
         if ( is_admin() && ! wp_next_scheduled( self::CRON_HOOK ) ) {
             wp_schedule_event( time(), 'daily', self::CRON_HOOK );

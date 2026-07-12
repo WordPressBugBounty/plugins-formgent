@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('formgent/gutenberg', 'react', 'react-jsx-runtime', 'wp-block-editor', 'wp-data', 'wp-element', 'wp-hooks', 'wp-i18n'), 'version' => '1edde760116d3602dea2');
+<?php return array('dependencies' => array('formgent/gutenberg', 'react', 'react-jsx-runtime', 'wp-block-editor', 'wp-data', 'wp-element', 'wp-hooks', 'wp-i18n'), 'version' => '16a33106882a890d2447');

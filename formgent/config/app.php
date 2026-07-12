@@ -3,8 +3,15 @@
 defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\Providers\AppseroServiceProvider;
+use FormGent\App\Http\Middleware\EnsureCanAccessFormGent;
+use FormGent\App\Http\Middleware\EnsureCanCreateForms;
+use FormGent\App\Http\Middleware\EnsureCanDeleteForms;
+use FormGent\App\Http\Middleware\EnsureCanEditForms;
+use FormGent\App\Http\Middleware\EnsureCanPublishForms;
+use FormGent\App\Http\Middleware\EnsureCanReadForms;
 use FormGent\App\Http\Middleware\EnsureIsUserAdmin;
 use FormGent\App\Http\Middleware\Zapier;
+use FormGent\App\Providers\CapabilitiesServiceProvider;
 use FormGent\App\Providers\EmailNotificationServiceProvider;
 use FormGent\App\Providers\BlockServiceProvider;
 use FormGent\App\Providers\ElementorServiceProvider;
@@ -47,6 +54,7 @@ return [
 
     'providers'               => [
         ShortCodeServiceProvider::class,
+        CapabilitiesServiceProvider::class,
         ElementorServiceProvider::class,
         BlockServiceProvider::class,
         PostTypeServiceProvider::class,
@@ -75,8 +83,14 @@ return [
     ],
 
     'middleware'              => [
-        'admin'  => EnsureIsUserAdmin::class,
-        'zapier' => Zapier::class
+        'admin'                  => EnsureIsUserAdmin::class,
+        'formgent_access'        => EnsureCanAccessFormGent::class,
+        'formgent_read_forms'    => EnsureCanReadForms::class,
+        'formgent_create_forms'  => EnsureCanCreateForms::class,
+        'formgent_edit_forms'    => EnsureCanEditForms::class,
+        'formgent_delete_forms'  => EnsureCanDeleteForms::class,
+        'formgent_publish_forms' => EnsureCanPublishForms::class,
+        'zapier'                 => Zapier::class
     ],
 
     'post_type'               => 'formgent_form',

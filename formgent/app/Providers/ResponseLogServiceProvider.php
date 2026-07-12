@@ -130,6 +130,17 @@ class ResponseLogServiceProvider implements Provider {
 
         switch ( $field_type ) {
             case Dropdown::get_key():
+                $decoded = json_decode( $raw_value, true );
+                if ( is_array( $decoded ) ) {
+                    $labels = array_map(
+                        function ( $val ) use ( $field_data ) {
+                            $label = $this->get_option_label( $field_data, $val );
+                            return '' !== $label ? $label : $val;
+                        },
+                        $decoded
+                    );
+                    return implode( ', ', array_filter( $labels ) );
+                }
             case SingleChoice::get_key():
                 $label = $this->get_option_label( $field_data, $raw_value );
                 if ( '' !== $label ) {

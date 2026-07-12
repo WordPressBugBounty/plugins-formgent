@@ -9,8 +9,20 @@ use FormGent\WpMVC\Contracts\Provider;
 
 class BlockServiceProvider implements Provider {
     public function boot() {
+        add_action( 'after_setup_theme', [ $this, 'register_image_sizes' ] );
         add_action( 'init', [ $this, 'action_init' ] );
         add_filter( 'formgent_pagination_summery', [$this, 'get_summary'], 10, 2 );
+    }
+
+    public function register_image_sizes(): void {
+        $size_args = formgent_choice_option_image_size_args();
+
+        add_image_size(
+            formgent_choice_option_image_size(),
+            $size_args['width'],
+            $size_args['height'],
+            $size_args['crop']
+        );
     }
 
     public function get_summary( $answers, $field ) {

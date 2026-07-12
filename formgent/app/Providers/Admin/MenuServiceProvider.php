@@ -5,6 +5,7 @@ namespace FormGent\App\Providers\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use FormGent\WpMVC\Contracts\Provider;
+use FormGent\App\Utils\Capabilities;
 
 class MenuServiceProvider implements Provider
 {
@@ -48,8 +49,8 @@ class MenuServiceProvider implements Provider
         $icon = file_get_contents( $icon_dir );
         $icon = 'data:image/svg+xml;base64,' . base64_encode( $icon );
 
-        add_menu_page( esc_html__( 'FormGent', 'formgent' ), esc_html__( 'FormGent', 'formgent' ), 'manage_options', 'formgent-menu', function () { }, $icon, 5 );
-        add_submenu_page( 'formgent-menu', esc_html__( 'All Forms', 'formgent' ), esc_html__( 'All Forms', 'formgent' ), 'manage_options', 'formgent', [$this, 'content'] );
+        add_menu_page( esc_html__( 'FormGent', 'formgent' ), esc_html__( 'FormGent', 'formgent' ), Capabilities::ACCESS, 'formgent-menu', function () { }, $icon, 5 );
+        add_submenu_page( 'formgent-menu', esc_html__( 'All Forms', 'formgent' ), esc_html__( 'All Forms', 'formgent' ), Capabilities::ACCESS, 'formgent', [$this, 'content'] );
 
         $entries_title = esc_html__( 'Entries', 'formgent' );
         $unread_count  = formgent_response_repository()->get_total_unread_count();

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "formgent/hidden",
+  "title": "Hidden",
+  "category": "formgent",
+  "description": "Store background data in the form without showing the field to visitors.",
+  "textdomain": "formgent",
+  "attributes": {
+    "id": {
+      "type": "string",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": "hidden"
+    },
+    "label": {
+      "type": "string",
+      "default": "Hidden"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
+    },
+    "is_invalid_name": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "block_width": {
+      "type": "string",
+      "default": "100"
+    }
+  },
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": "file:index.js",
+  "style": "file:style-index.css",
+  "editorStyle": "file:index.css",
+  "render": "file:render.php"
+}

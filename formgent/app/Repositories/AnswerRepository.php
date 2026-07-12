@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\DTO\AnswerDTO;
 use FormGent\App\Models\Answer;
+use FormGent\App\Utils\AnswerValueSanitizer;
 use FormGent\WpMVC\Database\Query\Builder;
 use FormGent\WpMVC\Repositories\Repository;
 use FormGent\WpMVC\DTO\DTO;
@@ -26,7 +27,7 @@ class AnswerRepository extends Repository {
         return Answer::query()->insert(
             array_map(
                 function( AnswerDTO $field ) use( $response_id ) {
-                    return $this->process_values( $field->set_response_id( $response_id )->to_array() );
+                    return $this->prepare_values( $field->set_response_id( $response_id )->to_array() );
                 }, $items
             )
         );
@@ -39,7 +40,7 @@ class AnswerRepository extends Repository {
         return Answer::query()->insert(
             array_map(
                 function( $item ) {
-                    return $this->process_values( $item );
+                    return $this->prepare_values( $item );
                 }, $array
             ) 
         );
@@ -69,7 +70,7 @@ class AnswerRepository extends Repository {
             return false;
         }
         
-        return Answer::query()->insert_get_id( $this->process_values( $dto->to_array() ) );
+        return Answer::query()->insert_get_id( $this->prepare_values( $dto->to_array() ) );
     }
 
     public function update( DTO $dto ) {
@@ -78,7 +79,7 @@ class AnswerRepository extends Repository {
             return false;
         }
         
-        $data = $this->process_values( $dto->to_array( true ) );
+        $data = $this->prepare_values( $dto->to_array( true ) );
         
         // Remove 'id' from update data as it's used in WHERE clause
         unset( $data['id'] );
@@ -86,7 +87,7 @@ class AnswerRepository extends Repository {
         // Ensure 'value' field is always included in update (even if null)
         // This is critical for updates to work correctly
         if ( ! isset( $data['value'] ) ) {
-            $data['value'] = $dto->get_value();
+            $data['value'] = AnswerValueSanitizer::sanitize( $dto->get_value() );
             // Process the value if it's an array or object
             if ( is_array( $data['value'] ) || ( is_object( $data['value'] ) && get_class( $data['value'] ) === 'stdClass' ) ) {
                 $data['value'] = wp_json_encode( $data['value'] );
@@ -106,5 +107,13 @@ class AnswerRepository extends Repository {
         return Answer::query()
             ->where( 'id', $dto->get_id() )
             ->update( $data );
+    }
+
+    private function prepare_values( array $values ): array {
+        if ( array_key_exists( 'value', $values ) ) {
+            $values['value'] = AnswerValueSanitizer::sanitize( $values['value'] );
+        }
+
+        return $this->process_values( $values );
     }
 }

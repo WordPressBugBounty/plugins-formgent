@@ -2,13 +2,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use FormGent\App\Providers\PostTypeServiceProvider;
 use FormGent\WpMVC\App;
 
 /**
  * Plugin Name:       FormGent
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.9.2
+ * Version:           1.10.0
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Tested up to:      7.0
@@ -60,8 +59,6 @@ final class FormGent {
 
     public function on_activation(): void {
         new FormGent\App\Setup\Activation();
-        PostTypeServiceProvider::register_post_type();
-        flush_rewrite_rules();
         add_option( 'formgent_activation_redirect', true );
     }
 

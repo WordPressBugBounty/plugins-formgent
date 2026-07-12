@@ -23,10 +23,20 @@ trait MultiChoice {
 
         foreach ( $options as $option ) {
             $option_query = clone $query;
-            $answers[]    = [
-                'label' => $option['label'],
-                'total' => $option_query->where_raw( 'JSON_CONTAINS(value, \'"' . $option['value'] . '"\')' )->count()
-            ];
+            $total        = $option_query->where_raw(
+                $GLOBALS['wpdb']->prepare(
+                    'JSON_CONTAINS(value, %s)',
+                    wp_json_encode( (string) $option['value'] )
+                )
+            )->count();
+
+            $answers[] = array_merge(
+                [
+                    'label' => $option['label'],
+                    'total' => $total,
+                ],
+                formgent_get_choice_option_media( $option )
+            );
         }
 
         return $answers;

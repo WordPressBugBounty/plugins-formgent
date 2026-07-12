@@ -23,9 +23,11 @@ use FormGent\App\Http\Controllers\Admin\UserRegistrationController;
 use FormGent\App\Http\Controllers\Admin\PdfResourcesController;
 use FormGent\App\Http\Controllers\Admin\PdfController;
 use FormGent\WpMVC\Routing\Route;
+
 Route::group(
     'admin', function() {
-        Route::get( 'page', [PageController::class, 'index'] );
+        Route::get( 'page', [PageController::class, 'index'], ['formgent_edit_forms'] );
+
         Route::group(
             'forms', function() {
                 Route::group(
@@ -33,24 +35,17 @@ Route::group(
                         Route::patch( '{id}/status', [EmailNotificationController::class, 'update_status'] );
                         Route::post( '{id}/duplicate', [EmailNotificationController::class, 'duplicate'] );
                         Route::resource( '/', EmailNotificationController::class );
-                    }
+                    }, ['formgent_edit_forms']
                 );
+
                 Route::group(
                     '{id}', function() {
-                        Route::get( 'settings', [FormController::class, 'get_settings'] );
-                        Route::post( 'settings', [FormController::class, 'update_settings'] );
-                        Route::patch( 'status', [FormController::class, 'update_status'] );
-                        Route::patch( 'title', [FormController::class, 'update_title'] );
-                        Route::post( 'duplicate', [FormController::class, 'duplicate'] );
-                        Route::get( 'preset-fields', [FormController::class, 'get_preset_fields'] );
-
-                        Route::group(
-                            'summary', function() {
-                                Route::get( '/', [SummaryController::class, 'index'] );
-                                Route::get( 'field', [SummaryController::class, 'field'] );
-                            }
-                        );
-
+                        Route::get( 'settings', [FormController::class, 'get_settings'], ['formgent_read_forms'] );
+                        Route::post( 'settings', [FormController::class, 'update_settings'], ['formgent_edit_forms'] );
+                        Route::patch( 'status', [FormController::class, 'update_status'], ['formgent_publish_forms'] );
+                        Route::patch( 'title', [FormController::class, 'update_title'], ['formgent_edit_forms'] );
+                        Route::post( 'duplicate', [FormController::class, 'duplicate'], ['formgent_create_forms'] );
+                        Route::get( 'preset-fields', [FormController::class, 'get_preset_fields'], ['formgent_read_forms'] );
 
                         Route::group(
                             'google/spreadsheets', function() {
@@ -59,7 +54,7 @@ Route::group(
                                 Route::delete( '/{spread_id}', [GoogleSpreadSheetController::class, 'delete'] );
                                 Route::patch( '/{spread_id}', [GoogleSpreadSheetController::class, 'update'] );
                                 Route::patch( '/{spread_id}/status', [GoogleSpreadSheetController::class, 'update_status'] );
-                            }
+                            }, ['formgent_edit_forms']
                         );
 
                         Route::group(
@@ -69,7 +64,7 @@ Route::group(
                                 Route::delete( '/{feed_id}', [ MailchimpController::class, 'delete' ] );
                                 Route::patch( '/{feed_id}', [ MailchimpController::class, 'update' ] );
                                 Route::patch( '/{feed_id}/status', [ MailchimpController::class, 'update_status' ] );
-                            }
+                            }, ['formgent_edit_forms']
                         );
 
                         Route::group(
@@ -78,7 +73,7 @@ Route::group(
                                 Route::post( '/', [ UserRegistrationController::class, 'store' ] );
                                 Route::patch( '/{registration_id}', [ UserRegistrationController::class, 'update' ] );
                                 Route::delete( '/{registration_id}', [ UserRegistrationController::class, 'delete' ] );
-                            }
+                            }, ['formgent_edit_forms']
                         );
 
                         Route::group(
@@ -88,18 +83,42 @@ Route::group(
                                 Route::get( '/{pdf_id}', [PdfController::class, 'show'] );
                                 Route::patch( '/{pdf_id}', [PdfController::class, 'update'] );
                                 Route::delete( '/{pdf_id}', [PdfController::class, 'delete'] );
-                            }
+                            }, ['formgent_edit_forms']
                         );
                     }
                 );
 
-                Route::post( 'status', [FormController::class, 'update_bulk_status'] );
-                Route::get( 'select', [FormController::class, 'select'] );
-                Route::post( 'media', [FormController::class, 'insert_media'] );
-                Route::delete( '/', [FormController::class, 'delete_bulk_form'] );
-                Route::resource( '/', FormController::class );
+                Route::get( '/', [FormController::class, 'index'], ['formgent_read_forms'] );
+                Route::post( '/', [FormController::class, 'store'], ['formgent_create_forms'] );
+                Route::delete( '/{id}', [FormController::class, 'delete'], ['formgent_delete_forms'] );
+                Route::post( 'status', [FormController::class, 'update_bulk_status'], ['formgent_publish_forms'] );
+                Route::get( 'select', [FormController::class, 'select'], ['formgent_read_forms'] );
+                Route::post( 'media', [FormController::class, 'insert_media'], ['formgent_create_forms'] );
+                Route::delete( '/', [FormController::class, 'delete_bulk_form'], ['formgent_delete_forms'] );
             }
         );
+
+        Route::post( 'templates/insert-attachment', [TemplateController::class, 'insert_media'], ['formgent_create_forms'] );
+    }, ['formgent_access']
+);
+
+Route::group(
+    'admin', function() {
+        Route::group(
+            'forms', function() {
+                Route::group(
+                    '{id}', function() {
+                        Route::group(
+                            'summary', function() {
+                                Route::get( '/', [SummaryController::class, 'index'] );
+                                Route::get( 'field', [SummaryController::class, 'field'] );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+
         Route::group(
             'responses', function() {
                 Route::resource( 'notes', NoteController::class );
@@ -157,8 +176,6 @@ Route::group(
                 Route::post( 'disconnect', [GoogleSheetController::class, 'disconnect'] );
             }
         );
-
-        Route::post( 'templates/insert-attachment', [TemplateController::class, 'insert_media'] );
 
         Route::group(
             'mailchimp', function() {

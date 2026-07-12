@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 use FormGent\App\Fields\DatePicker\DatePicker;
 use FormGent\App\Fields\Rating\Rating;
 use FormGent\App\Fields\GoogleMap\GoogleMap;
+use FormGent\App\Fields\Hidden\Hidden;
 use FormGent\App\Fields\Address\Address;
 use FormGent\App\Fields\Dropdown\Dropdown;
 use FormGent\App\Fields\Email\Email;
@@ -59,6 +60,11 @@ return apply_filters(
         'formgent/textarea'              => [
             'types'      => ['general', 'conversational'],
             'field_type' => TextArea::get_key(),
+            'dir'        => $blocks_dir,
+        ],
+        'formgent/hidden'                => [
+            'types'      => ['general', 'conversational'],
+            'field_type' => Hidden::get_key(),
             'dir'        => $blocks_dir,
         ],
         'formgent/number'                => [

@@ -156,6 +156,71 @@ class PaymentServiceProvider implements Provider
         return $map;
     }
 
+    private function normalize_selected_values( $value ): array {
+        if ( is_string( $value ) ) {
+            $decoded = json_decode( $value, true );
+
+            if ( is_array( $decoded ) ) {
+                $value = $decoded;
+            } elseif ( false !== strpos( $value, ',' ) ) {
+                $value = array_map( 'trim', explode( ',', $value ) );
+            }
+        }
+
+        if ( ! is_array( $value ) ) {
+            return '' === $value || null === $value ? [] : [ strval( $value ) ];
+        }
+
+        $selected = [];
+
+        foreach ( $value as $key => $item ) {
+            if ( false === $item || null === $item || '' === $item ) {
+                continue;
+            }
+
+            if ( is_int( $key ) ) {
+                if ( is_scalar( $item ) ) {
+                    $selected[] = strval( $item );
+                }
+                continue;
+            }
+
+            $selected[] = strval( $key );
+        }
+
+        return array_values( array_unique( $selected ) );
+    }
+
+    private function add_choice_order_items( array &$items, float &$total, array $field, array $selected_values, int $quantity ): void {
+        if ( empty( $field['options'] ) || empty( $selected_values ) ) {
+            return;
+        }
+
+        $selected_values = array_map( 'strval', $selected_values );
+
+        foreach ( $field['options'] as $opt ) {
+            if ( ! in_array( strval( $opt['value'] ?? '' ), $selected_values, true ) ) {
+                continue;
+            }
+
+            $raw_unit = $opt['price'] ?? ( $opt['numeric_value'] ?? ( $opt['numericValue'] ?? null ) );
+
+            if ( null === $raw_unit || '' === $raw_unit ) {
+                continue;
+            }
+
+            $unit    = abs( (float) $raw_unit );
+            $amount  = $unit * $quantity;
+            $items[] = [
+                'title'        => $opt['label'] ?? ( $field['label'] ?? ( $opt['value'] ?? '' ) ),
+                'unit_amount'  => $unit,
+                'quantity'     => $quantity,
+                'total_amount' => $amount,
+            ];
+            $total  += $amount;
+        }
+    }
+
     private function build_order_items( array $fields, array $form_data ): array {
         $items = [];
         $total = 0;
@@ -361,60 +426,23 @@ class PaymentServiceProvider implements Provider
 
                     case 'single-choice':
                     case 'dropdown':
-                        // Single selection - match option price
-                        if ( ! empty( $ref_field['options'] ) ) {
-                            $selected_value = $form_data[$field_name];
-                            // Could be an object like { value: true } or just a string
-                            if ( is_array( $selected_value ) ) {
-                                // Extract the actual selected value from the object
-                                foreach ( $selected_value as $val => $checked ) {
-                                    if ( $checked ) {
-                                        $selected_value = $val;
-                                        break;
-                                    }
-                                }
-                            }
-                            foreach ( $ref_field['options'] as $opt ) {
-                                $raw_unit = $opt['price'] ?? ( $opt['numeric_value'] ?? ( $opt['numericValue'] ?? null ) );
-                                if ( $opt['value'] === $selected_value && $raw_unit !== null && $raw_unit !== '' ) {
-                                    $unit    = abs( (float) $raw_unit );
-                                    $amount  = $unit * $field_qty;
-                                    $items[] = [
-                                        'title'        => $opt['label'] ?? $field_name,
-                                        'unit_amount'  => $unit,
-                                        'quantity'     => $field_qty,
-                                        'total_amount' => $amount,
-                                    ];
-                                    $total  += $amount;
-                                    break;
-                                }
-                            }
-                        }
+                        $this->add_choice_order_items(
+                            $items,
+                            $total,
+                            $ref_field,
+                            $this->normalize_selected_values( $form_data[$field_name] ),
+                            $field_qty
+                        );
                         break;
 
                     case 'multiple-choice':
-                        // Multi selection - sum selected options' prices
-                        if ( ! empty( $ref_field['options'] ) && is_array( $form_data[$field_name] ) ) {
-                            foreach ( $form_data[$field_name] as $val => $checked ) {
-                                if ( ! $checked )
-                                    continue;
-                                foreach ( $ref_field['options'] as $opt ) {
-                                    $raw_unit = $opt['price'] ?? ( $opt['numeric_value'] ?? ( $opt['numericValue'] ?? null ) );
-                                    if ( $opt['value'] === $val && $raw_unit !== null && $raw_unit !== '' ) {
-                                        $unit    = abs( (float) $raw_unit );
-                                        $amount  = $unit * $field_qty;
-                                        $items[] = [
-                                            'title'        => $opt['label'] ?? $val,
-                                            'unit_amount'  => $unit,
-                                            'quantity'     => $field_qty,
-                                            'total_amount' => $amount,
-                                        ];
-                                        $total  += $amount;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+                        $this->add_choice_order_items(
+                            $items,
+                            $total,
+                            $ref_field,
+                            $this->normalize_selected_values( $form_data[$field_name] ),
+                            $field_qty
+                        );
                         break;
                 }
             }

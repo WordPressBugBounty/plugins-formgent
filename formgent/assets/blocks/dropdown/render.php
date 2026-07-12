@@ -1,8 +1,13 @@
 <?php defined( 'ABSPATH' ) || exit;
+
+$allow_multi_select = ! empty( $attributes['allow_multi_select'] );
+$sanitized_options  = formgent_sanitize_choice_options( $attributes['options'] ?? [] );
+
 $context = [
-    'name'        => $attributes['name'],
-    'field_label' => $attributes['label'] ?? '',
-    'options'     => ! empty( $attributes['options'] ) ? map_deep( $attributes['options'], 'esc_attr' ) : [],
+    'name'               => $attributes['name'],
+    'field_label'        => $attributes['label'] ?? '',
+    'options'            => $sanitized_options,
+    'allow_multi_select' => $allow_multi_select,
 ];
 
 $settings                 = get_post_meta( get_post()->ID, '_formgent_form_settings', true );
@@ -29,13 +34,31 @@ $use_label_as_placeholder = ! empty( $settings['use_label_as_placeholder'] ?? nu
                 id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>"
                 data-wp-init="callbacks.dropdownInit"
                 data-placeholder="<?php echo esc_attr( $use_label_as_placeholder ? $attributes['label'] : $attributes['placeholder'] ); ?>"
+                name="<?php echo esc_attr( $attributes['name'] . ( $allow_multi_select ? '[]' : '' ) ); ?>"
                 autocomplete="off"
+                <?php echo $allow_multi_select ? 'multiple' : ''; ?>
             >
-                <?php if ( ! empty( $attributes['options'] ) && is_array( $attributes['options'] ) ) : ?>
-                    <option value=""><?php echo esc_html( $attributes['placeholder'] ) ?></option>
-                    <?php foreach ( $attributes['options'] as $index => $option ) : ?>
-                        <option value="<?php echo esc_attr( $option['value'] ); ?>">
-                            <?php echo esc_html( $option['label'] ); ?>
+                <?php if ( ! empty( $sanitized_options ) ) : ?>
+                    <?php if ( ! $allow_multi_select ) : ?>
+                        <option value=""><?php echo esc_html( $attributes['placeholder'] ) ?></option>
+                    <?php endif; ?>
+                    <?php foreach ( $sanitized_options as $index => $option ) :
+                        $option_label = $option['label'] ?? '';
+                        $option_value = $option['value'] ?? sanitize_title( wp_strip_all_tags( $option_label ) );
+                        $media        = formgent_get_choice_option_media( $option );
+                        $icon_svg     = $media['icon']['svg'] ?? '';
+                        $image_url    = $media['image']['thumbnail'] ?? '';
+                        $image_alt    = $media['image']['alt'] ?? '';
+                        ?>
+                        <option value="<?php echo esc_attr( $option_value ); ?>"
+                            <?php if ( $icon_svg ) :
+                                ?>data-icon="<?php echo esc_attr( $icon_svg ); ?>"<?php endif; ?>
+                            <?php if ( $image_url ) :
+                                ?>data-image="<?php echo esc_attr( $image_url ); ?>"<?php endif; ?>
+                            <?php if ( $image_alt ) :
+                                ?>data-image-alt="<?php echo esc_attr( $image_alt ); ?>"<?php endif; ?>
+                        >
+                            <?php echo esc_html( $option_label ); ?>
                         </option>
                     <?php endforeach; ?>
                 <?php endif; ?>

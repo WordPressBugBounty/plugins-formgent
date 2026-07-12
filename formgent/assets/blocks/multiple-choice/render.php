@@ -11,10 +11,12 @@ if ( $attributes['allow_user_add_other_option'] ) {
     ];
 }
 
+$sanitized_options = formgent_sanitize_choice_options( $attributes['options'] ?? [] );
+
 $context = [
     'name'        => $attributes['name'],
     'field_label' => $attributes['label'] ?? '',
-    'options'     => map_deep( $attributes['options'], 'esc_attr' ),
+    'options'     => $sanitized_options,
     'field_type'  => MultipleChoice::get_key(),
 ];
 ?>
@@ -39,10 +41,10 @@ $context = [
             <div class="formgent-field-single__box formgent-multiple-choice-<?php echo esc_attr( $attributes['name'] ); ?> formgent-field-single__box--<?php echo esc_attr( $attributes['layout'] ); ?>"
                 id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>"
                 data-wp-init="callbacks.multipleChoiceKeyboard">
-                <?php if ( ! empty( $attributes['options'] ) && is_array( $attributes['options'] ) ) : ?>
-                    <template data-wp-each--option="context.options">
+                <?php foreach ( $sanitized_options as $option ) : ?>
                         <div
-                            class="formgent-field-single__box__choice formgent-field-single__box__choice--<?php echo esc_attr( $attributes['style'] ); ?>">
+                            class="formgent-field-single__box__choice formgent-field-single__box__choice--<?php echo esc_attr( $attributes['style'] ); ?>"
+                            data-wp-context='<?php echo esc_attr( wp_json_encode( [ 'option' => $option ], JSON_HEX_QUOT | JSON_HEX_APOS | JSON_HEX_AMP ) ); ?>'>
                             <input class="formgent-field-single__input formgent-field-single__input--checkbox"
                                 type="checkbox" data-wp-on--change="actions.updateMultiChoice"
                                 data-wp-bind--id="state.getOptionId"
@@ -53,17 +55,18 @@ $context = [
                                 <span class="formgent-field-single__checkbox">
                                     <?php formgent_render_icon( 'check-thin', 'general' ) ?>
                                 </span>
+                                <?php formgent_render_choice_option_media( $option ); ?>
                                 <span data-wp-text="state.getOptionLabel"></span>
-                                <input type="text" class="formgent-field-other-input"
-                                    data-wp-bind--hidden="!context.option.is_other"
-                                    data-wp-bind--disabled="state.isMultiSelectOptionDisabled"
-                                    data-wp-bind--value="state.getOtherOptionValue"
-                                    data-wp-on--input="actions.updateMultiSelectSpecify"
-                                    placeholder="<?php echo esc_attr( $attributes['other_placeholder'] ) ?>" />
+                                <?php if ( ! empty( $option['is_other'] ) ) : ?>
+                                    <input type="text" class="formgent-field-other-input"
+                                        data-wp-bind--disabled="state.isMultiSelectOptionDisabled"
+                                        data-wp-bind--value="state.getOtherOptionValue"
+                                        data-wp-on--input="actions.updateMultiSelectSpecify"
+                                        placeholder="<?php echo esc_attr( $attributes['other_placeholder'] ); ?>" />
+                                <?php endif; ?>
                             </label>
                         </div>
-                    </template>
-                <?php endif; ?>
+                    <?php endforeach; ?>
             </div>
 
             <?php if ( ! empty( $attributes['sub_label'] ) ) : ?>

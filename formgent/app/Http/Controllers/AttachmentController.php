@@ -4,6 +4,7 @@ namespace FormGent\App\Http\Controllers;
 
 defined( "ABSPATH" ) || exit;
 
+use FormGent\App\Utils\UploadFileToken;
 use FormGent\WpMVC\Helpers\Helpers;
 use FormGent\App\Http\Controllers\Controller;
 use FormGent\WpMVC\Exceptions\Exception;
@@ -40,12 +41,19 @@ class AttachmentController extends Controller {
         // Remove the filter after upload
         remove_filter( 'upload_dir', [ $this, 'custom_upload_dir' ] );
 
-        $trimmed_path = preg_replace( '/^.*uploads\//', '', $attachment['file'] );
+        $upload_dir    = wp_upload_dir( null, false );
+        $uploads_base  = trailingslashit( wp_normalize_path( $upload_dir['basedir'] ) );
+        $uploaded_file = wp_normalize_path( $attachment['file'] );
+        $relative_path = UploadFileToken::normalize_relative_path( str_replace( $uploads_base, '', $uploaded_file ) );
+
+        if ( null === $relative_path ) {
+            throw new Exception( esc_html__( 'Invalid file path', 'formgent' ), 400 );
+        }
 
         return Response::send(
             [
                 "data" => [
-                    "file_token" => base64_encode( $trimmed_path )
+                    "file_token" => UploadFileToken::create( $relative_path )
                 ]
             ], 201
         );
@@ -63,17 +71,16 @@ class AttachmentController extends Controller {
             ]
         );
 
-        $file_path = ABSPATH . 'wp-content/uploads/' . base64_decode( $request->get_param( "file_token" ) );
+        $relative_path = UploadFileToken::path_from_token( (string) $request->get_param( "file_token" ) );
 
-        $read_file_path = realpath( $file_path );
-        $real_base_path = realpath( ABSPATH . 'wp-content/uploads/formgent' ) . DIRECTORY_SEPARATOR;
-
-        if ( $read_file_path === false || strpos( $read_file_path, $real_base_path ) !== 0 ) {
-            throw new Exception( "Invalid file path", 400 );
+        if ( null === $relative_path ) {
+            throw new Exception( esc_html__( 'Invalid file token', 'formgent' ), 400 );
         }
 
-        if ( ! file_exists( $file_path ) ) {
-            throw new Exception( "File not found", 404 );
+        $file_path = UploadFileToken::resolve_existing_upload_path( $relative_path );
+
+        if ( null === $file_path ) {
+            throw new Exception( esc_html__( 'Invalid file path', 'formgent' ), 400 );
         }
 
         //delete the file

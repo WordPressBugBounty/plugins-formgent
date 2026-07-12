@@ -74,16 +74,69 @@ function formgent_is_conversational_form( stdClass $form ) {
     return 'conversational' === $form->form_type;
 }
 
-function formgent_form_default_values_functions() {
+function formgent_form_default_values_functions( int $form_id = 0 ) {
     return apply_filters(
         'formgent_default_values_functions',
         [
-            'ip'         => 'formgent_get_user_ip_address',
-            'site_url'   => 'site_url',
-            'site_title' => function () {
+            'ip'                  => 'formgent_get_user_ip_address',
+            'site_url'            => 'site_url',
+            'site_title'          => function () {
                 return get_bloginfo( 'name' );
             },
-            'user'       => function ( $property ) {
+            'form_title'          => function () use ( $form_id ) {
+                $form = $form_id ? get_post( $form_id ) : null;
+                return $form instanceof WP_Post ? $form->post_title : '';
+            },
+            'embedded_post_id'    => function () {
+                $post = get_post();
+                return $post instanceof WP_Post ? (string) $post->ID : '';
+            },
+            'embedded_post_title' => function () {
+                $post = get_post();
+                return $post instanceof WP_Post ? $post->post_title : '';
+            },
+            'current_date'        => function () {
+                return current_datetime()->format( 'm/d/Y' );
+            },
+            'login_url'           => function () {
+                return esc_url_raw( wp_login_url() );
+            },
+            'registration_url'    => function () {
+                return esc_url_raw( wp_registration_url() );
+            },
+            'lost_password_url'   => function () {
+                return esc_url_raw( wp_lostpassword_url() );
+            },
+            'forgot_password_url' => function () {
+                return esc_url_raw( wp_lostpassword_url() );
+            },
+            'logout_url'          => function () {
+                return esc_url_raw( wp_logout_url() );
+            },
+            'browser_name'        => 'formgent_get_browser_name',
+            'browser_platform'    => 'formgent_get_browser_platform',
+            'current_page_url'    => 'formgent_get_current_page_url',
+            'referrer_url'        => 'formgent_get_referrer_url',
+            'cookie_value'        => 'formgent_get_cookie_value',
+            'cookie_values'       => 'formgent_get_cookie_value',
+            'query'               => function ( $property ) {
+                $property        = sanitize_key( (string) $property );
+                $has_query_param = isset( $_GET[$property] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL merge tag, sanitized before use.
+
+                if ( '' === $property || ! $has_query_param ) {
+                    return '';
+                }
+
+                $value = wp_unslash( $_GET[$property] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Read-only URL merge tag, sanitized before return.
+
+                if ( is_array( $value ) ) {
+                    $value = wp_json_encode( map_deep( $value, 'sanitize_text_field' ) );
+                    return is_string( $value ) ? $value : '';
+                }
+
+                return sanitize_text_field( (string) $value );
+            },
+            'user'                => function ( $property ) {
                 // For non-logged-in users, keep user-based defaults blank.
                 if ( ! is_user_logged_in() ) {
                     return '';
@@ -91,19 +144,20 @@ function formgent_form_default_values_functions() {
 
                 $user = wp_get_current_user();
                 return isset( $user->$property ) ? $user->$property : '';
-            }
-        ]
+            },
+        ],
+        $form_id
     );
 }
 
-function formgent_form_default_values( array $data ) {
-    $values_functions = formgent_form_default_values_functions();
+function formgent_form_default_values( array $data, int $form_id = 0 ) {
+    $values_functions = formgent_form_default_values_functions( $form_id );
     $dynamic_values   = [];
     $values           = [];
 
     foreach ( $data as $key => $item ) {
         if ( ! empty( $item['children'] ) ) {
-            $children_values = formgent_form_default_values( $item['children'] );
+            $children_values = formgent_form_default_values( $item['children'], $form_id );
 
             if ( 'step' === $item['field_type'] ) {
                 $values = array_merge( $values, $children_values );
@@ -161,8 +215,8 @@ function formgent_form_default_values( array $data ) {
                 $dynamic_value = '';
 
                 if ( isset( $values_functions[$base] ) && is_callable( $values_functions[$base] ) ) {
-                    // Resolve the user property if applicable.
-                    if ( 'user' === $base && ! empty( $parts ) ) {
+                    // Resolve token properties if applicable.
+                    if ( in_array( $base, ['user', 'query'], true ) && ! empty( $parts ) ) {
                         $property      = implode( '.', $parts );
                         $dynamic_value = $values_functions[$base]( $property );
                     } else {
@@ -318,6 +372,135 @@ function formgent_make_answer_field_dto( stdClass $answer, array $form_field ): 
 }
 
 /**
+ * Get the current visitor browser name from the user agent.
+ *
+ * @return string
+ */
+function formgent_get_browser_name(): string {
+    $user_agent = isset( $_SERVER['HTTP_USER_AGENT'] )
+        ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )
+        : '';
+
+    if ( '' === $user_agent ) {
+        return '';
+    }
+
+    if ( stripos( $user_agent, 'edg' ) !== false || stripos( $user_agent, 'edge' ) !== false ) {
+        return 'Edge';
+    }
+
+    if ( stripos( $user_agent, 'opr/' ) !== false || stripos( $user_agent, 'opera' ) !== false ) {
+        return 'Opera';
+    }
+
+    if ( stripos( $user_agent, 'chrome' ) !== false ) {
+        return 'Chrome';
+    }
+
+    if ( stripos( $user_agent, 'firefox' ) !== false ) {
+        return 'Firefox';
+    }
+
+    if ( stripos( $user_agent, 'safari' ) !== false ) {
+        return 'Safari';
+    }
+
+    if ( stripos( $user_agent, 'msie' ) !== false || stripos( $user_agent, 'trident/' ) !== false ) {
+        return 'Internet Explorer';
+    }
+
+    return '';
+}
+
+/**
+ * Get the current visitor browser platform from the user agent.
+ *
+ * @return string
+ */
+function formgent_get_browser_platform(): string {
+    $user_agent = isset( $_SERVER['HTTP_USER_AGENT'] )
+        ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )
+        : '';
+
+    if ( '' === $user_agent ) {
+        return '';
+    }
+
+    if ( stripos( $user_agent, 'iphone' ) !== false || stripos( $user_agent, 'ipad' ) !== false ) {
+        return 'iOS';
+    }
+
+    if ( stripos( $user_agent, 'android' ) !== false ) {
+        return 'Android';
+    }
+
+    if ( stripos( $user_agent, 'windows' ) !== false ) {
+        return 'Windows';
+    }
+
+    if ( stripos( $user_agent, 'mac' ) !== false ) {
+        return 'macOS';
+    }
+
+    if ( stripos( $user_agent, 'linux' ) !== false ) {
+        return 'Linux';
+    }
+
+    return '';
+}
+
+/**
+ * Get the current page URL for the active request.
+ *
+ * @return string
+ */
+function formgent_get_current_page_url(): string {
+    if ( isset( $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'] ) ) {
+        $scheme      = is_ssl() ? 'https://' : 'http://';
+        $host        = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+        $request_uri = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+        return esc_url_raw( $scheme . $host . $request_uri );
+    }
+
+    return esc_url_raw( home_url( '/' ) );
+}
+
+/**
+ * Get the referrer URL for the active request.
+ *
+ * @return string
+ */
+function formgent_get_referrer_url(): string {
+    if ( empty( $_SERVER['HTTP_REFERER'] ) ) {
+        return '';
+    }
+
+    return esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+}
+
+/**
+ * Get all cookies as a JSON string for string-based default-value fields.
+ *
+ * @return string
+ */
+function formgent_get_cookie_value(): string {
+    if ( empty( $_COOKIE ) || ! is_array( $_COOKIE ) ) {
+        return '';
+    }
+
+    $cookies = [];
+
+    foreach ( $_COOKIE as $key => $value ) {
+        $cookies[ sanitize_key( (string) $key ) ] = is_string( $value )
+            ? sanitize_text_field( wp_unslash( $value ) )
+            : $value;
+    }
+
+    return wp_json_encode( $cookies );
+}
+
+/**
  * Get preset values for HTML block dynamic tags.
  *
  * @param int $form_id Form post ID.
@@ -329,40 +512,6 @@ function formgent_get_preset_values( int $form_id ): array {
     $current_user = is_user_logged_in() ? wp_get_current_user() : null;
     $embed_post   = get_post();
 
-    $user_agent = isset( $_SERVER['HTTP_USER_AGENT'] )
-        ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )
-        : '';
-    $browser    = '';
-    $platform   = '';
-
-    if ( $user_agent ) {
-        if ( stripos( $user_agent, 'chrome' ) !== false ) {
-            $browser = 'Chrome';
-        } elseif ( stripos( $user_agent, 'safari' ) !== false ) {
-            $browser = 'Safari';
-        } elseif ( stripos( $user_agent, 'firefox' ) !== false ) {
-            $browser = 'Firefox';
-        } elseif ( stripos( $user_agent, 'edge' ) !== false ) {
-            $browser = 'Edge';
-        } elseif ( stripos( $user_agent, 'opera' ) !== false || stripos( $user_agent, 'opr/' ) !== false ) {
-            $browser = 'Opera';
-        } elseif ( stripos( $user_agent, 'msie' ) !== false || stripos( $user_agent, 'trident/' ) !== false ) {
-            $browser = 'Internet Explorer';
-        }
-
-        if ( stripos( $user_agent, 'windows' ) !== false ) {
-            $platform = 'Windows';
-        } elseif ( stripos( $user_agent, 'mac' ) !== false ) {
-            $platform = 'macOS';
-        } elseif ( stripos( $user_agent, 'linux' ) !== false ) {
-            $platform = 'Linux';
-        } elseif ( stripos( $user_agent, 'iphone' ) !== false || stripos( $user_agent, 'ipad' ) !== false ) {
-            $platform = 'iOS';
-        } elseif ( stripos( $user_agent, 'android' ) !== false ) {
-            $platform = 'Android';
-        }
-    }
-
     $now        = current_datetime();
     $admin_user = get_user_by( 'email', get_option( 'admin_email', '' ) );
 
@@ -371,16 +520,21 @@ function formgent_get_preset_values( int $form_id ): array {
         'site_name'           => get_option( 'blogname', '' ),
         'site_url'            => esc_url_raw( site_url() ),
         'form_title'          => $form_post ? $form_post->post_title : '',
-        'browser_name'        => $browser,
-        'browser_platform'    => $platform,
+        'browser_name'        => formgent_get_browser_name(),
+        'browser_platform'    => formgent_get_browser_platform(),
         'embedded_post_id'    => $embed_post instanceof WP_Post ? (string) $embed_post->ID : '',
         'embedded_post_title' => $embed_post instanceof WP_Post ? $embed_post->post_title : '',
         'current_date'        => $now->format( 'm/d/Y' ),
+        'current_page_url'    => formgent_get_current_page_url(),
+        'referrer_url'        => formgent_get_referrer_url(),
         'admin_name'          => $admin_user ? sanitize_text_field( $admin_user->display_name ) : '',
         'login_url'           => esc_url_raw( wp_login_url() ),
-        'register_url'        => esc_url_raw( wp_registration_url() ),
+        'registration_url'    => esc_url_raw( wp_registration_url() ),
+        'lost_password_url'   => esc_url_raw( wp_lostpassword_url() ),
         'forgot_password_url' => esc_url_raw( wp_lostpassword_url() ),
         'logout_url'          => esc_url_raw( wp_logout_url() ),
+        'cookie_value'        => formgent_get_cookie_value(),
+        'cookie_values'       => formgent_get_cookie_value(),
     ];
 
     if ( $current_user ) {
@@ -398,20 +552,10 @@ function formgent_get_preset_values( int $form_id ): array {
 
     if ( current_user_can( 'manage_options' ) ) {
         $get_params = filter_input_array( INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ?: [];
-        $cookies    = [];
-
-        foreach ( $_COOKIE as $key => $value ) {
-            $cookies[$key] = is_string( $value ) ? sanitize_text_field( wp_unslash( $value ) ) : $value;
-        }
 
         $preset += [
-            'admin_email'       => get_option( 'admin_email', '' ),
-            'login_url'         => esc_url_raw( wp_login_url() ),
-            'registration_url'  => esc_url_raw( wp_registration_url() ),
-            'lost_password_url' => esc_url_raw( wp_lostpassword_url() ),
-            'logout_url'        => esc_url_raw( wp_logout_url() ),
-            'get_params'        => $get_params,
-            'cookie_values'     => $cookies,
+            'admin_email' => get_option( 'admin_email', '' ),
+            'get_params'  => $get_params,
         ];
     }
 

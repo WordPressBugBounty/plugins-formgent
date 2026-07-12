@@ -4,6 +4,7 @@ namespace FormGent\App\Summary;
 
 defined( 'ABSPATH' ) || exit;
 
+use FormGent\App\Utils\AnswerValueSanitizer;
 use stdClass;
 use FormGent\App\EnumeratedList\SummaryType;
 
@@ -16,7 +17,15 @@ trait Custom {
     }
 
     protected function get_answers( stdClass $form, array $field ) {
-        return $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'value' )->get();
+        $answers = $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'value' )->get();
+
+        return array_map(
+            static function( $answer ) {
+                $answer->value = AnswerValueSanitizer::sanitize( $answer->value );
+                return $answer;
+            },
+            $answers
+        );
     }
 
     protected function get_field_summary( stdClass $form, array $field ) {
@@ -27,4 +36,3 @@ trait Custom {
         return apply_filters( "formgent_custom_summary", $this->get_field_summary( $form, $field ), $field, $form );
     }
 }
-

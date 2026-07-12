@@ -2,22 +2,22 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.9.2\n"
+"Project-Id-Version: FormGent 1.10.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-09T16:27:09+00:00\n"
+"POT-Creation-Date: 2026-07-12T08:29:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
 
 #. Plugin Name of the plugin
 #: formgent.php
-#: app/Providers/Admin/MenuServiceProvider.php:51
-#: app/Providers/PostTypeServiceProvider.php:121
+#: app/Providers/Admin/MenuServiceProvider.php:52
+#: app/Providers/PostTypeServiceProvider.php:122
 msgid "FormGent"
 msgstr ""
 
@@ -71,6 +71,11 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
+#: app/Fields/FileUpload/MethodResolver.php:36
+#: app/Http/Controllers/AttachmentController.php:77
+msgid "Invalid file token"
+msgstr ""
+
 #: app/Fields/Password/MethodResolver.php:58
 #: app/Http/Controllers/RegisterController.php:91
 #: app/Providers/UserRegistrationServiceProvider.php:398
@@ -82,62 +87,62 @@ msgstr ""
 msgid "Validation failed."
 msgstr ""
 
-#: app/Helpers/form-helpers.php:498
+#: app/Helpers/form-helpers.php:642
 #: assets/blocks/payment-summary/render.php:22
 #: assets/blocks/payment/render.php:95
 msgid "Item"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:499
+#: app/Helpers/form-helpers.php:643
 msgid "Qty"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:500
+#: app/Helpers/form-helpers.php:644
 msgid "Unit Price"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:501
+#: app/Helpers/form-helpers.php:645
 #: assets/blocks/payment-summary/render.php:28
 #: assets/blocks/payment/render.php:107
 msgid "Total"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:573
+#: app/Helpers/form-helpers.php:717
 #: resources/views/shortcodes/payment-success.php:126
 #: assets/blocks/payment/index.js:1
 msgid "Daily"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:574
+#: app/Helpers/form-helpers.php:718
 #: resources/views/shortcodes/payment-success.php:127
 #: assets/blocks/payment/index.js:1
 msgid "Weekly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:575
+#: app/Helpers/form-helpers.php:719
 #: resources/views/shortcodes/payment-success.php:128
 #: assets/blocks/payment/index.js:1
 msgid "Monthly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:576
+#: app/Helpers/form-helpers.php:720
 #: resources/views/shortcodes/payment-success.php:129
 #: assets/blocks/payment/index.js:1
 msgid "Yearly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:1074
-#: app/Helpers/form-helpers.php:1175
-#: app/Helpers/form-helpers.php:1204
+#: app/Helpers/form-helpers.php:1218
+#: app/Helpers/form-helpers.php:1319
+#: app/Helpers/form-helpers.php:1348
 msgid "Generated PDF"
 msgstr ""
 
-#: app/Helpers/helper.php:148
+#: app/Helpers/helper.php:426
 #: app/Repositories/SummaryRepository.php:32
 msgid "Field handler not found."
 msgstr ""
 
-#: app/Helpers/helper.php:154
+#: app/Helpers/helper.php:432
 msgid "Please use a valid field handler."
 msgstr ""
 
@@ -808,7 +813,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:71
 #: app/Http/Controllers/Admin/ResponseController.php:364
 #: app/Http/Controllers/Admin/ResponseController.php:711
-#: app/Http/Controllers/Admin/ResponseController.php:907
+#: app/Http/Controllers/Admin/ResponseController.php:916
 #: app/Http/Controllers/Admin/UserRegistrationController.php:44
 #: app/Http/Controllers/Admin/UserRegistrationController.php:73
 #: app/Http/Controllers/Admin/UserRegistrationController.php:124
@@ -877,9 +882,9 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/FormController.php:298
 #: app/Http/Controllers/Admin/ResponseController.php:194
-#: app/Http/Controllers/Admin/ResponseController.php:895
-#: app/Http/Controllers/Admin/ResponseController.php:1024
-#: app/Http/Controllers/Admin/ResponseController.php:1084
+#: app/Http/Controllers/Admin/ResponseController.php:904
+#: app/Http/Controllers/Admin/ResponseController.php:1033
+#: app/Http/Controllers/Admin/ResponseController.php:1093
 msgid "Sorry, Something was wrong."
 msgstr ""
 
@@ -968,9 +973,9 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:100
 #: app/Http/Controllers/Admin/PdfResourcesController.php:164
 #: app/Http/Controllers/ResponseController.php:428
-#: app/Repositories/ResponseRepository.php:33
-#: app/Repositories/ResponseRepository.php:580
-#: app/Repositories/ResponseRepository.php:633
+#: app/Repositories/ResponseRepository.php:35
+#: app/Repositories/ResponseRepository.php:685
+#: app/Repositories/ResponseRepository.php:738
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
 msgid "Form not found."
@@ -1080,23 +1085,23 @@ msgstr ""
 msgid "No fields were processed. Please check field names and ensure they exist in the form."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:936
+#: app/Http/Controllers/Admin/ResponseController.php:945
 msgid "The response starred has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:957
+#: app/Http/Controllers/Admin/ResponseController.php:966
 msgid "The response read has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:974
+#: app/Http/Controllers/Admin/ResponseController.php:983
 msgid "Invalid IDs."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:986
+#: app/Http/Controllers/Admin/ResponseController.php:995
 msgid "Responses read state updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/ResponseController.php:1098
+#: app/Http/Controllers/Admin/ResponseController.php:1107
 msgid "Responses have been successfully deleted."
 msgstr ""
 
@@ -1154,6 +1159,11 @@ msgstr ""
 
 #: app/Http/Controllers/AnalyticsController.php:57
 msgid "Could't update the view count"
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:50
+#: app/Http/Controllers/AttachmentController.php:83
+msgid "Invalid file path"
 msgstr ""
 
 #: app/Http/Controllers/CaptchaController.php:30
@@ -1331,23 +1341,23 @@ msgstr ""
 msgid "Choose %s type in select list."
 msgstr ""
 
-#: app/Providers/Admin/MenuServiceProvider.php:18
-#: app/Providers/Admin/MenuServiceProvider.php:52
-#: app/Providers/PostTypeServiceProvider.php:159
+#: app/Providers/Admin/MenuServiceProvider.php:19
+#: app/Providers/Admin/MenuServiceProvider.php:53
+#: app/Providers/PostTypeServiceProvider.php:160
 msgid "All Forms"
 msgstr ""
 
-#: app/Providers/Admin/MenuServiceProvider.php:19
-#: app/Providers/Admin/MenuServiceProvider.php:67
+#: app/Providers/Admin/MenuServiceProvider.php:20
+#: app/Providers/Admin/MenuServiceProvider.php:68
 msgid "Go Pro"
 msgstr ""
 
-#: app/Providers/Admin/MenuServiceProvider.php:54
-#: app/Providers/Admin/MenuServiceProvider.php:62
+#: app/Providers/Admin/MenuServiceProvider.php:55
+#: app/Providers/Admin/MenuServiceProvider.php:63
 msgid "Entries"
 msgstr ""
 
-#: app/Providers/Admin/MenuServiceProvider.php:64
+#: app/Providers/Admin/MenuServiceProvider.php:65
 msgid "Settings"
 msgstr ""
 
@@ -1363,130 +1373,130 @@ msgstr ""
 msgid "The selected payment method does not support subscriptions."
 msgstr ""
 
-#: app/Providers/PaymentServiceProvider.php:320
+#: app/Providers/PaymentServiceProvider.php:385
 msgid "Payment"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:30
+#: app/Providers/PostTypeServiceProvider.php:31
 msgid "FormGent Payment Success"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:32
+#: app/Providers/PostTypeServiceProvider.php:33
 msgid "FormGent Payment Failed"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:127
+#: app/Providers/PostTypeServiceProvider.php:128
 msgid "FormGent Payment Fields"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:150
+#: app/Providers/PostTypeServiceProvider.php:151
 msgctxt "Post type general name"
 msgid "Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:151
+#: app/Providers/PostTypeServiceProvider.php:152
 msgctxt "Post type singular name"
 msgid "Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:152
+#: app/Providers/PostTypeServiceProvider.php:153
 msgctxt "Admin Menu text"
 msgid "Formgent Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:153
+#: app/Providers/PostTypeServiceProvider.php:154
 msgctxt "Add New on Toolbar"
 msgid "Formgent Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:154
+#: app/Providers/PostTypeServiceProvider.php:155
 msgid "Add New"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:155
+#: app/Providers/PostTypeServiceProvider.php:156
 msgid "Add New Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:156
+#: app/Providers/PostTypeServiceProvider.php:157
 msgid "New Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:157
+#: app/Providers/PostTypeServiceProvider.php:158
 msgid "Edit Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:158
+#: app/Providers/PostTypeServiceProvider.php:159
 msgid "View Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:160
+#: app/Providers/PostTypeServiceProvider.php:161
 msgid "Search Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:161
+#: app/Providers/PostTypeServiceProvider.php:162
 msgid "Parent Forms:"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:162
+#: app/Providers/PostTypeServiceProvider.php:163
 msgid "No Forms found."
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:163
+#: app/Providers/PostTypeServiceProvider.php:164
 msgid "No Forms found in Trash."
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:164
+#: app/Providers/PostTypeServiceProvider.php:165
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
 msgid "Form Cover Image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:165
+#: app/Providers/PostTypeServiceProvider.php:166
 msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
 msgid "Set cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:166
+#: app/Providers/PostTypeServiceProvider.php:167
 msgctxt "Overrides the “Remove featured image” phrase for this post type. Added in 4.3"
 msgid "Remove cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:167
+#: app/Providers/PostTypeServiceProvider.php:168
 msgctxt "Overrides the “Use as featured image” phrase for this post type. Added in 4.3"
 msgid "Use as cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:168
+#: app/Providers/PostTypeServiceProvider.php:169
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
 msgid "Form archives"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:169
+#: app/Providers/PostTypeServiceProvider.php:170
 msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
 msgid "Insert into Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:170
+#: app/Providers/PostTypeServiceProvider.php:171
 msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
 msgid "Uploaded to this Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:171
+#: app/Providers/PostTypeServiceProvider.php:172
 msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
 msgid "Filter Forms list"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:172
+#: app/Providers/PostTypeServiceProvider.php:173
 msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
 msgid "Forms list navigation"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:173
+#: app/Providers/PostTypeServiceProvider.php:174
 msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
 msgid "Forms list"
 msgstr ""
 
 #. translators: %d: row number
-#: app/Providers/ResponseLogServiceProvider.php:213
+#: app/Providers/ResponseLogServiceProvider.php:224
 #, php-format
 msgid "Row %d"
 msgstr ""
@@ -1583,8 +1593,8 @@ msgstr ""
 msgid "The item not found."
 msgstr ""
 
-#: app/Repositories/ResponseRepository.php:386
-#: app/Repositories/ResponseRepository.php:405
+#: app/Repositories/ResponseRepository.php:424
+#: app/Repositories/ResponseRepository.php:445
 msgid "Other"
 msgstr ""
 
@@ -2550,6 +2560,7 @@ msgstr ""
 
 #: assets/blocks/custom-payment-amount/index.js:1
 #: assets/blocks/email/index.js:1
+#: assets/blocks/hidden/index.js:1
 #: assets/blocks/html/index.js:1
 #: assets/blocks/input-masking/index.js:1
 #: assets/blocks/number/index.js:1
@@ -2719,6 +2730,134 @@ msgstr ""
 
 #: assets/blocks/date-picker/index.js:1
 msgid "Saturday"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "All Icons"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Arrows"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+#: assets/blocks/step/index.js:1
+#: assets/blocks/welcome/index.js:1
+msgid "Media"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Layout"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Text & Editor"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "UI Elements"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Shapes"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Social"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Misc"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Icon Library"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Search"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "No icons found."
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Insert Icon"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Select Image"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Use Image"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Replace icon or image"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Choose Icon"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Upload Image"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Remove"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Add icon or image"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+#: assets/blocks/multiple-choice/index.js:1
+#: assets/blocks/single-choice/index.js:1
+msgid "Delete Item"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
@@ -2981,9 +3120,17 @@ msgid "Dropdown Items"
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
+msgid "Allow Multi Select"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
 #: assets/blocks/multiple-choice/index.js:1
 #: assets/blocks/single-choice/index.js:1
 msgid "Quiz Answer & Scoring Information"
+msgstr ""
+
+#: assets/blocks/dropdown/index.js:1
+msgid "Mark one or more default options to define the correct answers. The numeric values of those correct options will be summed to determine the total points for this question."
 msgstr ""
 
 #: assets/blocks/dropdown/index.js:1
@@ -3117,6 +3264,14 @@ msgstr ""
 
 #: assets/blocks/google-map/index.js:1
 msgid "Google Maps API key is not configured. Please <link>go to Settings</link> to configure it."
+msgstr ""
+
+#: assets/blocks/hidden/index.js:1
+msgid "Hidden"
+msgstr ""
+
+#: assets/blocks/hidden/index.js:1
+msgid "Enter default value"
 msgstr ""
 
 #: assets/blocks/html/index.js:1
@@ -3750,11 +3905,6 @@ msgstr ""
 
 #: assets/blocks/single-choice/index.js:1
 msgid "Single Choice Options"
-msgstr ""
-
-#: assets/blocks/step/index.js:1
-#: assets/blocks/welcome/index.js:1
-msgid "Media"
 msgstr ""
 
 #: assets/blocks/step/index.js:1

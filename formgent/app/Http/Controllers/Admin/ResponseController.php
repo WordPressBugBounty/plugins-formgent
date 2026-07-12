@@ -782,6 +782,10 @@ class ResponseController extends Controller
                 }
             }
 
+            if ( 'dropdown' === $field['field_type'] && isset( $field['allow_multi_select'] ) ) {
+                $field_data['allow_multi_select'] = (bool) $field['allow_multi_select'];
+            }
+
             // Include "other option" config for choice fields so the edit UI
             // can show/hide the "Other" input without heuristics.
             if ( in_array( $field['field_type'], ['single-choice', 'multiple-choice'], true ) ) {
@@ -870,6 +874,11 @@ class ResponseController extends Controller
             if ( isset( $option['value'] ) ) {
                 $sanitized_option['value'] = sanitize_text_field( $option['value'] );
             }
+
+            $sanitized_option = array_merge(
+                $sanitized_option,
+                formgent_get_choice_option_media( $option )
+            );
 
             if ( ! empty( $sanitized_option ) ) {
                 $sanitized_options[] = $sanitized_option;

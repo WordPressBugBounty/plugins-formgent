@@ -4,6 +4,7 @@ namespace FormGent\App\Summary;
 
 defined( 'ABSPATH' ) || exit;
 
+use FormGent\App\Utils\AnswerValueSanitizer;
 use FormGent\App\Models\Answer;
 use FormGent\App\EnumeratedList\SummaryType;
 use stdClass;
@@ -47,10 +48,14 @@ trait HasChild {
                 $child_rows = explode( '__FGS__', $item->value );
 
                 foreach ( $child_rows as $child_row_item ) {
-                      $key_value = explode( '__FGP__', $child_row_item );
-                      $filed_key = $key_value[0];
+                    $key_value = explode( '__FGP__', $child_row_item );
+                    if ( count( $key_value ) < 2 ) {
+                        continue;
+                    }
 
-                      $child_data[ $filed_key ] = wp_kses_post( $key_value[1] );
+                    $filed_key = sanitize_key( $key_value[0] );
+
+                    $child_data[ $filed_key ] = AnswerValueSanitizer::sanitize( $key_value[1] );
                 }
 
                 $item->value = $child_data;
@@ -68,4 +73,3 @@ trait HasChild {
         return apply_filters( "formgent_has_one_summary", $this->get_field_summary( $form, $field, $page, $per_page ), $field, $form );
     }
 }
-

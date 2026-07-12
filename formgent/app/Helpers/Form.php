@@ -63,7 +63,7 @@ class Form {
      */
     protected function remove_labels( array &$attributes ): void {
         // Keep a minimal representation of choice options for frontend runtime features
-        // (e.g. calculations using numeric_value). Labels are stripped to keep payload small.
+        // (e.g. calculations and conditional logic using selected option values).
         if ( isset( $attributes['options'] ) && is_array( $attributes['options'] ) ) {
             $attributes['options'] = array_map(
                 static function( $opt ) {
@@ -72,7 +72,7 @@ class Form {
                     }
 
                     $keep = [];
-                    foreach ( [ 'value', 'numeric_value', 'price', 'is_default', 'is_other' ] as $k ) {
+                    foreach ( [ 'label', 'value', 'numeric_value', 'price', 'is_default', 'is_other' ] as $k ) {
                         if ( array_key_exists( $k, $opt ) ) {
                             $keep[ $k ] = $opt[ $k ];
                         }

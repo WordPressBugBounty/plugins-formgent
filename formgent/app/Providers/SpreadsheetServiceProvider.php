@@ -167,6 +167,28 @@ class SpreadsheetServiceProvider implements Provider {
      * Get option label by value from field options
      */
     private function get_option_label_by_value( AnswerFieldDTO $field, $value ) {
+        if ( is_array( $value ) ) {
+            return implode(
+                PHP_EOL,
+                array_filter(
+                    array_map(
+                        function( $item ) use ( $field ) {
+                            return $this->get_option_label_by_value( $field, $item );
+                        },
+                        $value
+                    )
+                )
+            );
+        }
+
+        if ( is_string( $value ) ) {
+            $decoded = json_decode( $value, true );
+
+            if ( is_array( $decoded ) ) {
+                return $this->get_option_label_by_value( $field, $decoded );
+            }
+        }
+
         $option_key = array_search( $value, array_column( $field->get_options(), 'value' ) );
         return is_int( $option_key ) ? $field->get_options()[$option_key]['label'] : '';
     }

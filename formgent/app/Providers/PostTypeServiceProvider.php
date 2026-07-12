@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\WpMVC\View\View;
 use FormGent\WpMVC\Contracts\Provider;
+use FormGent\App\Utils\Capabilities;
 use WP_Post;
 
 class PostTypeServiceProvider implements Provider {
@@ -133,7 +134,7 @@ class PostTypeServiceProvider implements Provider {
     public function filter_the_content( string $content ) : string {
         global $post;
 
-        if ( $post->post_type !==  formgent_post_type() ) {
+        if ( ! $post instanceof WP_Post || $post->post_type !== formgent_post_type() ) {
             return $content;
         }
 
@@ -181,7 +182,24 @@ class PostTypeServiceProvider implements Provider {
             'show_in_menu'       => false,
             'query_var'          => true,
             'rewrite'            => [ 'slug' => 'form' ],
-            'capability_type'    => 'post',
+            'capability_type'    => [ 'formgent_form', 'formgent_forms' ],
+            'capabilities'       => [
+                'edit_post'              => 'formgent_edit_form',
+                'read_post'              => 'formgent_read_form',
+                'delete_post'            => 'formgent_delete_form',
+                'edit_posts'             => Capabilities::EDIT_FORMS,
+                'edit_others_posts'      => Capabilities::EDIT_FORMS,
+                'publish_posts'          => Capabilities::PUBLISH_FORMS,
+                'read_private_posts'     => Capabilities::READ_FORMS,
+                'delete_posts'           => Capabilities::DELETE_FORMS,
+                'delete_private_posts'   => Capabilities::DELETE_FORMS,
+                'delete_published_posts' => Capabilities::DELETE_FORMS,
+                'delete_others_posts'    => Capabilities::DELETE_FORMS,
+                'edit_private_posts'     => Capabilities::EDIT_FORMS,
+                'edit_published_posts'   => Capabilities::EDIT_FORMS,
+                'create_posts'           => Capabilities::CREATE_FORMS,
+            ],
+            'map_meta_cap'       => true,
             'has_archive'        => true,
             'hierarchical'       => false,
             'menu_position'      => null,
@@ -226,7 +244,7 @@ class PostTypeServiceProvider implements Provider {
                 'single'        => true, // One value per post
                 'default'       => [], // Default is an empty array
                 'auth_callback' => function () {
-                    return current_user_can( 'edit_posts' );
+                    return Capabilities::can_edit_forms();
                 },
             ]
         );
@@ -287,7 +305,7 @@ class PostTypeServiceProvider implements Provider {
                     "show_labels"              => true
                 ],
                 'auth_callback' => function () {
-                    return current_user_can( 'edit_posts' );
+                    return Capabilities::can_edit_forms();
                 },
             ]
         );
@@ -302,7 +320,7 @@ class PostTypeServiceProvider implements Provider {
                     ],
                 ],
                 'auth_callback' => function() {
-                    return current_user_can( 'edit_posts' );
+                    return Capabilities::can_edit_forms();
                 },
             ]
         );
@@ -321,7 +339,7 @@ class PostTypeServiceProvider implements Provider {
                     ],
                 ],
                 'auth_callback' => function() {
-                    return current_user_can( 'edit_posts' );
+                    return Capabilities::can_edit_forms();
                 },
             ]
         );
@@ -341,7 +359,7 @@ class PostTypeServiceProvider implements Provider {
                     ],
                 ],
                 'auth_callback' => function() {
-                    return current_user_can( 'edit_posts' );
+                    return Capabilities::can_edit_forms();
                 },
             ]
         );

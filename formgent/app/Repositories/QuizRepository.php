@@ -73,11 +73,12 @@ class QuizRepository {
             // If the field has choices
             if ( in_array( $field['field_type'], $choice_fields ) ) {
                 $field_options      = [];
-                $is_multiple_choice = 'multiple-choice' === $field['field_type'];
+                $is_multiple_choice = 'multiple-choice' === $field['field_type']
+                    || ( 'dropdown' === $field['field_type'] && ! empty( $field['allow_multi_select'] ) );
 
                 if ( $is_multiple_choice ) {
-                    // Multiple-choice: new quiz config uses options[].is_default for correct answers
-                    // and sums their numeric_value for total points.
+                    // Multiple-choice and multi-select dropdown use options[].is_default for correct answers.
+                    // The total points are the sum of those correct options' numeric_value values.
                     // Back-compat: fall back to legacy correct_answer/points when is_default/numeric_value are not present.
                     $derived_correct = [];
                     $derived_points  = null;
@@ -108,11 +109,23 @@ class QuizRepository {
                         }
                     }
 
-                    $correct_answer   = ! empty( $derived_correct )
-                        ? $derived_correct
-                        : ( ( isset( $field['correct_answer'] ) && is_array( $field['correct_answer'] ) ) ? $field['correct_answer'] : [] );
-                    $submitted_answer = isset( $field['value'] ) ? json_decode( $field['value'] ) : [];
-                    $field_points     = null !== $derived_points
+                    $legacy_correct = isset( $field['correct_answer'] ) ? $field['correct_answer'] : [];
+                    if ( ! is_array( $legacy_correct ) ) {
+                        $legacy_correct = '' !== $legacy_correct ? [ $legacy_correct ] : [];
+                    }
+
+                    $correct_answer = ! empty( $derived_correct ) ? $derived_correct : $legacy_correct;
+
+                    if ( isset( $field['value'] ) && is_array( $field['value'] ) ) {
+                        $submitted_answer = $field['value'];
+                    } else {
+                        $submitted_answer = isset( $field['value'] ) ? json_decode( $field['value'] ) : [];
+                    }
+
+                    if ( ! is_array( $submitted_answer ) ) {
+                        $submitted_answer = empty( $field['value'] ) ? [] : [ $field['value'] ];
+                    }
+                    $field_points = null !== $derived_points
                         ? $derived_points
                         : ( ( isset( $field['points'] ) && is_numeric( $field['points'] ) ) ? floatval( $field['points'] ) : 0 );
                 } else {
@@ -182,11 +195,14 @@ class QuizRepository {
                         }
                     }
 
-                    $field_options[] = [
-                        'label'       => $option['label'],
-                        'is_selected' => $is_selected,
-                        'is_correct'  => $is_correct_current_option,
-                    ];
+                    $field_options[] = array_merge(
+                        [
+                            'label'       => $option['label'],
+                            'is_selected' => $is_selected,
+                            'is_correct'  => $is_correct_current_option,
+                        ],
+                        formgent_get_choice_option_media( $option )
+                    );
                 }
 
                 if ( $total_selected_wrong_answer === 0 && ( $total_selected_correct_answer === $total_correct_answer ) ) {
@@ -197,12 +213,13 @@ class QuizRepository {
                 $total_score  += $field_score;
 
                 $quiz_fields[ $field_key ] = [
-                    'label'          => $field['label'],
-                    'field_type'     => $field['field_type'],
-                    'options'        => $field_options,
-                    'correct_answer' => $correct_answer,
-                    'points'         => $field_points,
-                    'score'          => $field_score,
+                    'label'              => $field['label'],
+                    'field_type'         => $field['field_type'],
+                    'allow_multi_select' => 'dropdown' === $field['field_type'] && ! empty( $field['allow_multi_select'] ),
+                    'options'            => $field_options,
+                    'correct_answer'     => $correct_answer,
+                    'points'             => $field_points,
+                    'score'              => $field_score,
                 ];
                 continue;
             }

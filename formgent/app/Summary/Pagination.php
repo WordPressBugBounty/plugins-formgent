@@ -4,6 +4,7 @@ namespace FormGent\App\Summary;
 
 defined( 'ABSPATH' ) || exit;
 
+use FormGent\App\Utils\AnswerValueSanitizer;
 use stdClass;
 use FormGent\App\EnumeratedList\SummaryType;
 
@@ -16,7 +17,15 @@ trait Pagination {
     }
 
     protected function get_answers( stdClass $form, array $field, int $page, int $per_page ) {
-        return $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'id, value, created_at' )->pagination( $page, $per_page, 1, 100 );
+        $answers = $this->query( $form->ID, $field['name'], $field['field_type'] )->select( 'id, value, created_at' )->pagination( $page, $per_page, 1, 100 );
+
+        return array_map(
+            static function( $answer ) {
+                $answer->value = AnswerValueSanitizer::sanitize( $answer->value );
+                return $answer;
+            },
+            $answers
+        );
     }
 
     protected function get_field_summary( stdClass $form, array $field, int $page, int $per_page ) {
@@ -27,4 +36,3 @@ trait Pagination {
         return apply_filters( "formgent_pagination_summery", $this->get_field_summary( $form, $field, $page, $per_page ), $field, $form );
     }
 }
-

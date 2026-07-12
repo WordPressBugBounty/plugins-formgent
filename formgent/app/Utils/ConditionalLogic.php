@@ -50,9 +50,15 @@ class ConditionalLogic {
 
         switch ( $condition['operator'] ) {
             case '=':
+                if ( $this->is_multi_value( $field_value ) ) {
+                    return $this->field_value_has_all( $field_value, $condition_value );
+                }
                 return strval( $field_value ) == strval( $condition_value );
 
             case '!=':
+                if ( $this->is_multi_value( $field_value ) ) {
+                    return ! $this->field_value_has_all( $field_value, $condition_value );
+                }
                 return strval( $field_value ) != strval( $condition_value );
 
             case 'equal_length':
@@ -73,13 +79,11 @@ class ConditionalLogic {
                     return false;
                 }
 
-                $array_value = json_decode( $field_value, true );
-
-                if ( is_null( $array_value ) ) {
+                if ( ! $this->is_multi_value( $field_value ) ) {
                     return  strpos( strtolower( strval( $field_value ) ), strtolower( strval( $condition_value ) ) ) !== false;
                 }
 
-                return in_array( $condition_value, $array_value, true );
+                return $this->field_value_has_any( $field_value, $condition_value );
             
             case 'doesNotContain':
                 if ( empty( $condition_value ) ) {
@@ -90,13 +94,11 @@ class ConditionalLogic {
                     return false;
                 }
 
-                $array_value = json_decode( $field_value, true );
-
-                if ( is_null( $array_value ) ) {
+                if ( ! $this->is_multi_value( $field_value ) ) {
                     return  strpos( strtolower( strval( $field_value ) ), strtolower( strval( $condition_value ) ) ) === false;
                 }
 
-                return ! in_array( $condition_value, $array_value, true );
+                return ! $this->field_value_has_any( $field_value, $condition_value );
             
             case 'regex':
                 $pattern = '/' . str_replace( '/', '\/', strval( $condition_value ) ) . '/';
@@ -124,6 +126,106 @@ class ConditionalLogic {
             default:
                 return false;
         }
+    }
+
+    private function parse_rule_values( $value ): array {
+        if ( is_array( $value ) ) {
+            return array_values( array_filter( array_map( 'strval', $value ), 'strlen' ) );
+        }
+
+        return array_values(
+            array_filter(
+                array_map( 'trim', explode( ',', strval( $value ) ) ),
+                static function( $item ) {
+                    return '' !== $item;
+                }
+            )
+        );
+    }
+
+    private function normalize_multi_value( $value ): array {
+        if ( is_string( $value ) ) {
+            $decoded = json_decode( $value, true );
+
+            if ( is_array( $decoded ) ) {
+                $value = $decoded;
+            }
+        }
+
+        if ( ! is_array( $value ) ) {
+            return [];
+        }
+
+        $values = [];
+        $walk   = static function( $item ) use ( &$values, &$walk ) {
+            if ( is_array( $item ) ) {
+                foreach ( $item as $key => $child ) {
+                    if ( false === $child || null === $child || '' === $child ) {
+                        continue;
+                    }
+
+                    if ( ! is_int( $key ) ) {
+                        $values[] = strval( $key );
+                    }
+
+                    if ( true === $child ) {
+                        continue;
+                    }
+
+                    $walk( $child );
+                }
+                return;
+            }
+
+            if ( null !== $item && '' !== $item ) {
+                $values[] = strval( $item );
+            }
+        };
+
+        $walk( $value );
+
+        return array_values( array_unique( $values ) );
+    }
+
+    private function is_multi_value( $value ): bool {
+        if ( is_array( $value ) ) {
+            return true;
+        }
+
+        if ( ! is_string( $value ) ) {
+            return false;
+        }
+
+        return is_array( json_decode( $value, true ) );
+    }
+
+    private function field_value_has_all( $field_value, $condition_value ): bool {
+        $field_values = $this->normalize_multi_value( $field_value );
+        $rule_values  = $this->parse_rule_values( $condition_value );
+
+        if ( empty( $rule_values ) ) {
+            return false;
+        }
+
+        foreach ( $rule_values as $value ) {
+            if ( ! in_array( strval( $value ), $field_values, true ) ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function field_value_has_any( $field_value, $condition_value ): bool {
+        $field_values = $this->normalize_multi_value( $field_value );
+
+        foreach ( $this->parse_rule_values( $condition_value ) as $value ) {
+            if ( in_array( strval( $value ), $field_values, true ) ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

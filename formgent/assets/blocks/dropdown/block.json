@@ -43,6 +43,10 @@
       "type": "boolean",
       "default": false
     },
+    "allow_multi_select": {
+      "type": "boolean",
+      "default": false
+    },
     "block_width": {
       "type": "string",
       "default": "100"

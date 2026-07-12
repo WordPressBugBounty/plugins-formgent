@@ -9,6 +9,7 @@ use FormGent\App\Fields\Email\Email;
 use FormGent\App\Fields\FileUpload\FileUpload;
 use FormGent\App\Fields\GDPR\GDPR;
 use FormGent\App\Fields\GoogleMap\GoogleMap;
+use FormGent\App\Fields\Hidden\Hidden;
 use FormGent\App\Fields\InputMasking\InputMasking;
 use FormGent\App\Fields\MultipleChoice\MultipleChoice;
 use FormGent\App\Fields\Name\Name;
@@ -39,6 +40,11 @@ return apply_filters(
         ],
         TextArea::get_key()       => [
             'class'                     => TextArea::class,
+            'allowed_in_response'       => true,
+            'allowed_in_response_table' => true,
+        ],
+        Hidden::get_key()         => [
+            'class'                     => Hidden::class,
             'allowed_in_response'       => true,
             'allowed_in_response_table' => true,
         ],

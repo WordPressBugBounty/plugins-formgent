@@ -9,6 +9,8 @@ use FormGent\App\DTO\ResponseReadDTO;
 use FormGent\App\DTO\ResponseSingleDTO;
 use FormGent\App\DTO\AllResponsesReadDTO;
 use FormGent\App\EnumeratedList\ResponseStatus;
+use FormGent\App\Utils\AnswerValueSanitizer;
+use FormGent\App\Utils\UploadFileToken;
 use FormGent\App\Models\Response;
 use FormGent\App\Models\ResponseMeta;
 use FormGent\App\Models\User;
@@ -375,8 +377,44 @@ class ResponseRepository {
      * Prepare a single field's value based on its type.
      */
     protected function prepare_field_value( \stdClass $answer, array $field_data ): \stdClass {
+        if ( FileUpload::get_key() !== $answer->field_type ) {
+            $answer->value = AnswerValueSanitizer::sanitize( $answer->value );
+        }
+
         if ( Dropdown::get_key() === $answer->field_type ) {
-            $answer->option_label = $this->get_option_label( $field_data, $answer->value );
+            $answer->allow_multi_select = ! empty( $field_data['allow_multi_select'] );
+            $values                     = is_array( $answer->value ) ? $answer->value : json_decode( $answer->value, true );
+
+            if ( is_array( $values ) ) {
+                $answer->options = array_map(
+                    function( $value ) use ( $field_data ) {
+                        $label = $this->get_option_label( $field_data, $value );
+
+                        return array_merge(
+                            [
+                                'label' => '' !== $label ? $label : $value,
+                                'value' => $value,
+                            ],
+                            $this->get_option_media( $field_data, $value )
+                        );
+                    },
+                    $values
+                );
+
+                $answer->option_label = implode(
+                    ', ',
+                    array_map(
+                        static function( $option ) {
+                            return $option['label'];
+                        },
+                        $answer->options
+                    )
+                );
+            } else {
+                $answer->option_label = $this->get_option_label( $field_data, $answer->value );
+                $media                = $this->get_option_media( $field_data, $answer->value );
+                $answer               = (object) array_merge( (array) $answer, $media );
+            }
         } elseif ( SingleChoice::get_key() === $answer->field_type ) {
             $label = $this->get_option_label( $field_data, $answer->value );
 
@@ -388,6 +426,8 @@ class ResponseRepository {
             if ( '' !== $label ) {
                 $answer->option_label = $label;
                 $answer->is_other     = false;
+                $media                = $this->get_option_media( $field_data, $answer->value );
+                $answer               = (object) array_merge( (array) $answer, $media );
             } elseif ( $allow_other ) {
                 // Keep the real free-text in $answer->value, but flag the selection as "Other".
                 $answer->option_label = $other_label;
@@ -408,11 +448,14 @@ class ResponseRepository {
                 function( $value ) use ( $field_data, $allow_other, $other_label ) {
                     $label = $this->get_option_label( $field_data, $value );
                     if ( '' !== $label ) {
-                        return [
-                            'label'    => $label,
-                            'value'    => $value,
-                            'is_other' => false,
-                        ];
+                        return array_merge(
+                            [
+                                'label'    => $label,
+                                'value'    => $value,
+                                'is_other' => false,
+                            ],
+                            $this->get_option_media( $field_data, $value )
+                        );
                     }
 
                     if ( $allow_other ) {
@@ -444,7 +487,7 @@ class ResponseRepository {
             $answer->value = array_map(
                 function( $file ) use ( $content_url ) {
                     return [
-                        'token' => base64_encode( $file ),
+                        'token' => UploadFileToken::create( $file ),
                         'url'   => $content_url . '/uploads/' . $file,
                     ];
                 },
@@ -495,6 +538,19 @@ class ResponseRepository {
                     case SingleChoice::get_key():
                     case Dropdown::get_key():
                         $formatted_item[ $child_key ]['option_label'] = $prepared->option_label ?? '';
+
+                        if ( ! empty( $prepared->icon ) ) {
+                            $formatted_item[ $child_key ]['icon'] = $prepared->icon;
+                        }
+
+                        if ( ! empty( $prepared->image ) ) {
+                            $formatted_item[ $child_key ]['image'] = $prepared->image;
+                        }
+
+                        if ( ! empty( $prepared->allow_multi_select ) ) {
+                            $formatted_item[ $child_key ]['allow_multi_select'] = true;
+                            $formatted_item[ $child_key ]['options']            = $prepared->options ?? [];
+                        }
                         break;
 
                     case MultipleChoice::get_key():
@@ -511,9 +567,58 @@ class ResponseRepository {
             $formatted[ $index ] = $formatted_item;
         }
 
-        $answer->value = $formatted;
+        $answer->value = $this->sanitize_prepared_repeater_value( $formatted );
 
         return $answer;
+    }
+
+    /**
+     * Sanitize prepared repeater display data while preserving option media
+     * that has already been sanitized from the form configuration.
+     *
+     * @param mixed  $value
+     * @param string $key
+     * @param string $parent_key
+     * @return mixed
+     */
+    protected function sanitize_prepared_repeater_value( $value, string $key = '', string $parent_key = '' ) {
+        if ( is_array( $value ) ) {
+            $sanitized = [];
+
+            foreach ( $value as $child_key => $child_value ) {
+                $sanitized[ $child_key ] = $this->sanitize_prepared_repeater_value(
+                    $child_value,
+                    (string) $child_key,
+                    $key
+                );
+            }
+
+            return $sanitized;
+        }
+
+        if ( is_object( $value ) && $value instanceof \stdClass ) {
+            $sanitized = new \stdClass();
+
+            foreach ( get_object_vars( $value ) as $child_key => $child_value ) {
+                $sanitized->{ sanitize_key( (string) $child_key ) } = $this->sanitize_prepared_repeater_value(
+                    $child_value,
+                    (string) $child_key,
+                    $key
+                );
+            }
+
+            return $sanitized;
+        }
+
+        if ( is_string( $value ) ) {
+            if ( 'icon' === $parent_key && 'svg' === $key ) {
+                return wp_kses( $value, formgent_allowed_svg_tags() );
+            }
+
+            return sanitize_textarea_field( $value );
+        }
+
+        return $value;
     }
 
     private function responses_order_query( Builder $query, ResponseReadDTO $dto ) {
@@ -698,13 +803,30 @@ class ResponseRepository {
     /**
      * Helper function to get option label by value.
      */
-    protected function get_option_label( $field_data, $value ) {
-        $option_keys = array_column( $field_data['options'] ?? [], 'value' );
-        $option_key  = array_search( $value, $option_keys );
-        if ( is_int( $option_key ) ) {
-            return $field_data['options'][$option_key]['label'];
+    protected function get_option_data( $field_data, $value ): array {
+        foreach ( $field_data['options'] ?? [] as $option ) {
+            if ( ! is_array( $option ) || ! array_key_exists( 'value', $option ) ) {
+                continue;
+            }
+
+            if ( (string) $option['value'] === (string) $value ) {
+                return $option;
+            }
         }
-        return '';
+
+        return [];
+    }
+
+    protected function get_option_label( $field_data, $value ) {
+        $option = $this->get_option_data( $field_data, $value );
+
+        return $option['label'] ?? '';
+    }
+
+    protected function get_option_media( $field_data, $value ): array {
+        $option = $this->get_option_data( $field_data, $value );
+
+        return $option ? formgent_get_choice_option_media( $option ) : [];
     }
 
     /**
@@ -852,23 +974,27 @@ class ResponseRepository {
         // Process each response to add option labels
         return array_map(
             function( $response ) use ( $fields_data ) {
-                foreach ( $response->answers as $answer ) {
+                foreach ( $response->answers as $answer_index => $answer ) {
                     $field_data = $fields_data[ $answer->field_name ] ?? [];
 
-                    // Process answers to add option_label for choice fields
-                    if ( ! in_array( $answer->field_type, ['file-upload', 'signature', 'digital-signature'], true ) ) {
-                        $this->prepare_field_value( $answer, $field_data );
+                    // Process answers to add option_label and option media for choice fields.
+                    if ( Repeater::get_key() === $answer->field_type ) {
+                        $answer = $this->prepare_answer_data( $answer, $field_data );
+                    } elseif ( ! in_array( $answer->field_type, ['file-upload', 'signature', 'digital-signature'], true ) ) {
+                        $answer = $this->prepare_field_value( $answer, $field_data );
                     }
 
                     // Process children for name/address fields
                     if ( ! empty( $answer->children ) && is_array( $answer->children ) ) {
-                        foreach ( $answer->children as $child ) {
+                        foreach ( $answer->children as $child_index => $child ) {
                             $child_field_data = $field_data['children'][ $child->field_name ] ?? [];
                             if ( ! in_array( $child->field_type, ['file-upload', 'signature', 'digital-signature'], true ) ) {
-                                $this->prepare_field_value( $child, $child_field_data );
+                                $answer->children[ $child_index ] = $this->prepare_field_value( $child, $child_field_data );
                             }
                         }
                     }
+
+                    $response->answers[ $answer_index ] = $answer;
                 }
 
                 return $response;

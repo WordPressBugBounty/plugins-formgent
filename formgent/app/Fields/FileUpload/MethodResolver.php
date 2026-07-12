@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\DTO\AnswerDTO;
 use FormGent\App\Summary\Pagination;
+use FormGent\App\Utils\UploadFileToken;
+use FormGent\WpMVC\Exceptions\Exception;
 use FormGent\WpMVC\RequestValidator\Validator;
 use stdClass;
 use WP_REST_Request;
@@ -28,7 +30,13 @@ trait MethodResolver {
 
         $values = array_map(
             function ( $value ) {
-                return base64_decode( $value );
+                $relative_path = UploadFileToken::path_from_token( (string) $value );
+
+                if ( null === $relative_path ) {
+                    throw new Exception( esc_html__( 'Invalid file token', 'formgent' ), 400 );
+                }
+
+                return $relative_path;
             }, $values 
         );
 
