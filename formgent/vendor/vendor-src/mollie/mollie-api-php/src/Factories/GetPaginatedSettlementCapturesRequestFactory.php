@@ -1,0 +1,19 @@
+<?php
+
+namespace FormGent\Mollie\Api\Factories;
+
+use FormGent\Mollie\Api\Http\Requests\GetPaginatedSettlementCapturesRequest;
+use FormGent\Mollie\Api\Types\PaymentIncludesQuery;
+class GetPaginatedSettlementCapturesRequestFactory extends RequestFactory
+{
+    private string $settlementId;
+    public function __construct(string $settlementId)
+    {
+        $this->settlementId = $settlementId;
+    }
+    public function create() : GetPaginatedSettlementCapturesRequest
+    {
+        $includePayment = $this->queryIncludes('include', PaymentIncludesQuery::PAYMENT) || $this->queryIncludes('embed', PaymentIncludesQuery::PAYMENT);
+        return new GetPaginatedSettlementCapturesRequest($this->settlementId, $this->query('from'), $this->query('limit'), $this->query('includePayment', $includePayment));
+    }
+}

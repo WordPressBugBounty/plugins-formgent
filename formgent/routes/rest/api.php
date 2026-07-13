@@ -10,6 +10,7 @@ use FormGent\App\Http\Controllers\ResponseController;
 use FormGent\App\Http\Controllers\UserController;
 use FormGent\App\Http\Controllers\UserVerificationController;
 use FormGent\App\Http\Controllers\AttachmentController;
+use FormGent\App\Http\Controllers\WebhookController;
 // use FormGent\App\Http\Controllers\FormController;
 use FormGent\WpMVC\Routing\Route;
 use FormGent\App\Jobs\Queue;
@@ -20,6 +21,7 @@ include __DIR__ . '/admin.php';
 Route::get( 'payment/success/{payment_gateway}', [PaymentController::class, 'success'] );
 Route::get( 'payment/cancel/{payment_gateway}', [PaymentController::class, 'cancel'] );
 Route::get( 'payment/retry/{order_hash}', [PaymentController::class, 'retry'] );
+Route::post( 'payment/webhook/mollie', [WebhookController::class, 'mollie'] );
 
 Route::group(
     'responses', function() {

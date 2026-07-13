@@ -27,49 +27,42 @@ class PaymentController extends Controller
         $payment_return_dto = formgent_payment_processor( $request->get_param( 'payment_gateway' ) )
             ->success( $validator, $request );
 
-        // Update payment status to paid
-        formgent_payment_repository()->update(
-            ( new PaymentDTO )
-                ->set_id( $payment_return_dto->get_payment_id() )
-                ->set_transaction_id( $payment_return_dto->get_transaction_id() )
-                ->set_billing_email( $payment_return_dto->get_billing_email() )
-                ->set_billing_name( $payment_return_dto->get_billing_name() )
-                ->set_billing_country( $payment_return_dto->get_billing_country() )
-                ->set_status( PaymentStatus::PAID )
-        );
+        $status = $payment_return_dto->get_status() ?: PaymentStatus::PAID;
 
-        $order_repository = formgent_order_repository();
-        // Update order status to paid
-        $order_repository->update(
-            ( new OrderDTO )->set_id( $payment_return_dto->get_order_id() )->set_status( OrderStatus::PAID )
-        );
+        if ( PaymentStatus::PAID !== $status ) {
+            formgent_update_payment_and_order_status(
+                $payment_return_dto->get_order_id(),
+                $payment_return_dto->get_payment_id(),
+                $status
+            );
 
-        $order = $order_repository->get_by_id( $payment_return_dto->get_order_id() );
+            $order = formgent_order_repository()->get_by_id( $payment_return_dto->get_order_id() );
 
-        // Generate PDFs with payment data now that payment is complete.
-        if ( ! empty( $order->response_id ) ) {
-            $response_obj = formgent_response_repository()->get_by_id( $order->response_id );
+            if ( $this->is_failed_payment_status( $status ) ) {
+                $this->maybe_redirect_to_payment_page( 'failed_page', $order );
 
-            if ( $response_obj && ! empty( $response_obj->form_id ) ) {
-                $pdf_links = formgent_generate_payment_pdf_links( (int) $response_obj->form_id, (int) $order->response_id );
-
-                if ( ! empty( $pdf_links ) && ! empty( $order->hash ) ) {
-                    set_transient( 'formgent_payment_pdf_links_' . $order->hash, $pdf_links, DAY_IN_SECONDS );
-                }
+                return Response::send(
+                    [
+                        "message" => esc_html__( "Payment was not completed.", 'formgent' )
+                    ],
+                    422
+                );
             }
+
+            $this->maybe_redirect_to_payment_page( 'success_page', $order );
+
+            return Response::send(
+                [
+                    "message" => esc_html__( "Payment is being processed.", 'formgent' )
+                ],
+                202
+            );
         }
 
-        $settings = formgent_get_setting( 'payment' );
+        formgent_complete_payment( $payment_return_dto );
+        $order = formgent_order_repository()->get_by_id( $payment_return_dto->get_order_id() );
 
-        if ( ! empty( $settings['success_page'] ) ) {
-            $target_url = get_permalink( $settings['success_page'] );
-
-            if ( ! empty( $target_url ) ) {
-                $target_url = add_query_arg( 'order_id', $order->hash, $target_url );
-                wp_safe_redirect( $target_url, 301 );
-                exit;
-            }
-        }
+        $this->maybe_redirect_to_payment_page( 'success_page', $order );
 
         return Response::send(
             [
@@ -87,32 +80,50 @@ class PaymentController extends Controller
 
         $payment_return_dto = formgent_payment_processor( $request->get_param( 'payment_gateway' ) )->cancel( $request );
 
-        if ( $payment_return_dto ) {
-            // Update payment status to cancelled
-            formgent_payment_repository()->update(
-                ( new PaymentDTO )->set_id( $payment_return_dto->get_payment_id() )->set_status( PaymentStatus::CANCELLED )
-            );
-
-            // Update order status to cancelled
-            formgent_order_repository()->update(
-                ( new OrderDTO )->set_id( $payment_return_dto->get_order_id() )->set_status( OrderStatus::CANCELLED )
+        if ( ! $payment_return_dto ) {
+            return Response::send(
+                [
+                    "message" => esc_html__( "Payment information was not found.", 'formgent' )
+                ],
+                404
             );
         }
 
-        $order_repository = formgent_order_repository();
-        $order            = $order_repository->get_by_id( $payment_return_dto->get_order_id() );
+        $status = $payment_return_dto->get_status() ?: PaymentStatus::CANCELLED;
 
-        $settings = formgent_get_setting( 'payment' );
+        if ( PaymentStatus::PAID === $status ) {
+            formgent_complete_payment( $payment_return_dto );
+            $order = formgent_order_repository()->get_by_id( $payment_return_dto->get_order_id() );
 
-        if ( ! empty( $settings['failed_page'] ) ) {
-            $target_url = get_permalink( $settings['failed_page'] );
+            $this->maybe_redirect_to_payment_page( 'success_page', $order );
 
-            if ( ! empty( $target_url ) ) {
-                $target_url = add_query_arg( 'order_id', $order->hash, $target_url );
-                wp_safe_redirect( $target_url, 301 );
-                exit;
-            }
+            return Response::send(
+                [
+                    "message" => esc_html__( "Payment successful.", 'formgent' )
+                ]
+            );
         }
+
+        formgent_update_payment_and_order_status(
+            $payment_return_dto->get_order_id(),
+            $payment_return_dto->get_payment_id(),
+            $status
+        );
+
+        $order = formgent_order_repository()->get_by_id( $payment_return_dto->get_order_id() );
+
+        if ( ! $this->is_failed_payment_status( $status ) ) {
+            $this->maybe_redirect_to_payment_page( 'success_page', $order );
+
+            return Response::send(
+                [
+                    "message" => esc_html__( "Payment is being processed.", 'formgent' )
+                ],
+                202
+            );
+        }
+
+        $this->maybe_redirect_to_payment_page( 'failed_page', $order );
 
         return Response::send(
             [
@@ -217,5 +228,31 @@ class PaymentController extends Controller
                 'redirect_url' => $redirect_url
             ]
         );
+    }
+
+    private function is_failed_payment_status( string $status ): bool {
+        return in_array( $status, [PaymentStatus::FAILED, PaymentStatus::CANCELLED, PaymentStatus::EXPIRED], true );
+    }
+
+    private function maybe_redirect_to_payment_page( string $setting_key, $order ): void {
+        if ( ! $order || empty( $order->hash ) ) {
+            return;
+        }
+
+        $settings = formgent_get_setting( 'payment' );
+
+        if ( empty( $settings[$setting_key] ) ) {
+            return;
+        }
+
+        $target_url = get_permalink( $settings[$setting_key] );
+
+        if ( empty( $target_url ) ) {
+            return;
+        }
+
+        $target_url = add_query_arg( 'order_id', $order->hash, $target_url );
+        wp_safe_redirect( $target_url );
+        exit;
     }
 }

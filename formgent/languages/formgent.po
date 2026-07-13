@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.10.0\n"
+"Project-Id-Version: FormGent 1.11.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-12T08:29:07+00:00\n"
+"POT-Creation-Date: 2026-07-13T17:17:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -38,6 +38,7 @@ msgstr ""
 
 #: app/EnumeratedList/OrderStatus.php:26
 #: app/EnumeratedList/PaymentStatus.php:26
+#: resources/views/shortcodes/payment-success.php:255
 msgid "Pending"
 msgstr ""
 
@@ -108,25 +109,25 @@ msgid "Total"
 msgstr ""
 
 #: app/Helpers/form-helpers.php:717
-#: resources/views/shortcodes/payment-success.php:126
+#: resources/views/shortcodes/payment-success.php:131
 #: assets/blocks/payment/index.js:1
 msgid "Daily"
 msgstr ""
 
 #: app/Helpers/form-helpers.php:718
-#: resources/views/shortcodes/payment-success.php:127
+#: resources/views/shortcodes/payment-success.php:132
 #: assets/blocks/payment/index.js:1
 msgid "Weekly"
 msgstr ""
 
 #: app/Helpers/form-helpers.php:719
-#: resources/views/shortcodes/payment-success.php:128
+#: resources/views/shortcodes/payment-success.php:133
 #: assets/blocks/payment/index.js:1
 msgid "Monthly"
 msgstr ""
 
 #: app/Helpers/form-helpers.php:720
-#: resources/views/shortcodes/payment-success.php:129
+#: resources/views/shortcodes/payment-success.php:134
 #: assets/blocks/payment/index.js:1
 msgid "Yearly"
 msgstr ""
@@ -146,659 +147,659 @@ msgstr ""
 msgid "Please use a valid field handler."
 msgstr ""
 
-#: app/Helpers/payment.php:30
+#: app/Helpers/payment.php:54
 msgid "Payment gateway not found."
 msgstr ""
 
-#: app/Helpers/payment.php:69
+#: app/Helpers/payment.php:145
 msgid "United Arab Emirates dirham"
 msgstr ""
 
-#: app/Helpers/payment.php:70
+#: app/Helpers/payment.php:146
 msgid "Afghan afghani"
 msgstr ""
 
-#: app/Helpers/payment.php:71
+#: app/Helpers/payment.php:147
 msgid "Albanian lek"
 msgstr ""
 
-#: app/Helpers/payment.php:72
+#: app/Helpers/payment.php:148
 msgid "Armenian dram"
 msgstr ""
 
-#: app/Helpers/payment.php:73
+#: app/Helpers/payment.php:149
 msgid "Netherlands Antillean guilder"
 msgstr ""
 
-#: app/Helpers/payment.php:74
+#: app/Helpers/payment.php:150
 msgid "Angolan kwanza"
 msgstr ""
 
-#: app/Helpers/payment.php:75
+#: app/Helpers/payment.php:151
 msgid "Argentine peso"
 msgstr ""
 
-#: app/Helpers/payment.php:76
+#: app/Helpers/payment.php:152
 msgid "Australian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:77
+#: app/Helpers/payment.php:153
 msgid "Aruban florin"
 msgstr ""
 
-#: app/Helpers/payment.php:78
+#: app/Helpers/payment.php:154
 msgid "Azerbaijani manat"
 msgstr ""
 
-#: app/Helpers/payment.php:79
+#: app/Helpers/payment.php:155
 msgid "Bosnia and Herzegovina convertible mark"
 msgstr ""
 
-#: app/Helpers/payment.php:80
+#: app/Helpers/payment.php:156
 msgid "Barbadian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:81
+#: app/Helpers/payment.php:157
 msgid "Bangladeshi taka"
 msgstr ""
 
-#: app/Helpers/payment.php:82
+#: app/Helpers/payment.php:158
 msgid "Bulgarian lev"
 msgstr ""
 
-#: app/Helpers/payment.php:83
+#: app/Helpers/payment.php:159
 msgid "Bahraini dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:84
+#: app/Helpers/payment.php:160
 msgid "Burundian franc"
 msgstr ""
 
-#: app/Helpers/payment.php:85
+#: app/Helpers/payment.php:161
 msgid "Bermudian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:86
+#: app/Helpers/payment.php:162
 msgid "Brunei dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:87
+#: app/Helpers/payment.php:163
 msgid "Bolivian boliviano"
 msgstr ""
 
-#: app/Helpers/payment.php:88
+#: app/Helpers/payment.php:164
 msgid "Brazilian real"
 msgstr ""
 
-#: app/Helpers/payment.php:89
+#: app/Helpers/payment.php:165
 msgid "Bahamian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:90
+#: app/Helpers/payment.php:166
 msgid "Bitcoin"
 msgstr ""
 
-#: app/Helpers/payment.php:91
+#: app/Helpers/payment.php:167
 msgid "Bhutanese ngultrum"
 msgstr ""
 
-#: app/Helpers/payment.php:92
+#: app/Helpers/payment.php:168
 msgid "Botswana pula"
 msgstr ""
 
-#: app/Helpers/payment.php:93
+#: app/Helpers/payment.php:169
 msgid "Belarusian ruble (old)"
 msgstr ""
 
-#: app/Helpers/payment.php:94
+#: app/Helpers/payment.php:170
 msgid "Belarusian ruble"
 msgstr ""
 
-#: app/Helpers/payment.php:95
+#: app/Helpers/payment.php:171
 msgid "Belize dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:96
+#: app/Helpers/payment.php:172
 msgid "Canadian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:97
+#: app/Helpers/payment.php:173
 msgid "Congolese franc"
 msgstr ""
 
-#: app/Helpers/payment.php:98
+#: app/Helpers/payment.php:174
 msgid "Swiss franc"
 msgstr ""
 
-#: app/Helpers/payment.php:99
+#: app/Helpers/payment.php:175
 msgid "Chilean peso"
 msgstr ""
 
-#: app/Helpers/payment.php:100
+#: app/Helpers/payment.php:176
 msgid "Chinese yuan"
 msgstr ""
 
-#: app/Helpers/payment.php:101
+#: app/Helpers/payment.php:177
 msgid "Colombian peso"
 msgstr ""
 
-#: app/Helpers/payment.php:102
+#: app/Helpers/payment.php:178
 msgid "Costa Rican col&oacute;n"
 msgstr ""
 
-#: app/Helpers/payment.php:103
+#: app/Helpers/payment.php:179
 msgid "Cuban convertible peso"
 msgstr ""
 
-#: app/Helpers/payment.php:104
+#: app/Helpers/payment.php:180
 msgid "Cuban peso"
 msgstr ""
 
-#: app/Helpers/payment.php:105
+#: app/Helpers/payment.php:181
 msgid "Cape Verdean escudo"
 msgstr ""
 
-#: app/Helpers/payment.php:106
+#: app/Helpers/payment.php:182
 msgid "Czech koruna"
 msgstr ""
 
-#: app/Helpers/payment.php:107
+#: app/Helpers/payment.php:183
 msgid "Djiboutian franc"
 msgstr ""
 
-#: app/Helpers/payment.php:108
+#: app/Helpers/payment.php:184
 msgid "Danish krone"
 msgstr ""
 
-#: app/Helpers/payment.php:109
+#: app/Helpers/payment.php:185
 msgid "Dominican peso"
 msgstr ""
 
-#: app/Helpers/payment.php:110
+#: app/Helpers/payment.php:186
 msgid "Algerian dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:111
+#: app/Helpers/payment.php:187
 msgid "Egyptian pound"
 msgstr ""
 
-#: app/Helpers/payment.php:112
+#: app/Helpers/payment.php:188
 msgid "Eritrean nakfa"
 msgstr ""
 
-#: app/Helpers/payment.php:113
+#: app/Helpers/payment.php:189
 msgid "Ethiopian birr"
 msgstr ""
 
-#: app/Helpers/payment.php:114
+#: app/Helpers/payment.php:190
 msgid "Euro"
 msgstr ""
 
-#: app/Helpers/payment.php:115
+#: app/Helpers/payment.php:191
 msgid "Fijian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:116
+#: app/Helpers/payment.php:192
 msgid "Falkland Islands pound"
 msgstr ""
 
-#: app/Helpers/payment.php:117
+#: app/Helpers/payment.php:193
 msgid "Pound sterling"
 msgstr ""
 
-#: app/Helpers/payment.php:118
+#: app/Helpers/payment.php:194
 msgid "Georgian lari"
 msgstr ""
 
-#: app/Helpers/payment.php:119
+#: app/Helpers/payment.php:195
 msgid "Guernsey pound"
 msgstr ""
 
-#: app/Helpers/payment.php:120
+#: app/Helpers/payment.php:196
 msgid "Ghana cedi"
 msgstr ""
 
-#: app/Helpers/payment.php:121
+#: app/Helpers/payment.php:197
 msgid "Gibraltar pound"
 msgstr ""
 
-#: app/Helpers/payment.php:122
+#: app/Helpers/payment.php:198
 msgid "Gambian dalasi"
 msgstr ""
 
-#: app/Helpers/payment.php:123
+#: app/Helpers/payment.php:199
 msgid "Guinean franc"
 msgstr ""
 
-#: app/Helpers/payment.php:124
+#: app/Helpers/payment.php:200
 msgid "Guatemalan quetzal"
 msgstr ""
 
-#: app/Helpers/payment.php:125
+#: app/Helpers/payment.php:201
 msgid "Guyanese dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:126
+#: app/Helpers/payment.php:202
 msgid "Hong Kong dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:127
+#: app/Helpers/payment.php:203
 msgid "Honduran lempira"
 msgstr ""
 
-#: app/Helpers/payment.php:128
+#: app/Helpers/payment.php:204
 msgid "Croatian kuna"
 msgstr ""
 
-#: app/Helpers/payment.php:129
+#: app/Helpers/payment.php:205
 msgid "Haitian gourde"
 msgstr ""
 
-#: app/Helpers/payment.php:130
+#: app/Helpers/payment.php:206
 msgid "Hungarian forint"
 msgstr ""
 
-#: app/Helpers/payment.php:131
+#: app/Helpers/payment.php:207
 msgid "Indonesian rupiah"
 msgstr ""
 
-#: app/Helpers/payment.php:132
+#: app/Helpers/payment.php:208
 msgid "Israeli new shekel"
 msgstr ""
 
-#: app/Helpers/payment.php:133
+#: app/Helpers/payment.php:209
 msgid "Manx pound"
 msgstr ""
 
-#: app/Helpers/payment.php:134
+#: app/Helpers/payment.php:210
 msgid "Indian rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:135
+#: app/Helpers/payment.php:211
 msgid "Iraqi dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:136
+#: app/Helpers/payment.php:212
 msgid "Iranian rial"
 msgstr ""
 
-#: app/Helpers/payment.php:137
+#: app/Helpers/payment.php:213
 msgid "Iranian toman"
 msgstr ""
 
-#: app/Helpers/payment.php:138
+#: app/Helpers/payment.php:214
 msgid "Icelandic kr&oacute;na"
 msgstr ""
 
-#: app/Helpers/payment.php:139
+#: app/Helpers/payment.php:215
 msgid "Jersey pound"
 msgstr ""
 
-#: app/Helpers/payment.php:140
+#: app/Helpers/payment.php:216
 msgid "Jamaican dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:141
+#: app/Helpers/payment.php:217
 msgid "Jordanian dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:142
+#: app/Helpers/payment.php:218
 msgid "Japanese yen"
 msgstr ""
 
-#: app/Helpers/payment.php:143
+#: app/Helpers/payment.php:219
 msgid "Kenyan shilling"
 msgstr ""
 
-#: app/Helpers/payment.php:144
+#: app/Helpers/payment.php:220
 msgid "Kyrgyzstani som"
 msgstr ""
 
-#: app/Helpers/payment.php:145
+#: app/Helpers/payment.php:221
 msgid "Cambodian riel"
 msgstr ""
 
-#: app/Helpers/payment.php:146
+#: app/Helpers/payment.php:222
 msgid "Comorian franc"
 msgstr ""
 
-#: app/Helpers/payment.php:147
+#: app/Helpers/payment.php:223
 msgid "North Korean won"
 msgstr ""
 
-#: app/Helpers/payment.php:148
+#: app/Helpers/payment.php:224
 msgid "South Korean won"
 msgstr ""
 
-#: app/Helpers/payment.php:149
+#: app/Helpers/payment.php:225
 msgid "Kuwaiti dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:150
+#: app/Helpers/payment.php:226
 msgid "Cayman Islands dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:151
+#: app/Helpers/payment.php:227
 msgid "Kazakhstani tenge"
 msgstr ""
 
-#: app/Helpers/payment.php:152
+#: app/Helpers/payment.php:228
 msgid "Lao kip"
 msgstr ""
 
-#: app/Helpers/payment.php:153
+#: app/Helpers/payment.php:229
 msgid "Lebanese pound"
 msgstr ""
 
-#: app/Helpers/payment.php:154
+#: app/Helpers/payment.php:230
 msgid "Sri Lankan rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:155
+#: app/Helpers/payment.php:231
 msgid "Liberian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:156
+#: app/Helpers/payment.php:232
 msgid "Lesotho loti"
 msgstr ""
 
-#: app/Helpers/payment.php:157
+#: app/Helpers/payment.php:233
 msgid "Libyan dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:158
+#: app/Helpers/payment.php:234
 msgid "Moroccan dirham"
 msgstr ""
 
-#: app/Helpers/payment.php:159
+#: app/Helpers/payment.php:235
 msgid "Moldovan leu"
 msgstr ""
 
-#: app/Helpers/payment.php:160
+#: app/Helpers/payment.php:236
 msgid "Malagasy ariary"
 msgstr ""
 
-#: app/Helpers/payment.php:161
+#: app/Helpers/payment.php:237
 msgid "Macedonian denar"
 msgstr ""
 
-#: app/Helpers/payment.php:162
+#: app/Helpers/payment.php:238
 msgid "Burmese kyat"
 msgstr ""
 
-#: app/Helpers/payment.php:163
+#: app/Helpers/payment.php:239
 msgid "Mongolian t&ouml;gr&ouml;g"
 msgstr ""
 
-#: app/Helpers/payment.php:164
+#: app/Helpers/payment.php:240
 msgid "Macanese pataca"
 msgstr ""
 
-#: app/Helpers/payment.php:165
+#: app/Helpers/payment.php:241
 msgid "Mauritanian ouguiya"
 msgstr ""
 
-#: app/Helpers/payment.php:166
+#: app/Helpers/payment.php:242
 msgid "Mauritian rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:167
+#: app/Helpers/payment.php:243
 msgid "Maldivian rufiyaa"
 msgstr ""
 
-#: app/Helpers/payment.php:168
+#: app/Helpers/payment.php:244
 msgid "Malawian kwacha"
 msgstr ""
 
-#: app/Helpers/payment.php:169
+#: app/Helpers/payment.php:245
 msgid "Mexican peso"
 msgstr ""
 
-#: app/Helpers/payment.php:170
+#: app/Helpers/payment.php:246
 msgid "Malaysian ringgit"
 msgstr ""
 
-#: app/Helpers/payment.php:171
+#: app/Helpers/payment.php:247
 msgid "Mozambican metical"
 msgstr ""
 
-#: app/Helpers/payment.php:172
+#: app/Helpers/payment.php:248
 msgid "Namibian dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:173
+#: app/Helpers/payment.php:249
 msgid "Nigerian naira"
 msgstr ""
 
-#: app/Helpers/payment.php:174
+#: app/Helpers/payment.php:250
 msgid "Nicaraguan c&oacute;rdoba"
 msgstr ""
 
-#: app/Helpers/payment.php:175
+#: app/Helpers/payment.php:251
 msgid "Norwegian krone"
 msgstr ""
 
-#: app/Helpers/payment.php:176
+#: app/Helpers/payment.php:252
 msgid "Nepalese rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:177
+#: app/Helpers/payment.php:253
 msgid "New Zealand dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:178
+#: app/Helpers/payment.php:254
 msgid "Omani rial"
 msgstr ""
 
-#: app/Helpers/payment.php:179
+#: app/Helpers/payment.php:255
 msgid "Panamanian balboa"
 msgstr ""
 
-#: app/Helpers/payment.php:180
+#: app/Helpers/payment.php:256
 msgid "Sol"
 msgstr ""
 
-#: app/Helpers/payment.php:181
+#: app/Helpers/payment.php:257
 msgid "Papua New Guinean kina"
 msgstr ""
 
-#: app/Helpers/payment.php:182
+#: app/Helpers/payment.php:258
 msgid "Philippine peso"
 msgstr ""
 
-#: app/Helpers/payment.php:183
+#: app/Helpers/payment.php:259
 msgid "Pakistani rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:184
+#: app/Helpers/payment.php:260
 msgid "Polish z&#x142;oty"
 msgstr ""
 
-#: app/Helpers/payment.php:185
+#: app/Helpers/payment.php:261
 msgid "Transnistrian ruble"
 msgstr ""
 
-#: app/Helpers/payment.php:186
+#: app/Helpers/payment.php:262
 msgid "Paraguayan guaran&iacute;"
 msgstr ""
 
-#: app/Helpers/payment.php:187
+#: app/Helpers/payment.php:263
 msgid "Qatari riyal"
 msgstr ""
 
-#: app/Helpers/payment.php:188
+#: app/Helpers/payment.php:264
 msgid "Romanian leu"
 msgstr ""
 
-#: app/Helpers/payment.php:189
+#: app/Helpers/payment.php:265
 msgid "Serbian dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:190
+#: app/Helpers/payment.php:266
 msgid "Russian ruble"
 msgstr ""
 
-#: app/Helpers/payment.php:191
+#: app/Helpers/payment.php:267
 msgid "Rwandan franc"
 msgstr ""
 
-#: app/Helpers/payment.php:192
+#: app/Helpers/payment.php:268
 msgid "Saudi riyal"
 msgstr ""
 
-#: app/Helpers/payment.php:193
+#: app/Helpers/payment.php:269
 msgid "Solomon Islands dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:194
+#: app/Helpers/payment.php:270
 msgid "Seychellois rupee"
 msgstr ""
 
-#: app/Helpers/payment.php:195
+#: app/Helpers/payment.php:271
 msgid "Sudanese pound"
 msgstr ""
 
-#: app/Helpers/payment.php:196
+#: app/Helpers/payment.php:272
 msgid "Swedish krona"
 msgstr ""
 
-#: app/Helpers/payment.php:197
+#: app/Helpers/payment.php:273
 msgid "Singapore dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:198
+#: app/Helpers/payment.php:274
 msgid "Saint Helena pound"
 msgstr ""
 
-#: app/Helpers/payment.php:199
+#: app/Helpers/payment.php:275
 msgid "Sierra Leonean leone"
 msgstr ""
 
-#: app/Helpers/payment.php:200
+#: app/Helpers/payment.php:276
 msgid "Somali shilling"
 msgstr ""
 
-#: app/Helpers/payment.php:201
+#: app/Helpers/payment.php:277
 msgid "Surinamese dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:202
+#: app/Helpers/payment.php:278
 msgid "South Sudanese pound"
 msgstr ""
 
-#: app/Helpers/payment.php:203
+#: app/Helpers/payment.php:279
 msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra"
 msgstr ""
 
-#: app/Helpers/payment.php:204
+#: app/Helpers/payment.php:280
 msgid "Syrian pound"
 msgstr ""
 
-#: app/Helpers/payment.php:205
+#: app/Helpers/payment.php:281
 msgid "Swazi lilangeni"
 msgstr ""
 
-#: app/Helpers/payment.php:206
+#: app/Helpers/payment.php:282
 msgid "Thai baht"
 msgstr ""
 
-#: app/Helpers/payment.php:207
+#: app/Helpers/payment.php:283
 msgid "Tajikistani somoni"
 msgstr ""
 
-#: app/Helpers/payment.php:208
+#: app/Helpers/payment.php:284
 msgid "Turkmenistan manat"
 msgstr ""
 
-#: app/Helpers/payment.php:209
+#: app/Helpers/payment.php:285
 msgid "Tunisian dinar"
 msgstr ""
 
-#: app/Helpers/payment.php:210
+#: app/Helpers/payment.php:286
 msgid "Tongan pa&#x2bb;anga"
 msgstr ""
 
-#: app/Helpers/payment.php:211
+#: app/Helpers/payment.php:287
 msgid "Turkish lira"
 msgstr ""
 
-#: app/Helpers/payment.php:212
+#: app/Helpers/payment.php:288
 msgid "Trinidad and Tobago dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:213
+#: app/Helpers/payment.php:289
 msgid "New Taiwan dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:214
+#: app/Helpers/payment.php:290
 msgid "Tanzanian shilling"
 msgstr ""
 
-#: app/Helpers/payment.php:215
+#: app/Helpers/payment.php:291
 msgid "Ukrainian hryvnia"
 msgstr ""
 
-#: app/Helpers/payment.php:216
+#: app/Helpers/payment.php:292
 msgid "Ugandan shilling"
 msgstr ""
 
-#: app/Helpers/payment.php:217
+#: app/Helpers/payment.php:293
 msgid "United States (US) dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:218
+#: app/Helpers/payment.php:294
 msgid "Uruguayan peso"
 msgstr ""
 
-#: app/Helpers/payment.php:219
+#: app/Helpers/payment.php:295
 msgid "Uzbekistani som"
 msgstr ""
 
-#: app/Helpers/payment.php:220
+#: app/Helpers/payment.php:296
 msgid "Venezuelan bol&iacute;var (2008–2018)"
 msgstr ""
 
-#: app/Helpers/payment.php:221
+#: app/Helpers/payment.php:297
 msgid "Venezuelan bol&iacute;var"
 msgstr ""
 
-#: app/Helpers/payment.php:222
+#: app/Helpers/payment.php:298
 msgid "Vietnamese &#x111;&#x1ed3;ng"
 msgstr ""
 
-#: app/Helpers/payment.php:223
+#: app/Helpers/payment.php:299
 msgid "Vanuatu vatu"
 msgstr ""
 
-#: app/Helpers/payment.php:224
+#: app/Helpers/payment.php:300
 msgid "Samoan t&#x101;l&#x101;"
 msgstr ""
 
-#: app/Helpers/payment.php:225
+#: app/Helpers/payment.php:301
 msgid "Central African CFA franc"
 msgstr ""
 
-#: app/Helpers/payment.php:226
+#: app/Helpers/payment.php:302
 msgid "East Caribbean dollar"
 msgstr ""
 
-#: app/Helpers/payment.php:227
+#: app/Helpers/payment.php:303
 msgid "West African CFA franc"
 msgstr ""
 
-#: app/Helpers/payment.php:228
+#: app/Helpers/payment.php:304
 msgid "CFP franc"
 msgstr ""
 
-#: app/Helpers/payment.php:229
+#: app/Helpers/payment.php:305
 msgid "Yemeni rial"
 msgstr ""
 
-#: app/Helpers/payment.php:230
+#: app/Helpers/payment.php:306
 msgid "South African rand"
 msgstr ""
 
-#: app/Helpers/payment.php:231
+#: app/Helpers/payment.php:307
 msgid "Zambian kwacha"
 msgstr ""
 
@@ -1111,7 +1112,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/SubscriptionController.php:36
 #: app/Http/Controllers/Admin/SubscriptionController.php:136
-#: app/Http/Controllers/PaymentController.php:138
+#: app/Http/Controllers/PaymentController.php:149
 msgid "Order not found."
 msgstr ""
 
@@ -1186,23 +1187,37 @@ msgstr ""
 msgid "Login successful. Redirecting..."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:76
+#: app/Http/Controllers/PaymentController.php:46
+msgid "Payment was not completed."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:56
+#: app/Http/Controllers/PaymentController.php:120
+msgid "Payment is being processed."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:69
+#: app/Http/Controllers/PaymentController.php:102
 msgid "Payment successful."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:119
+#: app/Http/Controllers/PaymentController.php:86
+msgid "Payment information was not found."
+msgstr ""
+
+#: app/Http/Controllers/PaymentController.php:130
 msgid "Payment canceled."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:147
+#: app/Http/Controllers/PaymentController.php:158
 msgid "Order is already paid."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:159
+#: app/Http/Controllers/PaymentController.php:170
 msgid "Order items not found."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:174
+#: app/Http/Controllers/PaymentController.php:185
 msgid "Payment method not found."
 msgstr ""
 
@@ -1339,6 +1354,21 @@ msgstr ""
 #: app/Integrations/ZohoCRM/ZohoCRM.php:129
 #, php-format
 msgid "Choose %s type in select list."
+msgstr ""
+
+#: app/PaymentProcessors/Mollie.php:40
+#: app/PaymentProcessors/Mollie.php:184
+msgid "Mollie API key is not configured."
+msgstr ""
+
+#: app/PaymentProcessors/Mollie.php:176
+msgid "Payment was not found."
+msgstr ""
+
+#. translators: %d: order id
+#: app/PaymentProcessors/Mollie.php:261
+#, php-format
+msgid "FormGent Order #%d"
 msgstr ""
 
 #: app/Providers/Admin/MenuServiceProvider.php:19
@@ -1771,6 +1801,14 @@ msgstr ""
 msgid "Pay securely with PayPal"
 msgstr ""
 
+#: assets/blocks/payment/render.php:221
+msgid "Mollie"
+msgstr ""
+
+#: assets/blocks/payment/render.php:224
+msgid "Pay securely with Mollie"
+msgstr ""
+
 #: assets/blocks/repeater/render.php:31
 #: assets/blocks/repeater/render.php:45
 msgid "Remove Item"
@@ -1811,7 +1849,7 @@ msgid "Trying"
 msgstr ""
 
 #: resources/views/shortcodes/payment-failed.php:53
-#: resources/views/shortcodes/payment-success.php:141
+#: resources/views/shortcodes/payment-success.php:146
 msgid "You are viewing sample order data."
 msgstr ""
 
@@ -1827,89 +1865,98 @@ msgstr ""
 msgid "Go Home"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:119
+#: resources/views/shortcodes/payment-success.php:124
 msgid "day"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:120
+#: resources/views/shortcodes/payment-success.php:125
 msgid "week"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:121
+#: resources/views/shortcodes/payment-success.php:126
 msgid "month"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:122
+#: resources/views/shortcodes/payment-success.php:127
 msgid "year"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:148
+#: resources/views/shortcodes/payment-success.php:156
+msgid "Payment Processing"
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:158
 msgid "Payment Success"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:152
+#: resources/views/shortcodes/payment-success.php:165
+msgid "Your payment is still being processed. We will update your order after the gateway confirms the final status."
+msgstr ""
+
+#: resources/views/shortcodes/payment-success.php:167
 msgid "Your subscription has been activated successfully."
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:154
+#: resources/views/shortcodes/payment-success.php:169
 msgid "Your transaction has been completed successfully."
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:162
+#: resources/views/shortcodes/payment-success.php:177
 msgid "Amount:"
 msgstr ""
 
 #. translators: %d: number of trial days
-#: resources/views/shortcodes/payment-success.php:176
+#: resources/views/shortcodes/payment-success.php:191
 #, php-format
 msgid "after %d days"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:197
+#: resources/views/shortcodes/payment-success.php:212
 msgid "Payment Method:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:214
+#: resources/views/shortcodes/payment-success.php:229
 msgid "Subscription ID:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:226
+#: resources/views/shortcodes/payment-success.php:241
 msgid "Transaction ID:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:238
+#: resources/views/shortcodes/payment-success.php:253
+#: resources/views/shortcodes/payment-success.php:263
 msgid "Status:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:240
+#: resources/views/shortcodes/payment-success.php:265
 msgid "Active"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:246
+#: resources/views/shortcodes/payment-success.php:271
 msgid "Start Date:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:257
+#: resources/views/shortcodes/payment-success.php:282
 msgid "Next Billing Date:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:282
+#: resources/views/shortcodes/payment-success.php:307
 msgid "Billing Cycle:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:291
+#: resources/views/shortcodes/payment-success.php:316
 msgid "Plan:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:301
+#: resources/views/shortcodes/payment-success.php:326
 msgid "Date:"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:319
+#: resources/views/shortcodes/payment-success.php:344
 msgid "Your Documents"
 msgstr ""
 
-#: resources/views/shortcodes/payment-success.php:324
+#: resources/views/shortcodes/payment-success.php:349
 msgid "Download PDF"
 msgstr ""
 

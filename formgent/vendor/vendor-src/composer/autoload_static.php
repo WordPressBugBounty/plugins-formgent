@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit929200e2492be0135a0a672ff8949268
+class ComposerStaticInitff7beb2cea3fdfbbbf503ab65a98034e
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -39,7 +39,9 @@ class ComposerStaticInit929200e2492be0135a0a672ff8949268
             'FormGent\\PhpDocReader\\' => 22,
             'FormGent\\PaypalServerSdkLib\\' => 28,
             'FormGent\\ParagonIE\\ConstantTime\\' => 32,
+            'FormGent\\Nyholm\\Psr7\\' => 21,
             'FormGent\\Monolog\\' => 17,
+            'FormGent\\Mollie\\Api\\' => 20,
             'FormGent\\MailchimpMarketing\\' => 28,
             'FormGent\\Laravel\\SerializableClosure\\' => 37,
             'FormGent\\Invoker\\' => 17,
@@ -54,6 +56,7 @@ class ComposerStaticInit929200e2492be0135a0a672ff8949268
             'FormGent\\DI\\' => 12,
             'FormGent\\Core\\' => 14,
             'FormGent\\CoreInterfaces\\' => 24,
+            'FormGent\\Composer\\CaBundle\\' => 27,
             'FormGent\\Bootstrap\\' => 19,
             'FormGent\\Appsero\\' => 17,
             'FormGent\\App\\' => 13,
@@ -142,9 +145,17 @@ class ComposerStaticInit929200e2492be0135a0a672ff8949268
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
+        'FormGent\\Nyholm\\Psr7\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/nyholm/psr7/src',
+        ),
         'FormGent\\Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'FormGent\\Mollie\\Api\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
         ),
         'FormGent\\MailchimpMarketing\\' =>
         array (
@@ -202,6 +213,10 @@ class ComposerStaticInit929200e2492be0135a0a672ff8949268
         array (
             0 => __DIR__ . '/..' . '/apimatic/core-interfaces/src',
         ),
+        'FormGent\\Composer\\CaBundle\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
         'FormGent\\Bootstrap\\' =>
         array (
             0 => __DIR__ . '/../..' . '/../bootstrap',
@@ -245,9 +260,9 @@ class ComposerStaticInit929200e2492be0135a0a672ff8949268
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit929200e2492be0135a0a672ff8949268::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit929200e2492be0135a0a672ff8949268::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit929200e2492be0135a0a672ff8949268::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitff7beb2cea3fdfbbbf503ab65a98034e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitff7beb2cea3fdfbbbf503ab65a98034e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitff7beb2cea3fdfbbbf503ab65a98034e::$classMap;
 
         }, null, ClassLoader::class);
     }

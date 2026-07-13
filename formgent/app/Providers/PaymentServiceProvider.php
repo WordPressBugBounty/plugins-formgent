@@ -56,7 +56,7 @@ class PaymentServiceProvider implements Provider
         $is_subscription = ( ( $payment_field_attr['payment_type'] ?? '' ) === 'subscription' );
 
         // Enforce allowed gateways for subscriptions (filterable by pro).
-        $allowed_gateways = apply_filters( 'formgent_subscription_allowed_gateways', ['stripe'], $payment_field_attr );
+        $allowed_gateways = formgent_get_subscription_payment_gateways( $payment_field_attr );
         if ( $is_subscription && ! in_array( $payment_gateway, $allowed_gateways, true ) ) {
             return array_merge(
                 $response_data,

@@ -57,6 +57,15 @@
             ),
             'dev_requirement' => false,
         ),
+        'composer/ca-bundle' => array(
+            'pretty_version' => '1.5.12',
+            'version' => '1.5.12.0',
+            'reference' => '00a2f4201641d5c53f7fc0195e6c8d9fcc321a78',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/./ca-bundle',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'deliciousbrains/wp-background-processing' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -151,12 +160,30 @@
             ),
             'dev_requirement' => false,
         ),
+        'mollie/mollie-api-php' => array(
+            'pretty_version' => 'v3.13.1',
+            'version' => '3.13.1.0',
+            'reference' => 'c35f5b1549a032a3cb52014828485bb6c40396cb',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mollie/mollie-api-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'monolog/monolog' => array(
             'pretty_version' => '2.x-dev',
             'version' => '2.9999999.9999999.9999999-dev',
             'reference' => 'cd82b5069148dd811ef54b4b92ce1b3aad84209b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'nyholm/psr7' => array(
+            'pretty_version' => '1.8.2',
+            'version' => '1.8.2.0',
+            'reference' => 'a71f2b11690f4b24d099d6b16690a90ae14fc6f3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nyholm/psr7',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -214,6 +241,12 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'php-http/message-factory-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
         'php-jsonpointer/php-jsonpointer' => array(
             'pretty_version' => 'v3.0.2',
             'version' => '3.0.2.0',
@@ -257,14 +290,12 @@
             ),
         ),
         'psr/http-client' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
             'reference' => 'bb5906edc1c324c9a05aa0873d40117941e5fa90',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-client',
-            'aliases' => array(
-                0 => '1.0.x-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'psr/http-client-implementation' => array(
@@ -289,14 +320,12 @@
             ),
         ),
         'psr/http-message' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => '2.0',
+            'version' => '2.0.0.0',
             'reference' => '402d35bcb92c70c026d1a6a9883f06b2ead23d71',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-message',
-            'aliases' => array(
-                0 => '2.0.x-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'psr/http-message-implementation' => array(

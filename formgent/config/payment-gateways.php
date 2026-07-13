@@ -4,6 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\PaymentProcessors\Stripe;
 use FormGent\App\PaymentProcessors\Paypal;
+use FormGent\App\PaymentProcessors\Mollie;
 
 return apply_filters(
     'formgent_payment_gateways', [
@@ -16,6 +17,11 @@ return apply_filters(
             'processor'   => Stripe::class,
             'label'       => __( 'Stripe', 'formgent' ),
             'description' => __( 'Stripe is a popular payment gateway that enables secure credit card payments and supports a wide range of currencies and payment methods.', 'formgent' ),
-        ]
+        ],
+        Mollie::get_key() => [
+            'processor'   => Mollie::class,
+            'label'       => __( 'Mollie', 'formgent' ),
+            'description' => __( 'Mollie lets you accept one-time online payments using a hosted checkout experience across many local and international payment methods.', 'formgent' ),
+        ],
     ] 
 );

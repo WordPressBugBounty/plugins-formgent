@@ -1,0 +1,26 @@
+<?php
+
+namespace FormGent\Mollie\Api\Http\Requests;
+
+use FormGent\Mollie\Api\Contracts\IsIteratable;
+use FormGent\Mollie\Api\Resources\TerminalPairingCodeCollection;
+use FormGent\Mollie\Api\Traits\IsIteratableRequest;
+/**
+ * @see https://docs.mollie.com/reference/terminals-list-pairing-codes
+ */
+class GetPaginatedTerminalPairingCodesRequest extends SortablePaginatedRequest implements IsIteratable
+{
+    use IsIteratableRequest;
+    protected $hydratableResource = TerminalPairingCodeCollection::class;
+    private ?string $profileId;
+    public function __construct(?string $from = null, ?int $limit = null, ?string $sort = null, ?string $profileId = null)
+    {
+        parent::__construct($from, $limit, $sort);
+        $this->profileId = $profileId;
+        $this->query()->add('profileId', $this->profileId);
+    }
+    public function resolveResourcePath() : string
+    {
+        return 'terminals/pairing-codes';
+    }
+}

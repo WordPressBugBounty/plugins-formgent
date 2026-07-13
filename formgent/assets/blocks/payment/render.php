@@ -15,7 +15,7 @@ foreach ( $payment_methods as $method ) {
 
 // For subscriptions, only show gateways allowed by the filter (default: Stripe only).
 if ( $payment_type === 'subscription' ) {
-    $subscription_gateways = apply_filters( 'formgent_subscription_allowed_gateways', ['stripe'] );
+    $subscription_gateways = formgent_get_subscription_payment_gateways( $attributes );
     $enabled_methods       = array_values( array_filter( $enabled_methods, fn( $m ) => in_array( $m, $subscription_gateways, true ) ) );
 }
 
@@ -215,6 +215,13 @@ $has_single_method    = count( $enabled_methods ) === 1;
                                         </strong>
                                         <span class="formgent-field-paypal-subtitle">
                                             <?php echo esc_html__( 'Pay securely with PayPal', 'formgent' ); ?>
+                                        </span>
+                                    <?php elseif ( $method === 'mollie' ) : ?>
+                                        <strong class="formgent-field-mollie-title">
+                                            <?php echo esc_html__( 'Mollie', 'formgent' ); ?>
+                                        </strong>
+                                        <span class="formgent-field-mollie-subtitle">
+                                            <?php echo esc_html__( 'Pay securely with Mollie', 'formgent' ); ?>
                                         </span>
                                     <?php endif; ?>
                                 </div>

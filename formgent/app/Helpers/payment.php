@@ -3,12 +3,36 @@
 defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\Contracts\PaymentInterface;
+use FormGent\App\DTO\OrderDTO;
+use FormGent\App\DTO\PaymentDTO;
+use FormGent\App\DTO\PaymentReturnDTO;
+use FormGent\App\EnumeratedList\OrderStatus;
+use FormGent\App\EnumeratedList\PaymentStatus;
 use FormGent\App\Repositories\OrderItemRepository;
 use FormGent\App\Repositories\OrderRepository;
 use FormGent\App\Repositories\PaymentRepository;
 
 function formgent_get_payment_gateways(): array {
     return formgent_config( 'payment-gateways' );
+}
+
+function formgent_get_subscription_payment_gateways( $payment_field_attr = null ): array {
+    $gateways = apply_filters( 'formgent_subscription_allowed_gateways', ['stripe'], $payment_field_attr );
+
+    if ( ! is_array( $gateways ) ) {
+        return ['stripe'];
+    }
+
+    $configured_gateways = array_keys( formgent_get_payment_gateways() );
+    $gateways            = array_map( 'sanitize_key', $gateways );
+    $gateways            = array_filter(
+        $gateways,
+        static function ( $gateway ) use ( $configured_gateways ) {
+            return in_array( $gateway, $configured_gateways, true );
+        }
+    );
+
+    return array_values( array_unique( $gateways ) );
 }
 
 function formgent_order_repository(): OrderRepository {
@@ -56,6 +80,58 @@ function formgent_is_payment_enabled() {
     }
 
     return true;
+}
+
+function formgent_complete_payment( PaymentReturnDTO $payment_return_dto ): void {
+    formgent_payment_repository()->update(
+        ( new PaymentDTO )
+            ->set_id( $payment_return_dto->get_payment_id() )
+            ->set_transaction_id( $payment_return_dto->get_transaction_id() )
+            ->set_billing_email( $payment_return_dto->get_billing_email() )
+            ->set_billing_name( $payment_return_dto->get_billing_name() )
+            ->set_billing_country( $payment_return_dto->get_billing_country() )
+            ->set_status( PaymentStatus::PAID )
+    );
+
+    $order_repository = formgent_order_repository();
+
+    $order_repository->update(
+        ( new OrderDTO )
+            ->set_id( $payment_return_dto->get_order_id() )
+            ->set_status( OrderStatus::PAID )
+    );
+
+    $order = $order_repository->get_by_id( $payment_return_dto->get_order_id() );
+
+    if ( ! $order || empty( $order->response_id ) ) {
+        return;
+    }
+
+    $response_obj = formgent_response_repository()->get_by_id( $order->response_id );
+
+    if ( ! $response_obj || empty( $response_obj->form_id ) ) {
+        return;
+    }
+
+    $pdf_links = formgent_generate_payment_pdf_links( (int) $response_obj->form_id, (int) $order->response_id );
+
+    if ( ! empty( $pdf_links ) && ! empty( $order->hash ) ) {
+        set_transient( 'formgent_payment_pdf_links_' . $order->hash, $pdf_links, DAY_IN_SECONDS );
+    }
+}
+
+function formgent_update_payment_and_order_status( int $order_id, int $payment_id, string $status ): void {
+    formgent_payment_repository()->update(
+        ( new PaymentDTO )
+            ->set_id( $payment_id )
+            ->set_status( $status )
+    );
+
+    formgent_order_repository()->update(
+        ( new OrderDTO )
+            ->set_id( $order_id )
+            ->set_status( $status )
+    );
 }
 
 function formgent_get_currencies() {
@@ -465,4 +541,3 @@ function formgent_price( $price, array $args = [] ) {
 
     return sprintf( $price_format, $currency_symbol, $price );
 }
-;

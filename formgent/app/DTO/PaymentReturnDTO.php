@@ -19,6 +19,8 @@ class PaymentReturnDTO extends DTO {
 
     private ?string $billing_country = null;
 
+    private ?string $status = null;
+
     /**
      * Get the value of order_id
      *
@@ -147,6 +149,28 @@ class PaymentReturnDTO extends DTO {
      */
     public function set_billing_country( ?string $billing_country ): self {
         $this->billing_country = $billing_country;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     *
+     * @return ?string
+     */
+    public function get_status(): ?string {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @param ?string $status
+     *
+     * @return self
+     */
+    public function set_status( ?string $status ): self {
+        $this->status = $status;
 
         return $this;
     }

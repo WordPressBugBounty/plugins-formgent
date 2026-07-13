@@ -1,6 +1,6 @@
-<?php defined( 'ABSPATH' ) || exit; 
+<?php defined( 'ABSPATH' ) || exit;
 
-use FormGent\App\EnumeratedList\OrderStatus; 
+use FormGent\App\EnumeratedList\OrderStatus;
 
 //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $order_hash = ! empty( $_GET['order_id'] ) ? sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) : null;
@@ -23,7 +23,7 @@ if ( ! $order ) {
     }
 }
 
-if ( ! in_array( $order->status, [OrderStatus::FAILED, OrderStatus::CANCELLED], true ) ) {
+if ( ! in_array( $order->status, [OrderStatus::FAILED, OrderStatus::CANCELLED, OrderStatus::EXPIRED], true ) ) {
     return;
 }
 
@@ -35,13 +35,13 @@ if ( ! $show_dummy ) {
 
 include_once __DIR__ . '/payment-failed-style.php';
 ?>
-<div 
+<div
     class="formgent-card"
     data-wp-interactive="formgent/payment-failed"
     data-wp-context='{
-    "isTrying": false, 
-    "buttonText": "<?php echo esc_html__( 'Try again', 'formgent' ); ?>", 
-    "buttonLoadingText": "<?php echo esc_html__( 'Trying', 'formgent' ); ?>", 
+    "isTrying": false,
+    "buttonText": "<?php echo esc_html__( 'Try again', 'formgent' ); ?>",
+    "buttonLoadingText": "<?php echo esc_html__( 'Trying', 'formgent' ); ?>",
     "errorMessage": null
     }'
 >
@@ -60,7 +60,7 @@ include_once __DIR__ . '/payment-failed-style.php';
     <h1 class="formgent-title"><?php esc_html_e( 'Payment Failed', 'formgent' ); ?></h1>
     <p class="formgent-subtitle"><?php esc_html_e( 'Please try again or contact support if the problem continues.', 'formgent' ); ?></p>
 
-    <button 
+    <button
         class="formgent-try-again-button"
         data-wp-on--click="actions.retryPayment"
         data-wp-bind--disabled="context.isTrying"

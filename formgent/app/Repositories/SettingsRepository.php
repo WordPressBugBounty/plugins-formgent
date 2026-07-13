@@ -53,6 +53,10 @@ class SettingsRepository {
                 "publishable_key" => "",
                 "secret_key"      => "",
             ],
+            "mollie"          => [
+                "status"  => false,
+                "api_key" => "",
+            ],
         ],
         "login_registration"         => [
             "login"        => [

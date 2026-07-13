@@ -1,0 +1,27 @@
+<?php
+
+namespace FormGent\Mollie\Api\Http\Requests;
+
+use FormGent\Mollie\Api\Contracts\SupportsTestmodeInQuery;
+use FormGent\Mollie\Api\Resources\Balance;
+use FormGent\Mollie\Api\Types\Method;
+/**
+ * @see https://docs.mollie.com/reference/v2/balances-api/get-balance
+ */
+class GetBalanceRequest extends ResourceHydratableRequest implements SupportsTestmodeInQuery
+{
+    protected static string $method = Method::GET;
+    protected $hydratableResource = Balance::class;
+    private string $id;
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
+    /**
+     * Resolve the resource path.
+     */
+    public function resolveResourcePath() : string
+    {
+        return "balances/{$this->id}";
+    }
+}

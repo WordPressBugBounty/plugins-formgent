@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.10.0
+Stable tag: 1.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -73,7 +73,7 @@ Build traditional forms, one-question-at-a-time conversational forms, and multi-
 Deliver personalized form experiences by showing or hiding fields based on user input. Create dynamic forms that adapt in real time, improving engagement and data quality.
 
 1. Payments and Orders
-Collect one-time payments with Stripe and PayPal. Build product order forms with payment items, custom amounts, quantity controls, payment summaries, and order details.
+Collect one-time payments with Stripe, PayPal & Mollie. Build product order forms with payment items, custom amounts, quantity controls, payment summaries, and order details.
 
 1. Quizzes, Surveys, and Polls
 Turn any form into an interactive quiz, survey, or poll with scoring, answer summaries, and result display support.
@@ -88,7 +88,7 @@ Show a success message, redirect to a WordPress page, redirect to a custom URL, 
 Manage entries from a dedicated response area with single-entry views, field editing, notes, starred/read status, exports, unread badges, response logs, and form analytics summaries.
 
 1. Integrations and Automation
-Connect submissions with Google Sheets, Mailchimp, Zoho CRM, Zapier, Directorist, WPML, Google Maps, Stripe, and PayPal.
+Connect submissions with Google Sheets, Mailchimp, Zoho CRM, Zapier, Directorist, WPML, Google Maps, Stripe, PayPal & Mollie.
 
 1. User Login and Registration
 Build login and registration forms with dedicated blocks, account field mapping, redirect settings, and user verification workflows.
@@ -104,7 +104,7 @@ FormGent includes a broad set of production features in the free plugin:
 1. Classic forms, conversational forms, and multi-step forms
 1. Conditional field logic
 1. Quiz, survey, and poll support
-1. Stripe and PayPal one-time payment forms
+1. Stripe, PayPal & Mollie one-time payment forms
 1. Product order fields, payment items, custom payment amounts, quantity fields, and payment summaries
 1. Email notifications with dynamic tags, CC, BCC, Reply-To, From Name, and From Email
 1. Form confirmations with success messages, page redirects, and custom URL redirects
@@ -132,7 +132,7 @@ FormGent includes the following blocks and field types:
 1. Standard fields: Name, Email, Single-Line Text, Multi-Line Text, Number, Phone Number, Website URL, and Address.
 1. Choice and scoring fields: Dropdown, Single Choice, Multiple Choice, Rating, and Range Slider.
 1. Advanced inputs: Date & Time Picker, File Upload, Google Map, GDPR Compliance, Captcha, Input Masking, Password, and Repeater.
-1. Payment blocks: Payment, Payment Item, Custom Payment Amount, Quantity, Payment Summary, Stripe, and PayPal.
+1. Payment blocks: Payment, Payment Item, Custom Payment Amount, Quantity, Payment Summary, Stripe, PayPal & Mollie.
 1. Login and registration blocks: Login, Login Username, Login Password, Remember Me, Forgot Password, Signup Link, Register, and Register Signin Link.
 
 == Pro Isn’t Required. But It’s Worth It ==
@@ -219,7 +219,7 @@ Absolutely! FormGent is designed with a mobile-first approach.
 
 = Does FormGent support payment forms? =
 
-Yes, FormGent supports Stripe and PayPal one-time payments. Stripe and PayPal subscription payment workflows are available in FormGent Pro.
+Yes, FormGent supports Stripe, PayPal & Mollie one-time payments. Stripe and PayPal subscription payment workflows are available in FormGent Pro.
 
 = Can I create login and registration forms? =
 
@@ -246,6 +246,10 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.11.0 - 13 July 2026 =
+* New: Added Mollie Payment Gateway support.
+* Fixed: form loading issue on Elementor pages.
+
 = 1.10.0 - 07 July 2026 =
 * New: Hidden field block for storing background values without showing the field to visitors.
 * Added: Icon and image support for Single Choice, Multiple Choice, and Dropdown options, including editor controls and frontend rendering.

@@ -1,0 +1,30 @@
+<?php
+
+namespace FormGent\Mollie\Api\Http\Requests;
+
+use FormGent\Mollie\Api\Contracts\SupportsTestmodeInPayload;
+use FormGent\Mollie\Api\Traits\HasJsonPayload;
+use FormGent\Mollie\Api\Types\Method;
+/**
+ * @see https://docs.mollie.com/reference/delete-webhook
+ */
+class DeleteWebhookRequest extends ResourceHydratableRequest implements SupportsTestmodeInPayload
+{
+    use HasJsonPayload;
+    /**
+     * Define the HTTP method.
+     */
+    protected static string $method = Method::DELETE;
+    private string $id;
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
+    /**
+     * The resource path.
+     */
+    public function resolveResourcePath() : string
+    {
+        return "webhooks/{$this->id}";
+    }
+}

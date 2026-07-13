@@ -10,8 +10,19 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     }
 
-    .formgent-success-icon {
+    .formgent-success-icon,
+    .formgent-processing-icon {
         margin-bottom: 16px;
+    }
+
+    .formgent-processing-icon svg {
+        width: 48px;
+        height: 48px;
+        animation: formgent-payment-spin 1s linear infinite;
+    }
+
+    .formgent-processing-icon svg path {
+        fill: #f5bb43;
     }
 
     .formgent-title {
@@ -71,6 +82,10 @@
 
     .formgent-status-active {
         color: #26a56c;
+    }
+
+    .formgent-status-pending {
+        color: #b7791f;
     }
 
     .formgent-payment-method {
@@ -151,5 +166,15 @@
         width: 18px;
         height: 18px;
         flex-shrink: 0;
+    }
+
+    @keyframes formgent-payment-spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
     }
 </style>

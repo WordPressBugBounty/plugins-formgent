@@ -1,0 +1,12 @@
+<?php
+
+namespace FormGent\Mollie\Api\Factories;
+
+use FormGent\Mollie\Api\Http\Requests\GetPaginatedSettlementsRequest;
+class GetPaginatedSettlementsRequestFactory extends RequestFactory
+{
+    public function create() : GetPaginatedSettlementsRequest
+    {
+        return new GetPaginatedSettlementsRequest($this->query('from'), $this->query('limit'), $this->query('balanceId'), $this->query('year'), $this->query('month'), $this->query('currencies'));
+    }
+}

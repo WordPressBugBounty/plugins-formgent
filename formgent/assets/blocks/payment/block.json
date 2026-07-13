@@ -4,7 +4,7 @@
   "name": "formgent/payment",
   "title": "Payment",
   "category": "formgent-payment",
-  "description": "Unified payment block for FormGent. Supports one-time and subscription payments with Stripe and PayPal.",
+  "description": "Unified payment block for FormGent. Supports one-time payments with Stripe, PayPal, and Mollie, plus subscription payments with supported gateways.",
   "textdomain": "formgent",
   "attributes": {
     "id": {

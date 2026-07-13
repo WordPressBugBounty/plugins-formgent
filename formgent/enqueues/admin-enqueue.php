@@ -22,6 +22,7 @@ if ( formgent_post_type() === get_post_type() ) {
 
     $formgent_payment_settings = formgent_get_setting( 'payment' );
     $payment_gateways          = array_keys( formgent_get_payment_gateways() );
+    $subscription_gateways     = formgent_get_subscription_payment_gateways();
     $enabled_payment_gateways  = array_values(
         array_filter(
             $payment_gateways,
@@ -30,27 +31,27 @@ if ( formgent_post_type() === get_post_type() ) {
             }
         )
     );
+    $editor_data               = [
+        'form_type'                => get_post_meta( get_post()->ID, "_formgent_type", true ),
+        'dummy_image_url'          => formgent_url( 'assets/images/dummy.webp' ),
+        'colors'                   => wp_get_global_settings( ['color', 'palette', 'default'] ),
+        'payment_gateways'         => $payment_gateways,
+        'enabled_payment_gateways' => $enabled_payment_gateways,
+        'subscription_gateways'    => $subscription_gateways,
+        'currency_symbols'         => formgent_get_currency_symbols(),
+        'is_pro_active'            => class_exists( 'FormGentPro' ),
+    ];
 
     wp_localize_script(
         'formgent/blocks-editor',
         'formgent_editor_data',
-        [
-            'form_type'                => get_post_meta( get_post()->ID, "_formgent_type", true ),
-            'dummy_image_url'          => formgent_url( 'assets/images/dummy.webp' ),
-            'colors'                   => wp_get_global_settings( ['color', 'palette', 'default'] ),
-            'payment_gateways'         => $payment_gateways,
-            'enabled_payment_gateways' => $enabled_payment_gateways,
-        ]
+        $editor_data
     );
 
     wp_localize_script(
         "formgent-form-editor-script",
         'formgent_editor_data',
-        [
-            'form_type'        => get_post_meta( get_post()->ID, "_formgent_type", true ),
-            'currency_symbols' => formgent_get_currency_symbols(),
-            'is_pro_active'    => class_exists( 'FormGentPro' ),
-        ]
+        $editor_data
     );
 
     wp_localize_script(
