@@ -3,11 +3,12 @@
 defined( 'ABSPATH' ) || exit;
 
 use FormGent\WpMVC\App;
+use FormGent\App\Multisite\SiteLifecycle;
 
 /**
  * Plugin Name:       FormGent
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.11.0
+ * Version:           1.12.0
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Tested up to:      7.0
@@ -27,6 +28,8 @@ define( 'FORMGENT_DEPENDENCY_VERSION', '1.0.0' );
 final class FormGent {
     private static ?FormGent $instance = null;
 
+    private SiteLifecycle $site_lifecycle;
+
     public static function instance(): FormGent {
         if ( is_null( self::$instance ) ) {
             self::$instance = new self();
@@ -35,7 +38,9 @@ final class FormGent {
     }
 
     public function load(): void {
-        register_activation_hook( __FILE__, [$this, 'on_activation'] );
+        $this->site_lifecycle = new SiteLifecycle( __FILE__ );
+
+        register_activation_hook( __FILE__, [$this->site_lifecycle, 'activate'] );
         register_deactivation_hook( __FILE__, [$this, 'on_deactivation'] );
 
         $application = App::instance();
@@ -50,16 +55,12 @@ final class FormGent {
 
                 do_action( 'formgent_before_load' );
 
+                $this->site_lifecycle->boot();
                 $application->load();
 
                 do_action( 'formgent_after_load' );
             }
         );
-    }
-
-    public function on_activation(): void {
-        new FormGent\App\Setup\Activation();
-        add_option( 'formgent_activation_redirect', true );
     }
 
     public function on_deactivation(): void {

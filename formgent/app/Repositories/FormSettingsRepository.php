@@ -6,6 +6,9 @@ defined( "ABSPATH" ) || exit;
 
 class FormSettingsRepository {
     protected array $default_settings = [
+        "analytics"                 => [
+            "enabled" => true,
+        ],
         "save_incompleted_data"     => "no",
         "hide_formgent_branding"    => "no",
         "confirmation"              => [
@@ -46,12 +49,17 @@ class FormSettingsRepository {
     public function get_settings( int $form_id ) {
         $settings = get_post_meta( $form_id, '_formgent_settings', true );
         $settings = is_array( $settings ) ? array_merge( $this->default_settings, $settings ) : $this->default_settings;
+        $settings = apply_filters( 'formgent_form_settings', $settings, $form_id );
 
-        return apply_filters( 'formgent_form_settings', $settings, $form_id );
+        return $this->enforce_sharing_status( $form_id, $settings );
     }
 
     public function save_settings( int $form_id, array $settings ) {
-        return update_post_meta( $form_id, '_formgent_settings', $settings );
+        return update_post_meta( $form_id, '_formgent_settings', $this->enforce_sharing_status( $form_id, $settings ) );
+    }
+
+    public function enforce_sharing_status_for_form( int $form_id ) {
+        return $this->save_settings( $form_id, $this->get_settings( $form_id ) );
     }
 
     public function get_setting_by_key( int $form_id, string $key, $default = null ) {
@@ -65,5 +73,16 @@ class FormSettingsRepository {
         $settings[$key] = $value;
 
         return $this->save_settings( $form_id, $settings );
+    }
+
+    private function enforce_sharing_status( int $form_id, array $settings ): array {
+        if ( formgent_get_form_post( $form_id, true ) ) {
+            return $settings;
+        }
+
+        $settings['design']           = isset( $settings['design'] ) && is_array( $settings['design'] ) ? $settings['design'] : [];
+        $settings['design']['status'] = false;
+
+        return $settings;
     }
 }

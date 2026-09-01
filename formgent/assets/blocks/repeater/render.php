@@ -1,8 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit;
-// Check if we're in the editor context
-$is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->editor ?? null, 'is_edit_mode' ) && \Elementor\Plugin::$instance->editor->is_edit_mode() ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->preview ?? null, 'is_preview_mode' ) && \Elementor\Plugin::$instance->preview->is_preview_mode() ) );
+$is_editor = formgent_is_editor_context();
 ?>
 <div data-wp-interactive="formgent/form" data-wp-context='{ "repeater_name": "<?php echo esc_attr( $attributes['name'] ); ?>", "repeater_items": [ 0 ] }' data-wp-init="callbacks.initRepeater" data-wp-bind--hidden="state.hideField" class="display-none formgent-field formgent-field-repeater formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>" id="<?php echo esc_attr( formgent_field_id_prefix( $attributes['id'] ) ); ?>">
     <div class="formgent-field-single formgent-field-align-<?php echo esc_attr( $attributes['label_alignment'] ); ?>">

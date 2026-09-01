@@ -11,10 +11,7 @@ $context = [
     'maxAllowedReached'   => false,
 ];
 
-// Check if we're in the editor context
-$is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->editor ?? null, 'is_edit_mode' ) && \Elementor\Plugin::$instance->editor->is_edit_mode() ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->preview ?? null, 'is_preview_mode' ) && \Elementor\Plugin::$instance->preview->is_preview_mode() ) );
+$is_editor = formgent_is_editor_context();
 
 if ( $is_editor ) {
     echo '<style>

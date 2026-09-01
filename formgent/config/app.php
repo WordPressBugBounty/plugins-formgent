@@ -15,6 +15,7 @@ use FormGent\App\Providers\CapabilitiesServiceProvider;
 use FormGent\App\Providers\EmailNotificationServiceProvider;
 use FormGent\App\Providers\BlockServiceProvider;
 use FormGent\App\Providers\ElementorServiceProvider;
+use FormGent\App\Providers\FrontendAssetServiceProvider;
 use FormGent\App\Providers\PostTypeServiceProvider;
 use FormGent\App\Providers\Admin\MenuServiceProvider;
 use FormGent\App\Providers\ShortCodeServiceProvider;
@@ -38,6 +39,7 @@ use FormGent\App\Providers\ResponseLogServiceProvider;
 use FormGent\App\Providers\LoginServiceProvider;
 use FormGent\App\Providers\RegisterServiceProvider;
 use FormGent\App\Providers\PdfCleanupServiceProvider;
+use FormGent\App\Providers\AbilitiesServiceProvider;
 
 return [
     'version'                 => Helpers::get_plugin_version( 'formgent' ),
@@ -56,6 +58,7 @@ return [
         ShortCodeServiceProvider::class,
         CapabilitiesServiceProvider::class,
         ElementorServiceProvider::class,
+        FrontendAssetServiceProvider::class,
         BlockServiceProvider::class,
         PostTypeServiceProvider::class,
         EmailNotificationServiceProvider::class,
@@ -76,6 +79,7 @@ return [
         LoginServiceProvider::class,
         RegisterServiceProvider::class,
         PdfCleanupServiceProvider::class,
+        AbilitiesServiceProvider::class,
     ],
 
     'admin_providers'         => [

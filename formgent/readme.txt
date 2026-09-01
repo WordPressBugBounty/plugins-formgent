@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.11.0
+Stable tag: 1.12.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,12 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.12.0 - 01 September 2026 =
+* New: Added MCP Support.
+* Added: Form Analytics disable option.
+* Fixed: Asset loading & performance issues.
+* Fixed: Data lifecycle for multisite.
+
 = 1.11.0 - 13 July 2026 =
 * New: Added Mollie Payment Gateway support.
 * Fixed: form loading issue on Elementor pages.

@@ -7,11 +7,30 @@ defined( 'ABSPATH' ) || exit;
 use FormGent\WpMVC\View\View;
 use FormGent\WpMVC\Contracts\Provider;
 use FormGent\App\Utils\Capabilities;
+use FormGent\App\Services\Forms\FormCacheService;
 use WP_Post;
 
 class PostTypeServiceProvider implements Provider {
+    /**
+     * Register after plugins that use the same `/form` rewrite base so
+     * FormGent deliberately owns that namespace.
+     */
+    private const REGISTRATION_PRIORITY = 99;
+
+    /** Bump when FormGent's rewrite ownership or structure changes. */
+    private const REWRITE_RULES_VERSION = '2';
+
+    private const REWRITE_RULES_VERSION_OPTION = 'formgent_form_rewrite_rules_version';
+
+    private FormCacheService $form_cache;
+
+    public function __construct( FormCacheService $form_cache ) {
+        $this->form_cache = $form_cache;
+    }
+
     public function boot() {
-        add_action( 'init', [self::class, 'register_post_type'] );
+        add_action( 'init', [self::class, 'register_post_type'], self::REGISTRATION_PRIORITY );
+        add_action( 'wp_loaded', [self::class, 'maybe_refresh_rewrite_rules'] );
         add_filter( 'allowed_block_types_all', [$this, 'allow_blocks_for_formgent_form'], 10, 2 );
         add_filter( 'the_content', [$this, 'filter_the_content'] );
         add_filter( 'block_categories_all', [$this, 'filter_block_categories_all'] );
@@ -21,7 +40,20 @@ class PostTypeServiceProvider implements Provider {
         add_action( 'admin_init', [$this, 'handle_plugin_activation_redirect'] );
         add_action( 'send_headers', [$this, 'embed_header_compatibility'], 999999999 );
         add_action( 'post_updated', [$this, 'remove_form_cache'] );
+        add_action( 'post_updated', [$this, 'disable_unpublished_form_sharing'], 10, 3 );
         add_filter( 'display_post_states', [$this, 'page_post_states'], 10, 2 );
+    }
+
+    /**
+     * Refresh persisted rewrite rules once after changing their ownership.
+     */
+    public static function maybe_refresh_rewrite_rules() : void {
+        if ( self::REWRITE_RULES_VERSION === get_option( self::REWRITE_RULES_VERSION_OPTION ) ) {
+            return;
+        }
+
+        flush_rewrite_rules( false );
+        update_option( self::REWRITE_RULES_VERSION_OPTION, self::REWRITE_RULES_VERSION, false );
     }
 
     public function page_post_states( $post_states, $post ) {
@@ -37,7 +69,20 @@ class PostTypeServiceProvider implements Provider {
     }
 
     public function remove_form_cache( $form_id ) : void {
+        $this->form_cache->forget_fields( absint( $form_id ) );
         wp_cache_delete( "form_{$form_id}_fields", "formgent" );
+        do_action( 'formgent_form_asset_cache_clear', (int) $form_id );
+    }
+
+    public function disable_unpublished_form_sharing( int $form_id, WP_Post $post_after, WP_Post $post_before ) : void {
+        $is_form        = formgent_post_type() === $post_after->post_type;
+        $status_changed = $post_after->post_status !== $post_before->post_status;
+
+        if ( ! $is_form || ! $status_changed || 'publish' === $post_after->post_status ) {
+            return;
+        }
+
+        formgent_form_settings_repository()->enforce_sharing_status_for_form( $form_id );
     }
 
     public function embed_header_compatibility() {
@@ -68,14 +113,23 @@ class PostTypeServiceProvider implements Provider {
     }
 
     public function restrict_formgent_permalink_access() {
-        if ( ! is_singular( formgent_post_type() ) || current_user_can( 'administrator' ) ) {
+        if ( ! is_singular( formgent_post_type() ) ) {
             return;
         }
 
-        $form_settings = formgent_form_repository()->get_settings( get_post()->ID );
+        $form = get_post();
 
-        //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if ( isset( $_GET['embed'] ) || formgent_get_nested_value( 'design.status', $form_settings, false ) ) {
+        if ( ! $form instanceof WP_Post ) {
+            return;
+        }
+
+        if ( current_user_can( 'edit_post', $form->ID ) ) {
+            return;
+        }
+
+        $form_settings = formgent_form_repository()->get_settings( $form->ID );
+
+        if ( 'publish' === $form->post_status && formgent_get_nested_value( 'design.status', $form_settings, false ) ) {
             return;
         }
 

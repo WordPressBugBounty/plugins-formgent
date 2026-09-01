@@ -14,6 +14,7 @@ use FormGent\App\Repositories\ResponseRepository;
 use FormGent\App\Repositories\AnswerRepository;
 use FormGent\App\Repositories\FormRepository;
 use FormGent\App\Repositories\PdfRepository;
+use FormGent\App\Multisite\SiteLifecycle;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
 use stdClass;
@@ -48,6 +49,18 @@ class ResponseController extends Controller {
      * @return array
      */
     public function store( Validator $validator, WP_REST_Request $request ) {
+        $schema = SiteLifecycle::ensure_current_site_schema();
+
+        if ( is_wp_error( $schema ) ) {
+            return Response::send(
+                [
+                    'code'    => 'formgent_database_not_ready',
+                    'message' => esc_html__( 'Form submission is temporarily unavailable because the site database is not ready.', 'formgent' ),
+                ],
+                503
+            );
+        }
+
         // Validate the request parameters.
         $validator->validate(
             [
@@ -355,6 +368,18 @@ class ResponseController extends Controller {
     }
 
     public function generate_token( Validator $validator, WP_REST_Request $wp_rest_request ) {
+        $schema = SiteLifecycle::ensure_current_site_schema();
+
+        if ( is_wp_error( $schema ) ) {
+            return Response::send(
+                [
+                    'code'    => 'formgent_database_not_ready',
+                    'message' => esc_html__( 'Form submission is temporarily unavailable because the site database is not ready.', 'formgent' ),
+                ],
+                503
+            );
+        }
+
         $validator->validate(
             [
                 'form_id' => 'required|numeric'
@@ -388,9 +413,31 @@ class ResponseController extends Controller {
 
         $response_id = $this->repository->create( $dto );
 
+        if ( $response_id <= 0 ) {
+            return Response::send(
+                [
+                    'code'    => 'formgent_response_create_failed',
+                    'message' => esc_html__( 'The form response could not be started. Please try again.', 'formgent' ),
+                ],
+                503
+            );
+        }
+
         $dto->set_id( $response_id );
 
         $response_token = $this->repository->create_token( $response_id, $dto->get_form_id() );
+
+        if ( empty( $response_token ) ) {
+            $this->repository->delete_by_ids( [$response_id] );
+
+            return Response::send(
+                [
+                    'code'    => 'formgent_response_token_create_failed',
+                    'message' => esc_html__( 'The form response could not be started. Please try again.', 'formgent' ),
+                ],
+                503
+            );
+        }
 
         do_action( 'formgent_after_create_form_response_token', $response_token, $dto, $wp_rest_request );
 

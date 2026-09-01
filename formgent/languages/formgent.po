@@ -2,22 +2,23 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.11.0\n"
+"Project-Id-Version: FormGent 1.12.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-13T17:17:55+00:00\n"
+"POT-Creation-Date: 2026-09-01T05:05:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
 
 #. Plugin Name of the plugin
 #: formgent.php
+#: app/Abilities/AbilityRegistrar.php:67
 #: app/Providers/Admin/MenuServiceProvider.php:52
-#: app/Providers/PostTypeServiceProvider.php:122
+#: app/Providers/PostTypeServiceProvider.php:176
 msgid "FormGent"
 msgstr ""
 
@@ -34,6 +35,191 @@ msgstr ""
 #. Author URI of the plugin
 #: formgent.php
 msgid "http://wpwax.com"
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:68
+msgid "Secure form, response, analytics, and settings abilities from FormGent."
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:124
+msgid "A compatible MCP Adapter transport is unavailable."
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:140
+msgid "The MCP Adapter is missing required handler classes."
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:148
+msgid "FormGent MCP Server"
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:149
+msgid "Secure FormGent form building and management."
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:161
+msgid "The FormGent MCP server could not be registered."
+msgstr ""
+
+#: app/Abilities/AbstractAbility.php:88
+msgid "The WordPress Abilities API is unavailable."
+msgstr ""
+
+#: app/Abilities/AbstractAbility.php:95
+#: app/Abilities/FormGentAbility.php:39
+msgid "The ability input does not match the declared schema."
+msgstr ""
+
+#: app/Abilities/AbstractAbility.php:103
+msgid "The ability input could not be sanitized."
+msgstr ""
+
+#: app/Abilities/AbstractAbility.php:168
+msgid "The value is invalid for this field."
+msgstr ""
+
+#: app/Abilities/Analytics/GetFormAnalytics.php:34
+msgid "Get FormGent analytics"
+msgstr ""
+
+#: app/Abilities/Analytics/GetFormAnalytics.php:38
+msgid "Returns bounded, permission-filtered aggregates. Response rows and answers are never returned."
+msgstr ""
+
+#: app/Abilities/Forms/CreateForm.php:34
+msgid "Create a FormGent form"
+msgstr ""
+
+#: app/Abilities/Forms/CreateForm.php:38
+msgid "Creates a complete form from either normalized fields or an exact Gutenberg layout. Provide exactly one representation."
+msgstr ""
+
+#: app/Abilities/Forms/DeleteForm.php:34
+msgid "Delete a FormGent form"
+msgstr ""
+
+#: app/Abilities/Forms/DeleteForm.php:38
+msgid "Deletes a form. State whether the operation uses trash or irreversible permanent deletion before execution."
+msgstr ""
+
+#: app/Abilities/Forms/DuplicateForm.php:34
+msgid "Duplicate a FormGent form"
+msgstr ""
+
+#: app/Abilities/Forms/DuplicateForm.php:38
+msgid "Creates a new draft from safe form content. Confirm the source and optional title before execution."
+msgstr ""
+
+#: app/Abilities/Forms/GetEmbedCode.php:34
+msgid "Get FormGent embed code"
+msgstr ""
+
+#: app/Abilities/Forms/GetEmbedCode.php:38
+msgid "Returns bounded FormGent shortcode and Gutenberg embed markup after validating the form."
+msgstr ""
+
+#: app/Abilities/Forms/GetForm.php:34
+msgid "Get a FormGent form"
+msgstr ""
+
+#: app/Abilities/Forms/GetForm.php:38
+msgid "Returns normalized fields plus the complete safe Gutenberg layout. Use layout when an exact structural round trip is required."
+msgstr ""
+
+#: app/Abilities/Forms/GetFormAutomations.php:41
+msgid "Get FormGent form automations"
+msgstr ""
+
+#: app/Abilities/Forms/GetFormAutomations.php:45
+msgid "Returns non-secret email, PDF, registration, and licensed automation configuration for a form. Credentials and PDF passwords are never returned."
+msgstr ""
+
+#: app/Abilities/Forms/GetFormStats.php:34
+msgid "Get FormGent form statistics"
+msgstr ""
+
+#: app/Abilities/Forms/GetFormStats.php:38
+msgid "Returns bounded, permission-filtered aggregate statistics without response records."
+msgstr ""
+
+#: app/Abilities/Forms/ListForms.php:34
+msgid "List FormGent forms"
+msgstr ""
+
+#: app/Abilities/Forms/ListForms.php:38
+msgid "Returns a bounded, permission-filtered list of form summaries without form content."
+msgstr ""
+
+#: app/Abilities/Forms/UpdateForm.php:34
+msgid "Update a FormGent form"
+msgstr ""
+
+#: app/Abilities/Forms/UpdateForm.php:38
+msgid "Updates a form after full validation. Supplying fields or layout replaces the complete structure; use layout to preserve screens, buttons, and nested blocks."
+msgstr ""
+
+#: app/Abilities/Forms/UpdateFormAutomations.php:41
+msgid "Update FormGent form automations"
+msgstr ""
+
+#: app/Abilities/Forms/UpdateFormAutomations.php:45
+msgid "Replaces each supplied automation collection after validation. Omitted collections remain unchanged; credentials, passwords, payment settings, webhooks, and executable scripts are excluded."
+msgstr ""
+
+#: app/Abilities/Responses/BulkGetResponses.php:35
+msgid "Bulk get FormGent responses"
+msgstr ""
+
+#: app/Abilities/Responses/BulkGetResponses.php:39
+msgid "Returns up to 50 ordered, permission-filtered responses with mandatory sensitive-data redaction."
+msgstr ""
+
+#: app/Abilities/Responses/DeleteResponse.php:35
+msgid "Delete FormGent responses"
+msgstr ""
+
+#: app/Abilities/Responses/DeleteResponse.php:39
+msgid "Permanently deletes responses. This is irreversible and requires confirm=true."
+msgstr ""
+
+#: app/Abilities/Responses/GetResponse.php:35
+msgid "Get a FormGent response"
+msgstr ""
+
+#: app/Abilities/Responses/GetResponse.php:39
+msgid "Returns one bounded, permission-filtered response with sensitive answer types redacted."
+msgstr ""
+
+#: app/Abilities/Responses/ListResponses.php:35
+msgid "List FormGent responses"
+msgstr ""
+
+#: app/Abilities/Responses/ListResponses.php:39
+msgid "Returns bounded, permission-filtered response summaries without answer data."
+msgstr ""
+
+#: app/Abilities/Responses/UpdateResponseState.php:35
+msgid "Update FormGent response state"
+msgstr ""
+
+#: app/Abilities/Responses/UpdateResponseState.php:39
+msgid "Marks responses read or unread, or stars or unstars them. Confirm the requested state before execution."
+msgstr ""
+
+#: app/Abilities/Settings/GetGlobalSettings.php:41
+msgid "Get FormGent global settings"
+msgstr ""
+
+#: app/Abilities/Settings/GetGlobalSettings.php:45
+msgid "Returns a bounded, permission-filtered subset of non-secret FormGent settings."
+msgstr ""
+
+#: app/Abilities/Settings/UpdateGlobalSettings.php:41
+msgid "Update FormGent global settings"
+msgstr ""
+
+#: app/Abilities/Settings/UpdateGlobalSettings.php:45
+msgid "Updates an allowlisted FormGent setting subset. Confirm the requested settings change before execution."
 msgstr ""
 
 #: app/EnumeratedList/OrderStatus.php:26
@@ -88,62 +274,83 @@ msgstr ""
 msgid "Validation failed."
 msgstr ""
 
-#: app/Helpers/form-helpers.php:642
+#: app/Helpers/form-helpers.php:678
 #: assets/blocks/payment-summary/render.php:22
 #: assets/blocks/payment/render.php:95
 msgid "Item"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:643
+#: app/Helpers/form-helpers.php:679
 msgid "Qty"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:644
+#: app/Helpers/form-helpers.php:680
 msgid "Unit Price"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:645
+#: app/Helpers/form-helpers.php:681
 #: assets/blocks/payment-summary/render.php:28
 #: assets/blocks/payment/render.php:107
 msgid "Total"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:717
+#: app/Helpers/form-helpers.php:753
 #: resources/views/shortcodes/payment-success.php:131
 #: assets/blocks/payment/index.js:1
 msgid "Daily"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:718
+#: app/Helpers/form-helpers.php:754
 #: resources/views/shortcodes/payment-success.php:132
 #: assets/blocks/payment/index.js:1
 msgid "Weekly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:719
+#: app/Helpers/form-helpers.php:755
 #: resources/views/shortcodes/payment-success.php:133
 #: assets/blocks/payment/index.js:1
 msgid "Monthly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:720
+#: app/Helpers/form-helpers.php:756
 #: resources/views/shortcodes/payment-success.php:134
 #: assets/blocks/payment/index.js:1
 msgid "Yearly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:1218
-#: app/Helpers/form-helpers.php:1319
-#: app/Helpers/form-helpers.php:1348
+#: app/Helpers/form-helpers.php:1254
+#: app/Helpers/form-helpers.php:1355
+#: app/Helpers/form-helpers.php:1384
 msgid "Generated PDF"
 msgstr ""
 
-#: app/Helpers/helper.php:426
+#: app/Helpers/Form.php:315
+#, php-format
+msgid "%s minute"
+msgid_plural "%s minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/Helpers/Form.php:322
+#, php-format
+msgid "%s second"
+msgid_plural "%s seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/Helpers/Form.php:329
+#, php-format
+msgid "%s Question"
+msgid_plural "%s Questions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/Helpers/helper.php:436
 #: app/Repositories/SummaryRepository.php:32
 msgid "Field handler not found."
 msgstr ""
 
-#: app/Helpers/helper.php:432
+#: app/Helpers/helper.php:442
 msgid "Please use a valid field handler."
 msgstr ""
 
@@ -806,7 +1013,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/AnalyticsController.php:30
 #: app/Http/Controllers/Admin/EmailNotificationController.php:53
 #: app/Http/Controllers/Admin/EmailNotificationController.php:78
-#: app/Http/Controllers/Admin/FormController.php:217
+#: app/Http/Controllers/Admin/FormController.php:246
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:84
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:162
 #: app/Http/Controllers/Admin/MailchimpController.php:103
@@ -823,10 +1030,15 @@ msgstr ""
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
 #: app/Http/Controllers/AnalyticsController.php:40
 #: app/Http/Controllers/FormController.php:32
-#: app/Http/Controllers/ResponseController.php:66
-#: app/Http/Controllers/ResponseController.php:371
+#: app/Http/Controllers/ResponseController.php:79
+#: app/Http/Controllers/ResponseController.php:396
 #: app/Repositories/FormPresetFieldRepository.php:162
 msgid "Form not found"
+msgstr ""
+
+#: app/Http/Controllers/Admin/AnalyticsController.php:39
+#: app/Http/Controllers/AnalyticsController.php:49
+msgid "Analytics is disabled for this form."
 msgstr ""
 
 #: app/Http/Controllers/Admin/EmailNotificationController.php:62
@@ -856,32 +1068,36 @@ msgstr ""
 msgid "The status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:131
+#: app/Http/Controllers/Admin/FormController.php:99
+msgid "Limit Reached: You have used all 5 free AI Forms."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:160
 msgid "The form has been created successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:152
+#: app/Http/Controllers/Admin/FormController.php:181
 msgid "The form title has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:170
+#: app/Http/Controllers/Admin/FormController.php:199
 msgid "Sorry, some thing was wrong"
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:179
-#: app/Http/Controllers/Admin/FormController.php:200
+#: app/Http/Controllers/Admin/FormController.php:208
+#: app/Http/Controllers/Admin/FormController.php:229
 msgid "The form status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:242
+#: app/Http/Controllers/Admin/FormController.php:271
 msgid "The form has been duplicated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:281
+#: app/Http/Controllers/Admin/FormController.php:310
 msgid "The form has been deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:298
+#: app/Http/Controllers/Admin/FormController.php:327
 #: app/Http/Controllers/Admin/ResponseController.php:194
 #: app/Http/Controllers/Admin/ResponseController.php:904
 #: app/Http/Controllers/Admin/ResponseController.php:1033
@@ -889,11 +1105,11 @@ msgstr ""
 msgid "Sorry, Something was wrong."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:311
+#: app/Http/Controllers/Admin/FormController.php:340
 msgid "Forms have been successfully deleted."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:386
+#: app/Http/Controllers/Admin/FormController.php:415
 #: app/Http/Controllers/Admin/SettingsController.php:60
 msgid "Settings have been saved successfully."
 msgstr ""
@@ -954,6 +1170,42 @@ msgstr ""
 msgid "Item was deleted successfully"
 msgstr ""
 
+#: app/Http/Controllers/Admin/McpController.php:36
+msgid "A settings object is required."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:42
+msgid "Only known boolean MCP settings may be changed."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:44
+msgid "The AI connection settings could not be saved."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:50
+msgid "AI connection settings have been saved."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:57
+msgid "You are not allowed to activate plugins."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:67
+msgid "The official MCP Adapter is not installed."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:71
+msgid "The MCP Adapter is already active."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:77
+msgid "The MCP Adapter could not be activated."
+msgstr ""
+
+#: app/Http/Controllers/Admin/McpController.php:80
+msgid "The MCP Adapter has been activated."
+msgstr ""
+
 #: app/Http/Controllers/Admin/NoteController.php:54
 msgid "The note has been created successfully."
 msgstr ""
@@ -973,12 +1225,13 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:38
 #: app/Http/Controllers/Admin/PdfController.php:100
 #: app/Http/Controllers/Admin/PdfResourcesController.php:164
-#: app/Http/Controllers/ResponseController.php:428
+#: app/Http/Controllers/ResponseController.php:475
 #: app/Repositories/ResponseRepository.php:35
-#: app/Repositories/ResponseRepository.php:685
-#: app/Repositories/ResponseRepository.php:738
+#: app/Repositories/ResponseRepository.php:819
+#: app/Repositories/ResponseRepository.php:872
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
+#: app/Services/Mcp/McpErrorFactory.php:48
 msgid "Form not found."
 msgstr ""
 
@@ -989,7 +1242,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:109
 #: app/Http/Controllers/Admin/PdfController.php:141
 #: app/Http/Controllers/Admin/PdfController.php:168
-#: app/Http/Controllers/ResponseController.php:452
+#: app/Http/Controllers/ResponseController.php:499
 msgid "PDF template not found."
 msgstr ""
 
@@ -1041,8 +1294,11 @@ msgid "Either \"id\" or \"page\" parameter is required."
 msgstr ""
 
 #: app/Http/Controllers/Admin/ResponseController.php:275
-#: app/Http/Controllers/ResponseController.php:74
-#: app/Http/Controllers/ResponseController.php:438
+#: app/Http/Controllers/ResponseController.php:87
+#: app/Http/Controllers/ResponseController.php:485
+#: app/Services/Mcp/McpErrorFactory.php:52
+#: app/Services/Responses/ResponseCommandService.php:189
+#: app/Services/Responses/ResponseReadService.php:106
 msgid "Response not found."
 msgstr ""
 
@@ -1158,7 +1414,7 @@ msgstr ""
 msgid "Feed data not found"
 msgstr ""
 
-#: app/Http/Controllers/AnalyticsController.php:57
+#: app/Http/Controllers/AnalyticsController.php:67
 msgid "Could't update the view count"
 msgstr ""
 
@@ -1285,44 +1541,54 @@ msgstr ""
 msgid "%1$s must not exceed %2$d characters."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:82
+#: app/Http/Controllers/ResponseController.php:58
+#: app/Http/Controllers/ResponseController.php:377
+msgid "Form submission is temporarily unavailable because the site database is not ready."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:95
 msgid "Skipping submission: Response is already completed."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:90
+#: app/Http/Controllers/ResponseController.php:103
 msgid "Oops, something went wrong. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:124
+#: app/Http/Controllers/ResponseController.php:137
 msgid "Verification required."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:166
+#: app/Http/Controllers/ResponseController.php:179
 msgid "The form was submitted successfully!"
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:464
+#: app/Http/Controllers/ResponseController.php:420
+#: app/Http/Controllers/ResponseController.php:436
+msgid "The form response could not be started. Please try again."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:511
 msgid "PDF library is not installed for this form."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:477
+#: app/Http/Controllers/ResponseController.php:524
 msgid "PDF engine could not be loaded."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:498
+#: app/Http/Controllers/ResponseController.php:545
 msgid "Failed to generate PDF."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:569
+#: app/Http/Controllers/ResponseController.php:616
 msgid "Invalid file name."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:579
+#: app/Http/Controllers/ResponseController.php:626
 msgid "Upload directory is not available."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:594
-#: app/Http/Controllers/ResponseController.php:603
+#: app/Http/Controllers/ResponseController.php:641
+#: app/Http/Controllers/ResponseController.php:650
 msgid "PDF file not found."
 msgstr ""
 
@@ -1356,6 +1622,37 @@ msgstr ""
 msgid "Choose %s type in select list."
 msgstr ""
 
+#: app/Multisite/SiteLifecycle.php:216
+msgid "FormGent database setup is incomplete."
+msgstr ""
+
+#: app/Multisite/SiteLifecycle.php:239
+msgid "FormGent could not provision every network site."
+msgstr ""
+
+#: app/Multisite/SiteLifecycle.php:240
+#, php-format
+msgid "Run `wp formgent multisite repair`. Affected site IDs: %s"
+msgstr ""
+
+#. translators: %s is a comma-separated list of missing database objects.
+#: app/Multisite/SiteLifecycle.php:306
+#, php-format
+msgid "Missing database objects: %s"
+msgstr ""
+
+#: app/Multisite/SiteLifecycle.php:333
+msgid "The requested site does not exist."
+msgstr ""
+
+#: app/Multisite/SiteLifecycle.php:339
+msgid "Could not switch to the requested site."
+msgstr ""
+
+#: app/Multisite/SiteLifecycle.php:548
+msgid "The FormGent database schema is incomplete."
+msgstr ""
+
 #: app/PaymentProcessors/Mollie.php:40
 #: app/PaymentProcessors/Mollie.php:184
 msgid "Mollie API key is not configured."
@@ -1373,7 +1670,7 @@ msgstr ""
 
 #: app/Providers/Admin/MenuServiceProvider.php:19
 #: app/Providers/Admin/MenuServiceProvider.php:53
-#: app/Providers/PostTypeServiceProvider.php:160
+#: app/Providers/PostTypeServiceProvider.php:214
 msgid "All Forms"
 msgstr ""
 
@@ -1407,120 +1704,120 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:31
+#: app/Providers/PostTypeServiceProvider.php:63
 msgid "FormGent Payment Success"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:33
+#: app/Providers/PostTypeServiceProvider.php:65
 msgid "FormGent Payment Failed"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:128
+#: app/Providers/PostTypeServiceProvider.php:182
 msgid "FormGent Payment Fields"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:151
+#: app/Providers/PostTypeServiceProvider.php:205
 msgctxt "Post type general name"
 msgid "Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:152
+#: app/Providers/PostTypeServiceProvider.php:206
 msgctxt "Post type singular name"
 msgid "Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:153
+#: app/Providers/PostTypeServiceProvider.php:207
 msgctxt "Admin Menu text"
 msgid "Formgent Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:154
+#: app/Providers/PostTypeServiceProvider.php:208
 msgctxt "Add New on Toolbar"
 msgid "Formgent Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:155
+#: app/Providers/PostTypeServiceProvider.php:209
 msgid "Add New"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:156
+#: app/Providers/PostTypeServiceProvider.php:210
 msgid "Add New Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:157
+#: app/Providers/PostTypeServiceProvider.php:211
 msgid "New Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:158
+#: app/Providers/PostTypeServiceProvider.php:212
 msgid "Edit Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:159
+#: app/Providers/PostTypeServiceProvider.php:213
 msgid "View Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:161
+#: app/Providers/PostTypeServiceProvider.php:215
 msgid "Search Forms"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:162
+#: app/Providers/PostTypeServiceProvider.php:216
 msgid "Parent Forms:"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:163
+#: app/Providers/PostTypeServiceProvider.php:217
 msgid "No Forms found."
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:164
+#: app/Providers/PostTypeServiceProvider.php:218
 msgid "No Forms found in Trash."
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:165
+#: app/Providers/PostTypeServiceProvider.php:219
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
 msgid "Form Cover Image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:166
+#: app/Providers/PostTypeServiceProvider.php:220
 msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
 msgid "Set cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:167
+#: app/Providers/PostTypeServiceProvider.php:221
 msgctxt "Overrides the “Remove featured image” phrase for this post type. Added in 4.3"
 msgid "Remove cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:168
+#: app/Providers/PostTypeServiceProvider.php:222
 msgctxt "Overrides the “Use as featured image” phrase for this post type. Added in 4.3"
 msgid "Use as cover image"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:169
+#: app/Providers/PostTypeServiceProvider.php:223
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
 msgid "Form archives"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:170
+#: app/Providers/PostTypeServiceProvider.php:224
 msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
 msgid "Insert into Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:171
+#: app/Providers/PostTypeServiceProvider.php:225
 msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
 msgid "Uploaded to this Form"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:172
+#: app/Providers/PostTypeServiceProvider.php:226
 msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
 msgid "Filter Forms list"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:173
+#: app/Providers/PostTypeServiceProvider.php:227
 msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
 msgid "Forms list navigation"
 msgstr ""
 
-#: app/Providers/PostTypeServiceProvider.php:174
+#: app/Providers/PostTypeServiceProvider.php:228
 msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
 msgid "Forms list"
 msgstr ""
@@ -1558,8 +1855,8 @@ msgstr ""
 msgid "« Back To ZohoCRM Integration"
 msgstr ""
 
-#: app/Repositories/AnalyticRepository.php:129
-#: app/Repositories/AnalyticRepository.php:150
+#: app/Repositories/AnalyticRepository.php:224
+#: app/Repositories/AnalyticRepository.php:245
 msgid "Could not update the view count."
 msgstr ""
 
@@ -1615,7 +1912,7 @@ msgstr ""
 msgid "Prints the fields label"
 msgstr ""
 
-#: app/Repositories/FormRepository.php:370
+#: app/Repositories/FormRepository.php:421
 msgid "Forms not found."
 msgstr ""
 
@@ -1623,8 +1920,8 @@ msgstr ""
 msgid "The item not found."
 msgstr ""
 
-#: app/Repositories/ResponseRepository.php:424
-#: app/Repositories/ResponseRepository.php:445
+#: app/Repositories/ResponseRepository.php:429
+#: app/Repositories/ResponseRepository.php:450
 msgid "Other"
 msgstr ""
 
@@ -1634,6 +1931,568 @@ msgstr ""
 
 #: app/Repositories/SummaryRepository.php:23
 msgid "Field not found"
+msgstr ""
+
+#: app/Services/Analytics/McpAnalyticsService.php:75
+msgid "Both analytics range dates are required."
+msgstr ""
+
+#: app/Services/Analytics/McpAnalyticsService.php:83
+msgid "The analytics date range is invalid."
+msgstr ""
+
+#: app/Services/Analytics/McpAnalyticsService.php:87
+msgid "The analytics date range cannot exceed 366 days."
+msgstr ""
+
+#: app/Services/Forms/AiFormQuotaService.php:33
+msgid "The free AI form creation limit has been reached."
+msgstr ""
+
+#: app/Services/Forms/AiFormQuotaService.php:105
+msgid "Form creation is busy. Try again."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:70
+msgid "At least one automation collection must be supplied."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:263
+msgid "An email notification does not belong to this form."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:267
+msgid "Email notification IDs must be unique."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:292
+msgid "A PDF template does not belong to this form."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:296
+msgid "PDF template IDs must be unique."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:344
+msgid "User registration IDs must be unique."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:353
+msgid "A published verification confirmation page is required when automatic login is disabled."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:358
+msgid "The selected user role is not permitted for registration automations."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:363
+msgid "The selected custom user role is not permitted for registration automations."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:371
+msgid "The registration email notification does not belong to this form."
+msgstr ""
+
+#: app/Services/Forms/FormAutomationService.php:375
+msgid "A registration email notification ID is required when registration email delivery is enabled."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:99
+msgid "The form type is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:103
+msgid "A form must contain between 1 and 100 fields."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:178
+msgid "A form field has an invalid nested structure."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:184
+msgid "A form field type is not supported."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:190
+msgid "Every form field requires a label of at most 255 characters."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:197
+msgid "Supplied field names must be non-empty and unique."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:211
+msgid "Supplied field IDs must be safe and unique."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:235
+msgid "A form field has an invalid block width."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:245
+msgid "Options are allowed only for choice fields."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:264
+msgid "This field does not accept the supplied children."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:289
+msgid "Payment settings are accepted only by the payment field."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:306
+msgid "A field can contain at most 100 options."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:314
+msgid "A field option is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:321
+msgid "Field option labels and values must be non-empty and unique."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:328
+msgid "Supplied option IDs must be safe and unique."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:346
+msgid "Choice option numeric values must be valid numbers."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:386
+msgid "Default Step"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:415
+#: resources/views/form.php:96
+#: resources/views/submit-button.php:25
+msgid "Submit"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:415
+#: assets/blocks/page-break/index.js:1
+#: assets/blocks/submit-button/index.js:2
+msgid "Next"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:416
+#: assets/blocks/page-break/index.js:1
+msgid "Back"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:432
+#: app/Services/Forms/FormTypeConversionService.php:406
+msgid "Welcome"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:433
+#: app/Services/Forms/FormTypeConversionService.php:407
+msgid "Hi there, please fill out and submit this form."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:439
+#: app/Services/Forms/FormTypeConversionService.php:413
+msgid "Start"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:464
+#: app/Services/Forms/FormTypeConversionService.php:428
+msgid "Thank you"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:465
+#: app/Services/Forms/FormTypeConversionService.php:429
+msgid "Your submission has been received!"
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:688
+msgid "The payment type or amount type is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:692
+msgid "Subscription payments require FormGent Pro to be active."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:699
+msgid "At least one registered payment method is required."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:708
+msgid "A selected payment method does not support subscriptions."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:717
+#: app/Services/Forms/FormBlockBuilder.php:781
+msgid "Payment field mappings must contain unique field names."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:734
+msgid "The payment amounts, quantity, billing count, or trial duration is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:741
+msgid "The subscription amount type or billing interval is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:774
+msgid "A payment field mapping is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:823
+msgid "A form can contain only one payment field."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:838
+msgid "The payment field must be at the top level of the form."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:846
+msgid "A payment amount mapping references an incompatible or missing field."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:851
+msgid "An amount-from-fields payment requires at least one amount field."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:855
+msgid "Quantity mappings must reference selected one-time amount fields."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:860
+msgid "An amount-from-fields subscription requires at least one amount field."
+msgstr ""
+
+#: app/Services/Forms/FormBlockBuilder.php:867
+msgid "A subscription requires mapped customer name and email fields."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:67
+msgid "The form was created as a draft because the current user cannot publish forms."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:70
+msgid "Provide exactly one of fields or layout when creating a form."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:129
+msgid "At least one form property must be changed."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:144
+msgid "Fields and layout cannot be replaced in the same update."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:149
+msgid "This form contains internal or unsupported blocks that cannot be safely replaced through the layout contract."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:337
+msgid "The form could not be deleted."
+msgstr ""
+
+#: app/Services/Forms/FormCommandService.php:432
+msgid "A form title must contain between 5 and 255 characters."
+msgstr ""
+
+#: app/Services/Forms/FormFieldAttributeService.php:60
+msgid "Detailed settings accepted by the selected registered FormGent field type."
+msgstr ""
+
+#: app/Services/Forms/FormFieldAttributeService.php:78
+msgid "Detailed field attributes must be an object."
+msgstr ""
+
+#: app/Services/Forms/FormFieldAttributeService.php:85
+msgid "A detailed setting is not supported by this field type."
+msgstr ""
+
+#: app/Services/Forms/FormFieldAttributeService.php:97
+msgid "A detailed field setting has an invalid value."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:77
+msgid "A form layout cannot be empty."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:88
+msgid "A form layout must contain at least one input field."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:184
+msgid "The form layout is too deeply nested or contains too many blocks."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:191
+msgid "A form layout block is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:197
+msgid "The form layout contains an unsupported block."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:203
+msgid "Form layout block attributes must be an object."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:210
+msgid "A form layout block contains an unknown attribute."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:217
+msgid "A form layout block has invalid children."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:231
+msgid "A form screen text block requires bounded text content."
+msgstr ""
+
+#: app/Services/Forms/FormLayoutService.php:236
+msgid "Only heading and paragraph blocks accept direct content."
+msgstr ""
+
+#: app/Services/Forms/FormReadService.php:126
+msgid "A positive form ID is required."
+msgstr ""
+
+#: app/Services/Forms/FormTypeConversionService.php:28
+msgid "The form type conversion is invalid."
+msgstr ""
+
+#: app/Services/Forms/FormTypeConversionService.php:55
+msgid "Conditional logic was removed because general and conversational forms use different rule structures."
+msgstr ""
+
+#: app/Services/Forms/FormTypeConversionService.php:115
+msgid "Question"
+msgstr ""
+
+#: app/Services/Forms/FormTypeConversionService.php:470
+msgid "This form contains content that cannot be converted safely without data loss."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:67
+#: app/Services/Forms/SafeFormSettingsService.php:356
+msgid "Thank you! Your submission has been received."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:124
+msgid "An unknown form setting group was provided."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:145
+#: app/Services/Forms/SafeFormSettingsService.php:150
+msgid "The form behavior settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:201
+msgid "The custom CSS/JS settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:276
+#, php-format
+msgid "Grade %d"
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:350
+msgid "The confirmation settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:366
+msgid "The confirmation type or post-submit behavior is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:371
+msgid "The confirmation message is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:378
+msgid "A message confirmation requires a message."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:384
+msgid "A page confirmation requires a published page."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:389
+msgid "The confirmation URL must be a valid HTTP or HTTPS URL."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:396
+msgid "A URL confirmation requires a valid URL."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:400
+msgid "The confirmation redirects to an external host."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:411
+msgid "The quiz settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:416
+msgid "Quiz state settings must be boolean."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:424
+msgid "The quiz score text is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:446
+msgid "A quiz can contain at most 20 grades."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:454
+msgid "A quiz grade is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:462
+msgid "Quiz grade labels and ranges must be unique and valid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:478
+msgid "Quiz grade ranges cannot overlap."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:488
+msgid "The appearance settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:503
+msgid "Appearance switches must be boolean."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:509
+msgid "An appearance option is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:530
+msgid "Appearance colors must use six-digit hexadecimal values."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:536
+msgid "The form background type is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:542
+msgid "The submit button label is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:581
+msgid "The design settings are invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:589
+msgid "Design switches must be boolean."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:595
+msgid "The cover type is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:601
+msgid "The design title is invalid."
+msgstr ""
+
+#: app/Services/Forms/SafeFormSettingsService.php:607
+msgid "The design width must be a valid CSS length."
+msgstr ""
+
+#: app/Services/Mcp/McpErrorFactory.php:24
+msgid "FormGent abilities are disabled."
+msgstr ""
+
+#. translators: %s: disabled MCP access scope.
+#: app/Services/Mcp/McpErrorFactory.php:32
+#, php-format
+msgid "The required FormGent MCP scope is disabled: %s."
+msgstr ""
+
+#: app/Services/Mcp/McpErrorFactory.php:40
+msgid "You are not allowed to perform this FormGent operation."
+msgstr ""
+
+#: app/Services/Mcp/McpErrorFactory.php:72
+msgid "Too many FormGent MCP requests. Try again shortly."
+msgstr ""
+
+#: app/Services/Mcp/McpErrorFactory.php:83
+msgid "FormGent could not complete the operation."
+msgstr ""
+
+#: app/Services/Mcp/McpInputValidator.php:31
+#: app/Services/Mcp/McpInputValidator.php:36
+msgid "Response operations require between 1 and 50 positive unique IDs."
+msgstr ""
+
+#: app/Services/Mcp/McpInputValidator.php:43
+msgid "Response IDs must be unique."
+msgstr ""
+
+#: app/Services/Mcp/McpInputValidator.php:59
+msgid "A from and to date are required for a custom date frame."
+msgstr ""
+
+#: app/Services/Mcp/McpInputValidator.php:67
+msgid "The custom date frame is invalid."
+msgstr ""
+
+#: app/Services/Responses/ResponseCommandService.php:43
+msgid "The response state operation is invalid."
+msgstr ""
+
+#: app/Services/Responses/ResponseCommandService.php:85
+#: app/Services/Responses/ResponseCommandService.php:198
+msgid "The response state could not be updated."
+msgstr ""
+
+#: app/Services/Responses/ResponseCommandService.php:111
+msgid "Permanent response deletion requires confirm=true."
+msgstr ""
+
+#: app/Services/Responses/ResponseCommandService.php:159
+msgid "The response could not be deleted."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:51
+msgid "An unknown settings category was requested."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:149
+msgid "Settings updates must contain exactly one known category."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:156
+msgid "Each settings category must contain values."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:184
+msgid "A settings toggle must be either yes or no."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:199
+msgid "An unknown validation message was provided."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:208
+msgid "Validation messages must contain between 1 and 255 characters."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:220
+msgid "An unknown login or registration setting was provided."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:227
+msgid "A login or registration setting is invalid."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:234
+msgid "Login and registration states must be 0 or 1."
+msgstr ""
+
+#: app/Services/Settings/SafeGlobalSettingsService.php:238
+msgid "An enabled login or registration route requires a published page."
 msgstr ""
 
 #: app/Services/UserVerificationService.php:41
@@ -1706,12 +2565,16 @@ msgstr ""
 msgid "Verify account"
 msgstr ""
 
-#: app/Widgets/Form.php:33
+#: app/Utils/Capabilities.php:162
+msgid "FormGent MCP Operator"
+msgstr ""
+
+#: app/Widgets/Form.php:32
 #: assets/blocks/form/index.js:1
 msgid "General"
 msgstr ""
 
-#: app/Widgets/Form.php:41
+#: app/Widgets/Form.php:40
 msgid "Select Form"
 msgstr ""
 
@@ -1719,11 +2582,11 @@ msgstr ""
 msgid "Captcha validation failed. Please complete the captcha."
 msgstr ""
 
-#: assets/blocks/file-upload/render.php:89
+#: assets/blocks/file-upload/render.php:86
 msgid "Upload file"
 msgstr ""
 
-#: assets/blocks/file-upload/render.php:195
+#: assets/blocks/file-upload/render.php:192
 msgid "Delete file"
 msgstr ""
 
@@ -1809,18 +2672,17 @@ msgstr ""
 msgid "Pay securely with Mollie"
 msgstr ""
 
-#: assets/blocks/repeater/render.php:31
-#: assets/blocks/repeater/render.php:45
+#: assets/blocks/repeater/render.php:28
+#: assets/blocks/repeater/render.php:42
 msgid "Remove Item"
 msgstr ""
 
-#: assets/blocks/repeater/render.php:53
+#: assets/blocks/repeater/render.php:50
 msgid "Add another"
 msgstr ""
 
-#: resources/views/form.php:96
-#: resources/views/submit-button.php:25
-msgid "Submit"
+#: resources/views/form-unavailable.php:4
+msgid "This form has been deleted or is unavailable."
 msgstr ""
 
 #: resources/views/form.php:97
@@ -2124,6 +2986,22 @@ msgstr ""
 #: assets/blocks/textarea/index.js:1
 #: assets/blocks/website/index.js:1
 msgid "Justify"
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Unable to update AI connection settings."
+msgstr ""
+
+#: assets/blocks/captcha/index.js:1
+#: assets/blocks/google-map/index.js:1
+#: assets/blocks/payment-item/index.js:1
+#: assets/blocks/paypal/index.js:1
+#: assets/blocks/stripe/index.js:1
+msgid "Unable to load AI connection settings."
 msgstr ""
 
 #: assets/blocks/captcha/index.js:1
@@ -3660,17 +4538,8 @@ msgid "Go to settings"
 msgstr ""
 
 #: assets/blocks/page-break/index.js:1
-msgid "Back"
-msgstr ""
-
-#: assets/blocks/page-break/index.js:1
 #: assets/blocks/submit-button/index.js:2
 msgid "Page Break"
-msgstr ""
-
-#: assets/blocks/page-break/index.js:1
-#: assets/blocks/submit-button/index.js:2
-msgid "Next"
 msgstr ""
 
 #: assets/blocks/password/index.js:1

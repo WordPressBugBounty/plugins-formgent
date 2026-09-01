@@ -32,6 +32,16 @@ class AnalyticsController extends Controller {
             );
         }
 
+        if ( ! formgent_is_form_analytics_enabled( $form->ID ) ) {
+            return Response::send(
+                [
+                    'code'    => 'formgent_analytics_disabled',
+                    'message' => esc_html__( 'Analytics is disabled for this form.', 'formgent' ),
+                ],
+                403
+            );
+        }
+
         $data = $this->analytic_repository->form_summary( $wp_rest_request->get_param( 'id' ) );
         $data = apply_filters( 'formgent_form_summary', $data, $wp_rest_request );
 

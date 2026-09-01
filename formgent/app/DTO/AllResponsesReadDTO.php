@@ -11,6 +11,8 @@ class AllResponsesReadDTO extends DTO {
 
     private int $per_page;
 
+    private ?int $form_id = null;
+
     private ?int $is_read = null;
 
     private ?int $is_starred = null;
@@ -69,6 +71,16 @@ class AllResponsesReadDTO extends DTO {
      */
     public function set_per_page( int $per_page ): self {
         $this->per_page = $per_page;
+
+        return $this;
+    }
+
+    public function get_form_id(): ?int {
+        return $this->form_id;
+    }
+
+    public function set_form_id( ?int $form_id ): self {
+        $this->form_id = $form_id;
 
         return $this;
     }

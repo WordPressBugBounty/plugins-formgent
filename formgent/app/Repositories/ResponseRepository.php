@@ -198,7 +198,12 @@ class ResponseRepository {
     private function all_responses_query( AllResponsesReadDTO $dto ) {
         $responses_query = Response::query( 'response' )
             ->join( Post::get_table_name() . ' as post', 'post.ID', 'response.form_id' )
+            ->where( 'post.post_type', formgent_post_type() )
             ->where( 'response.status', ResponseStatus::PUBLISH );
+
+        if ( null !== $dto->get_form_id() ) {
+            $responses_query->where( 'response.form_id', $dto->get_form_id() );
+        }
 
         // Apply date filtering
         $this->all_responses_date_query( $responses_query, $dto );
@@ -657,6 +662,135 @@ class ResponseRepository {
         return Response::query( 'response' )->select( $columns )->where( 'response.id', $id )->first();
     }
 
+    /**
+     * Fetch bounded response details and answers in two queries.
+     *
+     * @param array<int,int> $ids Response IDs.
+     * @return array<int,object> Responses keyed by ID.
+     */
+    public function get_mcp_details( array $ids ): array {
+        global $wpdb;
+
+        $ids = array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) );
+
+        if ( empty( $ids ) ) {
+            return [];
+        }
+
+        $placeholders   = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
+        $response_table = esc_sql( $wpdb->prefix . Response::get_table_name() );
+        $answer_table   = esc_sql( $wpdb->prefix . Answer::get_table_name() );
+        $response_sql   = "
+            SELECT response.id, response.form_id, response.is_read, response.is_starred,
+                response.is_completed, response.created_at, response.completed_at,
+                post.post_title AS form_title, post.post_content AS form_content,
+                COALESCE(type_meta.meta_value, 'general') AS form_type
+            FROM {$response_table} AS response
+            INNER JOIN {$wpdb->posts} AS post ON post.ID = response.form_id
+            LEFT JOIN {$wpdb->postmeta} AS type_meta
+                ON type_meta.post_id = response.form_id AND type_meta.meta_key = '_formgent_type'
+            WHERE response.id IN ({$placeholders})
+                AND response.status = 'publish'
+                AND post.post_type = %s
+        ";
+        $response_args  = array_merge( $ids, [formgent_post_type()] );
+
+        // Identifiers are trusted model/core table names and all values are prepared.
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+        $responses = $wpdb->get_results( $wpdb->prepare( $response_sql, $response_args ) );
+
+        if ( empty( $responses ) ) {
+            return [];
+        }
+
+        $found_ids    = array_map( static fn( $response ): int => absint( $response->id ), $responses );
+        $placeholders = implode( ', ', array_fill( 0, count( $found_ids ), '%d' ) );
+        $answer_sql   = "
+            SELECT id, response_id, parent_id, field_name, field_type, value
+            FROM {$answer_table}
+            WHERE response_id IN ({$placeholders})
+            ORDER BY id ASC
+        ";
+        $answers      = $wpdb->get_results( $wpdb->prepare( $answer_sql, $found_ids ) );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+
+        $answer_map = [];
+        $children   = [];
+
+        foreach ( $answers as $answer ) {
+            $answer->children = [];
+
+            if ( 0 < absint( $answer->parent_id ) ) {
+                $children[absint( $answer->parent_id )][] = $answer;
+            } else {
+                $answer_map[absint( $answer->response_id )][] = $answer;
+            }
+        }
+
+        $result = [];
+
+        foreach ( $responses as $response ) {
+            $response->answers = $answer_map[absint( $response->id )] ?? [];
+
+            foreach ( $response->answers as $answer ) {
+                $answer->children = $children[absint( $answer->id )] ?? [];
+            }
+
+            $form = (object) [
+                'ID'           => absint( $response->form_id ),
+                'post_title'   => (string) $response->form_title,
+                'post_content' => (string) $response->form_content,
+                'form_type'    => (string) ( $response->form_type ?: 'general' ),
+            ];
+
+            unset( $response->form_content, $response->form_type );
+            $response                        = $this->prepare_response_data( $response, $form );
+            $result[absint( $response->id )] = $response;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Fetch light current-site records for bounded state/delete operations.
+     *
+     * @param array<int,int> $ids Response IDs.
+     * @return array<int,object> Records keyed by ID.
+     */
+    public function get_mcp_records( array $ids ): array {
+        global $wpdb;
+
+        $ids = array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) );
+
+        if ( empty( $ids ) ) {
+            return [];
+        }
+
+        $response_table = esc_sql( $wpdb->prefix . Response::get_table_name() );
+        $placeholders   = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
+        $sql            = "
+            SELECT response.id, response.form_id, response.is_read, response.is_starred
+            FROM {$response_table} AS response
+            INNER JOIN {$wpdb->posts} AS post ON post.ID = response.form_id
+            WHERE response.id IN ({$placeholders})
+                AND response.status = 'publish'
+                AND post.post_type = %s
+        ";
+        $args           = array_merge( $ids, [formgent_post_type()] );
+
+        // Identifiers are trusted model/core table names and all values are prepared.
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+        $rows = $wpdb->get_results( $wpdb->prepare( $sql, $args ) );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+        $result = [];
+
+        foreach ( $rows as $row ) {
+            $result[absint( $row->id )] = $row;
+        }
+
+        return $result;
+    }
+
     public function get_count_by_form_id( int $form_id ) {
         return Response::query( 'response' )->where( 'response.form_id', $form_id )->where( 'response.status', ResponseStatus::PUBLISH )->count();
     }
@@ -1048,7 +1182,11 @@ class ResponseRepository {
          * @var ResponseTokenRepository $response_token_repository
          */
         $response_token_repository = formgent_singleton( ResponseTokenRepository::class );
-        $response_token_repository->create( $form_id, $response_id, $token );
+        $token_id                  = $response_token_repository->create( $form_id, $response_id, $token );
+
+        if ( $token_id <= 0 ) {
+            return '';
+        }
 
         return $token;
     }

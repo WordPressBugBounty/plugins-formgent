@@ -139,6 +139,49 @@ class PdfRepository {
     }
 
     /**
+     * Get the MCP-safe PDF projection without decrypting stored passwords.
+     *
+     * @return array<int,object>
+     */
+    public function get_safe_by_form_id( int $form_id ): array {
+        $result = Pdf::query()
+            ->where( 'form_id', $form_id )
+            ->order_by( 'created_at', 'desc' )
+            ->get();
+
+        if ( ! is_array( $result ) ) {
+            return [];
+        }
+
+        foreach ( $result as $pdf ) {
+            $pdf->password_protected = property_exists( $pdf, 'password' ) && '' !== (string) $pdf->password;
+            unset( $pdf->password );
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update only public PDF template properties and preserve the password column.
+     *
+     * @param array<string,mixed> $data Public PDF values.
+     */
+    public function update_non_secret( int $id, int $form_id, array $data ): int {
+        unset( $data['id'], $data['form_id'], $data['password'], $data['password_protected'] );
+        $row = $this->prepare_row( $data, null );
+        unset( $row['password'] );
+
+        if ( empty( $row ) ) {
+            return 0;
+        }
+
+        return Pdf::query()
+            ->where( 'id', $id )
+            ->where( 'form_id', $form_id )
+            ->update( $row );
+    }
+
+    /**
      * Get paginated PDF configurations for a form.
      *
      * @param int      $form_id  Form id.

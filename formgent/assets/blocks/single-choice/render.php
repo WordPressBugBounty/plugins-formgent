@@ -9,7 +9,9 @@ if ( $attributes['allow_user_add_other_option'] ) {
     ];
 }
 
-$sanitized_options = formgent_sanitize_choice_options( $attributes['options'] ?? [] );
+$form_id           = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : (int) get_the_ID();
+$is_quiz_enabled   = 0 < $form_id && formgent_is_quiz_enabled( $form_id );
+$sanitized_options = formgent_sanitize_choice_options( $attributes['options'] ?? [], ! $is_quiz_enabled );
 
 $context = [
     'name'        => $attributes['name'],

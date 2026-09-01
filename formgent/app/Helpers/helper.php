@@ -308,22 +308,32 @@ function formgent_render_choice_option_media( array $option ): void {
 /**
  * Sanitize choice options including icon SVG and image data.
  *
- * @param mixed $options
+ * @param mixed $options Choice options to sanitize.
+ * @param bool  $include_choice_scoring Whether private default and scoring metadata may be included.
  * @return array<int, array<string, mixed>>
  */
-function formgent_sanitize_choice_options( $options ): array {
+function formgent_sanitize_choice_options( $options, bool $include_choice_scoring = true ): array {
     if ( empty( $options ) || ! is_array( $options ) ) {
         return [];
     }
 
+    $excluded_keys = [ 'icon', 'image' ];
+
+    if ( ! $include_choice_scoring ) {
+        $excluded_keys = array_merge(
+            $excluded_keys,
+            [ 'is_default', 'is_correct', 'correct', 'numeric_value', 'numericValue', 'price', 'points', 'score' ]
+        );
+    }
+
     return array_map(
-        static function( $option ) {
+        static function( $option ) use ( $excluded_keys ) {
             if ( ! is_array( $option ) ) {
                 return [];
             }
 
             $sanitized = map_deep(
-                array_diff_key( $option, array_flip( [ 'icon', 'image' ] ) ),
+                array_diff_key( $option, array_flip( $excluded_keys ) ),
                 'esc_attr'
             );
 
@@ -505,7 +515,7 @@ function formgent_replace_placeholders( string $content, FormPresetFieldReposito
     );
 }
 
-function formgent_is_form_visible( Wp_Post $form ) {
+function formgent_is_form_visible( WP_Post $form ) {
     if ( 'publish' === $form->post_status ) {
         return true;
     }
@@ -515,19 +525,43 @@ function formgent_is_form_visible( Wp_Post $form ) {
         return strtotime( $current_time ) >= strtotime( $form->post_date_gmt );
     }
 
-    if ( 'private' === $form->post_status && current_user_can( 'read_private_posts' ) ) {
+    if ( 'private' === $form->post_status && current_user_can( 'read_post', $form->ID ) ) {
         return true;
     }
 
-    // Get the current user object
-    $current_user = wp_get_current_user();
+    return current_user_can( 'edit_post', $form->ID );
+}
 
-    // Check if the user has either 'administrator' or 'editor' role
-    if ( in_array( 'administrator', $current_user->roles ) || in_array( 'editor', $current_user->roles ) ) {
+function formgent_is_elementor_preview(): bool {
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return false;
+    }
+
+    $preview = \Elementor\Plugin::$instance->preview ?? null;
+
+    return is_object( $preview )
+        && method_exists( $preview, 'is_preview_mode' )
+        && $preview->is_preview_mode();
+}
+
+function formgent_is_editor_context(): bool {
+    if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
         return true;
     }
 
-    return false;
+    if ( formgent_is_elementor_preview() ) {
+        return true;
+    }
+
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return false;
+    }
+
+    $editor = \Elementor\Plugin::$instance->editor ?? null;
+
+    return is_object( $editor )
+        && method_exists( $editor, 'is_edit_mode' )
+        && $editor->is_edit_mode();
 }
 
 /**

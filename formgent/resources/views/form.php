@@ -3,21 +3,19 @@
 use FormGent\App\Helpers\Form;
 use FormGent\WpMVC\View\View;
 
-if ( ! $form instanceof WP_Post || empty( $form->post_content ) || ! formgent_is_form_visible( $form ) ) {
+if ( ! $form instanceof WP_Post || formgent_post_type() !== $form->post_type || empty( $form->post_content ) || ! formgent_is_form_visible( $form ) ) {
     return;
 }
 
 do_action( 'formgent_before_load_form', $form );
 
-wp_enqueue_script( 'lodash' );
-wp_enqueue_script( 'wp-api-fetch' );
-wp_enqueue_script( 'formgent/jquery-input-mask' );
-wp_enqueue_script_module( 'formgent/blocks-frontend' );
-
 $form_type       = formgent_get_form_type( $form->ID );
 $post_content    = (string) $form->post_content;
 $blocks          = parse_blocks( $post_content );
 $form->form_type = $form_type;
+$quiz_settings   = formgent_form_get_setting( $form->ID, 'quiz', [] );
+$quiz_settings   = is_array( $quiz_settings ) ? $quiz_settings : [];
+$is_quiz_enabled = ! empty( $quiz_settings['is_enabled'] );
 
 $form_helper    = new Form;
 $has_login_form = $form_helper->parsed_blocks_contain( $blocks, 'formgent/login' );
@@ -29,9 +27,9 @@ if ( $has_login_form ) {
 }
 
 if ( 'conversational' === $form_type ) {
-    $data = $form_helper->get_conversational_form_field_settings( $blocks, true );
+    $data = $form_helper->get_conversational_form_field_settings( $blocks, true, 'name', ! $is_quiz_enabled );
 } else {
-    $data = $form_helper->get_form_field_settings( $blocks, true, 'name', true );
+    $data = $form_helper->get_form_field_settings( $blocks, true, 'name', true, ! $is_quiz_enabled );
 }
 
 // Check if we should show the custom submit button
@@ -71,6 +69,7 @@ $context = apply_filters(
     'formgent_form_context',
     [
         'form_id'                => $form->ID,
+        'analytics_enabled'      => formgent_is_form_analytics_enabled( $form->ID ),
         'blocks_settings'        => $data,
         'form_type'              => $form_type,
         'data'                   => formgent_form_default_values( $data, $form->ID ),
@@ -81,6 +80,7 @@ $context = apply_filters(
             'is_response_submitting'         => false,
             'is_response_token_generating'   => false,
             'is_enabled_honeypot_protection' => $is_enabled_honeypot_protection,
+            'is_quiz_enabled'                => $is_quiz_enabled,
             'payment'                        => [
                 'enable_summary'  => false,
                 'payment_summary' => '',
@@ -89,7 +89,7 @@ $context = apply_filters(
             ],
         ],
         'quiz_result'            => false,
-        'show_quiz_results'      => formgent_form_get_setting( $form->ID, 'quiz' )['show_results'] ?? true,
+        'show_quiz_results'      => $quiz_settings['show_results'] ?? true,
         'confirmation'           => $confirmation,
         '_ccOverride'            => false,
         '_confirmationDisplayed' => false,

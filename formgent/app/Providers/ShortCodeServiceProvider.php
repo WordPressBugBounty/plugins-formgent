@@ -4,7 +4,6 @@ namespace FormGent\App\Providers;
 
 defined( 'ABSPATH' ) || exit;
 
-use FormGent\App\Models\Post;
 use FormGent\WpMVC\Contracts\Provider;
 use FormGent\WpMVC\View\View;
 
@@ -25,11 +24,11 @@ class ShortCodeServiceProvider implements Provider {
             return 'id is required.';
         }
 
-        $form_id = apply_filters( 'formgent_form_id',  intval( $attributes['id'] ) );
-        $form    = get_post( $form_id );
+        $form_id = apply_filters( 'formgent_form_id', intval( $attributes['id'] ) );
+        $form    = formgent_get_form_post( $form_id, true );
 
         if ( empty( $form ) ) {
-            return;
+            return View::get( 'form-unavailable' );
         }
 
         unset( $attributes['id'] );

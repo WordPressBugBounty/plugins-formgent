@@ -13,6 +13,7 @@ use FormGent\App\Models\Response;
 use FormGent\App\Models\Post;
 use FormGent\App\Models\PostMeta;
 use FormGent\App\Models\User;
+use FormGent\App\Multisite\SiteLifecycle;
 use FormGent\WpMVC\Database\Query\Builder;
 use FormGent\WpMVC\Database\Query\JoinClause;
 
@@ -20,12 +21,32 @@ class FormRepository extends FormSettingsRepository {
     const DEMOMEDIAOPTIONKEY = 'formgent_demo_medias';
 
     public function get( FormReadDTO $dto ) {
+        return $this->get_forms( $dto, false );
+    }
+
+    /**
+     * Return forms with exact bounded pagination for MCP consumers.
+     *
+     * The existing admin repository path intentionally keeps its established
+     * WpMVC pagination behavior. MCP requests use explicit limit and offset
+     * values so their response always matches the advertised contract.
+     */
+    public function get_for_mcp( FormReadDTO $dto ) {
+        return $this->get_forms( $dto, true );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function get_forms( FormReadDTO $dto, bool $exact_pagination ): array {
+        $schema_ready = ! is_wp_error( SiteLifecycle::ensure_current_site_schema() );
+
         $posts_query = Post::query( 'post' )->left_join( User::get_table_name() . " as user", "user.ID", "post.post_author" )->left_join(
             PostMeta::get_table_name() . " as form_type_post_meta", function( JoinClause $join ) {
                 $join->on_column( "post.ID", "form_type_post_meta.post_id" )->on( "form_type_post_meta.meta_key", "_formgent_type" );
             }
         )->where( 'post.post_type', formgent_post_type() )->where_in( 'post.post_status', ['publish', 'draft'] );
-        
+
 
         do_action( 'formgent_forms_select_query', $posts_query );
 
@@ -43,26 +64,44 @@ class FormRepository extends FormSettingsRepository {
 
         do_action( 'formgent_forms_count_query', $count_query, $dto );
 
-        $select_columns   = ['post.ID as id', 'post.post_title as title', 'post.post_status as status', 'form_type_post_meta.meta_value as type', 'post.post_date as created_at', 'post.post_modified as updated_at', 'user.display_name as username', 'COUNT(DISTINCT response.id) as total_responses', 'COUNT(DISTINCT CASE WHEN response.is_read = 0 THEN response.id ELSE NULL END) AS total_unread_responses'];
+        $select_columns   = ['post.ID as id', 'post.post_title as title', 'post.post_status as status', 'form_type_post_meta.meta_value as type', 'post.post_date as created_at', 'post.post_modified as updated_at', 'user.display_name as username'];
         $group_by_columns = ['post.ID', 'post.post_title', 'post.post_status', 'user.display_name' ];
 
-        $posts_query->select( $select_columns )->left_join(
-            Response::get_table_name() . ' as response', function( JoinClause $join ) {
-                $join->on_column( 'post.ID', 'response.form_id' )->on( 'response.status', ResponseStatus::PUBLISH );
-            }
-        )->group_by( $group_by_columns );
+        if ( $schema_ready ) {
+            $select_columns[] = 'COUNT(DISTINCT response.id) as total_responses';
+            $select_columns[] = 'COUNT(DISTINCT CASE WHEN response.is_read = 0 THEN response.id ELSE NULL END) AS total_unread_responses';
 
-        $this->forms_sort_query( $posts_query, $dto );
+            $posts_query->left_join(
+                Response::get_table_name() . ' as response', function( JoinClause $join ) {
+                    $join->on_column( 'post.ID', 'response.form_id' )->on( 'response.status', ResponseStatus::PUBLISH );
+                }
+            );
+        } else {
+            $select_columns[] = '0 as total_responses';
+            $select_columns[] = '0 as total_unread_responses';
+        }
+
+        $posts_query->select( $select_columns )->group_by( $group_by_columns );
+
+        $this->forms_sort_query( $posts_query, $dto, $schema_ready );
 
         do_action( 'formgent_forms_query', $posts_query, $dto );
 
         $types = $type_count_query->select( "meta_value as type", 'COUNT(DISTINCT post.ID) as total' )->group_by( ["form_type_post_meta.meta_value" ] )->get();
 
+        $form_rows = $exact_pagination
+            ? $posts_query
+                ->limit( $dto->get_per_page() )
+                ->offset( ( $dto->get_page() - 1 ) * $dto->get_per_page() )
+                ->get()
+            : $posts_query->pagination( $dto->get_page(), $dto->get_per_page() );
+
         $forms = array_map(
             function( $form ) {
-                $form->preview_url = get_post_permalink( $form->id );
+                $preview_url       = 'publish' === $form->status ? get_permalink( (int) $form->id ) : get_preview_post_link( (int) $form->id );
+                $form->preview_url = is_string( $preview_url ) ? $preview_url : '';
                 return $form;
-            }, $posts_query->pagination( $dto->get_page(), $dto->get_per_page() )
+            }, $form_rows
         );
 
         return [
@@ -119,7 +158,7 @@ class FormRepository extends FormSettingsRepository {
              */
             if ( empty( $date_frame['from'] ) ||
                 ! is_string( $date_frame['from'] ) ||
-                empty( $date_frame['to'] ) || 
+                empty( $date_frame['to'] ) ||
                 ! is_string( $date_frame['to'] ) ||
                 ! formgent_is_valid_date( $date_frame['from'], $from_date_format ) ||
                 ! formgent_is_valid_date( $date_frame['to'], $to_date_format )
@@ -147,8 +186,12 @@ class FormRepository extends FormSettingsRepository {
         return $query->where_raw( "((post.post_modified > '{$form}' and post.post_modified < '{$to}') or (post.post_date > '{$form}' and post.post_date < '{$to}'))" );
     }
 
-    private function forms_sort_query( Builder $query, FormReadDTO $dto ) {
+    private function forms_sort_query( Builder $query, FormReadDTO $dto, bool $schema_ready = true ) {
         $sort_by = $dto->get_sort_by();
+
+        if ( ! $schema_ready && in_array( $sort_by, ['last_submission', 'unread'], true ) ) {
+            return $query->order_by_desc( 'post.ID' );
+        }
 
         if ( empty( $sort_by ) ) {
             return $query->order_by_desc( 'post.ID' );
@@ -185,7 +228,7 @@ class FormRepository extends FormSettingsRepository {
             default:
                 return $query->order_by_desc( 'post.ID' );
         }
-    } 
+    }
 
     public function create( FormDTO $dto ) {
         $post_id = wp_insert_post(
@@ -198,7 +241,7 @@ class FormRepository extends FormSettingsRepository {
         );
 
         if ( $post_id instanceof WP_Error ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped	
+            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception( $post_id->get_error_message(), $post_id->get_error_code() );
         }
 
@@ -253,14 +296,14 @@ class FormRepository extends FormSettingsRepository {
             } else {
                 $response_code = $error_code;
             }
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped	
+            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception( $response->get_error_message(), $response_code );
         }
 
         $response_code = intval( wp_remote_retrieve_response_code( $response ) );
 
         if ( 200 !== $response_code ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped	
+            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception( wp_remote_retrieve_response_message( $response ), $response_code );
         }
 
@@ -268,7 +311,7 @@ class FormRepository extends FormSettingsRepository {
         $upload    = wp_upload_bits( $file_name, null, wp_remote_retrieve_body( $response ) );
 
         if ( ! empty( $upload['error'] ) ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped	
+            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception( $upload['error'], 500 );
         }
 
@@ -282,7 +325,7 @@ class FormRepository extends FormSettingsRepository {
         $id = wp_insert_attachment( $attachment, $upload['file'] );
 
         if ( is_wp_error( $id ) ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped	
+            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             throw new Exception( $id->get_error_message(), $id->get_error_code() );
         }
 
@@ -338,13 +381,21 @@ class FormRepository extends FormSettingsRepository {
     }
 
     public function update_bulk_status( array $ids, string $post_status ) {
-        $ids = map_deep( $ids, "intval" );
+        $updated = 0;
 
-        return Post::query()->where( 'post_type', formgent_post_type() )->where_in( 'ID', $ids )->update(
-            [
-                'post_status' => $post_status
-            ]
-        );
+        foreach ( array_map( 'intval', $ids ) as $post_id ) {
+            if ( ! formgent_get_form_post( $post_id ) ) {
+                continue;
+            }
+
+            $result = $this->update_status( $post_id, $post_status );
+
+            if ( ! is_wp_error( $result ) ) {
+                $updated++;
+            }
+        }
+
+        return $updated;
     }
 
     public function get_by_id( int $id, $columns = ['*'] ) {

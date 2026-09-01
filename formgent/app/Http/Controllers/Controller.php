@@ -10,6 +10,8 @@ abstract class Controller {
     protected function pagination( WP_REST_Request $wp_rest_request, int $total_items, int $per_page = 10 ) {
         $current_page = $wp_rest_request->has_param( 'page' ) ? intval( $wp_rest_request->get_param( 'page' ) ) : 1;
         $per_page     = $wp_rest_request->has_param( 'per_page' ) ? intval( $wp_rest_request->get_param( 'per_page' ) ) : $per_page;
+        $current_page = max( 1, $current_page );
+        $per_page     = 0 < $per_page ? $per_page : 10;
         $total_pages  = ceil( $total_items / $per_page );
 
         $pagination = [

@@ -48,12 +48,19 @@ class BlockServiceProvider implements Provider {
         foreach ( formgent_config( 'blocks' ) as $block_name => $block_data ) {
             $name = ltrim( $block_name, 'formgent' );
 
-            wp_enqueue_block_style(
-                $block_name, [
-                    'handle' => 'formgent/blocks-frontend',
-                    'src'    => formgent_url( 'assets/build/css/blocks-frontend.css' )
-                ]
-            );
+            // Elementor renders shortcode/widget blocks late on the public
+            // frontend, where the asset manager resolves form dependencies.
+            // The block editor must keep the established consolidated style;
+            // merely activating Elementor must not alter wp-admin assets.
+            if ( is_admin() || ! class_exists( '\Elementor\Plugin' ) ) {
+                wp_enqueue_block_style(
+                    $block_name, [
+                        'handle' => 'formgent/blocks-frontend',
+                        'src'    => formgent_url( 'assets/build/css/blocks-frontend.css' )
+                    ]
+                );
+            }
+
             register_block_type( $block_data['dir'] . '/' . $name );
         }
 

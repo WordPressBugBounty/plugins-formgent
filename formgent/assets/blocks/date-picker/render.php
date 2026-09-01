@@ -1,8 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit;
-// Check if we're in the editor context
-$is_editor = ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->editor ?? null, 'is_edit_mode' ) && \Elementor\Plugin::$instance->editor->is_edit_mode() ) ||
-    ( defined( 'ELEMENTOR_VERSION' ) && method_exists( \Elementor\Plugin::$instance->preview ?? null, 'is_preview_mode' ) && \Elementor\Plugin::$instance->preview->is_preview_mode() ) );
+$is_editor = formgent_is_editor_context();
 
 $settings                 = get_post_meta( get_post()->ID, '_formgent_form_settings', true );
 $use_label_as_placeholder = ! empty( $settings['use_label_as_placeholder'] ?? null );

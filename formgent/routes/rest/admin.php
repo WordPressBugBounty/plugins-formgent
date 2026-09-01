@@ -22,6 +22,7 @@ use FormGent\App\Http\Controllers\Admin\ZohoCRMFeedController;
 use FormGent\App\Http\Controllers\Admin\UserRegistrationController;
 use FormGent\App\Http\Controllers\Admin\PdfResourcesController;
 use FormGent\App\Http\Controllers\Admin\PdfController;
+use FormGent\App\Http\Controllers\Admin\McpController;
 use FormGent\WpMVC\Routing\Route;
 
 Route::group(
@@ -158,6 +159,13 @@ Route::group(
 
         Route::get( 'settings', [SettingsController::class, 'index'] );
         Route::post( 'settings', [SettingsController::class, 'update'] );
+        Route::group(
+            'mcp', function() {
+                Route::get( '/', [McpController::class, 'index'] );
+                Route::patch( 'settings', [McpController::class, 'update_settings'] );
+                Route::post( 'activate-adapter', [McpController::class, 'activate_adapter'] );
+            }
+        );
         Route::post( 'pdf-resources', [PdfResourcesController::class, 'install'] );
         Route::delete( 'pdf-resources', [PdfResourcesController::class, 'delete'] );
         Route::get( 'total-unread-count', [ResponseController::class, 'total_unread_count'] );

@@ -50,6 +50,12 @@ class EmailNotificationRepository extends Repository {
         return EmailNotification::query()->where( 'form_id', $form_id )->where( 'status', $status )->get();
     }
 
+    /** @return array<int,object> */
+    public function get_all_by_form_id( int $form_id ): array {
+        $items = EmailNotification::query()->where( 'form_id', $form_id )->order_by( 'id' )->get();
+        return is_array( $items ) ? $items : [];
+    }
+
     public function update_status( int $id, string $status ) {
         return EmailNotification::query()->where( 'id', $id )->update(
             [

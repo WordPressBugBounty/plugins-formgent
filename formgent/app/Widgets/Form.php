@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) || exit;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use FormGent\WpMVC\View\View;
-use FormGent\App\Models\Post;
 
 class Form extends Widget_Base {
     public static function get_type() {
@@ -54,10 +53,11 @@ class Form extends Widget_Base {
             return;
         }
 
-        $form = get_post( $settings['form_id'] );
+        $form_id = apply_filters( 'formgent_form_id', absint( $settings['form_id'] ) );
+        $form    = formgent_get_form_post( $form_id, true );
 
         if ( empty( $form ) ) {
-            echo "Form not found";
+            View::render( 'form-unavailable' );
             return;
         }
 

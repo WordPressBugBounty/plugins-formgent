@@ -24,7 +24,7 @@ use FormGent\Monolog\Formatter\FormatterInterface;
  *
  * @internal feel free to reuse this to test your own handlers, this is marked internal to avoid issues with PHPStorm https://github.com/Seldaek/monolog/issues/1677
  */
-class TestCase extends \FormGent\PHPUnit\Framework\TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     public function tearDown() : void
     {

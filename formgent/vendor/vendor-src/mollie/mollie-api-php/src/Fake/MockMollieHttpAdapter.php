@@ -9,7 +9,7 @@ use FormGent\Mollie\Api\Http\PendingRequest;
 use FormGent\Mollie\Api\Http\Response;
 use FormGent\Mollie\Api\Traits\HasDefaultFactories;
 use FormGent\Mollie\Api\Utils\Arr;
-use FormGent\PHPUnit\Framework\Assert as PHPUnit;
+use PHPUnit\Framework\Assert as PHPUnit;
 use FormGent\Psr\Http\Client\NetworkExceptionInterface;
 use FormGent\Psr\Http\Client\RequestExceptionInterface;
 class MockMollieHttpAdapter implements HttpAdapterContract

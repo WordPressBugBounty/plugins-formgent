@@ -15,6 +15,26 @@ function formgent_form_repository(): FormRepository {
     return formgent_singleton( FormRepository::class );
 }
 
+/**
+ * Resolve a form from the current WordPress site only.
+ *
+ * Post IDs are not globally unique in multisite. Validating the post type
+ * prevents a copied embed ID from rendering an unrelated post on another site.
+ */
+function formgent_get_form_post( int $form_id, bool $only_publish = false ): ?WP_Post {
+    $form = get_post( $form_id );
+
+    if ( ! $form instanceof WP_Post || formgent_post_type() !== $form->post_type ) {
+        return null;
+    }
+
+    if ( $only_publish && 'publish' !== $form->post_status ) {
+        return null;
+    }
+
+    return $form;
+}
+
 function formgent_get_response_columns_names( $form ) {
     return [
         "text",
@@ -289,6 +309,22 @@ function formgent_form_settings_repository(): FormSettingsRepository {
 
 function formgent_form_get_setting( int $form_id, string $key, $default = null ) {
     return formgent_form_settings_repository()->get_setting_by_key( $form_id, $key, $default );
+}
+
+function formgent_is_quiz_enabled( int $form_id ): bool {
+    $quiz_settings = formgent_form_get_setting( $form_id, 'quiz', [] );
+
+    return is_array( $quiz_settings ) && ! empty( $quiz_settings['is_enabled'] );
+}
+
+function formgent_is_form_analytics_enabled( int $form_id ): bool {
+    $analytics = formgent_form_get_setting( $form_id, 'analytics', [ 'enabled' => true ] );
+
+    if ( ! is_array( $analytics ) || ! array_key_exists( 'enabled', $analytics ) ) {
+        return true;
+    }
+
+    return ! in_array( $analytics['enabled'], [ false, 0, '0', 'false', 'no' ], true );
 }
 
 function formgent_form_update_setting( int $form_id, string $key, $value ) {

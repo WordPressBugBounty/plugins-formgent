@@ -5,22 +5,44 @@ namespace FormGent\App\Utils;
 defined( 'ABSPATH' ) || exit;
 
 final class Capabilities {
-    public const ACCESS        = 'formgent_access';
-    public const MANAGE_FORMS  = 'formgent_manage_forms';
-    public const READ_FORMS    = 'formgent_read_forms';
-    public const CREATE_FORMS  = 'formgent_create_forms';
-    public const EDIT_FORMS    = 'formgent_edit_forms';
-    public const DELETE_FORMS  = 'formgent_delete_forms';
-    public const PUBLISH_FORMS = 'formgent_publish_forms';
+    public const ACCESS                          = 'formgent_access';
+    public const MANAGE_FORMS                    = 'formgent_manage_forms';
+    public const READ_FORMS                      = 'formgent_read_forms';
+    public const CREATE_FORMS                    = 'formgent_create_forms';
+    public const EDIT_FORMS                      = 'formgent_edit_forms';
+    public const DELETE_FORMS                    = 'formgent_delete_forms';
+    public const PUBLISH_FORMS                   = 'formgent_publish_forms';
+    public const READ_RESPONSES                  = 'formgent_read_responses';
+    public const EDIT_RESPONSES                  = 'formgent_edit_responses';
+    public const DELETE_RESPONSES                = 'formgent_delete_responses';
+    public const READ_SETTINGS                   = 'formgent_read_settings';
+    public const EDIT_SETTINGS                   = 'formgent_edit_settings';
+    public const READ_AUTOMATIONS                = 'formgent_read_automations';
+    public const EDIT_AUTOMATIONS                = 'formgent_edit_automations';
+    public const MANAGE_REGISTRATION_AUTOMATIONS = 'formgent_manage_registration_automations';
+    public const MANAGE_CPT_AUTOMATIONS          = 'formgent_manage_cpt_automations';
 
-    private const VERSION    = '1';
+    public const MCP_OPERATOR_ROLE = 'formgent_mcp_operator';
+
+    private const VERSION    = '2';
     private const OPTION_KEY = 'formgent_capabilities_version';
+
+    private const FORBIDDEN_USER_CAPABILITIES = [
+        'create_users',
+        'edit_users',
+        'delete_users',
+        'promote_users',
+        'list_users',
+        'remove_users',
+        'add_users',
+    ];
 
     public static function all(): array {
         return [
             self::ACCESS,
             self::MANAGE_FORMS,
             ...self::form_action_capabilities(),
+            ...self::mcp_action_capabilities(),
         ];
     }
 
@@ -32,6 +54,52 @@ final class Capabilities {
             self::DELETE_FORMS,
             self::PUBLISH_FORMS,
         ];
+    }
+
+    public static function mcp_action_capabilities(): array {
+        return [
+            self::READ_RESPONSES,
+            self::EDIT_RESPONSES,
+            self::DELETE_RESPONSES,
+            self::READ_SETTINGS,
+            self::EDIT_SETTINGS,
+            self::READ_AUTOMATIONS,
+            self::EDIT_AUTOMATIONS,
+            self::MANAGE_REGISTRATION_AUTOMATIONS,
+            self::MANAGE_CPT_AUTOMATIONS,
+        ];
+    }
+
+    /**
+     * Determines whether MCP registration automation may assign a role.
+     *
+     * MCP-created registrations must never grant WordPress user-management or
+     * FormGent-management access, including the dedicated MCP operator role.
+     */
+    public static function is_safe_registration_role( string $role_name ): bool {
+        if ( in_array( $role_name, ['administrator', 'editor', self::MCP_OPERATOR_ROLE], true ) ) {
+            return false;
+        }
+
+        $role = get_role( $role_name );
+
+        if ( ! $role ) {
+            return false;
+        }
+
+        $restricted = [
+            'manage_options',
+            ...self::FORBIDDEN_USER_CAPABILITIES,
+            ...self::all(),
+        ];
+
+        foreach ( array_unique( $restricted ) as $capability ) {
+            if ( $role->has_cap( $capability ) ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static function filter_user_has_cap( array $allcaps ): array {
@@ -80,7 +148,37 @@ final class Capabilities {
             }
         }
 
+        self::install_mcp_operator_role();
+
         update_option( self::OPTION_KEY, self::VERSION );
+    }
+
+    private static function install_mcp_operator_role(): void {
+        $role = get_role( self::MCP_OPERATOR_ROLE );
+
+        if ( ! $role ) {
+            add_role(
+                self::MCP_OPERATOR_ROLE,
+                esc_html__( 'FormGent MCP Operator', 'formgent' ),
+                ['read' => true]
+            );
+
+            $role = get_role( self::MCP_OPERATOR_ROLE );
+        }
+
+        if ( ! $role ) {
+            return;
+        }
+
+        foreach ( self::all() as $capability ) {
+            $role->add_cap( $capability );
+        }
+
+        foreach ( self::FORBIDDEN_USER_CAPABILITIES as $capability ) {
+            $role->remove_cap( $capability );
+        }
+
+        $role->remove_cap( 'manage_options' );
     }
 
     public static function can_access(): bool {

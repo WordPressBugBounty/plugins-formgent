@@ -3,14 +3,15 @@
 use FormGent\WpMVC\View\View; 
 
 if ( 0 >= $attributes['formId'] ) {
-    echo "Form not found";
+    View::render( 'form-unavailable' );
     return;
 }
 
-$post = get_post( $attributes['formId'] );
+$form_id = apply_filters( 'formgent_form_id', absint( $attributes['formId'] ) );
+$post    = formgent_get_form_post( $form_id, true );
 
 if ( empty( $post ) ) {
-    echo "Form not found";
+    View::render( 'form-unavailable' );
     return;
 }
 

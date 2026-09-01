@@ -4,7 +4,7 @@ namespace FormGent\Psr\Log\Test;
 
 use FormGent\Psr\Log\LoggerInterface;
 use FormGent\Psr\Log\LogLevel;
-use FormGent\PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 /**
  * Provides a base test class for ensuring compliance with the LoggerInterface.
  *

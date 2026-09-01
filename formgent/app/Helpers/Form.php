@@ -59,20 +59,27 @@ class Form {
      * Remove label and visual-only fields from block attributes.
      *
      * @param array $attributes Reference to attributes to modify in-place.
+     * @param bool  $include_choice_scoring Whether choice defaults and scoring metadata may be exposed.
      * @return void
      */
-    protected function remove_labels( array &$attributes ): void {
+    protected function remove_labels( array &$attributes, bool $include_choice_scoring = true ): void {
         // Keep a minimal representation of choice options for frontend runtime features
         // (e.g. calculations and conditional logic using selected option values).
         if ( isset( $attributes['options'] ) && is_array( $attributes['options'] ) ) {
+            $option_keys = [ 'label', 'value', 'is_other' ];
+
+            if ( $include_choice_scoring ) {
+                $option_keys = array_merge( $option_keys, [ 'numeric_value', 'price', 'is_default' ] );
+            }
+
             $attributes['options'] = array_map(
-                static function( $opt ) {
+                static function( $opt ) use ( $option_keys ) {
                     if ( ! is_array( $opt ) ) {
                         return $opt;
                     }
 
                     $keep = [];
-                    foreach ( [ 'label', 'value', 'numeric_value', 'price', 'is_default', 'is_other' ] as $k ) {
+                    foreach ( $option_keys as $k ) {
                         if ( array_key_exists( $k, $opt ) ) {
                             $keep[ $k ] = $opt[ $k ];
                         }
@@ -112,13 +119,15 @@ class Form {
      * @param bool $remove_label Whether to remove label-related UI fields.
      * @param string $array_key The key to use as the map key in the output array (e.g., "name").
      * @param bool $allowed_core_blocks Whether to allow specific core blocks like heading or paragraph.
+     * @param bool $include_choice_scoring Whether choice defaults and scoring metadata may be exposed.
      * @return array Array of field settings indexed by $array_key.
      */
     public function get_form_field_settings(
         array $parsed_blocks,
         bool $remove_label = false,
         string $array_key = 'name',
-        bool $allowed_core_blocks = false
+        bool $allowed_core_blocks = false,
+        bool $include_choice_scoring = true
     ): array {
         $blocks            = formgent_config( 'blocks' );
         $registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
@@ -156,7 +165,7 @@ class Form {
 
             // Remove UI-only fields if required
             if ( $remove_label ) {
-                $this->remove_labels( $attributes );
+                $this->remove_labels( $attributes, $include_choice_scoring );
             } else {
                 $this->sanitize_placeholders( $attributes );
             }
@@ -171,7 +180,13 @@ class Form {
             $settings[$setting_key]   = $attributes;
 
             if ( ! empty( $parsed_block['innerBlocks'] ) ) {
-                $settings[$setting_key]['children'] = $this->get_form_field_settings( $parsed_block['innerBlocks'], $remove_label );
+                $settings[$setting_key]['children'] = $this->get_form_field_settings(
+                    $parsed_block['innerBlocks'],
+                    $remove_label,
+                    'name',
+                    false,
+                    $include_choice_scoring
+                );
             }
         }
 
@@ -186,12 +201,14 @@ class Form {
      * @param array $parsed_blocks Parsed Gutenberg blocks.
      * @param bool $remove_label Whether to remove label and placeholders.
      * @param string $array_key Key to identify field (e.g., "name").
+     * @param bool $include_choice_scoring Whether choice defaults and scoring metadata may be exposed.
      * @return array Array of field settings indexed by $array_key or step ID.
      */
     public function get_conversational_form_field_settings(
         array $parsed_blocks,
         bool $remove_label = false,
-        string $array_key = 'name'
+        string $array_key = 'name',
+        bool $include_choice_scoring = true
     ): array {
         $blocks            = formgent_config( 'blocks' );
         $registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
@@ -221,7 +238,7 @@ class Form {
             );
 
             if ( $remove_label ) {
-                $this->remove_labels( $attributes );
+                $this->remove_labels( $attributes, $include_choice_scoring );
             } else {
                 // Fallback label assignment if label is missing
                 if ( empty( $attributes['label'] ) && ! empty( $attributes['name'] ) ) {
@@ -258,11 +275,62 @@ class Form {
 
             // Recurse into inner blocks if available
             if ( ! empty( $parsed_block['innerBlocks'] ) ) {
-                $settings[$setting_key]['children'] = $this->get_conversational_form_field_settings( $parsed_block['innerBlocks'], $remove_label, $array_key );
+                $settings[$setting_key]['children'] = $this->get_conversational_form_field_settings(
+                    $parsed_block['innerBlocks'],
+                    $remove_label,
+                    $array_key,
+                    $include_choice_scoring
+                );
             }
         }
 
         return $settings;
+    }
+
+    /**
+     * Build the static conversational summary used when interactive bindings
+     * are unavailable in a builder preview.
+     *
+     * @param array $parsed_blocks Parsed form blocks.
+     * @return array{question_count:string,time_to_complete:string}
+     */
+    public function get_conversational_summary( array $parsed_blocks ): array {
+        $settings    = $this->get_conversational_form_field_settings( $parsed_blocks, true );
+        $total_steps = count(
+            array_filter(
+                $settings,
+                static function ( array $setting ): bool {
+                    return 'step' === ( $setting['field_type'] ?? '' );
+                }
+            )
+        );
+
+        $time_in_seconds = (int) round( ( $total_steps * 2 * 60 ) / 8 / 10 ) * 10;
+        $minutes         = (int) floor( $time_in_seconds / 60 );
+        $seconds         = $time_in_seconds % 60;
+        $time_parts      = [];
+
+        if ( $minutes > 0 ) {
+            $time_parts[] = sprintf(
+                _n( '%s minute', '%s minutes', $minutes, 'formgent' ),
+                number_format_i18n( $minutes )
+            );
+        }
+
+        if ( $seconds > 0 || empty( $time_parts ) ) {
+            $time_parts[] = sprintf(
+                _n( '%s second', '%s seconds', $seconds, 'formgent' ),
+                number_format_i18n( $seconds )
+            );
+        }
+
+        return [
+            'question_count'   => sprintf(
+                _n( '%s Question', '%s Questions', $total_steps, 'formgent' ),
+                number_format_i18n( $total_steps )
+            ),
+            'time_to_complete' => implode( ' ', $time_parts ),
+        ];
     }
 
     /**

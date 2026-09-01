@@ -76,6 +76,31 @@ class SettingsRepository {
         return $update;
     }
 
+    /**
+     * Return the stored option without creating defaults or tokens.
+     *
+     * @return array<string,mixed>
+     */
+    public function get_stored(): array {
+        $settings = get_option( 'formgent_settings', [] );
+
+        return is_array( $settings ) ? $settings : [];
+    }
+
+    /**
+     * Persist an already validated shallow patch while preserving excluded values.
+     *
+     * @param array<string,mixed> $changes Validated top-level settings.
+     */
+    public function update_preserving( array $changes ): bool {
+        $settings = array_merge( $this->get_stored(), $changes );
+        $updated  = update_option( 'formgent_settings', $settings );
+
+        wp_cache_delete( 'settings', 'formgent' );
+
+        return $updated;
+    }
+
     public function get() {
         $settings_cache = wp_cache_get( 'settings', 'formgent' );
 

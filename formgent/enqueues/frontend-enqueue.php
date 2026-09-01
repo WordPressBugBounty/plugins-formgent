@@ -1,18 +1,8 @@
 <?php
 
-use FormGent\App\Services\ElementorFormAssetDetector;
-
 defined( 'ABSPATH' ) || exit;
 
 include_once __DIR__ . '/register.php';
-
-/**
- * Load block styles for elementor builder
- */
-//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( isset( $_GET['elementor-preview'] ) ) {
-    wp_enqueue_style( 'formgent/blocks-frontend', formgent_url( 'assets/build/css/blocks-frontend.css' ), [], formgent_version() );
-}
 
 wp_register_script( 'formgent/jquery-input-mask', formgent_url( 'assets/js/jquery.mask.min.js' ), ['jquery'], formgent_version(), [ 'in_footer' => true ] );
 $payment_settings         = formgent_get_setting( 'payment', [] );
@@ -58,34 +48,6 @@ wp_register_script_module( 'formgent/blocks-frontend', formgent_url( 'assets/bui
  * @wordpress/interactivity import map early enough for late-rendered form modules.
  */
 wp_register_script_module( 'formgent/interactivity-importmap', '', ['@wordpress/interactivity'], $block_frontend_asset['version'] );
-
-$formgent_frontend_asset_detector = formgent_singleton( ElementorFormAssetDetector::class );
-$formgent_enqueue_form_assets     = static function () : void {
-    wp_enqueue_style( 'formgent/blocks-frontend', formgent_url( 'assets/build/css/blocks-frontend.css' ), [], formgent_version() );
-    wp_enqueue_script( 'lodash' );
-    wp_enqueue_script( 'wp-api-fetch' );
-    wp_enqueue_script( 'formgent/jquery-input-mask' );
-    wp_enqueue_script_module( 'formgent/blocks-frontend' );
-};
-
-if ( ! is_admin() ) {
-    if ( $formgent_frontend_asset_detector->current_page_needs_frontend_assets() ) {
-        $formgent_enqueue_form_assets();
-    } elseif ( $formgent_frontend_asset_detector->published_theme_templates_contain_form() ) {
-        wp_enqueue_script_module( 'formgent/interactivity-importmap' );
-    }
-}
-
-foreach ( [ 'header', 'footer', 'single', 'archive' ] as $formgent_elementor_location ) {
-    add_action(
-        "elementor/theme/before_do_{$formgent_elementor_location}",
-        static function ( $locations_manager ) use ( $formgent_elementor_location, $formgent_frontend_asset_detector, $formgent_enqueue_form_assets ) : void {
-            if ( $formgent_frontend_asset_detector->theme_location_needs_frontend_assets( $formgent_elementor_location, $locations_manager ) ) {
-                $formgent_enqueue_form_assets();
-            }
-        }
-    );
-}
 
 $payment_failed_asset = include formgent_dir( 'assets/build/js/payment-failed.asset.php' );
 wp_register_script_module( 'formgent/payment-failed', formgent_url( 'assets/build/js/payment-failed.js' ), $payment_failed_asset['dependencies'], $payment_failed_asset['version'] );

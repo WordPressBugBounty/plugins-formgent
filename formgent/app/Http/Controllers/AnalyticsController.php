@@ -42,6 +42,16 @@ class AnalyticsController extends Controller {
                 );
             }
 
+            if ( ! formgent_is_form_analytics_enabled( $form->ID ) ) {
+                return Response::send(
+                    [
+                        'code'    => 'formgent_analytics_disabled',
+                        'message' => esc_html__( 'Analytics is disabled for this form.', 'formgent' ),
+                    ],
+                    403
+                );
+            }
+
             return Response::send(
                 [
                     'new_count' => $this->analytic_repository->update_form_view_count(
