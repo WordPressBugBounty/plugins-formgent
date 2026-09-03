@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.12.0\n"
+"Project-Id-Version: FormGent 1.12.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-01T05:05:20+00:00\n"
+"POT-Creation-Date: 2026-09-03T04:58:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -2168,31 +2168,31 @@ msgstr ""
 msgid "A subscription requires mapped customer name and email fields."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:67
+#: app/Services/Forms/FormCommandService.php:63
 msgid "The form was created as a draft because the current user cannot publish forms."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:70
+#: app/Services/Forms/FormCommandService.php:66
 msgid "Provide exactly one of fields or layout when creating a form."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:129
+#: app/Services/Forms/FormCommandService.php:125
 msgid "At least one form property must be changed."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:144
+#: app/Services/Forms/FormCommandService.php:140
 msgid "Fields and layout cannot be replaced in the same update."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:149
+#: app/Services/Forms/FormCommandService.php:145
 msgid "This form contains internal or unsupported blocks that cannot be safely replaced through the layout contract."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:337
+#: app/Services/Forms/FormCommandService.php:333
 msgid "The form could not be deleted."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:432
+#: app/Services/Forms/FormCommandService.php:417
 msgid "A form title must contain between 5 and 255 characters."
 msgstr ""
 

@@ -19,8 +19,6 @@ class FormCommandService {
 
     private SafeFormSettingsService $safe_settings;
 
-    private AiFormQuotaService $quota;
-
     private FormCacheService $cache;
 
     private FormReadService $reader;
@@ -32,7 +30,6 @@ class FormCommandService {
     public function __construct(
         FormBlockBuilder $builder,
         SafeFormSettingsService $safe_settings,
-        AiFormQuotaService $quota,
         FormCacheService $cache,
         FormReadService $reader,
         FormTypeConversionService $converter,
@@ -40,7 +37,6 @@ class FormCommandService {
     ) {
         $this->builder       = $builder;
         $this->safe_settings = $safe_settings;
-        $this->quota         = $quota;
         $this->cache         = $cache;
         $this->reader        = $reader;
         $this->converter     = $converter;
@@ -381,12 +377,6 @@ class FormCommandService {
             return McpErrorFactory::internal();
         }
 
-        $reservation = $this->quota->reserve();
-
-        if ( is_wp_error( $reservation ) ) {
-            return $reservation;
-        }
-
         $post_id = wp_insert_post( $post_data, true );
 
         if ( is_wp_error( $post_id ) || ! $this->created_meta_matches( $post_id, $dto->get_type(), $settings ) ) {
@@ -394,7 +384,6 @@ class FormCommandService {
                 wp_delete_post( $post_id, true );
             }
 
-            $this->quota->rollback( $reservation );
             return McpErrorFactory::internal();
         }
 
@@ -404,7 +393,6 @@ class FormCommandService {
             do_action( $after_hook, $dto, null );
         } catch ( Throwable $throwable ) {
             wp_delete_post( $post_id, true );
-            $this->quota->rollback( $reservation );
             $this->report_exception( $ability, $throwable, [ 'form_id' => $post_id ] );
             return McpErrorFactory::internal();
         }
@@ -414,11 +402,8 @@ class FormCommandService {
 
         if ( is_wp_error( $form ) ) {
             wp_delete_post( $post_id, true );
-            $this->quota->rollback( $reservation );
             return McpErrorFactory::internal();
         }
-
-        $this->quota->commit( $reservation );
 
         return $form;
     }

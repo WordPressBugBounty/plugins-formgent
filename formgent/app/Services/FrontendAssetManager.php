@@ -228,17 +228,20 @@ class FrontendAssetManager {
      * @return array{blocks:string[]}
      */
     private function form_asset_manifest( int $form_id ) : array {
+        $form = formgent_get_form_post( $form_id );
+
+        // Draft/private previews are valid for users who can view the form.
+        // Check visibility before consulting the cache so a previously cached
+        // manifest cannot make assets available after access is revoked.
+        if ( ! $form || ! formgent_is_form_visible( $form ) ) {
+            return [ 'blocks' => [] ];
+        }
+
         $cache_key = $this->manifest_cache_key( $form_id );
         $manifest  = wp_cache_get( $cache_key, self::CACHE_GROUP );
 
         if ( is_array( $manifest ) ) {
             return $manifest;
-        }
-
-        $form = formgent_get_form_post( $form_id, true );
-
-        if ( ! $form ) {
-            return [ 'blocks' => [] ];
         }
 
         $blocks   = $this->collect_block_names( parse_blocks( $form->post_content ) );

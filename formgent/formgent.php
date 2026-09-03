@@ -8,7 +8,7 @@ use FormGent\App\Multisite\SiteLifecycle;
 /**
  * Plugin Name:       FormGent
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.12.0
+ * Version:           1.12.1
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Tested up to:      7.0
