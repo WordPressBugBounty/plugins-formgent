@@ -8,6 +8,7 @@ use FormGent\WpMVC\View\View;
 use FormGent\WpMVC\Contracts\Provider;
 use FormGent\App\Utils\Capabilities;
 use FormGent\App\Services\Forms\FormCacheService;
+use FormGent\App\Services\Forms\FormPermalinkService;
 use WP_Post;
 
 class PostTypeServiceProvider implements Provider {
@@ -17,11 +18,6 @@ class PostTypeServiceProvider implements Provider {
      */
     private const REGISTRATION_PRIORITY = 99;
 
-    /** Bump when FormGent's rewrite ownership or structure changes. */
-    private const REWRITE_RULES_VERSION = '2';
-
-    private const REWRITE_RULES_VERSION_OPTION = 'formgent_form_rewrite_rules_version';
-
     private FormCacheService $form_cache;
 
     public function __construct( FormCacheService $form_cache ) {
@@ -30,7 +26,7 @@ class PostTypeServiceProvider implements Provider {
 
     public function boot() {
         add_action( 'init', [self::class, 'register_post_type'], self::REGISTRATION_PRIORITY );
-        add_action( 'wp_loaded', [self::class, 'maybe_refresh_rewrite_rules'] );
+        add_action( 'wp_loaded', [FormPermalinkService::class, 'maybe_refresh_rewrite_rules'] );
         add_filter( 'allowed_block_types_all', [$this, 'allow_blocks_for_formgent_form'], 10, 2 );
         add_filter( 'the_content', [$this, 'filter_the_content'] );
         add_filter( 'block_categories_all', [$this, 'filter_block_categories_all'] );
@@ -42,18 +38,6 @@ class PostTypeServiceProvider implements Provider {
         add_action( 'post_updated', [$this, 'remove_form_cache'] );
         add_action( 'post_updated', [$this, 'disable_unpublished_form_sharing'], 10, 3 );
         add_filter( 'display_post_states', [$this, 'page_post_states'], 10, 2 );
-    }
-
-    /**
-     * Refresh persisted rewrite rules once after changing their ownership.
-     */
-    public static function maybe_refresh_rewrite_rules() : void {
-        if ( self::REWRITE_RULES_VERSION === get_option( self::REWRITE_RULES_VERSION_OPTION ) ) {
-            return;
-        }
-
-        flush_rewrite_rules( false );
-        update_option( self::REWRITE_RULES_VERSION_OPTION, self::REWRITE_RULES_VERSION, false );
     }
 
     public function page_post_states( $post_states, $post ) {
@@ -235,7 +219,9 @@ class PostTypeServiceProvider implements Provider {
             'show_ui'            => true,
             'show_in_menu'       => false,
             'query_var'          => true,
-            'rewrite'            => [ 'slug' => 'form' ],
+            'rewrite'            => [
+                'slug' => FormPermalinkService::current_base(),
+            ],
             'capability_type'    => [ 'formgent_form', 'formgent_forms' ],
             'capabilities'       => [
                 'edit_post'              => 'formgent_edit_form',

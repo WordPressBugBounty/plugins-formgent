@@ -73,7 +73,7 @@ class FrontendAssetManager {
         $form_ids = $this->detector->theme_location_form_ids( $location, $locations_manager );
 
         if ( ! empty( $form_ids ) ) {
-            $this->enqueue_form_assets( $form_ids, $this->elementor_compatibility_required() );
+            $this->enqueue_form_assets( $form_ids, true );
         }
     }
 
@@ -125,7 +125,7 @@ class FrontendAssetManager {
             return false;
         }
 
-        return class_exists( '\Elementor\Plugin' );
+        return $this->detector->current_page_uses_elementor();
     }
 
     private function enqueue_full_frontend_style() : void {

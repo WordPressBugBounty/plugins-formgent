@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.12.1
+Stable tag: 1.12.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,11 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.12.2 - 13 September 2026 =
+* Added: Form URL base change option in global settings.
+* Fixed: Asset loading issue in Shortcode view.
+* Fixed: Minor issue & instruction fix.
+
 = 1.12.1 - 03 September 2026 =
 * Fixed: An issue where MCP form creation was blocked when the AI form creation quota limit was exceeded.
 * Fixed: Form styles breaking or rendering incorrectly in the draft preview.

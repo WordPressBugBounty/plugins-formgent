@@ -11,8 +11,32 @@ class ElementorFormAssetDetector {
 
     private $published_theme_templates_contain_form = null;
 
+    private $matching_theme_document_form_ids = null;
+
     public function current_page_needs_frontend_assets() : bool {
         return ! empty( $this->current_page_form_ids() );
+    }
+
+    /**
+     * Determine whether a FormGent form on the current request is rendered by Elementor.
+     *
+     * Elementor being active is not enough: regular block-theme/classic-theme pages
+     * must continue to use FormGent's complete frontend stylesheet.
+     */
+    public function current_page_uses_elementor() : bool {
+        if ( ! class_exists( '\Elementor\Plugin' ) ) {
+            return false;
+        }
+
+        if ( is_singular() ) {
+            $post = get_post();
+
+            if ( $post instanceof WP_Post && 'builder' === get_post_meta( $post->ID, '_elementor_edit_mode', true ) ) {
+                return true;
+            }
+        }
+
+        return ! empty( $this->matching_theme_document_form_ids() );
     }
 
     /**
@@ -145,18 +169,28 @@ class ElementorFormAssetDetector {
 
     private function matching_theme_document_form_ids() : array {
         if ( ! class_exists( '\ElementorPro\Modules\ThemeBuilder\Module' ) ) {
-            return [];
+            $this->matching_theme_document_form_ids = [];
+
+            return $this->matching_theme_document_form_ids;
+        }
+
+        if ( is_array( $this->matching_theme_document_form_ids ) ) {
+            return $this->matching_theme_document_form_ids;
         }
 
         $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
 
         if ( ! method_exists( $theme_builder, 'get_conditions_manager' ) ) {
-            return [];
+            $this->matching_theme_document_form_ids = [];
+
+            return $this->matching_theme_document_form_ids;
         }
 
         $conditions_manager = $theme_builder->get_conditions_manager();
         if ( ! method_exists( $conditions_manager, 'get_documents_for_location' ) ) {
-            return [];
+            $this->matching_theme_document_form_ids = [];
+
+            return $this->matching_theme_document_form_ids;
         }
 
         $form_ids = [];
@@ -174,7 +208,9 @@ class ElementorFormAssetDetector {
             }
         }
 
-        return $this->normalize_form_ids( $form_ids );
+        $this->matching_theme_document_form_ids = $this->normalize_form_ids( $form_ids );
+
+        return $this->matching_theme_document_form_ids;
     }
 
     private function document_post_id( $document ) : int {

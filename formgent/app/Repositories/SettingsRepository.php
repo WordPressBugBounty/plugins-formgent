@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 class SettingsRepository {
     protected array $default_settings = [
+        "form_permalink_base"        => "form",
         "disable_ip_logging"         => "no",
         "enable_honeypot_protection" => "yes",
         "validation_messages"        => [
