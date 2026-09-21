@@ -14,6 +14,7 @@ use FormGent\App\Repositories\ResponseRepository;
 use FormGent\App\Repositories\AnswerRepository;
 use FormGent\App\Repositories\FormRepository;
 use FormGent\App\Repositories\PdfRepository;
+use FormGent\App\Repositories\ResponseTokenRepository;
 use FormGent\App\Multisite\SiteLifecycle;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
@@ -105,11 +106,17 @@ class ResponseController extends Controller {
             );
         }
 
+        $security_error = $this->validate_submission_security( $form, $request );
+
+        if ( null !== $security_error ) {
+            return $security_error;
+        }
+
         // Set additional form properties.
         $form->save_incomplete_data = formgent_is_save_incompleted_data( $form->ID );
 
         // Validate form data and create DTOs.
-        $validate_data = $this->validate_form_data( $form, $validator, $request );
+        $validate_data = $this->validate_form_data( $form, $validator, $request, (int) $response->id );
         if ( ! empty( $validate_data['errors'] ) ) {
             return Response::send( ['messages' => $validate_data['errors']], 422 );
         }
@@ -137,6 +144,12 @@ class ResponseController extends Controller {
                 [ 'message' => esc_html__( 'Verification required.', 'formgent' ) ],
                 403
             );
+        }
+
+        $captcha_proof = sanitize_text_field( (string) $request->get_param( 'captcha_proof' ) );
+
+        if ( '' !== $captcha_proof ) {
+            delete_transient( 'formgent_captcha_' . hash( 'sha256', $captcha_proof ) );
         }
 
         if ( ! empty( $validate_data['field_dtos'] ) ) {
@@ -191,11 +204,18 @@ class ResponseController extends Controller {
      * @param stdClass $form
      * @param Validator $validator
      * @param WP_REST_Request $request
+     * @param int $response_id
      * @return array
      */
-    private function validate_form_data( stdClass $form, Validator $validator, WP_REST_Request $request ): array {
+    private function validate_form_data( stdClass $form, Validator $validator, WP_REST_Request $request, int $response_id ): array {
         $form_data = $request->get_param( 'form_data' );
+
+        if ( array_key_exists( '_formgent_response_id', $form_data ) ) {
+            throw new Exception( esc_html__( 'Invalid form data.', 'formgent' ), 400 );
+        }
+
         $request->set_body_params( $form_data );
+        $request->set_param( '_formgent_response_id', $response_id );
 
         $registered_fields  = formgent_config( "fields" );
         $fields             = formgent_get_form_fields( $form );
@@ -319,7 +339,13 @@ class ResponseController extends Controller {
             return compact( 'field_dtos', 'errors' );
         }
 
+        if ( array_key_exists( '_formgent_response_id', $form_data ) ) {
+            throw new Exception( esc_html__( 'Invalid form data.', 'formgent' ), 400 );
+        }
+
         $children_request->set_body_params( $form_data );
+        $children_request->set_param( 'id', $request->get_param( 'id' ) );
+        $children_request->set_param( '_formgent_response_id', absint( $request->get_param( '_formgent_response_id' ) ) );
         $validator->wp_rest_request = $children_request;
         $registered_fields          = formgent_config( "fields" );
         $fields                     = $parent_field['children'];
@@ -398,6 +424,32 @@ class ResponseController extends Controller {
             );
         }
 
+        $remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+        $rate_key       = 'formgent_token_' . md5( $form_id . '|' . $remote_address );
+        $requests       = (int) get_transient( $rate_key );
+
+        if ( $requests >= 20 ) {
+            return Response::send(
+                ['message' => esc_html__( 'Too many form sessions were requested. Please try again shortly.', 'formgent' )],
+                429
+            );
+        }
+
+        $aggregate_key      = 'formgent_token_form_' . $form_id;
+        $aggregate_requests = (int) get_transient( $aggregate_key );
+        $aggregate_limit    = max( 20, (int) apply_filters( 'formgent_form_session_rate_limit', 500, $form_id ) );
+
+        if ( $aggregate_requests >= $aggregate_limit ) {
+            return Response::send(
+                ['message' => esc_html__( 'This form is receiving too many new sessions. Please try again shortly.', 'formgent' )],
+                429
+            );
+        }
+
+        set_transient( $rate_key, $requests + 1, MINUTE_IN_SECONDS );
+        set_transient( $aggregate_key, $aggregate_requests + 1, MINUTE_IN_SECONDS );
+        formgent_singleton( ResponseTokenRepository::class )->cleanup_expired();
+
         $dto = new ResponseDTO;
         $dto->set_status( ResponseStatus::DRAFT )->set_is_completed( 0 )->set_form_id( $form_id );
 
@@ -446,6 +498,41 @@ class ResponseController extends Controller {
                 'response_token' => $response_token
             ]
         );
+    }
+
+    /**
+     * Enforce server-side bot checks before accepting a public submission.
+     *
+     * @return array|null REST response on failure, otherwise null.
+     */
+    private function validate_submission_security( stdClass $form, WP_REST_Request $request ): ?array {
+        if ( 'yes' === formgent_settings_repository()->get_by_key( 'enable_honeypot_protection', 'yes' ) && '' !== (string) $request->get_param( 'honeypot' ) ) {
+            return Response::send( ['message' => esc_html__( 'Form verification failed.', 'formgent' )], 400 );
+        }
+
+        $has_captcha = false;
+        foreach ( formgent_get_form_fields( $form ) as $field ) {
+            if ( 'captcha' === ( $field['field_type'] ?? '' ) ) {
+                $has_captcha = true;
+                break;
+            }
+        }
+
+        if ( ! $has_captcha ) {
+            return null;
+        }
+
+        $proof          = sanitize_text_field( (string) $request->get_param( 'captcha_proof' ) );
+        $response_token = (string) $request->get_param( 'response_token' );
+        $transient_key  = 'formgent_captcha_' . hash( 'sha256', $proof );
+        $expected       = hash_hmac( 'sha256', (int) $form->ID . '|' . $response_token, wp_salt( 'nonce' ) );
+        $stored         = (string) get_transient( $transient_key );
+
+        if ( '' === $proof || '' === $stored || ! hash_equals( $expected, $stored ) ) {
+            return Response::send( ['message' => esc_html__( 'Captcha verification is required.', 'formgent' )], 403 );
+        }
+
+        return null;
     }
 
     /**

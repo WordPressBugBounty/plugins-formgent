@@ -24,8 +24,11 @@ class PaymentController extends Controller
             ]
         );
 
-        $payment_return_dto = formgent_payment_processor( $request->get_param( 'payment_gateway' ) )
+        $payment_gateway    = sanitize_key( (string) $request->get_param( 'payment_gateway' ) );
+        $payment_return_dto = formgent_payment_processor( $payment_gateway )
             ->success( $validator, $request );
+
+        formgent_validate_payment_return( $payment_return_dto, $payment_gateway );
 
         $status = $payment_return_dto->get_status() ?: PaymentStatus::PAID;
 
@@ -78,7 +81,8 @@ class PaymentController extends Controller
             ]
         );
 
-        $payment_return_dto = formgent_payment_processor( $request->get_param( 'payment_gateway' ) )->cancel( $request );
+        $payment_gateway    = sanitize_key( (string) $request->get_param( 'payment_gateway' ) );
+        $payment_return_dto = formgent_payment_processor( $payment_gateway )->cancel( $request );
 
         if ( ! $payment_return_dto ) {
             return Response::send(
@@ -87,6 +91,17 @@ class PaymentController extends Controller
                 ],
                 404
             );
+        }
+
+        formgent_validate_payment_return( $payment_return_dto, $payment_gateway );
+
+        $payment = formgent_payment_repository()->get_by_id( $payment_return_dto->get_payment_id() );
+
+        if ( $payment && PaymentStatus::PAID === $payment->status ) {
+            $order = formgent_order_repository()->get_by_id( $payment_return_dto->get_order_id() );
+            $this->maybe_redirect_to_payment_page( 'success_page', $order );
+
+            return Response::send( ['message' => esc_html__( 'Payment was already completed.', 'formgent' )] );
         }
 
         $status = $payment_return_dto->get_status() ?: PaymentStatus::CANCELLED;

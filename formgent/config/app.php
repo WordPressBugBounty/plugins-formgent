@@ -40,6 +40,7 @@ use FormGent\App\Providers\LoginServiceProvider;
 use FormGent\App\Providers\RegisterServiceProvider;
 use FormGent\App\Providers\PdfCleanupServiceProvider;
 use FormGent\App\Providers\AbilitiesServiceProvider;
+use FormGent\App\Providers\RestRequestServiceProvider;
 
 return [
     'version'                 => Helpers::get_plugin_version( 'formgent' ),
@@ -80,6 +81,7 @@ return [
         RegisterServiceProvider::class,
         PdfCleanupServiceProvider::class,
         AbilitiesServiceProvider::class,
+        RestRequestServiceProvider::class,
     ],
 
     'admin_providers'         => [

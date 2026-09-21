@@ -43,6 +43,7 @@ class Mollie implements PaymentInterface {
         $callback_args = [
             'order_id'   => $pay_dto->order->get_id(),
             'payment_id' => $pay_dto->payment->get_id(),
+            'state'      => formgent_create_payment_callback_state( self::get_key(), $pay_dto->order->get_id(), $pay_dto->payment->get_id() ),
         ];
         $payload       = [
             'amount'      => [
@@ -84,11 +85,18 @@ class Mollie implements PaymentInterface {
             [
                 'order_id'   => 'required|numeric',
                 'payment_id' => 'required|numeric',
+                'state'      => 'required|string',
             ]
         );
 
-        $payment_id     = (int) $request->get_param( 'payment_id' );
-        $order_id       = (int) $request->get_param( 'order_id' );
+        $payment_id = (int) $request->get_param( 'payment_id' );
+        $order_id   = (int) $request->get_param( 'order_id' );
+        $state      = (string) $request->get_param( 'state' );
+
+        if ( ! formgent_verify_payment_callback_state( $state, self::get_key(), $order_id, $payment_id ) ) {
+            throw new Exception( esc_html__( 'Payment was not completed.', 'formgent' ), 422 );
+        }
+
         $payment_record = $this->get_verified_payment_record( $order_id, $payment_id );
         $payment        = $this->fetch_payment( $payment_record->transaction_id );
         $status         = $this->map_status( $payment->status ) ?: PaymentStatus::PENDING;
@@ -101,15 +109,14 @@ class Mollie implements PaymentInterface {
     }
 
     public function cancel( WP_REST_Request $request ): ?PaymentReturnDTO {
-        $order_id   = $request->get_param( 'order_id' );
-        $payment_id = $request->get_param( 'payment_id' );
+        $order_id   = (int) $request->get_param( 'order_id' );
+        $payment_id = (int) $request->get_param( 'payment_id' );
+        $state      = (string) $request->get_param( 'state' );
 
-        if ( empty( $order_id ) || empty( $payment_id ) ) {
+        if ( ! formgent_verify_payment_callback_state( $state, self::get_key(), $order_id, $payment_id ) ) {
             return null;
         }
 
-        $order_id       = (int) $order_id;
-        $payment_id     = (int) $payment_id;
         $payment_record = $this->get_verified_payment_record( $order_id, $payment_id );
         $payment        = $this->fetch_payment( $payment_record->transaction_id );
         $status         = $this->map_status( $payment->status ) ?: PaymentStatus::PENDING;

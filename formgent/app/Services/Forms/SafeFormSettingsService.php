@@ -202,8 +202,9 @@ class SafeFormSettingsService {
             }
 
             $settings['customScript'] = [
-                'css' => isset( $custom_code['css'] ) ? substr( (string) $custom_code['css'], 0, 100000 ) : (string) ( $settings['customScript']['css'] ?? '' ),
-                'js'  => isset( $custom_code['js'] ) ? substr( (string) $custom_code['js'], 0, 100000 ) : (string) ( $settings['customScript']['js'] ?? '' ),
+                'css'         => isset( $custom_code['css'] ) ? substr( (string) $custom_code['css'], 0, 100000 ) : (string) ( $settings['customScript']['css'] ?? '' ),
+                'js'          => isset( $custom_code['js'] ) ? substr( (string) $custom_code['js'], 0, 100000 ) : (string) ( $settings['customScript']['js'] ?? '' ),
+                '_authorized' => true,
             ];
         }
 

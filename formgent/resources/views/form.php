@@ -46,13 +46,14 @@ $is_enabled_honeypot_protection = 'yes' === formgent_settings_repository()->get_
 
 $confirmation  = formgent_form_get_setting( $form->ID, 'confirmation' );
 $custom_script = formgent_form_get_setting( $form->ID, 'customScript', ['css' => '', 'js' => ''] );
+$custom_script = is_array( $custom_script ) && ! empty( $custom_script['_authorized'] ) ? $custom_script : ['css' => '', 'js' => ''];
 
 $message = "";
 
 if ( 'page' === $confirmation['type'] ) {
     $confirmation['page'] = get_permalink( intval( $confirmation['page'] ) );
 } elseif ( 'message' === $confirmation['type'] ) {
-    $message = htmlspecialchars( $confirmation['message'] ?? '', ENT_QUOTES, 'UTF-8' );
+    $message = htmlspecialchars( wp_kses_post( $confirmation['message'] ?? '' ), ENT_QUOTES, 'UTF-8' );
 }
 
 if ( 'conversational' !== $form_type ) {

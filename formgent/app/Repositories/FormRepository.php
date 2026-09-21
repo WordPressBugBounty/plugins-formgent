@@ -14,6 +14,7 @@ use FormGent\App\Models\Post;
 use FormGent\App\Models\PostMeta;
 use FormGent\App\Models\User;
 use FormGent\App\Multisite\SiteLifecycle;
+use FormGent\App\Services\Security\RemoteMediaImporter;
 use FormGent\WpMVC\Database\Query\Builder;
 use FormGent\WpMVC\Database\Query\JoinClause;
 
@@ -277,79 +278,16 @@ class FormRepository extends FormSettingsRepository {
             }
         }
 
-        $response = wp_remote_get(
-            $attachment_url, [
-                [
-                    'timeout' => 30
-                ]
-            ]
-        );
-
-        if ( is_wp_error( $response ) ) {
-            $error_code    = $response->get_error_code();
-            $response_code = 500;
-
-            if ( is_string( $error_code ) ) {
-                if ( 'http_request_failed' === $error_code ) {
-                    $response_code = 495;
-                }
-            } else {
-                $response_code = $error_code;
-            }
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-            throw new Exception( $response->get_error_message(), $response_code );
-        }
-
-        $response_code = intval( wp_remote_retrieve_response_code( $response ) );
-
-        if ( 200 !== $response_code ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-            throw new Exception( wp_remote_retrieve_response_message( $response ), $response_code );
-        }
-
-        $file_name = wp_basename( $attachment_url );
-        $upload    = wp_upload_bits( $file_name, null, wp_remote_retrieve_body( $response ) );
-
-        if ( ! empty( $upload['error'] ) ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-            throw new Exception( $upload['error'], 500 );
-        }
-
-        $attachment = [
-            'post_title'     => $file_name,
-            'post_type'      => 'attachment',
-            'post_mime_type' => $upload['type'],
-            'guid'           => $upload['url']
-        ];
-
-        $id = wp_insert_attachment( $attachment, $upload['file'] );
-
-        if ( is_wp_error( $id ) ) {
-            //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-            throw new Exception( $id->get_error_message(), $id->get_error_code() );
-        }
-
-        if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/image.php';
-        }
-
-        if ( ! function_exists( 'wp_read_video_metadata' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/media.php';
-        }
-
-        wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
+        $import = ( new RemoteMediaImporter() )->import( $attachment_url );
 
         /**
          * Caching the inserted attachment url and id
          */
-        $demo_attachments[$attachment_url] = $id;
+        $demo_attachments[$attachment_url] = $import['id'];
 
         $this->update_demo_attachments( $demo_attachments );
 
-        return [
-            'id'  => $id,
-            'url' => $upload['url']
-        ];
+        return $import;
     }
 
     public function get_demo_attachments():array {

@@ -26,19 +26,23 @@ trait MethodResolver {
 
     public function validate( array $field, WP_REST_Request $wp_rest_request, Validator $validator, stdClass $form ) {
         $answer_items = $wp_rest_request->get_param( $field['name'] );
+        $response_id  = absint( $wp_rest_request->get_param( '_formgent_response_id' ) );
 
         $repeater_request = new WP_REST_Request( 'POST', '/' );
-        $repeater_request->set_body_params(
-            [
-                'id' => $wp_rest_request->get_param( 'id' )
-            ]
-        );
 
         $validator->wp_rest_request = $repeater_request;
         $errors                     = [];
 
         foreach ( $answer_items as $key => $answer_item ) {
+            if ( ! is_array( $answer_item ) || array_key_exists( '_formgent_response_id', $answer_item ) ) {
+                throw new Exception( esc_html__( 'Invalid form data.', 'formgent' ), 400 );
+            }
+
             $repeater_request->set_body_params( $answer_item );
+            $repeater_request->set_param( 'id', $wp_rest_request->get_param( 'id' ) );
+            $repeater_request->set_param( '_formgent_response_id', $response_id );
+            $repeater_request->set_param( '_formgent_parent_field_name', $field['name'] );
+            $repeater_request->set_param( '_formgent_field_index', absint( $key ) );
             $field_errors = [];
             foreach ( $field['children'] as $child_field ) {
                 try {
@@ -70,18 +74,22 @@ trait MethodResolver {
 
     public function get_field_dto( array $field, WP_REST_Request $wp_rest_request, stdClass $form ): AnswerDTO {
         $answer_items = $wp_rest_request->get_param( $field['name'] );
+        $response_id  = absint( $wp_rest_request->get_param( '_formgent_response_id' ) );
 
         $repeater_request = new WP_REST_Request( 'POST', '/' );
-        $repeater_request->set_body_params(
-            [
-                'id' => $wp_rest_request->get_param( 'id' ),
-            ]
-        );
 
         $values = [];
 
         foreach ( $answer_items as $key => $answer_item ) {
+            if ( ! is_array( $answer_item ) || array_key_exists( '_formgent_response_id', $answer_item ) ) {
+                throw new Exception( esc_html__( 'Invalid form data.', 'formgent' ), 400 );
+            }
+
             $repeater_request->set_body_params( $answer_item );
+            $repeater_request->set_param( 'id', $wp_rest_request->get_param( 'id' ) );
+            $repeater_request->set_param( '_formgent_response_id', $response_id );
+            $repeater_request->set_param( '_formgent_parent_field_name', $field['name'] );
+            $repeater_request->set_param( '_formgent_field_index', absint( $key ) );
 
             foreach ( $field['children'] as $child_field ) {
                 if ( empty( $repeater_request->get_param( $child_field['name'] ) ) ) {
@@ -137,8 +145,14 @@ trait MethodResolver {
             return null;
         }
 
+        if ( array_key_exists( '_formgent_response_id', $form_data ) ) {
+            throw new Exception( esc_html__( 'Invalid form data.', 'formgent' ), 400 );
+        }
+
         $child_request = new WP_REST_Request( 'POST', '/' );
         $child_request->set_body_params( $form_data );
+        $child_request->set_param( 'id', $request->get_param( 'id' ) );
+        $child_request->set_param( '_formgent_response_id', absint( $request->get_param( '_formgent_response_id' ) ) );
 
         if ( $validator ) {
             $validator->wp_rest_request = $child_request;

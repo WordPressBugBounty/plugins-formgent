@@ -2,9 +2,9 @@
 Contributors: wpWax
 Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.12.2
+Stable tag: 1.12.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,13 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.12.3 - 21 September 2026 =
+* Security: Hardened Zoho CRM OAuth callbacks with administrator authorization and PKCE transaction validation.
+* Security: Improved protection for form submissions, file  uploads, integrations, and permissions.
+* Fixed: Improved reliability of calculations, file handling, and PDF resources.
+* Fixed: Improved Zapier and Google Sheets integration handling.
+* Fixed: Zoho CRM access token refresh persistence.
+
 = 1.12.2 - 13 September 2026 =
 * Added: Form URL base change option in global settings.
 * Fixed: Asset loading issue in Shortcode view.

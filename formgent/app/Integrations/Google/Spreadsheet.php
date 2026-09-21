@@ -211,7 +211,7 @@ class Spreadsheet extends Base {
                 $range,
                 $value_range,
                 [
-                    'valueInputOption' => 'USER_ENTERED',
+                    'valueInputOption' => 'RAW',
                     'insertDataOption' => 'INSERT_ROWS'
                 ]
             );
@@ -228,7 +228,7 @@ class Spreadsheet extends Base {
             $range,
             $value_range,
             [
-                'valueInputOption' => 'USER_ENTERED'
+                'valueInputOption' => 'RAW'
             ]
         );
 
@@ -316,7 +316,7 @@ class Spreadsheet extends Base {
             sprintf( "'%s'!A%d:%s%d", $sheet_title, 1, $end_col, 1 ),
             $value_range,
             [
-                'valueInputOption' => 'USER_ENTERED'
+                'valueInputOption' => 'RAW'
             ]
         );
     }

@@ -2,24 +2,21 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent 1.12.2\n"
+"Project-Id-Version: FormGent – Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More 1.12.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-13T05:07:14+00:00\n"
+"POT-Creation-Date: 2026-09-21T05:42:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
 
 #. Plugin Name of the plugin
 #: formgent.php
-#: app/Abilities/AbilityRegistrar.php:67
-#: app/Providers/Admin/MenuServiceProvider.php:52
-#: app/Providers/PostTypeServiceProvider.php:160
-msgid "FormGent"
+msgid "FormGent – Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More"
 msgstr ""
 
 #. Description of the plugin
@@ -35,6 +32,12 @@ msgstr ""
 #. Author URI of the plugin
 #: formgent.php
 msgid "http://wpwax.com"
+msgstr ""
+
+#: app/Abilities/AbilityRegistrar.php:67
+#: app/Providers/Admin/MenuServiceProvider.php:52
+#: app/Providers/PostTypeServiceProvider.php:160
+msgid "FormGent"
 msgstr ""
 
 #: app/Abilities/AbilityRegistrar.php:68
@@ -258,14 +261,22 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
-#: app/Fields/FileUpload/MethodResolver.php:36
-#: app/Http/Controllers/AttachmentController.php:77
+#: app/Fields/FileUpload/MethodResolver.php:33
+msgid "Too many files were uploaded."
+msgstr ""
+
+#: app/Fields/FileUpload/MethodResolver.php:39
+msgid "Invalid form session"
+msgstr ""
+
+#: app/Fields/FileUpload/MethodResolver.php:54
+#: app/Http/Controllers/AttachmentController.php:150
 msgid "Invalid file token"
 msgstr ""
 
 #: app/Fields/Password/MethodResolver.php:58
 #: app/Http/Controllers/RegisterController.php:91
-#: app/Providers/UserRegistrationServiceProvider.php:398
+#: app/Providers/UserRegistrationServiceProvider.php:399
 #: assets/blocks/password/render.php:205
 msgid "Password strength is too weak."
 msgstr ""
@@ -274,53 +285,61 @@ msgstr ""
 msgid "Validation failed."
 msgstr ""
 
-#: app/Helpers/form-helpers.php:678
+#: app/Fields/Repeater/MethodResolver.php:38
+#: app/Fields/Repeater/MethodResolver.php:85
+#: app/Fields/Repeater/MethodResolver.php:149
+#: app/Http/Controllers/ResponseController.php:214
+#: app/Http/Controllers/ResponseController.php:343
+msgid "Invalid form data."
+msgstr ""
+
+#: app/Helpers/form-helpers.php:666
 #: assets/blocks/payment-summary/render.php:22
 #: assets/blocks/payment/render.php:95
 msgid "Item"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:679
+#: app/Helpers/form-helpers.php:667
 msgid "Qty"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:680
+#: app/Helpers/form-helpers.php:668
 msgid "Unit Price"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:681
+#: app/Helpers/form-helpers.php:669
 #: assets/blocks/payment-summary/render.php:28
 #: assets/blocks/payment/render.php:107
 msgid "Total"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:753
+#: app/Helpers/form-helpers.php:741
 #: resources/views/shortcodes/payment-success.php:131
 #: assets/blocks/payment/index.js:1
 msgid "Daily"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:754
+#: app/Helpers/form-helpers.php:742
 #: resources/views/shortcodes/payment-success.php:132
 #: assets/blocks/payment/index.js:1
 msgid "Weekly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:755
+#: app/Helpers/form-helpers.php:743
 #: resources/views/shortcodes/payment-success.php:133
 #: assets/blocks/payment/index.js:1
 msgid "Monthly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:756
+#: app/Helpers/form-helpers.php:744
 #: resources/views/shortcodes/payment-success.php:134
 #: assets/blocks/payment/index.js:1
 msgid "Yearly"
 msgstr ""
 
-#: app/Helpers/form-helpers.php:1254
-#: app/Helpers/form-helpers.php:1355
-#: app/Helpers/form-helpers.php:1384
+#: app/Helpers/form-helpers.php:1242
+#: app/Helpers/form-helpers.php:1343
+#: app/Helpers/form-helpers.php:1372
 msgid "Generated PDF"
 msgstr ""
 
@@ -358,662 +377,667 @@ msgstr ""
 msgid "Payment gateway not found."
 msgstr ""
 
-#: app/Helpers/payment.php:145
-msgid "United Arab Emirates dirham"
-msgstr ""
-
-#: app/Helpers/payment.php:146
-msgid "Afghan afghani"
-msgstr ""
-
-#: app/Helpers/payment.php:147
-msgid "Albanian lek"
-msgstr ""
-
-#: app/Helpers/payment.php:148
-msgid "Armenian dram"
-msgstr ""
-
-#: app/Helpers/payment.php:149
-msgid "Netherlands Antillean guilder"
-msgstr ""
-
-#: app/Helpers/payment.php:150
-msgid "Angolan kwanza"
-msgstr ""
-
-#: app/Helpers/payment.php:151
-msgid "Argentine peso"
-msgstr ""
-
-#: app/Helpers/payment.php:152
-msgid "Australian dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:153
-msgid "Aruban florin"
-msgstr ""
-
-#: app/Helpers/payment.php:154
-msgid "Azerbaijani manat"
-msgstr ""
-
-#: app/Helpers/payment.php:155
-msgid "Bosnia and Herzegovina convertible mark"
-msgstr ""
-
-#: app/Helpers/payment.php:156
-msgid "Barbadian dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:157
-msgid "Bangladeshi taka"
-msgstr ""
-
-#: app/Helpers/payment.php:158
-msgid "Bulgarian lev"
-msgstr ""
-
-#: app/Helpers/payment.php:159
-msgid "Bahraini dinar"
-msgstr ""
-
-#: app/Helpers/payment.php:160
-msgid "Burundian franc"
-msgstr ""
-
-#: app/Helpers/payment.php:161
-msgid "Bermudian dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:162
-msgid "Brunei dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:163
-msgid "Bolivian boliviano"
-msgstr ""
-
-#: app/Helpers/payment.php:164
-msgid "Brazilian real"
-msgstr ""
-
-#: app/Helpers/payment.php:165
-msgid "Bahamian dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:166
-msgid "Bitcoin"
-msgstr ""
-
-#: app/Helpers/payment.php:167
-msgid "Bhutanese ngultrum"
-msgstr ""
-
-#: app/Helpers/payment.php:168
-msgid "Botswana pula"
-msgstr ""
-
-#: app/Helpers/payment.php:169
-msgid "Belarusian ruble (old)"
-msgstr ""
-
-#: app/Helpers/payment.php:170
-msgid "Belarusian ruble"
-msgstr ""
-
-#: app/Helpers/payment.php:171
-msgid "Belize dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:172
-msgid "Canadian dollar"
-msgstr ""
-
-#: app/Helpers/payment.php:173
-msgid "Congolese franc"
-msgstr ""
-
-#: app/Helpers/payment.php:174
-msgid "Swiss franc"
-msgstr ""
-
-#: app/Helpers/payment.php:175
-msgid "Chilean peso"
-msgstr ""
-
-#: app/Helpers/payment.php:176
-msgid "Chinese yuan"
-msgstr ""
-
-#: app/Helpers/payment.php:177
-msgid "Colombian peso"
-msgstr ""
-
-#: app/Helpers/payment.php:178
-msgid "Costa Rican col&oacute;n"
+#: app/Helpers/payment.php:90
+#: app/Http/Controllers/PaymentController.php:90
+msgid "Payment information was not found."
 msgstr ""
 
 #: app/Helpers/payment.php:179
-msgid "Cuban convertible peso"
+msgid "United Arab Emirates dirham"
 msgstr ""
 
 #: app/Helpers/payment.php:180
-msgid "Cuban peso"
+msgid "Afghan afghani"
 msgstr ""
 
 #: app/Helpers/payment.php:181
-msgid "Cape Verdean escudo"
+msgid "Albanian lek"
 msgstr ""
 
 #: app/Helpers/payment.php:182
-msgid "Czech koruna"
+msgid "Armenian dram"
 msgstr ""
 
 #: app/Helpers/payment.php:183
-msgid "Djiboutian franc"
+msgid "Netherlands Antillean guilder"
 msgstr ""
 
 #: app/Helpers/payment.php:184
-msgid "Danish krone"
+msgid "Angolan kwanza"
 msgstr ""
 
 #: app/Helpers/payment.php:185
-msgid "Dominican peso"
+msgid "Argentine peso"
 msgstr ""
 
 #: app/Helpers/payment.php:186
-msgid "Algerian dinar"
+msgid "Australian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:187
-msgid "Egyptian pound"
+msgid "Aruban florin"
 msgstr ""
 
 #: app/Helpers/payment.php:188
-msgid "Eritrean nakfa"
+msgid "Azerbaijani manat"
 msgstr ""
 
 #: app/Helpers/payment.php:189
-msgid "Ethiopian birr"
+msgid "Bosnia and Herzegovina convertible mark"
 msgstr ""
 
 #: app/Helpers/payment.php:190
-msgid "Euro"
+msgid "Barbadian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:191
-msgid "Fijian dollar"
+msgid "Bangladeshi taka"
 msgstr ""
 
 #: app/Helpers/payment.php:192
-msgid "Falkland Islands pound"
+msgid "Bulgarian lev"
 msgstr ""
 
 #: app/Helpers/payment.php:193
-msgid "Pound sterling"
+msgid "Bahraini dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:194
-msgid "Georgian lari"
+msgid "Burundian franc"
 msgstr ""
 
 #: app/Helpers/payment.php:195
-msgid "Guernsey pound"
+msgid "Bermudian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:196
-msgid "Ghana cedi"
+msgid "Brunei dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:197
-msgid "Gibraltar pound"
+msgid "Bolivian boliviano"
 msgstr ""
 
 #: app/Helpers/payment.php:198
-msgid "Gambian dalasi"
+msgid "Brazilian real"
 msgstr ""
 
 #: app/Helpers/payment.php:199
-msgid "Guinean franc"
+msgid "Bahamian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:200
-msgid "Guatemalan quetzal"
+msgid "Bitcoin"
 msgstr ""
 
 #: app/Helpers/payment.php:201
-msgid "Guyanese dollar"
+msgid "Bhutanese ngultrum"
 msgstr ""
 
 #: app/Helpers/payment.php:202
-msgid "Hong Kong dollar"
+msgid "Botswana pula"
 msgstr ""
 
 #: app/Helpers/payment.php:203
-msgid "Honduran lempira"
+msgid "Belarusian ruble (old)"
 msgstr ""
 
 #: app/Helpers/payment.php:204
-msgid "Croatian kuna"
+msgid "Belarusian ruble"
 msgstr ""
 
 #: app/Helpers/payment.php:205
-msgid "Haitian gourde"
+msgid "Belize dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:206
-msgid "Hungarian forint"
+msgid "Canadian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:207
-msgid "Indonesian rupiah"
+msgid "Congolese franc"
 msgstr ""
 
 #: app/Helpers/payment.php:208
-msgid "Israeli new shekel"
+msgid "Swiss franc"
 msgstr ""
 
 #: app/Helpers/payment.php:209
-msgid "Manx pound"
+msgid "Chilean peso"
 msgstr ""
 
 #: app/Helpers/payment.php:210
-msgid "Indian rupee"
+msgid "Chinese yuan"
 msgstr ""
 
 #: app/Helpers/payment.php:211
-msgid "Iraqi dinar"
+msgid "Colombian peso"
 msgstr ""
 
 #: app/Helpers/payment.php:212
-msgid "Iranian rial"
+msgid "Costa Rican col&oacute;n"
 msgstr ""
 
 #: app/Helpers/payment.php:213
-msgid "Iranian toman"
+msgid "Cuban convertible peso"
 msgstr ""
 
 #: app/Helpers/payment.php:214
-msgid "Icelandic kr&oacute;na"
+msgid "Cuban peso"
 msgstr ""
 
 #: app/Helpers/payment.php:215
-msgid "Jersey pound"
+msgid "Cape Verdean escudo"
 msgstr ""
 
 #: app/Helpers/payment.php:216
-msgid "Jamaican dollar"
+msgid "Czech koruna"
 msgstr ""
 
 #: app/Helpers/payment.php:217
-msgid "Jordanian dinar"
+msgid "Djiboutian franc"
 msgstr ""
 
 #: app/Helpers/payment.php:218
-msgid "Japanese yen"
+msgid "Danish krone"
 msgstr ""
 
 #: app/Helpers/payment.php:219
-msgid "Kenyan shilling"
+msgid "Dominican peso"
 msgstr ""
 
 #: app/Helpers/payment.php:220
-msgid "Kyrgyzstani som"
+msgid "Algerian dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:221
-msgid "Cambodian riel"
+msgid "Egyptian pound"
 msgstr ""
 
 #: app/Helpers/payment.php:222
-msgid "Comorian franc"
+msgid "Eritrean nakfa"
 msgstr ""
 
 #: app/Helpers/payment.php:223
-msgid "North Korean won"
+msgid "Ethiopian birr"
 msgstr ""
 
 #: app/Helpers/payment.php:224
-msgid "South Korean won"
+msgid "Euro"
 msgstr ""
 
 #: app/Helpers/payment.php:225
-msgid "Kuwaiti dinar"
+msgid "Fijian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:226
-msgid "Cayman Islands dollar"
+msgid "Falkland Islands pound"
 msgstr ""
 
 #: app/Helpers/payment.php:227
-msgid "Kazakhstani tenge"
+msgid "Pound sterling"
 msgstr ""
 
 #: app/Helpers/payment.php:228
-msgid "Lao kip"
+msgid "Georgian lari"
 msgstr ""
 
 #: app/Helpers/payment.php:229
-msgid "Lebanese pound"
+msgid "Guernsey pound"
 msgstr ""
 
 #: app/Helpers/payment.php:230
-msgid "Sri Lankan rupee"
+msgid "Ghana cedi"
 msgstr ""
 
 #: app/Helpers/payment.php:231
-msgid "Liberian dollar"
+msgid "Gibraltar pound"
 msgstr ""
 
 #: app/Helpers/payment.php:232
-msgid "Lesotho loti"
+msgid "Gambian dalasi"
 msgstr ""
 
 #: app/Helpers/payment.php:233
-msgid "Libyan dinar"
+msgid "Guinean franc"
 msgstr ""
 
 #: app/Helpers/payment.php:234
-msgid "Moroccan dirham"
+msgid "Guatemalan quetzal"
 msgstr ""
 
 #: app/Helpers/payment.php:235
-msgid "Moldovan leu"
+msgid "Guyanese dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:236
-msgid "Malagasy ariary"
+msgid "Hong Kong dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:237
-msgid "Macedonian denar"
+msgid "Honduran lempira"
 msgstr ""
 
 #: app/Helpers/payment.php:238
-msgid "Burmese kyat"
+msgid "Croatian kuna"
 msgstr ""
 
 #: app/Helpers/payment.php:239
-msgid "Mongolian t&ouml;gr&ouml;g"
+msgid "Haitian gourde"
 msgstr ""
 
 #: app/Helpers/payment.php:240
-msgid "Macanese pataca"
+msgid "Hungarian forint"
 msgstr ""
 
 #: app/Helpers/payment.php:241
-msgid "Mauritanian ouguiya"
+msgid "Indonesian rupiah"
 msgstr ""
 
 #: app/Helpers/payment.php:242
-msgid "Mauritian rupee"
+msgid "Israeli new shekel"
 msgstr ""
 
 #: app/Helpers/payment.php:243
-msgid "Maldivian rufiyaa"
+msgid "Manx pound"
 msgstr ""
 
 #: app/Helpers/payment.php:244
-msgid "Malawian kwacha"
+msgid "Indian rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:245
-msgid "Mexican peso"
+msgid "Iraqi dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:246
-msgid "Malaysian ringgit"
+msgid "Iranian rial"
 msgstr ""
 
 #: app/Helpers/payment.php:247
-msgid "Mozambican metical"
+msgid "Iranian toman"
 msgstr ""
 
 #: app/Helpers/payment.php:248
-msgid "Namibian dollar"
+msgid "Icelandic kr&oacute;na"
 msgstr ""
 
 #: app/Helpers/payment.php:249
-msgid "Nigerian naira"
+msgid "Jersey pound"
 msgstr ""
 
 #: app/Helpers/payment.php:250
-msgid "Nicaraguan c&oacute;rdoba"
+msgid "Jamaican dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:251
-msgid "Norwegian krone"
+msgid "Jordanian dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:252
-msgid "Nepalese rupee"
+msgid "Japanese yen"
 msgstr ""
 
 #: app/Helpers/payment.php:253
-msgid "New Zealand dollar"
+msgid "Kenyan shilling"
 msgstr ""
 
 #: app/Helpers/payment.php:254
-msgid "Omani rial"
+msgid "Kyrgyzstani som"
 msgstr ""
 
 #: app/Helpers/payment.php:255
-msgid "Panamanian balboa"
+msgid "Cambodian riel"
 msgstr ""
 
 #: app/Helpers/payment.php:256
-msgid "Sol"
+msgid "Comorian franc"
 msgstr ""
 
 #: app/Helpers/payment.php:257
-msgid "Papua New Guinean kina"
+msgid "North Korean won"
 msgstr ""
 
 #: app/Helpers/payment.php:258
-msgid "Philippine peso"
+msgid "South Korean won"
 msgstr ""
 
 #: app/Helpers/payment.php:259
-msgid "Pakistani rupee"
+msgid "Kuwaiti dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:260
-msgid "Polish z&#x142;oty"
+msgid "Cayman Islands dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:261
-msgid "Transnistrian ruble"
+msgid "Kazakhstani tenge"
 msgstr ""
 
 #: app/Helpers/payment.php:262
-msgid "Paraguayan guaran&iacute;"
+msgid "Lao kip"
 msgstr ""
 
 #: app/Helpers/payment.php:263
-msgid "Qatari riyal"
+msgid "Lebanese pound"
 msgstr ""
 
 #: app/Helpers/payment.php:264
-msgid "Romanian leu"
+msgid "Sri Lankan rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:265
-msgid "Serbian dinar"
+msgid "Liberian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:266
-msgid "Russian ruble"
+msgid "Lesotho loti"
 msgstr ""
 
 #: app/Helpers/payment.php:267
-msgid "Rwandan franc"
+msgid "Libyan dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:268
-msgid "Saudi riyal"
+msgid "Moroccan dirham"
 msgstr ""
 
 #: app/Helpers/payment.php:269
-msgid "Solomon Islands dollar"
+msgid "Moldovan leu"
 msgstr ""
 
 #: app/Helpers/payment.php:270
-msgid "Seychellois rupee"
+msgid "Malagasy ariary"
 msgstr ""
 
 #: app/Helpers/payment.php:271
-msgid "Sudanese pound"
+msgid "Macedonian denar"
 msgstr ""
 
 #: app/Helpers/payment.php:272
-msgid "Swedish krona"
+msgid "Burmese kyat"
 msgstr ""
 
 #: app/Helpers/payment.php:273
-msgid "Singapore dollar"
+msgid "Mongolian t&ouml;gr&ouml;g"
 msgstr ""
 
 #: app/Helpers/payment.php:274
-msgid "Saint Helena pound"
+msgid "Macanese pataca"
 msgstr ""
 
 #: app/Helpers/payment.php:275
-msgid "Sierra Leonean leone"
+msgid "Mauritanian ouguiya"
 msgstr ""
 
 #: app/Helpers/payment.php:276
-msgid "Somali shilling"
+msgid "Mauritian rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:277
-msgid "Surinamese dollar"
+msgid "Maldivian rufiyaa"
 msgstr ""
 
 #: app/Helpers/payment.php:278
-msgid "South Sudanese pound"
+msgid "Malawian kwacha"
 msgstr ""
 
 #: app/Helpers/payment.php:279
-msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra"
+msgid "Mexican peso"
 msgstr ""
 
 #: app/Helpers/payment.php:280
-msgid "Syrian pound"
+msgid "Malaysian ringgit"
 msgstr ""
 
 #: app/Helpers/payment.php:281
-msgid "Swazi lilangeni"
+msgid "Mozambican metical"
 msgstr ""
 
 #: app/Helpers/payment.php:282
-msgid "Thai baht"
+msgid "Namibian dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:283
-msgid "Tajikistani somoni"
+msgid "Nigerian naira"
 msgstr ""
 
 #: app/Helpers/payment.php:284
-msgid "Turkmenistan manat"
+msgid "Nicaraguan c&oacute;rdoba"
 msgstr ""
 
 #: app/Helpers/payment.php:285
-msgid "Tunisian dinar"
+msgid "Norwegian krone"
 msgstr ""
 
 #: app/Helpers/payment.php:286
-msgid "Tongan pa&#x2bb;anga"
+msgid "Nepalese rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:287
-msgid "Turkish lira"
+msgid "New Zealand dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:288
-msgid "Trinidad and Tobago dollar"
+msgid "Omani rial"
 msgstr ""
 
 #: app/Helpers/payment.php:289
-msgid "New Taiwan dollar"
+msgid "Panamanian balboa"
 msgstr ""
 
 #: app/Helpers/payment.php:290
-msgid "Tanzanian shilling"
+msgid "Sol"
 msgstr ""
 
 #: app/Helpers/payment.php:291
-msgid "Ukrainian hryvnia"
+msgid "Papua New Guinean kina"
 msgstr ""
 
 #: app/Helpers/payment.php:292
-msgid "Ugandan shilling"
+msgid "Philippine peso"
 msgstr ""
 
 #: app/Helpers/payment.php:293
-msgid "United States (US) dollar"
+msgid "Pakistani rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:294
-msgid "Uruguayan peso"
+msgid "Polish z&#x142;oty"
 msgstr ""
 
 #: app/Helpers/payment.php:295
-msgid "Uzbekistani som"
+msgid "Transnistrian ruble"
 msgstr ""
 
 #: app/Helpers/payment.php:296
-msgid "Venezuelan bol&iacute;var (2008–2018)"
+msgid "Paraguayan guaran&iacute;"
 msgstr ""
 
 #: app/Helpers/payment.php:297
-msgid "Venezuelan bol&iacute;var"
+msgid "Qatari riyal"
 msgstr ""
 
 #: app/Helpers/payment.php:298
-msgid "Vietnamese &#x111;&#x1ed3;ng"
+msgid "Romanian leu"
 msgstr ""
 
 #: app/Helpers/payment.php:299
-msgid "Vanuatu vatu"
+msgid "Serbian dinar"
 msgstr ""
 
 #: app/Helpers/payment.php:300
-msgid "Samoan t&#x101;l&#x101;"
+msgid "Russian ruble"
 msgstr ""
 
 #: app/Helpers/payment.php:301
-msgid "Central African CFA franc"
+msgid "Rwandan franc"
 msgstr ""
 
 #: app/Helpers/payment.php:302
-msgid "East Caribbean dollar"
+msgid "Saudi riyal"
 msgstr ""
 
 #: app/Helpers/payment.php:303
-msgid "West African CFA franc"
+msgid "Solomon Islands dollar"
 msgstr ""
 
 #: app/Helpers/payment.php:304
-msgid "CFP franc"
+msgid "Seychellois rupee"
 msgstr ""
 
 #: app/Helpers/payment.php:305
-msgid "Yemeni rial"
+msgid "Sudanese pound"
 msgstr ""
 
 #: app/Helpers/payment.php:306
-msgid "South African rand"
+msgid "Swedish krona"
 msgstr ""
 
 #: app/Helpers/payment.php:307
+msgid "Singapore dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:308
+msgid "Saint Helena pound"
+msgstr ""
+
+#: app/Helpers/payment.php:309
+msgid "Sierra Leonean leone"
+msgstr ""
+
+#: app/Helpers/payment.php:310
+msgid "Somali shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:311
+msgid "Surinamese dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:312
+msgid "South Sudanese pound"
+msgstr ""
+
+#: app/Helpers/payment.php:313
+msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra"
+msgstr ""
+
+#: app/Helpers/payment.php:314
+msgid "Syrian pound"
+msgstr ""
+
+#: app/Helpers/payment.php:315
+msgid "Swazi lilangeni"
+msgstr ""
+
+#: app/Helpers/payment.php:316
+msgid "Thai baht"
+msgstr ""
+
+#: app/Helpers/payment.php:317
+msgid "Tajikistani somoni"
+msgstr ""
+
+#: app/Helpers/payment.php:318
+msgid "Turkmenistan manat"
+msgstr ""
+
+#: app/Helpers/payment.php:319
+msgid "Tunisian dinar"
+msgstr ""
+
+#: app/Helpers/payment.php:320
+msgid "Tongan pa&#x2bb;anga"
+msgstr ""
+
+#: app/Helpers/payment.php:321
+msgid "Turkish lira"
+msgstr ""
+
+#: app/Helpers/payment.php:322
+msgid "Trinidad and Tobago dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:323
+msgid "New Taiwan dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:324
+msgid "Tanzanian shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:325
+msgid "Ukrainian hryvnia"
+msgstr ""
+
+#: app/Helpers/payment.php:326
+msgid "Ugandan shilling"
+msgstr ""
+
+#: app/Helpers/payment.php:327
+msgid "United States (US) dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:328
+msgid "Uruguayan peso"
+msgstr ""
+
+#: app/Helpers/payment.php:329
+msgid "Uzbekistani som"
+msgstr ""
+
+#: app/Helpers/payment.php:330
+msgid "Venezuelan bol&iacute;var (2008–2018)"
+msgstr ""
+
+#: app/Helpers/payment.php:331
+msgid "Venezuelan bol&iacute;var"
+msgstr ""
+
+#: app/Helpers/payment.php:332
+msgid "Vietnamese &#x111;&#x1ed3;ng"
+msgstr ""
+
+#: app/Helpers/payment.php:333
+msgid "Vanuatu vatu"
+msgstr ""
+
+#: app/Helpers/payment.php:334
+msgid "Samoan t&#x101;l&#x101;"
+msgstr ""
+
+#: app/Helpers/payment.php:335
+msgid "Central African CFA franc"
+msgstr ""
+
+#: app/Helpers/payment.php:336
+msgid "East Caribbean dollar"
+msgstr ""
+
+#: app/Helpers/payment.php:337
+msgid "West African CFA franc"
+msgstr ""
+
+#: app/Helpers/payment.php:338
+msgid "CFP franc"
+msgstr ""
+
+#: app/Helpers/payment.php:339
+msgid "Yemeni rial"
+msgstr ""
+
+#: app/Helpers/payment.php:340
+msgid "South African rand"
+msgstr ""
+
+#: app/Helpers/payment.php:341
 msgid "Zambian kwacha"
 msgstr ""
 
 #: app/Http/Controllers/Admin/AnalyticsController.php:30
 #: app/Http/Controllers/Admin/EmailNotificationController.php:53
 #: app/Http/Controllers/Admin/EmailNotificationController.php:78
-#: app/Http/Controllers/Admin/FormController.php:246
+#: app/Http/Controllers/Admin/FormController.php:258
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:84
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:162
 #: app/Http/Controllers/Admin/MailchimpController.php:103
@@ -1028,16 +1052,16 @@ msgstr ""
 #: app/Http/Controllers/Admin/UserRegistrationController.php:182
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:72
 #: app/Http/Controllers/Admin/ZohoCRMFeedController.php:137
-#: app/Http/Controllers/AnalyticsController.php:40
+#: app/Http/Controllers/AnalyticsController.php:35
 #: app/Http/Controllers/FormController.php:32
-#: app/Http/Controllers/ResponseController.php:79
-#: app/Http/Controllers/ResponseController.php:396
+#: app/Http/Controllers/ResponseController.php:80
+#: app/Http/Controllers/ResponseController.php:422
 #: app/Repositories/FormPresetFieldRepository.php:162
 msgid "Form not found"
 msgstr ""
 
 #: app/Http/Controllers/Admin/AnalyticsController.php:39
-#: app/Http/Controllers/AnalyticsController.php:49
+#: app/Http/Controllers/AnalyticsController.php:44
 msgid "Analytics is disabled for this form."
 msgstr ""
 
@@ -1068,36 +1092,45 @@ msgstr ""
 msgid "The status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:99
+#: app/Http/Controllers/Admin/FormController.php:93
+#: app/Http/Controllers/Admin/FormController.php:418
+msgid "You are not allowed to save custom code."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:97
+msgid "You are not allowed to publish forms."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:112
 msgid "Limit Reached: You have used all 5 free AI Forms."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:160
+#: app/Http/Controllers/Admin/FormController.php:172
 msgid "The form has been created successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:181
+#: app/Http/Controllers/Admin/FormController.php:193
 msgid "The form title has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:199
+#: app/Http/Controllers/Admin/FormController.php:211
 msgid "Sorry, some thing was wrong"
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:208
-#: app/Http/Controllers/Admin/FormController.php:229
+#: app/Http/Controllers/Admin/FormController.php:220
+#: app/Http/Controllers/Admin/FormController.php:241
 msgid "The form status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:271
+#: app/Http/Controllers/Admin/FormController.php:283
 msgid "The form has been duplicated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:310
+#: app/Http/Controllers/Admin/FormController.php:322
 msgid "The form has been deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:327
+#: app/Http/Controllers/Admin/FormController.php:339
 #: app/Http/Controllers/Admin/ResponseController.php:194
 #: app/Http/Controllers/Admin/ResponseController.php:904
 #: app/Http/Controllers/Admin/ResponseController.php:1033
@@ -1105,11 +1138,11 @@ msgstr ""
 msgid "Sorry, Something was wrong."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:340
+#: app/Http/Controllers/Admin/FormController.php:352
 msgid "Forms have been successfully deleted."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:415
+#: app/Http/Controllers/Admin/FormController.php:435
 #: app/Http/Controllers/Admin/SettingsController.php:81
 msgid "Settings have been saved successfully."
 msgstr ""
@@ -1224,11 +1257,11 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/PdfController.php:38
 #: app/Http/Controllers/Admin/PdfController.php:100
-#: app/Http/Controllers/Admin/PdfResourcesController.php:164
-#: app/Http/Controllers/ResponseController.php:475
+#: app/Http/Controllers/Admin/PdfResourcesController.php:344
+#: app/Http/Controllers/ResponseController.php:562
 #: app/Repositories/ResponseRepository.php:35
-#: app/Repositories/ResponseRepository.php:819
-#: app/Repositories/ResponseRepository.php:872
+#: app/Repositories/ResponseRepository.php:834
+#: app/Repositories/ResponseRepository.php:887
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
 #: app/Services/Mcp/McpErrorFactory.php:48
@@ -1242,7 +1275,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/PdfController.php:109
 #: app/Http/Controllers/Admin/PdfController.php:141
 #: app/Http/Controllers/Admin/PdfController.php:168
-#: app/Http/Controllers/ResponseController.php:499
+#: app/Http/Controllers/ResponseController.php:586
 msgid "PDF template not found."
 msgstr ""
 
@@ -1254,27 +1287,93 @@ msgstr ""
 msgid "PDF template deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/PdfResourcesController.php:54
-msgid "PDF resources zip not found or could not be downloaded. Enter a valid local path above, or ensure the remote URL is reachable."
+#: app/Http/Controllers/Admin/PdfResourcesController.php:44
+msgid "You are not allowed to install runtime libraries."
 msgstr ""
 
-#: app/Http/Controllers/Admin/PdfResourcesController.php:66
-msgid "Could not create formgent-libraries/pdf directory."
+#: app/Http/Controllers/Admin/PdfResourcesController.php:60
+#: app/Http/Controllers/Admin/PdfResourcesController.php:255
+msgid "The PDF resources directory is invalid."
 msgstr ""
 
-#: app/Http/Controllers/Admin/PdfResourcesController.php:81
-msgid "Failed to extract PDF resources archive."
+#: app/Http/Controllers/Admin/PdfResourcesController.php:70
+#: app/Http/Controllers/Admin/PdfResourcesController.php:265
+msgid "A PDF resources operation is already in progress."
 msgstr ""
 
-#: app/Http/Controllers/Admin/PdfResourcesController.php:91
-msgid "Verification failed: vendor/autoload.php not found after extraction."
+#: app/Http/Controllers/Admin/PdfResourcesController.php:93
+msgid "The verified PDF resources archive could not be downloaded."
 msgstr ""
 
 #: app/Http/Controllers/Admin/PdfResourcesController.php:102
+msgid "Could not create the PDF resources parent directory."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:115
+msgid "Could not create the PDF resources staging directory."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:125
+msgid "Failed to extract PDF resources archive."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:136
+msgid "Verification failed: vendor/autoload.php not found after extraction."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:150
+msgid "Could not prepare the existing PDF resources for replacement."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:165
+msgid "Could not activate the new PDF resources."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:166
+msgid "Could not activate the new PDF resources. The previous library was preserved in its recovery location."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:182
+msgid "The new PDF resources failed final verification."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:183
+msgid "The new PDF resources failed final verification. The previous library was preserved in its recovery location."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:199
+msgid "Could not save the new PDF resources configuration. The previous library was restored."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:200
+msgid "Could not save the new PDF resources configuration. The previous library was preserved in its recovery location."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:213
 msgid "PDF resources installed successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/PdfResourcesController.php:139
+#: app/Http/Controllers/Admin/PdfResourcesController.php:239
+msgid "You are not allowed to remove runtime libraries."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:281
+msgid "Could not prepare the PDF resources directory for removal."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:297
+msgid "Could not clear the PDF resources configuration. The existing library was restored."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:298
+msgid "Could not clear the PDF resources configuration. The existing library was preserved in its recovery location."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:307
+msgid "The PDF resources were deactivated, but their recovery directory could not be fully removed."
+msgstr ""
+
+#: app/Http/Controllers/Admin/PdfResourcesController.php:316
 msgid "PDF library removed successfully."
 msgstr ""
 
@@ -1294,8 +1393,8 @@ msgid "Either \"id\" or \"page\" parameter is required."
 msgstr ""
 
 #: app/Http/Controllers/Admin/ResponseController.php:275
-#: app/Http/Controllers/ResponseController.php:87
-#: app/Http/Controllers/ResponseController.php:485
+#: app/Http/Controllers/ResponseController.php:88
+#: app/Http/Controllers/ResponseController.php:572
 #: app/Services/Mcp/McpErrorFactory.php:52
 #: app/Services/Responses/ResponseCommandService.php:189
 #: app/Services/Responses/ResponseReadService.php:106
@@ -1368,7 +1467,7 @@ msgstr ""
 
 #: app/Http/Controllers/Admin/SubscriptionController.php:36
 #: app/Http/Controllers/Admin/SubscriptionController.php:136
-#: app/Http/Controllers/PaymentController.php:149
+#: app/Http/Controllers/PaymentController.php:164
 msgid "Order not found."
 msgstr ""
 
@@ -1414,24 +1513,66 @@ msgstr ""
 msgid "Feed data not found"
 msgstr ""
 
-#: app/Http/Controllers/AnalyticsController.php:67
+#: app/Http/Controllers/AnalyticsController.php:71
 msgid "Could't update the view count"
 msgstr ""
 
 #: app/Http/Controllers/AttachmentController.php:50
+#: app/Http/Controllers/AttachmentController.php:138
+#: app/Http/Controllers/CaptchaController.php:20
+msgid "Form session not found."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:64
+msgid "The upload limit for this field has been reached."
+msgstr ""
+
 #: app/Http/Controllers/AttachmentController.php:83
+#: app/Http/Controllers/AttachmentController.php:160
 msgid "Invalid file path"
 msgstr ""
 
-#: app/Http/Controllers/CaptchaController.php:30
+#: app/Http/Controllers/AttachmentController.php:91
+msgid "The uploaded file could not be secured."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:164
+msgid "The uploaded file could not be deleted."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:220
+msgid "The upload field is invalid."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:230
+msgid "This file type is not allowed."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:236
+msgid "The uploaded file is too large."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:248
+msgid "The upload field scope is invalid."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:265
+msgid "The upload could not be started."
+msgstr ""
+
+#: app/Http/Controllers/AttachmentController.php:277
+msgid "Another upload operation is in progress. Please try again."
+msgstr ""
+
+#: app/Http/Controllers/CaptchaController.php:39
 msgid "Failed to verify captcha"
 msgstr ""
 
-#: app/Http/Controllers/CaptchaController.php:38
+#: app/Http/Controllers/CaptchaController.php:47
 msgid "Captcha verification failed"
 msgstr ""
 
-#: app/Http/Controllers/CaptchaController.php:47
+#: app/Http/Controllers/CaptchaController.php:63
 msgid "Captcha verification successful"
 msgstr ""
 
@@ -1443,83 +1584,84 @@ msgstr ""
 msgid "Login successful. Redirecting..."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:46
+#: app/Http/Controllers/PaymentController.php:49
+#: app/PaymentProcessors/Mollie.php:97
 msgid "Payment was not completed."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:56
-#: app/Http/Controllers/PaymentController.php:120
+#: app/Http/Controllers/PaymentController.php:59
+#: app/Http/Controllers/PaymentController.php:135
 msgid "Payment is being processed."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:69
-#: app/Http/Controllers/PaymentController.php:102
+#: app/Http/Controllers/PaymentController.php:72
+#: app/Http/Controllers/PaymentController.php:117
 msgid "Payment successful."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:86
-msgid "Payment information was not found."
+#: app/Http/Controllers/PaymentController.php:104
+msgid "Payment was already completed."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:130
+#: app/Http/Controllers/PaymentController.php:145
 msgid "Payment canceled."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:158
+#: app/Http/Controllers/PaymentController.php:173
 msgid "Order is already paid."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:170
+#: app/Http/Controllers/PaymentController.php:185
 msgid "Order items not found."
 msgstr ""
 
-#: app/Http/Controllers/PaymentController.php:185
+#: app/Http/Controllers/PaymentController.php:200
 msgid "Payment method not found."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:14
-#: app/Providers/UserRegistrationServiceProvider.php:337
+#: app/Providers/UserRegistrationServiceProvider.php:338
 msgid "User registration is currently disabled."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:62
-#: app/Providers/UserRegistrationServiceProvider.php:369
+#: app/Providers/UserRegistrationServiceProvider.php:370
 msgid "Email is required."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:64
-#: app/Providers/UserRegistrationServiceProvider.php:371
+#: app/Providers/UserRegistrationServiceProvider.php:372
 msgid "Please enter a valid email address."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:66
-#: app/Providers/UserRegistrationServiceProvider.php:373
+#: app/Providers/UserRegistrationServiceProvider.php:374
 msgid "This email is already registered."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:74
-#: app/Providers/UserRegistrationServiceProvider.php:381
+#: app/Providers/UserRegistrationServiceProvider.php:382
 msgid "Emails do not match."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:78
-#: app/Providers/UserRegistrationServiceProvider.php:385
+#: app/Providers/UserRegistrationServiceProvider.php:386
 msgid "Password is required."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:80
-#: app/Providers/UserRegistrationServiceProvider.php:387
+#: app/Providers/UserRegistrationServiceProvider.php:388
 msgid "Passwords do not match."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:95
-#: app/Providers/UserRegistrationServiceProvider.php:402
+#: app/Providers/UserRegistrationServiceProvider.php:403
 msgid "This username is already taken."
 msgstr ""
 
 #: app/Http/Controllers/RegisterController.php:101
-#: app/Providers/UserRegistrationServiceProvider.php:42
-#: app/Providers/UserRegistrationServiceProvider.php:231
+#: app/Providers/UserRegistrationServiceProvider.php:43
+#: app/Providers/UserRegistrationServiceProvider.php:232
 msgid "Registration failed. Please fix the errors."
 msgstr ""
 
@@ -1529,66 +1671,82 @@ msgstr ""
 
 #. translators: %s: field label.
 #: app/Http/Controllers/RegisterController.php:190
-#: app/Providers/UserRegistrationServiceProvider.php:664
+#: app/Providers/UserRegistrationServiceProvider.php:665
 #, php-format
 msgid "%s is required."
 msgstr ""
 
 #. translators: 1: field label, 2: character limit.
 #: app/Http/Controllers/RegisterController.php:204
-#: app/Providers/UserRegistrationServiceProvider.php:678
+#: app/Providers/UserRegistrationServiceProvider.php:679
 #, php-format
 msgid "%1$s must not exceed %2$d characters."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:58
-#: app/Http/Controllers/ResponseController.php:377
+#: app/Http/Controllers/ResponseController.php:59
+#: app/Http/Controllers/ResponseController.php:403
 msgid "Form submission is temporarily unavailable because the site database is not ready."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:95
+#: app/Http/Controllers/ResponseController.php:96
 msgid "Skipping submission: Response is already completed."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:103
+#: app/Http/Controllers/ResponseController.php:104
 msgid "Oops, something went wrong. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:137
+#: app/Http/Controllers/ResponseController.php:144
 msgid "Verification required."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:179
+#: app/Http/Controllers/ResponseController.php:192
 msgid "The form was submitted successfully!"
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:420
-#: app/Http/Controllers/ResponseController.php:436
+#: app/Http/Controllers/ResponseController.php:433
+msgid "Too many form sessions were requested. Please try again shortly."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:444
+msgid "This form is receiving too many new sessions. Please try again shortly."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:472
+#: app/Http/Controllers/ResponseController.php:488
 msgid "The form response could not be started. Please try again."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:511
+#: app/Http/Controllers/ResponseController.php:510
+msgid "Form verification failed."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:532
+msgid "Captcha verification is required."
+msgstr ""
+
+#: app/Http/Controllers/ResponseController.php:598
 msgid "PDF library is not installed for this form."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:524
+#: app/Http/Controllers/ResponseController.php:611
 msgid "PDF engine could not be loaded."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:545
+#: app/Http/Controllers/ResponseController.php:632
 msgid "Failed to generate PDF."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:616
+#: app/Http/Controllers/ResponseController.php:703
 msgid "Invalid file name."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:626
+#: app/Http/Controllers/ResponseController.php:713
 msgid "Upload directory is not available."
 msgstr ""
 
-#: app/Http/Controllers/ResponseController.php:641
-#: app/Http/Controllers/ResponseController.php:650
+#: app/Http/Controllers/ResponseController.php:728
+#: app/Http/Controllers/ResponseController.php:737
 msgid "PDF file not found."
 msgstr ""
 
@@ -1599,27 +1757,36 @@ msgid "The email is required"
 msgstr ""
 
 #. translators: %s: field display label
-#: app/Integrations/ZohoCRM/ZohoCRM.php:104
+#: app/Integrations/ZohoCRM/ZohoCRM.php:110
 #, php-format
 msgid "Enter %s value or choose form input provided by shortcode."
 msgstr ""
 
 #. translators: %s: field display label
-#: app/Integrations/ZohoCRM/ZohoCRM.php:114
+#: app/Integrations/ZohoCRM/ZohoCRM.php:120
 #, php-format
 msgid "%s is a required field. Enter value or choose form input provided by shortcode."
 msgstr ""
 
 #. translators: %s: field display label
-#: app/Integrations/ZohoCRM/ZohoCRM.php:121
+#: app/Integrations/ZohoCRM/ZohoCRM.php:127
 #, php-format
 msgid "%s is a required field. Enter value or choose form input shortcode. <br> Make sure format is (01/01/2022 00:00 +0:00)"
 msgstr ""
 
 #. translators: %s: field display label
-#: app/Integrations/ZohoCRM/ZohoCRM.php:129
+#: app/Integrations/ZohoCRM/ZohoCRM.php:135
 #, php-format
 msgid "Choose %s type in select list."
+msgstr ""
+
+#: app/Integrations/ZohoCRM/ZohoCRM.php:189
+msgid "Unable to start the ZohoCRM authorization. Please try again."
+msgstr ""
+
+#: app/Integrations/ZohoCRM/ZohoCRM.php:208
+#: app/Integrations/ZohoCRM/ZohoCRM.php:224
+msgid "The ZohoCRM authorization request is invalid or has expired. Please try again."
 msgstr ""
 
 #: app/Multisite/SiteLifecycle.php:216
@@ -1654,16 +1821,16 @@ msgid "The FormGent database schema is incomplete."
 msgstr ""
 
 #: app/PaymentProcessors/Mollie.php:40
-#: app/PaymentProcessors/Mollie.php:184
+#: app/PaymentProcessors/Mollie.php:191
 msgid "Mollie API key is not configured."
 msgstr ""
 
-#: app/PaymentProcessors/Mollie.php:176
+#: app/PaymentProcessors/Mollie.php:183
 msgid "Payment was not found."
 msgstr ""
 
 #. translators: %d: order id
-#: app/PaymentProcessors/Mollie.php:261
+#: app/PaymentProcessors/Mollie.php:268
 #, php-format
 msgid "FormGent Order #%d"
 msgstr ""
@@ -1828,30 +1995,40 @@ msgstr ""
 msgid "Row %d"
 msgstr ""
 
-#: app/Providers/UserRegistrationServiceProvider.php:207
-#: app/Providers/UserRegistrationServiceProvider.php:315
+#: app/Providers/UserRegistrationServiceProvider.php:208
+#: app/Providers/UserRegistrationServiceProvider.php:316
 msgid "Registration successful."
 msgstr ""
 
-#: app/Providers/UserRegistrationServiceProvider.php:251
+#: app/Providers/UserRegistrationServiceProvider.php:252
 msgid "Registration failed. Please try again."
 msgstr ""
 
-#: app/Providers/UserRegistrationServiceProvider.php:747
+#: app/Providers/UserRegistrationServiceProvider.php:748
 msgid "You are now logged in."
 msgstr ""
 
+#: app/Providers/ZohoCRMServiceProvider.php:35
+msgid "You are not allowed to connect the ZohoCRM integration."
+msgstr ""
+
+#: app/Providers/ZohoCRMServiceProvider.php:36
+#: app/Providers/ZohoCRMServiceProvider.php:44
+#: app/Providers/ZohoCRMServiceProvider.php:63
+msgid "ZohoCRM connection failed"
+msgstr ""
+
+#: app/Providers/ZohoCRMServiceProvider.php:43
+msgid "The ZohoCRM authorization response is incomplete. Please try again."
+msgstr ""
+
 #. translators: %s: error message
-#: app/Providers/ZohoCRMServiceProvider.php:48
+#: app/Providers/ZohoCRMServiceProvider.php:60
 #, php-format
 msgid "ZohoCRM connection failed (%s). Please try again."
 msgstr ""
 
-#: app/Providers/ZohoCRMServiceProvider.php:51
-msgid "ZohoCRM connection failed"
-msgstr ""
-
-#: app/Providers/ZohoCRMServiceProvider.php:54
+#: app/Providers/ZohoCRMServiceProvider.php:66
 msgid "« Back To ZohoCRM Integration"
 msgstr ""
 
@@ -1912,7 +2089,7 @@ msgstr ""
 msgid "Prints the fields label"
 msgstr ""
 
-#: app/Repositories/FormRepository.php:421
+#: app/Repositories/FormRepository.php:359
 msgid "Forms not found."
 msgstr ""
 
@@ -2066,7 +2243,7 @@ msgid "Default Step"
 msgstr ""
 
 #: app/Services/Forms/FormBlockBuilder.php:415
-#: resources/views/form.php:96
+#: resources/views/form.php:97
 #: resources/views/submit-button.php:25
 msgid "Submit"
 msgstr ""
@@ -2168,31 +2345,31 @@ msgstr ""
 msgid "A subscription requires mapped customer name and email fields."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:63
+#: app/Services/Forms/FormCommandService.php:64
 msgid "The form was created as a draft because the current user cannot publish forms."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:66
+#: app/Services/Forms/FormCommandService.php:67
 msgid "Provide exactly one of fields or layout when creating a form."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:125
+#: app/Services/Forms/FormCommandService.php:126
 msgid "At least one form property must be changed."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:140
+#: app/Services/Forms/FormCommandService.php:145
 msgid "Fields and layout cannot be replaced in the same update."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:145
+#: app/Services/Forms/FormCommandService.php:150
 msgid "This form contains internal or unsupported blocks that cannot be safely replaced through the layout contract."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:333
+#: app/Services/Forms/FormCommandService.php:338
 msgid "The form could not be deleted."
 msgstr ""
 
-#: app/Services/Forms/FormCommandService.php:417
+#: app/Services/Forms/FormCommandService.php:422
 msgid "A form title must contain between 5 and 255 characters."
 msgstr ""
 
@@ -2293,7 +2470,7 @@ msgid "This form contains content that cannot be converted safely without data l
 msgstr ""
 
 #: app/Services/Forms/SafeFormSettingsService.php:67
-#: app/Services/Forms/SafeFormSettingsService.php:356
+#: app/Services/Forms/SafeFormSettingsService.php:357
 msgid "Thank you! Your submission has been received."
 msgstr ""
 
@@ -2310,112 +2487,112 @@ msgstr ""
 msgid "The custom CSS/JS settings are invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:276
+#: app/Services/Forms/SafeFormSettingsService.php:277
 #, php-format
 msgid "Grade %d"
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:350
+#: app/Services/Forms/SafeFormSettingsService.php:351
 msgid "The confirmation settings are invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:366
+#: app/Services/Forms/SafeFormSettingsService.php:367
 msgid "The confirmation type or post-submit behavior is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:371
+#: app/Services/Forms/SafeFormSettingsService.php:372
 msgid "The confirmation message is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:378
+#: app/Services/Forms/SafeFormSettingsService.php:379
 msgid "A message confirmation requires a message."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:384
+#: app/Services/Forms/SafeFormSettingsService.php:385
 msgid "A page confirmation requires a published page."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:389
+#: app/Services/Forms/SafeFormSettingsService.php:390
 msgid "The confirmation URL must be a valid HTTP or HTTPS URL."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:396
+#: app/Services/Forms/SafeFormSettingsService.php:397
 msgid "A URL confirmation requires a valid URL."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:400
+#: app/Services/Forms/SafeFormSettingsService.php:401
 msgid "The confirmation redirects to an external host."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:411
+#: app/Services/Forms/SafeFormSettingsService.php:412
 msgid "The quiz settings are invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:416
+#: app/Services/Forms/SafeFormSettingsService.php:417
 msgid "Quiz state settings must be boolean."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:424
+#: app/Services/Forms/SafeFormSettingsService.php:425
 msgid "The quiz score text is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:446
+#: app/Services/Forms/SafeFormSettingsService.php:447
 msgid "A quiz can contain at most 20 grades."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:454
+#: app/Services/Forms/SafeFormSettingsService.php:455
 msgid "A quiz grade is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:462
+#: app/Services/Forms/SafeFormSettingsService.php:463
 msgid "Quiz grade labels and ranges must be unique and valid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:478
+#: app/Services/Forms/SafeFormSettingsService.php:479
 msgid "Quiz grade ranges cannot overlap."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:488
+#: app/Services/Forms/SafeFormSettingsService.php:489
 msgid "The appearance settings are invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:503
+#: app/Services/Forms/SafeFormSettingsService.php:504
 msgid "Appearance switches must be boolean."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:509
+#: app/Services/Forms/SafeFormSettingsService.php:510
 msgid "An appearance option is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:530
+#: app/Services/Forms/SafeFormSettingsService.php:531
 msgid "Appearance colors must use six-digit hexadecimal values."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:536
+#: app/Services/Forms/SafeFormSettingsService.php:537
 msgid "The form background type is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:542
+#: app/Services/Forms/SafeFormSettingsService.php:543
 msgid "The submit button label is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:581
+#: app/Services/Forms/SafeFormSettingsService.php:582
 msgid "The design settings are invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:589
+#: app/Services/Forms/SafeFormSettingsService.php:590
 msgid "Design switches must be boolean."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:595
+#: app/Services/Forms/SafeFormSettingsService.php:596
 msgid "The cover type is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:601
+#: app/Services/Forms/SafeFormSettingsService.php:602
 msgid "The design title is invalid."
 msgstr ""
 
-#: app/Services/Forms/SafeFormSettingsService.php:607
+#: app/Services/Forms/SafeFormSettingsService.php:608
 msgid "The design width must be a valid CSS length."
 msgstr ""
 
@@ -2473,6 +2650,34 @@ msgstr ""
 
 #: app/Services/Responses/ResponseCommandService.php:159
 msgid "The response could not be deleted."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:20
+msgid "The media URL is invalid."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:32
+msgid "A temporary media file could not be created."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:48
+msgid "The remote media server returned an error."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:56
+msgid "The remote media file is too large."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:70
+msgid "Only JPEG, PNG, GIF, and WebP images may be imported."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:88
+msgid "The remote media type does not match its filename."
+msgstr ""
+
+#: app/Services/Security/RemoteMediaImporter.php:107
+msgid "The imported media URL could not be resolved."
 msgstr ""
 
 #: app/Services/Settings/SafeGlobalSettingsService.php:51
@@ -2705,7 +2910,7 @@ msgstr ""
 msgid "This form has been deleted or is unavailable."
 msgstr ""
 
-#: resources/views/form.php:97
+#: resources/views/form.php:98
 msgid "You will be redirected in"
 msgstr ""
 

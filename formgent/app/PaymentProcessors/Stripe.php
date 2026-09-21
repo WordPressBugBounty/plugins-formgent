@@ -38,7 +38,14 @@ class Stripe implements PaymentInterface
         StripeSDK::setApiKey( $this->secret_key );
 
         $success_url = add_query_arg( ['session_id' => "{CHECKOUT_SESSION_ID}"], get_rest_url( null, '/formgent/payment/success/stripe' ) );
-        $cancel_url  = add_query_arg( ['order_id' => $pay_dto->order->get_id(), 'payment_id' => $pay_dto->payment->get_id(),], get_rest_url( null, '/formgent/payment/cancel/stripe' ) );
+        $cancel_url  = add_query_arg(
+            [
+                'order_id'   => $pay_dto->order->get_id(),
+                'payment_id' => $pay_dto->payment->get_id(),
+                'state'      => formgent_create_payment_callback_state( self::get_key(), $pay_dto->order->get_id(), $pay_dto->payment->get_id() ),
+            ],
+            get_rest_url( null, '/formgent/payment/cancel/stripe' )
+        );
 
         $line_items = [];
 
@@ -74,10 +81,11 @@ class Stripe implements PaymentInterface
     }
 
     public function cancel( WP_REST_Request $request ): ?PaymentReturnDTO {
-        $order_id   = $request->get_param( 'order_id' );
-        $payment_id = $request->get_param( 'payment_id' );
+        $order_id   = (int) $request->get_param( 'order_id' );
+        $payment_id = (int) $request->get_param( 'payment_id' );
+        $state      = (string) $request->get_param( 'state' );
 
-        if ( empty( $order_id ) || empty( $payment_id ) ) {
+        if ( ! formgent_verify_payment_callback_state( $state, self::get_key(), $order_id, $payment_id ) ) {
             return null;
         }
 

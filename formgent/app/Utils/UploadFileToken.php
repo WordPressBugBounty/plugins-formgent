@@ -9,16 +9,26 @@ final class UploadFileToken {
 
     private const SEPARATOR = '.';
 
-    public static function create( string $relative_path ): string {
+    public static function create( string $relative_path, int $form_id = 0, string $context = '', int $response_id = 0, string $field_name = '', int $expires_at = 0 ): string {
         $relative_path = self::normalize_relative_path( $relative_path );
 
         if ( null === $relative_path ) {
             return '';
         }
 
+        if ( $form_id > 0 && $expires_at <= time() ) {
+            $ttl        = max( MINUTE_IN_SECONDS, (int) apply_filters( 'formgent_upload_file_token_ttl', DAY_IN_SECONDS, $form_id, $response_id ) );
+            $expires_at = time() + $ttl;
+        }
+
         $json = wp_json_encode(
             [
-                'path' => $relative_path,
+                'path'        => $relative_path,
+                'form_id'     => $form_id,
+                'context'     => sanitize_key( $context ),
+                'response_id' => $response_id,
+                'field_name'  => sanitize_key( $field_name ),
+                'expires'     => $form_id > 0 ? $expires_at : 0,
             ]
         );
 
@@ -32,7 +42,7 @@ final class UploadFileToken {
         return self::VERSION . self::SEPARATOR . $payload . self::SEPARATOR . $signature;
     }
 
-    public static function path_from_token( string $token ): ?string {
+    public static function path_from_token( string $token, int $form_id = 0, string $context = '', int $response_id = 0, string $field_name = '' ): ?string {
         $token = sanitize_text_field( $token );
         $parts = explode( self::SEPARATOR, $token );
 
@@ -56,6 +66,20 @@ final class UploadFileToken {
         $data = json_decode( $json, true );
 
         if ( ! is_array( $data ) || empty( $data['path'] ) || ! is_string( $data['path'] ) ) {
+            return null;
+        }
+
+        if ( $form_id > 0 && ( (int) ( $data['form_id'] ?? 0 ) !== $form_id ||
+            sanitize_key( (string) ( $data['context'] ?? '' ) ) !== sanitize_key( $context ) ||
+            (int) ( $data['expires'] ?? 0 ) < time() ) ) {
+            return null;
+        }
+
+        if ( $response_id > 0 && (int) ( $data['response_id'] ?? 0 ) !== $response_id ) {
+            return null;
+        }
+
+        if ( '' !== $field_name && sanitize_key( (string) ( $data['field_name'] ?? '' ) ) !== sanitize_key( $field_name ) ) {
             return null;
         }
 

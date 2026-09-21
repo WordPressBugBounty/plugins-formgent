@@ -6,8 +6,6 @@ defined( "ABSPATH" ) || exit;
 
 use WP_REST_Request;
 use FormGent\WpMVC\Routing\Contracts\Middleware;
-use FormGent\WpMVC\Helpers\Helpers;
-use FormGent\WpMVC\RequestValidator\Validator;
 
 class Zapier implements Middleware {
     /**
@@ -17,31 +15,21 @@ class Zapier implements Middleware {
     * @return bool
     */
     public function handle( WP_REST_Request $request ): bool {
-        $request = Helpers::request();
-        /**
-         * @var Validator $validator
-         */
-        $validator                  = formgent_make( Validator::class );
-        $validator->wp_rest_request = $request;
-        $validator->validate(
-            [
-                'secret_key' => 'required|string|max:255'
-            ], false
-        );
-
-        if ( $validator->is_fail() ) {
-            return false;
-        }
-
         $settings_repo = formgent_settings_repository();
 
         if ( ! $settings_repo->get_by_key( "zapier_status" ) ) {
             return false;
         }
 
-        $api_key = $settings_repo->get_by_key( "zapier_token" );
+        $api_key       = (string) $settings_repo->get_by_key( 'zapier_token' );
+        $authorization = trim( (string) $request->get_header( 'authorization' ) );
+        $provided_key  = trim( (string) $request->get_header( 'x-formgent-key' ) );
 
-        if ( $request->get_param( "secret_key" ) !== $api_key ) {
+        if ( 0 === stripos( $authorization, 'Bearer ' ) ) {
+            $provided_key = trim( substr( $authorization, 7 ) );
+        }
+
+        if ( '' === $api_key || '' === $provided_key || ! hash_equals( $api_key, $provided_key ) ) {
             return false;
         }
 

@@ -26,20 +26,32 @@ class ZohoCRMServiceProvider implements Provider {
     }
 
     public function save_and_redirect_oauth_confirm() {
-        if ( ! isset( $_GET['fg_zohocrm_confirm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if ( ! isset( $_GET['fg_zohocrm_confirm'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- The pending OAuth transaction is verified below.
             return;
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die(
+                esc_html__( 'You are not allowed to connect the ZohoCRM integration.', 'formgent' ),
+                esc_html__( 'ZohoCRM connection failed', 'formgent' ),
+                ['response' => 403]
+            );
+        }
+
+        if ( ! isset( $_GET['code'], $_GET['state'] ) || ! is_string( $_GET['code'] ) || ! is_string( $_GET['state'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- The pending OAuth transaction is verified by ZohoCRM::generate_access_token().
+            wp_die(
+                esc_html__( 'The ZohoCRM authorization response is incomplete. Please try again.', 'formgent' ),
+                esc_html__( 'ZohoCRM connection failed', 'formgent' ),
+                ['response' => 400]
+            );
         }
 
         $zohocrm = formgent_singleton( ZohoCRM::class );
 
-        if ( ! isset( $_GET['code'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            wp_redirect( $zohocrm->get_auth_url() ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
-            exit();
-        }
-
         // Get the access token now
-        $code   = sanitize_text_field( wp_unslash( $_GET['code'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $tokens = $zohocrm->generate_access_token( $code );
+        $code   = sanitize_text_field( wp_unslash( $_GET['code'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- The pending state, nonce, and PKCE verifier are consumed in the next call.
+        $state  = sanitize_text_field( wp_unslash( $_GET['state'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- The pending state, nonce, and PKCE verifier are consumed in the next call.
+        $tokens = $zohocrm->generate_access_token( $code, $state );
 
         if ( is_wp_error( $tokens ) ) {
             wp_die(
@@ -61,18 +73,28 @@ class ZohoCRMServiceProvider implements Provider {
             $zohocrm->set_tokens( $tokens );
         }
 
-        wp_redirect( admin_url( 'admin.php?page=formgent#/settings/integrations' ) ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+        $this->redirect_to_integrations();
+    }
+
+    protected function redirect_to_integrations(): void {
+        wp_safe_redirect( admin_url( 'admin.php?page=formgent#/settings/integrations' ) );
         exit();
     }
 
     public function filter_rest_settings_saved_response( $response, WP_REST_Request $request ) {
-        if ( ! isset( $request['triggered_from'] ) || $request['triggered_from'] !== 'zoho-integration' ) {
+        if ( 'zoho-integration' !== $request->get_param( 'triggered_from' ) || ! current_user_can( 'manage_options' ) ) {
             return $response;
         }
 
         $zohocrm = formgent_singleton( ZohoCRM::class );
 
-        $response['redirect_url'] = $zohocrm->get_auth_url();
+        $auth_url = $zohocrm->get_auth_url();
+        if ( is_wp_error( $auth_url ) ) {
+            $response['message'] = esc_html( $auth_url->get_error_message() );
+            return $response;
+        }
+
+        $response['redirect_url'] = $auth_url;
 
         return $response;
     }

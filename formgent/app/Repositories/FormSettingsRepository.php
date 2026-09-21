@@ -4,6 +4,8 @@ namespace FormGent\App\Repositories;
 
 defined( "ABSPATH" ) || exit;
 
+use FormGent\App\Services\Forms\FormSecurityPolicy;
+
 class FormSettingsRepository {
     protected array $default_settings = [
         "analytics"                 => [
@@ -55,6 +57,8 @@ class FormSettingsRepository {
     }
 
     public function save_settings( int $form_id, array $settings ) {
+        $settings = FormSecurityPolicy::sanitize_settings( $settings );
+
         return update_post_meta( $form_id, '_formgent_settings', $this->enforce_sharing_status( $form_id, $settings ) );
     }
 

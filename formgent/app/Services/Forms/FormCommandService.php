@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\DTO\FormDTO;
 use FormGent\App\Services\Mcp\McpErrorFactory;
+use FormGent\App\Utils\Capabilities;
 use Throwable;
 use WP_Error;
 use WP_Post;
@@ -135,6 +136,10 @@ class FormCommandService {
         $target_type  = $input['type'] ?? $current_type;
         $content      = $post->post_content;
         $warnings     = [];
+
+        if ( 'publish' === ( $input['status'] ?? '' ) && ! Capabilities::can_publish_forms() ) {
+            return McpErrorFactory::forbidden();
+        }
 
         if ( isset( $input['fields'], $input['layout'] ) ) {
             return McpErrorFactory::invalid_input( esc_html__( 'Fields and layout cannot be replaced in the same update.', 'formgent' ) );

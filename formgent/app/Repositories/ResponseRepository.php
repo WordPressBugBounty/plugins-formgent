@@ -627,11 +627,24 @@ class ResponseRepository {
     }
 
     private function responses_order_query( Builder $query, ResponseReadDTO $dto ) {
+        $order = strtolower( (string) $dto->get_order() );
+        $order = in_array( $order, ['asc', 'desc'], true ) ? $order : 'desc';
+
         if ( 'response' === $dto->get_order_field_type() ) {
-            return $query->order_by( $dto->get_order_by(), $dto->get_order() );
+            $allowed_columns = ['id', 'form_id', 'is_completed', 'is_read', 'is_starred', 'created_at', 'updated_at'];
+            $order_by        = (string) $dto->get_order_by();
+            $order_by        = in_array( $order_by, $allowed_columns, true ) ? $order_by : 'id';
+
+            return $query->order_by( 'response.' . $order_by, $order );
         }
 
-        $order_by = explode( '.', $dto->get_order_by() );
+        $answer_order = (string) $dto->get_order_by();
+
+        if ( ! preg_match( '/^[A-Za-z0-9_-]{1,64}(?:\.[A-Za-z0-9_-]{1,64})?$/', $answer_order ) ) {
+            return $query->order_by( 'response.id', 'desc' );
+        }
+
+        $order_by = explode( '.', $answer_order );
 
         $query->left_join(
             Answer::get_table_name() . " as order_answer", function( JoinClause $join ) use( $order_by ) {
@@ -644,9 +657,9 @@ class ResponseRepository {
                 Answer::get_table_name() . " as order_answer_children", function( JoinClause $join ) use( $order_by ) {
                     $join->on_column( "order_answer.id", "order_answer_children.parent_id" )->on( "order_answer_children.field_name", $order_by[1] );
                 }
-            )->order_by( "order_answer_children.value", $dto->get_order() );
+            )->order_by( "order_answer_children.value", $order );
         } else {
-            return $query->order_by( "order_answer.value", $dto->get_order() );
+            return $query->order_by( "order_answer.value", $order );
         }
     }
 
@@ -695,6 +708,7 @@ class ResponseRepository {
         ";
         $response_args  = array_merge( $ids, [formgent_post_type()] );
 
+        // Identifiers are trusted model/core table names and all values are prepared.
         // Identifiers are trusted model/core table names and all values are prepared.
         // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
         $responses = $wpdb->get_results( $wpdb->prepare( $response_sql, $response_args ) );
@@ -778,6 +792,7 @@ class ResponseRepository {
         ";
         $args           = array_merge( $ids, [formgent_post_type()] );
 
+        // Identifiers are trusted model/core table names and all values are prepared.
         // Identifiers are trusted model/core table names and all values are prepared.
         // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
         $rows = $wpdb->get_results( $wpdb->prepare( $sql, $args ) );

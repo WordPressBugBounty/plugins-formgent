@@ -25,14 +25,9 @@ class AnalyticsController extends Controller {
     }
 
     public function increment_or_decrement_form_view_count( Validator $validator, WP_REST_Request $wp_rest_request ) {
-        $validator->validate(
-            [
-                'type' => 'string|accepted:+,-',
-            ]
-        );
-
         try {
-            $form = $this->form_repository->get_by_id( absint( $wp_rest_request->get_param( 'id' ) ) );
+            $form_id = absint( $wp_rest_request->get_param( 'id' ) );
+            $form    = $this->form_repository->get_by_id_publish( $form_id );
 
             if ( ! $form ) {
                 return Response::send(
@@ -52,12 +47,21 @@ class AnalyticsController extends Controller {
                 );
             }
 
+            $remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+            $rate_key       = 'formgent_view_' . md5( $form_id . '|' . $remote_address );
+
+            if ( get_transient( $rate_key ) ) {
+                return Response::send( ['new_count' => absint( get_post_meta( $form_id, '_formgent_views', true ) )] );
+            }
+
+            set_transient( $rate_key, 1, MINUTE_IN_SECONDS );
+
             return Response::send(
                 [
                     'new_count' => $this->analytic_repository->update_form_view_count(
-                        absint( $wp_rest_request->get_param( 'id' ) ), 
+                        $form_id,
                         1,
-                        $wp_rest_request->get_param( 'type' ) ?? '+'
+                        '+'
                     )
                 ]
             );

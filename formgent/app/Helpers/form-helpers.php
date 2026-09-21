@@ -516,24 +516,12 @@ function formgent_get_referrer_url(): string {
 }
 
 /**
- * Get all cookies as a JSON string for string-based default-value fields.
+ * Legacy cookie preset. Browser cookies must never be exposed in public form markup.
  *
  * @return string
  */
 function formgent_get_cookie_value(): string {
-    if ( empty( $_COOKIE ) || ! is_array( $_COOKIE ) ) {
-        return '';
-    }
-
-    $cookies = [];
-
-    foreach ( $_COOKIE as $key => $value ) {
-        $cookies[ sanitize_key( (string) $key ) ] = is_string( $value )
-            ? sanitize_text_field( wp_unslash( $value ) )
-            : $value;
-    }
-
-    return wp_json_encode( $cookies );
+    return '';
 }
 
 /**
@@ -569,8 +557,8 @@ function formgent_get_preset_values( int $form_id ): array {
         'lost_password_url'   => esc_url_raw( wp_lostpassword_url() ),
         'forgot_password_url' => esc_url_raw( wp_lostpassword_url() ),
         'logout_url'          => esc_url_raw( wp_logout_url() ),
-        'cookie_value'        => formgent_get_cookie_value(),
-        'cookie_values'       => formgent_get_cookie_value(),
+        'cookie_value'        => '',
+        'cookie_values'       => '',
     ];
 
     if ( $current_user ) {

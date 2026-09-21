@@ -57,6 +57,40 @@ function formgent_payment_processor( $payment_gateway ): PaymentInterface {
     return formgent_singleton( $payment_gateways[$payment_gateway]['processor'] );
 }
 
+function formgent_create_payment_callback_state( string $gateway, int $order_id, int $payment_id ): string {
+    $payload = implode( '|', [sanitize_key( $gateway ), $order_id, $payment_id] );
+
+    return hash_hmac( 'sha256', $payload, wp_salt( 'auth' ) );
+}
+
+function formgent_verify_payment_callback_state( string $state, string $gateway, int $order_id, int $payment_id ): bool {
+    if ( '' === $state || $order_id <= 0 || $payment_id <= 0 ) {
+        return false;
+    }
+
+    return hash_equals( formgent_create_payment_callback_state( $gateway, $order_id, $payment_id ), $state );
+}
+
+/**
+ * Verify that a callback DTO identifies one real payment/order pair for the
+ * processor that handled the callback.
+ *
+ * @throws Exception When callback records are inconsistent.
+ */
+function formgent_validate_payment_return( PaymentReturnDTO $payment_return_dto, string $gateway ): void {
+    $payment_id = (int) $payment_return_dto->get_payment_id();
+    $order_id   = (int) $payment_return_dto->get_order_id();
+    $payment    = formgent_payment_repository()->get_by_id( $payment_id );
+    $order      = formgent_order_repository()->get_by_id( $order_id );
+
+    if ( ! $payment || ! $order ||
+        (int) $payment->order_id !== $order_id ||
+        sanitize_key( (string) $payment->method ) !== sanitize_key( $gateway )
+    ) {
+        throw new Exception( esc_html__( 'Payment information was not found.', 'formgent' ), 404 );
+    }
+}
+
 function formgent_is_payment_form( array $fields_data ) {
     $payment_gateways    = formgent_get_payment_gateways();
     $payment_field_types = array_keys( $payment_gateways );

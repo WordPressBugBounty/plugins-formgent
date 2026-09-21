@@ -6,6 +6,7 @@ defined( "ABSPATH" ) || exit;
 
 use FormGent\App\DTO\AnswerFieldDTO;
 use FormGent\App\Services\UserVerificationService;
+use FormGent\App\Utils\Capabilities;
 use FormGent\WpMVC\Contracts\Provider;
 use stdClass;
 use WP_REST_Request;
@@ -784,30 +785,15 @@ class UserRegistrationServiceProvider implements Provider {
         return $username;
     }
 
-    /**
-     * Roles that must never be assigned via frontend self-registration.
-     */
-    private const FORBIDDEN_ROLES = [ 'administrator', 'editor' ];
-
     private function resolve_user_role( array $registration ): string {
         $role = isset( $registration['user_role'] ) ? sanitize_key( (string) $registration['user_role'] ) : 'subscriber';
 
         if ( 'custom' === $role ) {
             $custom_role = isset( $registration['custom_role'] ) ? sanitize_key( (string) $registration['custom_role'] ) : '';
-            if ( '' !== $custom_role && get_role( $custom_role ) && ! in_array( $custom_role, self::FORBIDDEN_ROLES, true ) ) {
-                return $custom_role;
-            }
-            return 'subscriber';
+
+            return Capabilities::is_safe_registration_role( $custom_role ) ? $custom_role : 'subscriber';
         }
 
-        if ( in_array( $role, self::FORBIDDEN_ROLES, true ) ) {
-            return 'subscriber';
-        }
-
-        if ( get_role( $role ) ) {
-            return $role;
-        }
-
-        return 'subscriber';
+        return Capabilities::is_safe_registration_role( $role ) ? $role : 'subscriber';
     }
 }

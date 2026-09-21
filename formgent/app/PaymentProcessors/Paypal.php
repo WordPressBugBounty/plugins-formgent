@@ -13,6 +13,7 @@ use FormGent\App\Lib\Paypal\DTO\OrderPurchaseItemDTO;
 
 use FormGent\App\DTO\PayDTO;
 use FormGent\App\DTO\PaymentReturnDTO;
+use FormGent\App\DTO\PaymentDTO;
 use FormGent\App\DTO\OrderItemDTO;
 
 use FormGent\WpMVC\RequestValidator\Validator;
@@ -43,6 +44,7 @@ class Paypal implements PaymentInterface
         $return_url_args = [
             'order_id'   => $pay_dto->order->get_id(),
             'payment_id' => $pay_dto->payment->get_id(),
+            'state'      => formgent_create_payment_callback_state( self::get_key(), $pay_dto->order->get_id(), $pay_dto->payment->get_id() ),
         ];
 
         $order_dto = ( new PaypalOrderDTO() )
@@ -72,6 +74,16 @@ class Paypal implements PaymentInterface
             throw new Exception( 'Failed to create PayPal order' );
         }
 
+        if ( empty( $response['id'] ) ) {
+            throw new Exception( 'Failed to create PayPal order' );
+        }
+
+        formgent_payment_repository()->update(
+            ( new PaymentDTO() )
+                ->set_id( $pay_dto->payment->get_id() )
+                ->set_transaction_id( (string) $response['id'] )
+        );
+
         $payer_action_url = null;
 
         foreach ( $response['links'] as $link ) {
@@ -93,10 +105,11 @@ class Paypal implements PaymentInterface
     }
 
     public function cancel( WP_REST_Request $request ): ?PaymentReturnDTO {
-        $order_id   = $request->get_param( 'order_id' );
-        $payment_id = $request->get_param( 'payment_id' );
+        $order_id   = (int) $request->get_param( 'order_id' );
+        $payment_id = (int) $request->get_param( 'payment_id' );
+        $state      = (string) $request->get_param( 'state' );
 
-        if ( empty( $order_id ) || empty( $payment_id ) ) {
+        if ( ! formgent_verify_payment_callback_state( $state, self::get_key(), $order_id, $payment_id ) ) {
             return null;
         }
 
@@ -117,10 +130,24 @@ class Paypal implements PaymentInterface
                 'token'      => 'required|string',
                 'order_id'   => 'required|numeric',
                 'payment_id' => 'required|numeric',
+                'state'      => 'required|string',
             ]
         );
 
-        $token = $request->get_param( 'token' );
+        $token      = (string) $request->get_param( 'token' );
+        $order_id   = (int) $request->get_param( 'order_id' );
+        $payment_id = (int) $request->get_param( 'payment_id' );
+        $state      = (string) $request->get_param( 'state' );
+
+        if ( ! formgent_verify_payment_callback_state( $state, self::get_key(), $order_id, $payment_id ) ) {
+            throw new Exception( 'Payment was not completed', 422 );
+        }
+
+        $payment = formgent_payment_repository()->get_by_id( $payment_id );
+
+        if ( ! $payment || (int) $payment->order_id !== $order_id || self::get_key() !== $payment->method || ! hash_equals( (string) $payment->transaction_id, $token ) ) {
+            throw new Exception( 'Payment was not completed', 422 );
+        }
 
         try {
             $response = $this->payment_processor->capture_order( $token );
@@ -130,8 +157,8 @@ class Paypal implements PaymentInterface
             }
 
             return ( new PaymentReturnDTO )
-                ->set_order_id( $request->get_param( 'order_id' ) )
-                ->set_payment_id( $request->get_param( 'payment_id' ) )
+                ->set_order_id( $order_id )
+                ->set_payment_id( $payment_id )
                 ->set_transaction_id( $token )
                 ->set_billing_email( $response['payer']['email_address'] )
                 ->set_billing_name( (string) $response['payer']['name']['given_name'] . ' ' . (string) $response['payer']['name']['surname'] )

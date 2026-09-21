@@ -41,29 +41,44 @@ class ZohoCRMApi
         $this->callback_url  = admin_url( '?fg_zohocrm_confirm=1' );
     }
 
-    public function get_auth_url() {
-        return add_query_arg(
-            [
-                'scope'         => 'ZohoCRM.users.ALL,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL',
-                'client_id'     => $this->client_id,
-                'access_type'   => 'offline',
-                'redirect_uri'  => $this->callback_url,
-                'response_type' => 'code'
-            ], $this->account_url . '/oauth/v2/auth'
-        );
+    public function get_auth_url( string $code_challenge = '', string $state = '' ) {
+        $query = [
+            'scope'         => 'ZohoCRM.users.ALL,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL',
+            'client_id'     => $this->client_id,
+            'access_type'   => 'offline',
+            'redirect_uri'  => $this->callback_url,
+            'response_type' => 'code',
+        ];
+
+        if ( '' !== $code_challenge ) {
+            $query['code_challenge']        = $code_challenge;
+            $query['code_challenge_method'] = 'S256';
+        }
+
+        if ( '' !== $state ) {
+            $query['state'] = $state;
+        }
+
+        return add_query_arg( $query, $this->account_url . '/oauth/v2/auth' );
     }
 
-    public function generate_access_token( $code, $settings ) {
+    public function generate_access_token( $code, $settings, string $code_verifier = '' ) {
+        $body = [
+            'client_id'     => $this->client_id,
+            'client_secret' => $this->client_secret,
+            'grant_type'    => 'authorization_code',
+            'redirect_uri'  => $this->callback_url,
+            'scope'         => 'ZohoCRM.users.ALL,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL',
+            'code'          => $code,
+        ];
+
+        if ( '' !== $code_verifier ) {
+            $body['code_verifier'] = $code_verifier;
+        }
+
         $response = wp_remote_post(
             $this->account_url . '/oauth/v2/token', [
-                'body' => [
-                    'client_id'     => $this->client_id,
-                    'client_secret' => $this->client_secret,
-                    'grant_type'    => 'authorization_code',
-                    'redirect_uri'  => $this->callback_url,
-                    'scope'         => 'ZohoCRM.users.ALL,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL',
-                    'code'          => $code
-                ]
+                'body' => $body,
             ]
         );
 
@@ -130,7 +145,10 @@ class ZohoCRMApi
     }
 
     protected function get_api_settings() {
-        $this->maybe_refresh_token();
+        $refreshed = $this->maybe_refresh_token();
+        if ( is_wp_error( $refreshed ) ) {
+            return $refreshed;
+        }
 
         $api_settings = $this->settings;
 
@@ -153,36 +171,45 @@ class ZohoCRMApi
     protected function maybe_refresh_token() {
         $settings  = $this->settings;
         $expire_at = $settings['expire_at'];
-        if ( $expire_at && $expire_at <= ( time() - 10 ) ) {
-            // we have to regenerate the tokens
-            $response = wp_remote_post(
-                $this->account_url . '/oauth/v2/token', [
-                    'body' => [
-                        'client_id'     => $this->client_id,
-                        'client_secret' => $this->client_secret,
-                        'grant_type'    => 'refresh_token',
-                        'refresh_token' => $settings['refresh_token'],
-                        'redirect_uri'  => $this->callback_url
-                    ]
-                ]
-            );
-
-            if ( is_wp_error( $response ) ) {
-                $settings['status'] = false;
-            }
-
-            $body = wp_remote_retrieve_body( $response );
-            $body = \json_decode( $body, true );
-            if ( isset( $body['error_description'] ) ) {
-                $settings['status'] = false;
-            }
-
-            $settings['access_token'] = $body['access_token'];
-            $settings['expire_at']    = time() + intval( $body['expires_in'] );
-            $this->settings           = $settings;
-            
-            update_option( '_formgent_zohocrm_settings', $settings, false );
+        if ( ! $expire_at || $expire_at > ( time() - 10 ) ) {
+            return true;
         }
+
+        $response = wp_remote_post(
+            $this->account_url . '/oauth/v2/token', [
+                'body' => [
+                    'client_id'     => $this->client_id,
+                    'client_secret' => $this->client_secret,
+                    'grant_type'    => 'refresh_token',
+                    'refresh_token' => $settings['refresh_token'],
+                    'redirect_uri'  => $this->callback_url,
+                ],
+            ]
+        );
+
+        if ( is_wp_error( $response ) ) {
+            return $response;
+        }
+
+        $body = \json_decode( wp_remote_retrieve_body( $response ), true );
+        if ( ! is_array( $body ) ||
+            ! empty( $body['error'] ) ||
+            ! empty( $body['error_description'] ) ||
+            empty( $body['access_token'] ) ||
+            empty( $body['expires_in'] )
+        ) {
+            $message = is_array( $body ) ? ( $body['error_description'] ?? $body['error'] ?? 'Invalid token refresh response' ) : 'Invalid token refresh response';
+
+            return new \WP_Error( 'zohocrm_token_refresh_failed', (string) $message );
+        }
+
+        $settings['access_token'] = $body['access_token'];
+        $settings['expire_at']    = time() + intval( $body['expires_in'] );
+        $this->settings           = $settings;
+
+        update_option( '_fg_zohocrm_tokens', $settings, false );
+
+        return true;
     }
 
     public function get_all_modules() {

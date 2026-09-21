@@ -8,6 +8,12 @@ use FormGent\App\Repositories\SettingsRepository;
 use FormGent\App\Integrations\ZohoCRM\ZohoCRMApi;
 
 class ZohoCRM {
+    public const OAUTH_NONCE_ACTION = 'formgent_zohocrm_oauth';
+
+    private const OAUTH_TRANSIENT_PREFIX = 'formgent_zohocrm_oauth_';
+
+    private const OAUTH_TRANSACTION_TTL = 10 * MINUTE_IN_SECONDS;
+
     protected $option_key = '_fg_zohocrm_tokens';
 
     public SettingsRepository $settings;
@@ -167,10 +173,64 @@ class ZohoCRM {
     }
 
     public function get_auth_url() {
-        return $this->get_client()->get_auth_url();
+        $state    = wp_generate_password( 32, false, false );
+        $verifier = wp_generate_password( 64, false, false );
+        $stored   = set_transient(
+            $this->get_oauth_transient_key( $state ),
+            [
+                'nonce'    => wp_create_nonce( self::OAUTH_NONCE_ACTION ),
+                'state'    => $state,
+                'verifier' => $verifier,
+            ],
+            self::OAUTH_TRANSACTION_TTL
+        );
+
+        if ( ! $stored ) {
+            return new \WP_Error( 'zohocrm_oauth_state_failed', esc_html__( 'Unable to start the ZohoCRM authorization. Please try again.', 'formgent' ) );
+        }
+
+        $challenge = rtrim( strtr( base64_encode( hash( 'sha256', $verifier, true ) ), '+/', '-_' ), '=' );
+
+        return $this->get_client()->get_auth_url( $challenge, $state );
     }
 
-    public function generate_access_token( $code ) {
-        return $this->get_client()->generate_access_token( $code, $this->get_global_settings() );
+    public function generate_access_token( $code, string $state = '' ) {
+        $verifier = $this->consume_oauth_verifier( $state );
+        if ( is_wp_error( $verifier ) ) {
+            return $verifier;
+        }
+
+        return $this->get_client()->generate_access_token( $code, $this->get_global_settings(), $verifier );
+    }
+
+    private function consume_oauth_verifier( string $state ) {
+        if ( '' === $state || strlen( $state ) > 128 ) {
+            return new \WP_Error( 'zohocrm_oauth_state_invalid', esc_html__( 'The ZohoCRM authorization request is invalid or has expired. Please try again.', 'formgent' ) );
+        }
+
+        $key         = $this->get_oauth_transient_key( $state );
+        $transaction = get_transient( $key );
+
+        delete_transient( $key );
+
+        if ( ! is_array( $transaction ) ||
+            ! isset( $transaction['nonce'], $transaction['state'], $transaction['verifier'] ) ||
+            ! is_string( $transaction['nonce'] ) ||
+            ! is_string( $transaction['state'] ) ||
+            ! is_string( $transaction['verifier'] ) ||
+            ! hash_equals( $transaction['state'], $state ) ||
+            ! wp_verify_nonce( $transaction['nonce'], self::OAUTH_NONCE_ACTION )
+        ) {
+            return new \WP_Error( 'zohocrm_oauth_state_invalid', esc_html__( 'The ZohoCRM authorization request is invalid or has expired. Please try again.', 'formgent' ) );
+        }
+
+        return $transaction['verifier'];
+    }
+
+    private function get_oauth_transient_key( string $state ): string {
+        $session_hash = substr( hash( 'sha256', wp_get_session_token() ), 0, 32 );
+        $state_hash   = substr( hash( 'sha256', $state ), 0, 32 );
+
+        return self::OAUTH_TRANSIENT_PREFIX . get_current_user_id() . '_' . $session_hash . '_' . $state_hash;
     }
 }

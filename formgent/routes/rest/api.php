@@ -13,8 +13,6 @@ use FormGent\App\Http\Controllers\AttachmentController;
 use FormGent\App\Http\Controllers\WebhookController;
 // use FormGent\App\Http\Controllers\FormController;
 use FormGent\WpMVC\Routing\Route;
-use FormGent\App\Jobs\Queue;
-use FormGent\WpMVC\Routing\Response;
 
 include __DIR__ . '/admin.php';
 
@@ -58,13 +56,4 @@ Route::group(
         Route::post( 'hcaptcha', [CaptchaController::class, 'hcaptcha'] );
         Route::post( 'turnstile', [CaptchaController::class, 'turnstile'] );
     }
-);
-
-Route::post(
-    'queue/dispatch', function() {
-        $queue = formgent_singleton( Queue::class );
-        $queue->dispatch_queue();
-
-        return Response::send( [] );
-    } 
 );

@@ -12,6 +12,8 @@ use FormGent\App\Repositories\FormRepository;
 use FormGent\App\Repositories\FormPresetFieldRepository;
 use FormGent\App\Repositories\PdfRepository;
 use FormGent\App\Services\Forms\AiFormQuotaService;
+use FormGent\App\Services\Forms\FormSecurityPolicy;
+use FormGent\App\Utils\Capabilities;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
 use Exception;
@@ -84,6 +86,17 @@ class FormController extends Controller {
             ]
         );
 
+        $settings = $wp_rest_request->get_param( 'settings' );
+        $status   = $wp_rest_request->get_param( 'status' );
+
+        if ( is_array( $settings ) && array_key_exists( 'customScript', $settings ) && ! current_user_can( 'unfiltered_html' ) ) {
+            throw new Exception( esc_html__( 'You are not allowed to save custom code.', 'formgent' ), 403 );
+        }
+
+        if ( 'publish' === $status && ! Capabilities::can_publish_forms() ) {
+            throw new Exception( esc_html__( 'You are not allowed to publish forms.', 'formgent' ), 403 );
+        }
+
         $dto = new FormDTO;
 
         $fields      = $wp_rest_request->get_param( 'fields' );
@@ -112,11 +125,10 @@ class FormController extends Controller {
         //     $content = '<!-- wp:formgent/submit-button {"id":"P5rxfTIwma0-"} /-->';
         // }
 
-        $settings      = $wp_rest_request->get_param( 'settings' );
         $form_settings = $wp_rest_request->get_param( 'form_settings' );
 
         if ( ! empty( $settings ) && is_array( $settings ) ) {
-            $dto->set_settings( $settings );
+            $dto->set_settings( FormSecurityPolicy::sanitize_settings( $settings, array_key_exists( 'customScript', $settings ) ) );
         }
 
         if ( ! empty( $form_settings ) && is_array( $form_settings ) ) {
@@ -124,7 +136,7 @@ class FormController extends Controller {
         }
 
         $dto->set_title( $wp_rest_request->get_param( 'title' ) );
-        $dto->set_status( $wp_rest_request->get_param( 'status' ) );
+        $dto->set_status( $status );
         $dto->set_content( $content );
         $dto->set_type( $type );
 
@@ -250,7 +262,7 @@ class FormController extends Controller {
 
         $dto = new FormDTO;
         $dto->set_title( $form->post_title . ' - copy' );
-        $dto->set_status( $form->post_status );
+        $dto->set_status( 'publish' === $form->post_status && Capabilities::can_publish_forms() ? 'publish' : 'draft' );
         $dto->set_content( $form->post_content );
         $dto->set_type( get_post_meta( $form->ID, '_formgent_type', true ) );
         $dto->set_save_incomplete_data( formgent_is_save_incompleted_data( $form->ID ) );
@@ -400,13 +412,21 @@ class FormController extends Controller {
 
         $form_id = intval( $wp_rest_request->get_param( 'id' ) );
 
+        $incoming_settings = $wp_rest_request->get_param( 'settings' );
+
+        if ( array_key_exists( 'customScript', $incoming_settings ) && ! current_user_can( 'unfiltered_html' ) ) {
+            throw new Exception( esc_html__( 'You are not allowed to save custom code.', 'formgent' ), 403 );
+        }
+
         $settings = array_merge(
             $this->form_repository->get_settings( $form_id ),
-            $wp_rest_request->get_param( 'settings' )
+            $incoming_settings
         );
         unset( $settings['pdfs'] );
         unset( $settings['pdf_generation'] );
         unset( $settings['pdf_library_path'] ); // Stored globally; do not persist per-form.
+
+        $settings = FormSecurityPolicy::sanitize_settings( $settings, array_key_exists( 'customScript', $incoming_settings ) );
 
         $this->form_repository->save_settings( $form_id, $settings );
 
