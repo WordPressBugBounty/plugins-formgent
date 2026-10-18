@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FormGent – Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More 1.12.3\n"
+"Project-Id-Version: FormGent – Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More 1.12.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/formgent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T05:42:36+00:00\n"
+"POT-Creation-Date: 2026-10-18T10:28:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: formgent\n"
@@ -1037,7 +1037,7 @@ msgstr ""
 #: app/Http/Controllers/Admin/AnalyticsController.php:30
 #: app/Http/Controllers/Admin/EmailNotificationController.php:53
 #: app/Http/Controllers/Admin/EmailNotificationController.php:78
-#: app/Http/Controllers/Admin/FormController.php:258
+#: app/Http/Controllers/Admin/FormController.php:262
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:84
 #: app/Http/Controllers/Admin/GoogleSpreadsheetController.php:162
 #: app/Http/Controllers/Admin/MailchimpController.php:103
@@ -1092,45 +1092,58 @@ msgstr ""
 msgid "The status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:93
-#: app/Http/Controllers/Admin/FormController.php:418
+#: app/Http/Controllers/Admin/FormController.php:97
+#: app/Http/Controllers/Admin/FormController.php:473
 msgid "You are not allowed to save custom code."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:97
+#: app/Http/Controllers/Admin/FormController.php:101
 msgid "You are not allowed to publish forms."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:112
+#: app/Http/Controllers/Admin/FormController.php:116
 msgid "Limit Reached: You have used all 5 free AI Forms."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:172
+#: app/Http/Controllers/Admin/FormController.php:176
 msgid "The form has been created successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:193
+#: app/Http/Controllers/Admin/FormController.php:197
 msgid "The form title has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:211
+#: app/Http/Controllers/Admin/FormController.php:215
 msgid "Sorry, some thing was wrong"
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:220
-#: app/Http/Controllers/Admin/FormController.php:241
+#: app/Http/Controllers/Admin/FormController.php:224
+#: app/Http/Controllers/Admin/FormController.php:245
 msgid "The form status has been updated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:283
+#: app/Http/Controllers/Admin/FormController.php:287
 msgid "The form has been duplicated successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:322
+#: app/Http/Controllers/Admin/FormController.php:307
+msgid "The form has been exported successfully."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:320
+#: app/Services/Forms/FormTransferService.php:154
+msgid "Please select a valid FormGent form export file."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:328
+msgid "The form has been imported successfully as a draft."
+msgstr ""
+
+#: app/Http/Controllers/Admin/FormController.php:377
 msgid "The form has been deleted successfully."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:339
+#: app/Http/Controllers/Admin/FormController.php:394
 #: app/Http/Controllers/Admin/ResponseController.php:194
 #: app/Http/Controllers/Admin/ResponseController.php:904
 #: app/Http/Controllers/Admin/ResponseController.php:1033
@@ -1138,11 +1151,11 @@ msgstr ""
 msgid "Sorry, Something was wrong."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:352
+#: app/Http/Controllers/Admin/FormController.php:407
 msgid "Forms have been successfully deleted."
 msgstr ""
 
-#: app/Http/Controllers/Admin/FormController.php:435
+#: app/Http/Controllers/Admin/FormController.php:490
 #: app/Http/Controllers/Admin/SettingsController.php:81
 msgid "Settings have been saved successfully."
 msgstr ""
@@ -1264,6 +1277,7 @@ msgstr ""
 #: app/Repositories/ResponseRepository.php:887
 #: app/Repositories/SummaryRepository.php:17
 #: app/Repositories/SummaryRepository.php:47
+#: app/Services/Forms/FormTransferService.php:38
 #: app/Services/Mcp/McpErrorFactory.php:48
 msgid "Form not found."
 msgstr ""
@@ -2451,6 +2465,36 @@ msgstr ""
 
 #: app/Services/Forms/FormReadService.php:126
 msgid "A positive form ID is required."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:80
+msgid "The form could not be exported."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:98
+msgid "The selected form export file is too large."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:132
+msgid "The imported form settings could not be saved."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:160
+msgid "This FormGent export version is not supported."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:178
+msgid "The selected file does not contain valid form content."
+msgstr ""
+
+#: app/Services/Forms/FormTransferService.php:192
+msgid "Imported form"
+msgstr ""
+
+#. translators: %s: imported form title.
+#: app/Services/Forms/FormTransferService.php:195
+#, php-format
+msgid "%s imported"
 msgstr ""
 
 #: app/Services/Forms/FormTypeConversionService.php:28

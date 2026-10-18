@@ -13,6 +13,7 @@ use FormGent\App\Repositories\FormPresetFieldRepository;
 use FormGent\App\Repositories\PdfRepository;
 use FormGent\App\Services\Forms\AiFormQuotaService;
 use FormGent\App\Services\Forms\FormSecurityPolicy;
+use FormGent\App\Services\Forms\FormTransferService;
 use FormGent\App\Utils\Capabilities;
 use FormGent\WpMVC\RequestValidator\Validator;
 use FormGent\WpMVC\Routing\Response;
@@ -29,11 +30,14 @@ class FormController extends Controller {
 
     private AiFormQuotaService $ai_form_quota;
 
-    public function __construct( FormRepository $form_repository, FormPresetFieldRepository $form_preset_field_repository, PdfRepository $pdf_repository, AiFormQuotaService $ai_form_quota ) {
+    private FormTransferService $form_transfer;
+
+    public function __construct( FormRepository $form_repository, FormPresetFieldRepository $form_preset_field_repository, PdfRepository $pdf_repository, AiFormQuotaService $ai_form_quota, FormTransferService $form_transfer ) {
         $this->form_preset_field_repository = $form_preset_field_repository;
         $this->form_repository              = $form_repository;
         $this->pdf_repository               = $pdf_repository;
         $this->ai_form_quota                = $ai_form_quota;
+        $this->form_transfer                = $form_transfer;
     }
 
     public function index( Validator $validator, WP_REST_Request $wp_rest_request ) {
@@ -283,6 +287,57 @@ class FormController extends Controller {
                 'message' => esc_html__( 'The form has been duplicated successfully.', 'formgent' )
             ], 201
         );
+    }
+
+    public function export( Validator $validator, WP_REST_Request $wp_rest_request ) {
+        $validator->validate(
+            [
+                'id' => 'required|numeric'
+            ]
+        );
+
+        $form_id = intval( $wp_rest_request->get_param( 'id' ) );
+        $payload = $this->form_transfer->export( $form_id );
+        $title   = (string) ( $payload['form']['title'] ?? "form-{$form_id}" );
+
+        return Response::send(
+            [
+                'export'   => $payload,
+                'filename' => $this->get_export_filename( $title, $form_id ),
+                'message'  => esc_html__( 'The form has been exported successfully.', 'formgent' )
+            ]
+        );
+    }
+
+    public function import_form( Validator $validator, WP_REST_Request $wp_rest_request ) {
+        $payload = $wp_rest_request->get_param( 'payload' );
+
+        if ( is_string( $payload ) ) {
+            $payload = json_decode( $payload, true );
+        }
+
+        if ( ! is_array( $payload ) ) {
+            throw new Exception( esc_html__( 'Please select a valid FormGent form export file.', 'formgent' ), 422 );
+        }
+
+        $form_id = $this->form_transfer->import( $payload, $wp_rest_request );
+
+        return Response::send(
+            [
+                'form_id' => $form_id,
+                'message' => esc_html__( 'The form has been imported successfully as a draft.', 'formgent' )
+            ], 201
+        );
+    }
+
+    protected function get_export_filename( string $title, int $form_id ): string {
+        $filename = sanitize_title( $title );
+
+        if ( '' === $filename ) {
+            $filename = "form-{$form_id}";
+        }
+
+        return "formgent-form-{$filename}.json";
     }
 
     public function select( Validator $validator, WP_REST_Request $wp_rest_request ) {

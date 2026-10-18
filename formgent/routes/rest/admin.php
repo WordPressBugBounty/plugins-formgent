@@ -31,6 +31,8 @@ Route::group(
 
         Route::group(
             'forms', function() {
+                Route::post( 'import', [FormController::class, 'import_form'], ['formgent_create_forms'] );
+
                 Route::group(
                     'email-notifications', function() {
                         Route::patch( '{id}/status', [EmailNotificationController::class, 'update_status'] );
@@ -46,6 +48,7 @@ Route::group(
                         Route::patch( 'status', [FormController::class, 'update_status'], ['formgent_publish_forms'] );
                         Route::patch( 'title', [FormController::class, 'update_title'], ['formgent_edit_forms'] );
                         Route::post( 'duplicate', [FormController::class, 'duplicate'], ['formgent_create_forms'] );
+                        Route::get( 'export', [FormController::class, 'export'], ['formgent_edit_forms'] );
                         Route::get( 'preset-fields', [FormController::class, 'get_preset_fields'], ['formgent_read_forms'] );
 
                         Route::group(

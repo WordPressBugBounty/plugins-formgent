@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.12.3
+Stable tag: 1.12.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -180,13 +180,11 @@ FormGent is proudly developed by wpWax, the team behind several top-rated WordPr
 👉 [Logo Showcase Ultimate](https://wordpress.org/plugins/logo-showcase-ultimate/) – Ultimate logo showcase plugin to create a responsive logo carousel, logo slider & logo grid and display unlimited clients, partners, sponsors’ logos
 
 ## Privacy Policy
-FormGent uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+FormGent uses the [Appsero](https://appsero.com) SDK to collect diagnostic and usage data only after an administrator explicitly allows it through the WordPress admin notice. This information helps us troubleshoot problems and improve the plugin.
 
-Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
+The collected information can include the site URL and name, the administrator's name and email address, WordPress and server environment details, user and plugin counts, the FormGent version, and the site's public IP address. FormGent does not send this telemetry before consent.
 
-Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
-
-Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+Administrators can decline telemetry when the notice appears. Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 == Support & Documentation ==
 FormGent comes with detailed, [step-by-step documentation](https://formgent.com/docs/how-to-install-and-activate-formgent/) and helpful video tutorials to guide you. Join our growing [Facebook community](https://www.facebook.com/groups/973281511169713) where FormGent users share ideas and help each other grow faster. And if you ever need direct help, our friendly support team is just a message away.
@@ -246,6 +244,9 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.12.4 - 18 October 2026 =
+* Added: From import/export support
+
 = 1.12.3 - 21 September 2026 =
 * Security: Hardened Zoho CRM OAuth callbacks with administrator authorization and PKCE transaction validation.
 * Security: Improved protection for form submissions, file  uploads, integrations, and permissions.

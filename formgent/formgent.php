@@ -8,7 +8,7 @@ use FormGent\App\Multisite\SiteLifecycle;
 /**
  * Plugin Name:       FormGent – Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More
  * Description:       Next-Gen AI Form Builder for WordPress with Multi-Step, Quizzes, Payments & More.
- * Version:           1.12.3
+ * Version:           1.12.4
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Tested up to:      7.1
@@ -24,6 +24,17 @@ require_once __DIR__ . '/vendor/vendor-src/autoload.php';
 require_once __DIR__ . '/app/Helpers/helper.php';
 
 define( 'FORMGENT_DEPENDENCY_VERSION', '1.0.0' );
+
+/**
+ * Appsero project settings from the FormGent project's Usage Guide.
+ */
+if ( ! defined( 'FORMGENT_APPSERO_PROJECT_HASH' ) ) {
+    define( 'FORMGENT_APPSERO_PROJECT_HASH', 'a3605678-9526-4c1c-a942-a016a5128ef4' );
+}
+
+if ( ! defined( 'FORMGENT_APPSERO_ENDPOINT' ) ) {
+    define( 'FORMGENT_APPSERO_ENDPOINT', 'https://analytics.wpwax.com' );
+}
 
 final class FormGent {
     private static ?FormGent $instance = null;
