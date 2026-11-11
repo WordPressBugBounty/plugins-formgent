@@ -4,7 +4,7 @@ Tags: form builder, payment form, survey, conversational form, multistep form
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.12.4
+Stable tag: 1.12.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -244,8 +244,13 @@ No, FormGent is beginner-friendly and does not require coding knowledge to creat
 Absolutely! FormGent provides form analytics summaries and response management in the All Responses section. FormGent Pro adds advanced analytics such as completed submission counts and field drop-off summaries.
 
 == Changelog ==
+= 1.12.5 - 11 November 2026 =
+* Added: Responsive width control to blocks
+* Fixed: CAPTCHA validation errors.
+* Fixed: Paypal submit button show/hide issue.
+
 = 1.12.4 - 18 October 2026 =
-* Added: From import/export support
+* Added: Form import/export support
 
 = 1.12.3 - 21 September 2026 =
 * Security: Hardened Zoho CRM OAuth callbacks with administrator authorization and PKCE transaction validation.

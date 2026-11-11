@@ -78,6 +78,7 @@ $context = apply_filters(
         'is_form_loaded'         => false,
         'is_partial_submitting'  => false,
         'global'                 => [
+            'captcha_error'                  => false,
             'is_response_submitting'         => false,
             'is_response_token_generating'   => false,
             'is_enabled_honeypot_protection' => $is_enabled_honeypot_protection,

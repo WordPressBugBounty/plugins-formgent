@@ -74,8 +74,9 @@ $settings            = $settings_repository->get_by_key( "captcha_keys" );
     </div>
     <div
         class="formgent-captcha-error"
-        data-wp-bind--hidden="!context.data.captcha"
-        data-wp-class--hide="context.data.captcha"
+        hidden
+        data-wp-bind--hidden="!context.global.captcha_error"
+        role="alert"
     >
         <?php echo esc_html__( "Captcha validation failed. Please complete the captcha.", 'formgent' ) ?>
     </div>

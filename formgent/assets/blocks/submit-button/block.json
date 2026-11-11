@@ -23,6 +23,15 @@
       "type": "string",
       "default": "left"
     },
+    "button_vertical_alignment": {
+      "type": "string",
+      "enum": [
+        "top",
+        "center",
+        "bottom"
+      ],
+      "default": "top"
+    },
     "button_style": {
       "type": "string",
       "default": "default"

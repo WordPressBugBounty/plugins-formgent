@@ -5,10 +5,13 @@ namespace FormGent\App\Providers;
 defined( 'ABSPATH' ) || exit;
 
 use FormGent\App\Fields\FileUpload\FileUpload;
+use FormGent\App\Services\ResponsiveWidths;
 use FormGent\WpMVC\Contracts\Provider;
 
 class BlockServiceProvider implements Provider {
     public function boot() {
+        add_filter( 'register_block_type_args', [ ResponsiveWidths::class, 'register_attributes' ], 10, 2 );
+        add_filter( 'render_block', [ ResponsiveWidths::class, 'render' ], 10, 2 );
         add_action( 'after_setup_theme', [ $this, 'register_image_sizes' ] );
         add_action( 'init', [ $this, 'action_init' ] );
         add_filter( 'formgent_pagination_summery', [$this, 'get_summary'], 10, 2 );

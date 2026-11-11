@@ -1,9 +1,15 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php defined( 'ABSPATH' ) || exit;
+
+$button_vertical_alignment = $attributes['button_vertical_alignment'] ?? 'top';
+$button_align_self         = 'bottom' === $button_vertical_alignment ? 'flex-end' : ( 'center' === $button_vertical_alignment ? 'center' : 'flex-start' );
+$button_row_class          = 'flex-start' === $button_align_self ? '' : 'formgent-button-row-aligned';
+?>
 <div
+    style="align-self: <?php echo esc_attr( $button_align_self ); ?>;"
     data-wp-interactive="formgent/form"
     data-wp-context='{ "name": "<?php echo esc_attr( $attributes['name'] ); ?>" }'
     data-wp-class--formgent-display-none="context.is_multi_step"
-    data-wp-bind--hidden="state.hideField" class="display-none formgent-field  formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>">
+    data-wp-bind--hidden="state.hideField" class="display-none formgent-field <?php echo esc_attr( $button_row_class ); ?> formgent-field-width-<?php echo esc_attr( number_format( $attributes['block_width'] ) ); ?>">
 
     <div
         class="formgent-field-single formgent-field-single--button formgent-field-align-<?php echo esc_attr( $attributes['button_alignment'] ); ?>"
